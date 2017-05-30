@@ -1,0 +1,35 @@
+<div class="content_p android-content mdl-layout__content">
+  <h1>Users#index</h1>
+  <p>Find me in app/views/users/index.html.erb</p>
+
+  <%= link_to 'New user', new_user_path %>
+  <%= link_to "Todo los usuarios", :controller => "users", :action => "index" %>
+  <%= link_to "Usuario ricardo", :controller => "users", :action => "index", :flag => 0 %>
+
+
+  <h1>Listing articles</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+    <th>Text2</th>
+  </tr>
+
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.title %></td>
+        <td><%= link_to 'Show', user_path(user) %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <br>
+        <td><%= link_to 'Destroy', user_path(user),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+</table>
+
+
+
+
+  </div>

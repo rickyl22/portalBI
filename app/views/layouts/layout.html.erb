@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PortalBI</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Portal de indicadores para Telefonica Venezuela.">
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "portalBI", :media => "all" %>
+  <%= stylesheet_link_tag "material.min.css" %>
+  <%= stylesheet_link_tag "icon.css" %>
+  <%= javascript_include_tag "material.min" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<!-- Header -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  <div class="android-header mdl-layout__header mdl-layout__header--waterfall is-casting-shadow">
+    <div class="mdl-layout__header-row">
+          <span class="android-title mdl-layout-title">
+            <%= image_tag "logo_telefonica.png", class: "android-logo-image" %>
+          </span>
+      <!-- Add spacer, to align navigation to the right in desktop -->
+      <div class="android-header-spacer mdl-layout-spacer"></div>
+      <div class="android-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
+        <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" id="search-field">
+        </div>
+      </div>
+      <!-- Navigation -->
+      <div class="android-navigation-container">
+        <nav class="android-navigation mdl-navigation">
+          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/">Inicio</a>
+          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/home/noticias">Noticias</a>
+          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/">Nosotros</a>
+          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/">Proyectos</a>
+          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/sessions/new">Login</a>
+        </nav>
+      </div>
+          <span class="android-mobile-title mdl-layout-title">
+            <%= image_tag "logo_telefonica.png", class: "android-logo-image" %>
+          </span>
+      <!-- Boton para mas opciones -->
+      <button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
+        <i class="material-icons">more_vert</i>
+      </button>
+      <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+        <li class="mdl-menu__item">Iniciar sesión</li>
+        <li class="mdl-menu__item">Solicitar usuario</li>
+        <li disabled class="mdl-menu__item">No se </li>
+        <li class="mdl-menu__item">No se</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Menu lateral -->
+  <div class="android-drawer mdl-layout__drawer">
+        <span class="mdl-layout-title">
+          <%= image_tag "logo_telefonica_blanco.png", class: "android-logo-image" %>
+        </span>
+    <nav class="mdl-navigation">
+      <!-- Opciones Adicionales -->
+      <a class="mdl-navigation__link" href="/home/ayuda">Ayuda</a>
+      <a class="mdl-navigation__link" href="">Versión</a>
+      <a class="mdl-navigation__link" href="">Gestión de Usuarios</a>
+      <div class="android-drawer-separator"></div>
+      <!-- Menu para Portal de Indicadores -->
+      <strong><span class="mdl-navigation__link" href="">Indicadores</span></strong>
+      <a class="mdl-navigation__link" href="">Altas</a>
+      <a class="mdl-navigation__link" href="">Arpu</a>
+      <a class="mdl-navigation__link" href="">Recargas</a>
+      <a class="mdl-navigation__link" href="">Tráfico</a>
+      <div class="android-drawer-separator"></div>
+      <!-- Menu para Portal de Gestion de Mineria -->
+      <strong><span class="mdl-navigation__link" href="">Mineria</span></strong>
+      <a class="mdl-navigation__link" href="">Gestión de Casos</a>
+      <a class="mdl-navigation__link" href="">Crear Caso</a>
+      <a class="mdl-navigation__link" href="">Ver Caso</a>
+      <div class="android-drawer-separator"></div>
+
+    </nav>
+  </div>
+
+</div>
+
+<%= yield %>
+
+
+
+</body>
+</html>
