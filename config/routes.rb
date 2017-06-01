@@ -1,9 +1,10 @@
 PortalBI::Application.routes.draw do
 
+  resources :usuarios
   get "home/index"
   get "home/noticias"
   root :to => "home#index" #Pagina de inicio de la App
-  resources :users
+  #resources :users
   resources :sessions
   # The priority is based upon order of creation:
   # first created -> highest priority.
