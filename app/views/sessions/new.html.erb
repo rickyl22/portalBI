@@ -1,33 +1,37 @@
-<div class="content_p login_singup android-content mdl-layout__content">
-
+<div  class="content_p login_singup android-content mdl-layout__content">
   <!-- Contenido -->
   <div class="container">
+    <!-- Login -->
     <div class="card"></div>
     <div class="card">
       <h1 class="title">Iniciar Sesión</h1>
       <%= form_tag sessions_path do %>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="text" id="usuario" name="usuario">
-          <label class="mdl-textfield__label" for="usuario">Nombre de usuario</label>
-        </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="usuario" name="usuario">
+            <label class="mdl-textfield__label" for="usuario">Nombre de usuario</label>
+          </div>
 
-        </br>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="text" id="password" name="password">
-          <label class="mdl-textfield__label" for="password">Contraseña</label>
-        </div>
+          </br>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="password" name="password">
+            <label class="mdl-textfield__label" for="password">Contraseña</label>
+          </div>
 
-        </br></br></br>
+          </br></br></br>
 
-        <div class="button-container">
-          <button><span>Acceder</span></button>
-        </div>
+          <div class="button-container">
+            <button><span>Acceder</span></button>
+          </div>
 
       <% end %>
     </div>
+
+
+
+  <!-- Sign up -->
     <div class="card alt">
       <div class="toggle"></div>
-      <h1 class="title">Registro
+      <h1 class="title">Solicitud de Registro
         <div class="close"></div>
       </h1>
 
@@ -134,38 +138,37 @@
             </div>
           </div>
 
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col input_su_cont_l">
+              <div class="input-container input_su">
+                <input type="text" id="justificacion" name="justificacion" required="required"/>
+                <label for="justificacion">Justificación de la solicitud de registro</label>
+                <div class="bar"></div>
+              </div>
+            </div>
+          </div>
+
           </br></br>
 
           <div class="button-container">
             <button><span>Registrar</span></button>
           </div>
 
-          </div>
-
-
-
-
-
 
       <% end %>
 
-
-
-
-
-
     </div>
+
   </div>
 
-  <script>
-
-    $('.toggle').on('click', function() {
-      $('.container').stop().addClass('active');
-    });
-
-    $('.close').on('click', function() {
-      $('.container').stop().removeClass('active');
-    });
-  </script>
-
 </div>
+<script>
+
+  $('.toggle').on('click', function() {
+    $('.container').stop().addClass('active');
+  });
+
+  $('.close').on('click', function() {
+    $('.container').stop().removeClass('active');
+  });
+</script>

@@ -564,6 +564,7 @@ a img{
 }
 .mdl-layout__container{
     top: 0px;
+    background-color: white;
 }
 
 #mensaje_error{
@@ -590,18 +591,15 @@ a img{
     background-color: #01cc01!important;
 }
 .login_singup{
-    background-image: url("kpis_2.png");
+    background-image: url("bc_91.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     /*min-height: 100vh;*/
     font-family: 'Roboto', sans-serif;
+    top: 65px;
 }
 
-
-.login{
-
-}
 .login .mdl-card{
     margin-top: 5%;
 }
@@ -611,13 +609,11 @@ a img{
 .mdl-button.mdl-button--colored{
     color: #01cc01!important;
 }
-.mdl-mega-footer{
-   /* background-color: #002c3d!important;*/
+.mdl-textfield__label:after{
+    background-color: #01cc01!important;
 }
-
 .input_su{
     margin: 0px!important;
-
 }
 .input_su_cont_l{
    padding-left: 20px;
@@ -723,7 +719,7 @@ body {
     max-width: 560px;
     width: 100%;
     margin: 0 auto 60px;
-    margin-top: 60px;
+    margin-bottom: 60px;
 }
 .container.active .card:first-child {
     background: #f2f2f2;
@@ -815,7 +811,7 @@ body {
 .card .title {
     position: relative;
     z-index: 1;
-    border-left: 5px solid #01cc01;
+    border-left: 5px solid #002d3e;
     margin: 0 0 35px;
     padding: 10px 0 10px 50px;
     color: #002d3e;
@@ -897,9 +893,9 @@ body {
     position: relative;
     display: inline-block;
     background: 0;
-    width: 150px;
+    width: 180px;
     border: 2px solid grey;
-    padding: 10px 0;
+    padding: 13px 0;
     font-size: 14px;
     font-weight: 600;
     line-height: 1;
@@ -980,9 +976,9 @@ body {
 }
 .card.alt .toggle {
     position: relative;
-    background: #01cc01;
-    width: 120px;
-    height: 120px;
+    background: #002d3e;
+    width: 140px;
+    height: 140px;
     border-radius: 100%;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     color: #ffffff;
@@ -994,8 +990,8 @@ body {
 .card.alt .toggle:before {
     content: 'Regístrate';
     display: block;
-    max-height: 120px;
-    line-height: 120px;
+    max-height: 140px;
+    line-height: 140px;
     /*font: normal normal normal 14px/1 FontAwesome;*/
     font-size: 20px;
     text-rendering: auto;
@@ -1053,7 +1049,7 @@ body {
     border-color: #ffffff;
 }
 .card.alt .button-container button span {
-    color: #ed2553;
+    color: #002d3e;
 }
 .card.alt .button-container button:hover {
     background: rgba(255, 255, 255, 0.9);
