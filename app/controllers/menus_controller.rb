@@ -1,4 +1,5 @@
 class MenusController < ApplicationController
+  before_filter :require_authentication
   def index
   end
 
