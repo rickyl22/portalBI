@@ -156,14 +156,14 @@ a img{
 }
 
 .android-drawer span.mdl-navigation__link.mdl-navigation__link {
-    color: #01cc01;
+    color: #002d3e;
     font-weight: 700;
     text-transform: uppercase;
 }
 
 .android-drawer .mdl-layout-title {
     position: relative;
-    background: #01cc01;
+    background: #002d3e;
     height: 160px;
 }
 
@@ -621,6 +621,18 @@ a img{
 
 .input_su_cont_r{
     padding-right: 20px;
+}
+.mdl-textfield--floating-label.is-focused .mdl-textfield__label,
+.mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
+.mdl-textfield--floating-label.has-placeholder .mdl-textfield__label{
+    color: #01cc01!important;
+}
+.mdl-menu__container.is-visible .mdl-menu{
+    z-index: 9!important;
+    background-color: white;
+}
+.mdl-menu__container.is-visible .mdl-menu__outline{
+    background-color: white;
 }
 /*-----------------------------------------------------------------------------------*/
 
