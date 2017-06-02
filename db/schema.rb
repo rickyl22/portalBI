@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20170531141559) do
   end
 
   create_table "usuarios", :force => true do |t|
+    t.string   "usuario"
     t.string   "codigo_empleado"
     t.string   "area"
     t.string   "gerencia"
@@ -28,6 +29,8 @@ ActiveRecord::Schema.define(:version => 20170531141559) do
     t.string   "nombre"
     t.string   "apellido"
     t.string   "supervisor"
+    t.string   "justificacion"
+    t.string   "estatus"
     t.string   "password_digest"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false

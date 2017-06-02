@@ -1,11 +1,12 @@
 PortalBI::Application.routes.draw do
-
   resources :usuarios
+  resources :menus
+  resources :sessions
+  match 'logout' => 'sessions#destroy'
   get "home/index"
   get "home/noticias"
   root :to => "home#index" #Pagina de inicio de la App
-  #resources :users
-  resources :sessions
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

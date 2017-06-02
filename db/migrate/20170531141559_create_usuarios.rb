@@ -1,6 +1,7 @@
 class CreateUsuarios < ActiveRecord::Migration
   def change
     create_table :usuarios do |t|
+      t.string :usuario
       t.string :codigo_empleado
       t.string :area
       t.string :gerencia
@@ -10,6 +11,8 @@ class CreateUsuarios < ActiveRecord::Migration
       t.string :nombre
       t.string :apellido
       t.string :supervisor
+      t.string :justificacion
+      t.string :estatus
       t.string :password_digest
 
       t.timestamps
