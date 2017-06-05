@@ -1,81 +1,150 @@
 <div class="content_p android-content mdl-layout__content">
+<style>
+table-title h3 {
+   color: #fafafa;
+   font-size: 30px;
+   font-weight: 400;
+   font-style:normal;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+}
+
+
+/*** Table Styles **/
+
+.table-fill {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  margin: auto;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+ 
+th {
+  color:#D5DDE5;;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:23px;
+  font-weight: 100;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+th:first-child {
+  border-top-left-radius:3px;
+}
+ 
+th:last-child {
+  border-top-right-radius:3px;
+  border-right:none;
+}
+  
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:16px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+ 
+tr:first-child {
+  border-top:none;
+}
+
+tr:last-child {
+  border-bottom:none;
+}
+ 
+tr:last-child td:first-child {
+  border-bottom-left-radius:3px;
+}
+ 
+tr:last-child td:last-child {
+  border-bottom-right-radius:3px;
+}
+ 
+td {
+  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+
+td:last-child {
+  border-right: 0px;
+}
+
+th.text-left {
+  text-align: left;
+}
+
+th.text-center {
+  text-align: center;
+}
+
+th.text-right {
+  text-align: right;
+}
+
+td.text-left {
+  text-align: left;
+}
+
+td.text-center {
+  text-align: center;
+}
+
+td.text-right {
+  text-align: right;
+}
+  </style>
 <p id="notice"><%= notice %></p>
 
 <h1>Casos</h1>
 
-<table>
+<table class="table-fill" style="width: 95%;">
   <thead>
     <tr>
-      <th>Act tabla</th>
-      <th>Agrup</th>
-      <th>Altas</th>
-      <th>Arpu</th>
-      <th>Campos</th>
-      <th>Complejidad</th>
-      <th>Condiciones</th>
-      <th>Consultor</th>
-      <th>Especifique</th>
-      <th>Fech asig</th>
-      <th>Fecha creado</th>
-      <th>Fecha req</th>
-      <th>Fijo</th>
-      <th>Im</th>
-      <th>Infosoft</th>
-      <th>Movil</th>
-      <th>Otro</th>
-      <th>Parque</th>
-      <th>Periodo</th>
-      <th>Phone</th>
-      <th>Pre post</th>
-      <th>Recargas</th>
-      <th>Separacion</th>
-      <th>Status</th>
-      <th>Tipo archivo</th>
-      <th>Tipo caso</th>
+      <th>Caso</th>
       <th>Titulo</th>
-      <th>Tlv</th>
-      <th>Tv</th>
-      <th>Usuario</th>
-      <th colspan="3"></th>
+      <th style="word-wrap:break-word;">Fecha de creación/asignación</th>
+      <th style="word-wrap:break-word;">Dias transcurridos desde:</th>
+      <th>Asignado a Infosoft</th>
+      <th>Complejidad</th>
+      <th>Estatus</th>
+      <th>Ver Casos</th>      
     </tr>
   </thead>
 
   <tbody>
     <% @casos.each do |caso| %>
       <tr>
-        <td><%= caso.act_tabla %></td>
-        <td><%= caso.agrup %></td>
-        <td><%= caso.altas %></td>
-        <td><%= caso.arpu %></td>
-        <td><%= caso.campos %></td>
-        <td><%= caso.complejidad %></td>
-        <td><%= caso.condiciones %></td>
-        <td><%= caso.consultor %></td>
-        <td><%= caso.especifique %></td>
-        <td><%= caso.fech_asig %></td>
-        <td><%= caso.fecha_creado %></td>
-        <td><%= caso.fecha_req %></td>
-        <td><%= caso.fijo %></td>
-        <td><%= caso.im %></td>
-        <td><%= caso.infosoft %></td>
-        <td><%= caso.movil %></td>
-        <td><%= caso.otro %></td>
-        <td><%= caso.parque %></td>
-        <td><%= caso.periodo %></td>
-        <td><%= caso.phone %></td>
-        <td><%= caso.pre_post %></td>
-        <td><%= caso.recargas %></td>
-        <td><%= caso.separacion %></td>
-        <td><%= caso.status %></td>
-        <td><%= caso.tipo_archivo %></td>
-        <td><%= caso.tipo_caso %></td>
+        <td><%= caso.id %></td>
         <td><%= caso.titulo %></td>
-        <td><%= caso.tlv %></td>
-        <td><%= caso.tv %></td>
-        <td><%= caso.usuario %></td>
+        <td>
+            Creacion: <%= caso.fecha_creado %><br>
+            Asignacion: <%= caso.fech_asig %>
+        </td>
+        <td>
+            Creacion: <br>
+            Asignacion: 
+        </td>
+        <td><%= caso.infosoft %></td>
+        <td><%= caso.complejidad %></td>
+        <td><%= caso.status %></td>
         <td><%= link_to 'Show', caso %></td>
-        <td><%= link_to 'Edit', edit_caso_path(caso) %></td>
-        <td><%= link_to 'Destroy', caso, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

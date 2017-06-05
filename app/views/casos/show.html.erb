@@ -1,156 +1,195 @@
 <div class="content_p android-content mdl-layout__content">
+<style>
+table-title h3 {
+   color: #fafafa;
+   font-size: 30px;
+   font-weight: 400;
+   font-style:normal;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+}
+
+
+/*** Table Styles **/
+
+.table-fill {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  margin: auto;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+ 
+th {
+  color:#D5DDE5;;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:23px;
+  font-weight: 100;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+th:first-child {
+  border-top-left-radius:3px;
+}
+ 
+th:last-child {
+  border-top-right-radius:3px;
+  border-right:none;
+}
+  
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:16px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+ 
+tr:first-child {
+  border-top:none;
+}
+
+tr:last-child {
+  border-bottom:none;
+}
+ 
+tr:last-child td:first-child {
+  border-bottom-left-radius:3px;
+}
+ 
+tr:last-child td:last-child {
+  border-bottom-right-radius:3px;
+}
+ 
+td {
+  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+
+td:last-child {
+  border-right: 0px;
+}
+
+th.text-left {
+  text-align: left;
+}
+
+th.text-center {
+  text-align: center;
+}
+
+th.text-right {
+  text-align: right;
+}
+
+td.text-left {
+  text-align: left;
+}
+
+td.text-center {
+  text-align: center;
+}
+
+td.text-right {
+  text-align: right;
+}
+  </style>
 <p id="notice"><%= notice %></p>
+<table><tr><td>
+<table class="table-fill" style="width: 70vw;">
+<thead>
+<tr>
+<th class="text-left">Detalles del Caso</th>
+<th class="text-left">Indicadores</th>
+<th class="text-left">Filtro</th>
+<th class="text-left">Linea de Negocio</th>
+<th class="text-left">Tipo de Caso</th>
+</tr>
+</thead>
+<tbody class="table-hover">
+<tr>
+<td class="text-left" style="max-width: 400px;word-wrap: break-word;">
+     Titulo: <%= @caso.titulo %><br>
+     Fecha creado: <%= @caso.fecha_creado %><br>
+     Fecha requerido: <%= @caso.fecha_req %><br>
+     Periodo: <%= @caso.periodo_desde %> - <%= @caso.periodo_hasta %><br>
+     Delimitador: <%= @caso.separacion %><br>
+     Tipo de archivo: <%= @caso.tipo_archivo %><br>
+     Historial de documentos:
 
-<p>
-  <strong>Act tabla:</strong>
-  <%= @caso.act_tabla %>
-</p>
+</td>
+<td class="text-left">
+    ARPU: <%= @caso.arpu %><br>
+    Altas: <%= @caso.altas %><br>
+    Parque: <%= @caso.parque %><br>
+    Recargas: <%= @caso.recargas %><br>
+    Act_Tabla: <%= @caso.act_tabla %><br>
+    TLV: <%= @caso.tlv %>
+</td>
+<td class="text-left">
+    Smartphone/No Smartphone: <%= @caso.phone %><br>
+    Prepago/Postpago: <%= @caso.pre_post %><br>
+    Otro: <%= @caso.otro %>
+</td>
+<td class="text-left">
+    Fijo: <%= @caso.fijo %><br>
+    IM: <%= @caso.im %><br>
+    Movil: <%= @caso.movil %><br>
+    TV: <%= @caso.tv %>
+</td>
+<td class="text-left"><%= @caso.tipo_caso %></td>
+</tr>
+</tbody>
+</table>
+<table class="table-fill">
+<thead>
+<tr>
+<th class="text-left">Agrupaciones</th>
+<th class="text-left">Condiciones</th>
+<th class="text-left">Campos</th>
+<th class="text-left">Complejidad</th>
+<th class="text-left">Estatus</th>
+</tr>
+</thead>
+<tbody class="table-hover">
+<tr>
+<td class="text-left"><%= @caso.agrup %><%= @caso.especifique %></td>
+<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= @caso.condiciones %></td>
+<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= @caso.campos %></td>
+<td class="text-left"><%= @caso.complejidad %></td>
+<td class="text-left"><%= @caso.status %></td>
+</tr>
+</tbody>
+</table>
+</td><td>
+<table class="table-fill" ><thead>
+<tr>
+<th class="text-left">Comentarios</th>
+</tr>
+</thead>
+<tbody class="table-hover">
+<tr>
+<td class="text-left" style="max-width: 300px;word-wrap: break-word;">Januaryyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy</td>
+</tr>
 
-<p>
-  <strong>Agrup:</strong>
-  <%= @caso.agrup %>
-</p>
-
-<p>
-  <strong>Altas:</strong>
-  <%= @caso.altas %>
-</p>
-
-<p>
-  <strong>Arpu:</strong>
-  <%= @caso.arpu %>
-</p>
-
-<p>
-  <strong>Campos:</strong>
-  <%= @caso.campos %>
-</p>
-
-<p>
-  <strong>Complejidad:</strong>
-  <%= @caso.complejidad %>
-</p>
-
-<p>
-  <strong>Condiciones:</strong>
-  <%= @caso.condiciones %>
-</p>
-
-<p>
-  <strong>Consultor:</strong>
-  <%= @caso.consultor %>
-</p>
-
-<p>
-  <strong>Especifique:</strong>
-  <%= @caso.especifique %>
-</p>
-
-<p>
-  <strong>Fech asig:</strong>
-  <%= @caso.fech_asig %>
-</p>
-
-<p>
-  <strong>Fecha creado:</strong>
-  <%= @caso.fecha_creado %>
-</p>
-
-<p>
-  <strong>Fecha req:</strong>
-  <%= @caso.fecha_req %>
-</p>
-
-<p>
-  <strong>Fijo:</strong>
-  <%= @caso.fijo %>
-</p>
-
-<p>
-  <strong>Im:</strong>
-  <%= @caso.im %>
-</p>
-
-<p>
-  <strong>Infosoft:</strong>
-  <%= @caso.infosoft %>
-</p>
-
-<p>
-  <strong>Movil:</strong>
-  <%= @caso.movil %>
-</p>
-
-<p>
-  <strong>Otro:</strong>
-  <%= @caso.otro %>
-</p>
-
-<p>
-  <strong>Parque:</strong>
-  <%= @caso.parque %>
-</p>
-
-<p>
-  <strong>Periodo:</strong>
-  <%= @caso.periodo %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @caso.phone %>
-</p>
-
-<p>
-  <strong>Pre post:</strong>
-  <%= @caso.pre_post %>
-</p>
-
-<p>
-  <strong>Recargas:</strong>
-  <%= @caso.recargas %>
-</p>
-
-<p>
-  <strong>Separacion:</strong>
-  <%= @caso.separacion %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @caso.status %>
-</p>
-
-<p>
-  <strong>Tipo archivo:</strong>
-  <%= @caso.tipo_archivo %>
-</p>
-
-<p>
-  <strong>Tipo caso:</strong>
-  <%= @caso.tipo_caso %>
-</p>
-
-<p>
-  <strong>Titulo:</strong>
-  <%= @caso.titulo %>
-</p>
-
-<p>
-  <strong>Tlv:</strong>
-  <%= @caso.tlv %>
-</p>
-
-<p>
-  <strong>Tv:</strong>
-  <%= @caso.tv %>
-</p>
-
-<p>
-  <strong>Usuario:</strong>
-  <%= @caso.usuario %>
-</p>
-
-<%= link_to 'Edit', edit_caso_path(@caso) %> |
+</tbody></table></td></tr></table>
+<br><br><br>
 <%= link_to 'Back', casos_path %>
+
 </div>

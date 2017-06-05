@@ -53,6 +53,6 @@ class CasosController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def caso_params
-      params.require(:caso).permit(:act_tabla, :agrup, :altas, :arpu, :campos, :complejidad, :condiciones, :consultor, :especifique, :fech_asig, :fecha_creado, :fecha_req, :fijo, :im, :infosoft, :movil, :otro, :parque, :periodo, :phone, :pre_post, :recargas, :separacion, :status, :tipo_archivo, :tipo_caso, :titulo, :tlv, :tv, :usuario)
+      params.require(:caso).permit(:act_tabla, :agrup, :altas, :arpu, :campos, :complejidad, :condiciones, :consultor, :especifique, :fech_asig, :fecha_creado, :fecha_req, :fijo, :im, :infosoft, :movil, :otro, :parque, :periodo_desde, :periodo_hasta, :phone, :pre_post, :recargas, :separacion, :status, :tipo_archivo, :tipo_caso, :titulo, :tlv, :tv, :usuario)
     end
 end

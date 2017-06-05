@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 
   def create
     p "entra aca"
-    usuario = Usuario.where("usuario = ?",params[:usuario]).first
+    usuario = User.where("usuario = ?",params[:usuario]).first
     p "ESTATUS "+usuario.estatus.inspect
     p "USUARIO "+usuario.inspect
     if usuario && (usuario.estatus == "Aprobado") && usuario.authenticate(params[:password])

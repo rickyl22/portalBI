@@ -1,7 +1,198 @@
 <div class="content_p android-content mdl-layout__content">
-<h1>New Caso</h1>
+<style>
+table-title h3 {
+   color: #fafafa;
+   font-size: 30px;
+   font-weight: 400;
+   font-style:normal;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+}
 
-<%= render 'form', caso: @caso %>
 
+/*** Table Styles **/
+
+.table-fill {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  margin: auto;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+ 
+th {
+  color:#D5DDE5;;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:23px;
+  font-weight: 100;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+th:first-child {
+  border-top-left-radius:3px;
+}
+ 
+th:last-child {
+  border-top-right-radius:3px;
+  border-right:none;
+}
+  
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:16px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+ 
+tr:first-child {
+  border-top:none;
+}
+
+tr:last-child {
+  border-bottom:none;
+}
+ 
+tr:last-child td:first-child {
+  border-bottom-left-radius:3px;
+}
+ 
+tr:last-child td:last-child {
+  border-bottom-right-radius:3px;
+}
+ 
+td {
+  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+
+td:last-child {
+  border-right: 0px;
+}
+
+th.text-left {
+  text-align: left;
+}
+
+th.text-center {
+  text-align: center;
+}
+
+th.text-right {
+  text-align: right;
+}
+
+td.text-left {
+  text-align: left;
+}
+
+td.text-center {
+  text-align: center;
+}
+
+td.text-right {
+  text-align: right;
+}
+  </style>
+<p id="notice"><%= notice %></p>
+<%= form_with(model: @caso, local: true) do |form| %>
+  <% if @caso.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@caso.errors.count, "error") %> prohibited this caso from being saved:</h2>
+
+      <ul>
+      <% @caso.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<table class="table-fill" style="width: 70vw;">
+<thead>
+<tr>
+<th class="text-left">Detalles del Caso</th>
+<th class="text-left">Indicadores</th>
+<th class="text-left">Filtro</th>
+<th class="text-left">Linea de Negocio</th>
+<th class="text-left">Tipo de Caso</th>
+</tr>
+</thead>
+<tbody class="table-hover">
+<tr>
+<td class="text-left" style="max-width: 400px;word-wrap: break-word;">
+     Titulo: <%= form.text_field :titulo, id: :caso_titulo %><br>
+     Fecha requerido:<br> <%= form.date_select :fecha_req, id: :caso_fecha_req %><br>
+     Periodo: desde<br>
+     <%= form.date_select :periodo_desde, id: :caso_periodo_desde %><br>
+     hasta <br>
+     <%= form.date_select :periodo_hasta, id: :caso_periodo_hasta %><br>
+     Delimitador: <%= form.text_field :separacion, id: :caso_separacion %><br>
+     Tipo de archivo: <%= form.text_field :tipo_archivo, id: :caso_tipo_archivo %><br>
+     
+
+</td>
+<td class="text-left">
+    ARPU: <%= form.check_box :arpu, id: :caso_arpu %><br>
+    Altas: <%= form.check_box  :altas, id: :caso_altas %><br>
+    Parque: <%= form.check_box  :parque, id: :caso_parque %><br>
+    Recargas: <%= form.check_box  :recargas, id: :recargas %><br>
+    Act_Tabla: <% form.check_box :act_tabla, id: :caso_act_tabla %><br>
+    TLV: <%= form.check_box  :tlv, id: :caso_tlv %>
+</td>
+<td class="text-left">
+    Smartphone/No Smartphone: <%= form.check_box  :phone, id: :caso_phone %><br>
+    Prepago/Postpago: <%= form.check_box  :pre_post, id: :caso_pre_post %><br>
+    Otro: <%= form.check_box  :otro, id: :caso_otro %>
+</td>
+<td class="text-left">
+    Fijo: <%= form.check_box  :fijo, id: :caso_fijo %><br>
+    IM: <%= form.check_box  :im, id: :caso_im %><br>
+    Movil: <%= form.check_box  :movil, id: :caso_movil %><br>
+    TV: <%= form.check_box  :tv, id: :caso_tv %>
+</td>
+<td class="text-left"><%= form.text_field  :tipo_caso, id: :caso_tipo_caso %></td>
+</tr>
+</tbody>
+</table>
+<table class="table-fill" style="width: 70vw;">
+<thead>
+<tr>
+<th class="text-left">Agrupaciones</th>
+<th class="text-left">Condiciones</th>
+<th class="text-left">Campos</th>
+</tr>
+</thead>
+<tbody class="table-hover">
+<tr>
+<td class="text-left">
+     <%= form.text_field :agrup, id: :caso_agrup %><br>
+     Especifique: <%= form.text_field :especifique, id: :caso_especifique %>
+</td>
+<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= form.text_field :condiciones, id: :caso_condiciones %></td>
+<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= form.text_field :campos, id: :caso_campos %></td>
+</tr>
+</tbody>
+</table>
+
+<br><br>
+ <%= form.submit %><br>
+ <% end %>
 <%= link_to 'Back', casos_path %>
+
 </div>

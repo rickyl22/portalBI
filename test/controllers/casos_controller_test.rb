@@ -17,7 +17,7 @@ class CasosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create caso" do
     assert_difference('Caso.count') do
-      post casos_url, params: { caso: { act_tabla: @caso.act_tabla, agrup: @caso.agrup, altas: @caso.altas, arpu: @caso.arpu, campos: @caso.campos, complejidad: @caso.complejidad, condiciones: @caso.condiciones, consultor: @caso.consultor, especifique: @caso.especifique, fech_asig: @caso.fech_asig, fecha_creado: @caso.fecha_creado, fecha_req: @caso.fecha_req, fijo: @caso.fijo, im: @caso.im, infosoft: @caso.infosoft, movil: @caso.movil, otro: @caso.otro, parque: @caso.parque, periodo: @caso.periodo, phone: @caso.phone, pre_post: @caso.pre_post, recargas: @caso.recargas, separacion: @caso.separacion, status: @caso.status, tipo_archivo: @caso.tipo_archivo, tipo_caso: @caso.tipo_caso, titulo: @caso.titulo, tlv: @caso.tlv, tv: @caso.tv, usuario: @caso.usuario } }
+      post casos_url, params: { caso: { act_tabla: @caso.act_tabla, agrup: @caso.agrup, altas: @caso.altas, arpu: @caso.arpu, campos: @caso.campos, complejidad: @caso.complejidad, condiciones: @caso.condiciones, consultor: @caso.consultor, especifique: @caso.especifique, fech_asig: @caso.fech_asig, fecha_creado: @caso.fecha_creado, fecha_req: @caso.fecha_req, fijo: @caso.fijo, im: @caso.im, infosoft: @caso.infosoft, movil: @caso.movil, otro: @caso.otro, parque: @caso.parque, periodo_desde: @caso.periodo_desde, periodo_hasta: @caso.periodo_hasta, phone: @caso.phone, pre_post: @caso.pre_post, recargas: @caso.recargas, separacion: @caso.separacion, status: @caso.status, tipo_archivo: @caso.tipo_archivo, tipo_caso: @caso.tipo_caso, titulo: @caso.titulo, tlv: @caso.tlv, tv: @caso.tv, usuario: @caso.usuario } }
     end
 
     assert_redirected_to caso_url(Caso.last)
@@ -34,7 +34,7 @@ class CasosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update caso" do
-    patch caso_url(@caso), params: { caso: { act_tabla: @caso.act_tabla, agrup: @caso.agrup, altas: @caso.altas, arpu: @caso.arpu, campos: @caso.campos, complejidad: @caso.complejidad, condiciones: @caso.condiciones, consultor: @caso.consultor, especifique: @caso.especifique, fech_asig: @caso.fech_asig, fecha_creado: @caso.fecha_creado, fecha_req: @caso.fecha_req, fijo: @caso.fijo, im: @caso.im, infosoft: @caso.infosoft, movil: @caso.movil, otro: @caso.otro, parque: @caso.parque, periodo: @caso.periodo, phone: @caso.phone, pre_post: @caso.pre_post, recargas: @caso.recargas, separacion: @caso.separacion, status: @caso.status, tipo_archivo: @caso.tipo_archivo, tipo_caso: @caso.tipo_caso, titulo: @caso.titulo, tlv: @caso.tlv, tv: @caso.tv, usuario: @caso.usuario } }
+    patch caso_url(@caso), params: { caso: { act_tabla: @caso.act_tabla, agrup: @caso.agrup, altas: @caso.altas, arpu: @caso.arpu, campos: @caso.campos, complejidad: @caso.complejidad, condiciones: @caso.condiciones, consultor: @caso.consultor, especifique: @caso.especifique, fech_asig: @caso.fech_asig, fecha_creado: @caso.fecha_creado, fecha_req: @caso.fecha_req, fijo: @caso.fijo, im: @caso.im, infosoft: @caso.infosoft, movil: @caso.movil, otro: @caso.otro, parque: @caso.parque, periodo_desde: @caso.periodo_desde, periodo_hasta: @caso.periodo_hasta, phone: @caso.phone, pre_post: @caso.pre_post, recargas: @caso.recargas, separacion: @caso.separacion, status: @caso.status, tipo_archivo: @caso.tipo_archivo, tipo_caso: @caso.tipo_caso, titulo: @caso.titulo, tlv: @caso.tlv, tv: @caso.tv, usuario: @caso.usuario } }
     assert_redirected_to caso_url(@caso)
   end
 

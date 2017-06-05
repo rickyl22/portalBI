@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :act_tabla %>
-    <%= form.text_field :act_tabla, id: :caso_act_tabla %>
+    <%= form.check_box :act_tabla, id: :caso_act_tabla %>
   </div>
 
   <div class="field">
@@ -23,12 +23,12 @@
 
   <div class="field">
     <%= form.label :altas %>
-    <%= form.text_field :altas, id: :caso_altas %>
+    <%= form.check_box  :altas, id: :caso_altas %>
   </div>
 
   <div class="field">
     <%= form.label :arpu %>
-    <%= form.text_field :arpu, id: :caso_arpu %>
+    <%= form.check_box :arpu, id: :caso_arpu %>
   </div>
 
   <div class="field">
@@ -58,27 +58,27 @@
 
   <div class="field">
     <%= form.label :fech_asig %>
-    <%= form.datetime_select :fech_asig, id: :caso_fech_asig %>
+    <%= form.date_select :fech_asig, id: :caso_fech_asig %>
   </div>
 
   <div class="field">
     <%= form.label :fecha_creado %>
-    <%= form.datetime_select :fecha_creado, id: :caso_fecha_creado %>
+    <%= form.date_select :fecha_creado, id: :caso_fecha_creado %>
   </div>
 
   <div class="field">
     <%= form.label :fecha_req %>
-    <%= form.datetime_select :fecha_req, id: :caso_fecha_req %>
+    <%= form.date_select :fecha_req, id: :caso_fecha_req %>
   </div>
 
   <div class="field">
     <%= form.label :fijo %>
-    <%= form.text_field :fijo, id: :caso_fijo %>
+    <%= form.check_box :fijo, id: :caso_fijo %>
   </div>
 
   <div class="field">
     <%= form.label :im %>
-    <%= form.text_field :im, id: :caso_im %>
+    <%= form.check_box  :im, id: :caso_im %>
   </div>
 
   <div class="field">
@@ -88,7 +88,7 @@
 
   <div class="field">
     <%= form.label :movil %>
-    <%= form.text_field :movil, id: :caso_movil %>
+    <%= form.check_box  :movil, id: :caso_movil %>
   </div>
 
   <div class="field">
@@ -98,27 +98,32 @@
 
   <div class="field">
     <%= form.label :parque %>
-    <%= form.text_field :parque, id: :caso_parque %>
+    <%= form.check_box  :parque, id: :caso_parque %>
   </div>
 
   <div class="field">
-    <%= form.label :periodo %>
-    <%= form.text_field :periodo, id: :caso_periodo %>
+    <%= form.label :periodo_desde %>
+    <%= form.date_select :periodo_desde, id: :caso_periodo_desde %>
+  </div>
+
+  <div class="field">
+    <%= form.label :periodo_hasta %>
+    <%= form.date_select :periodo_hasta, id: :caso_periodo_hasta %>
   </div>
 
   <div class="field">
     <%= form.label :phone %>
-    <%= form.text_field :phone, id: :caso_phone %>
+    <%= form.check_box  :phone, id: :caso_phone %>
   </div>
 
   <div class="field">
     <%= form.label :pre_post %>
-    <%= form.text_field :pre_post, id: :caso_pre_post %>
+    <%= form.check_box  :pre_post, id: :caso_pre_post %>
   </div>
 
   <div class="field">
     <%= form.label :recargas %>
-    <%= form.text_field :recargas, id: :caso_recargas %>
+    <%= form.check_box  :recargas, id: :caso_recargas %>
   </div>
 
   <div class="field">
@@ -148,12 +153,12 @@
 
   <div class="field">
     <%= form.label :tlv %>
-    <%= form.text_field :tlv, id: :caso_tlv %>
+    <%= form.check_box  :tlv, id: :caso_tlv %>
   </div>
 
   <div class="field">
     <%= form.label :tv %>
-    <%= form.text_field :tv, id: :caso_tv %>
+    <%= form.check_box  :tv, id: :caso_tv %>
   </div>
 
   <div class="field">

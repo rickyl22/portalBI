@@ -10,16 +10,17 @@ one:
   condiciones: MyText
   consultor: MyString
   especifique: MyString
-  fech_asig: 2017-06-04 21:32:03
-  fecha_creado: 2017-06-04 21:32:03
-  fecha_req: 2017-06-04 21:32:03
+  fech_asig: 2017-06-05
+  fecha_creado: 2017-06-05
+  fecha_req: 2017-06-05
   fijo: MyString
   im: MyString
   infosoft: MyString
   movil: MyString
   otro: MyString
   parque: MyString
-  periodo: MyString
+  periodo_desde: 2017-06-05
+  periodo_hasta: 2017-06-05
   phone: MyString
   pre_post: MyString
   recargas: MyString
@@ -42,16 +43,17 @@ two:
   condiciones: MyText
   consultor: MyString
   especifique: MyString
-  fech_asig: 2017-06-04 21:32:03
-  fecha_creado: 2017-06-04 21:32:03
-  fecha_req: 2017-06-04 21:32:03
+  fech_asig: 2017-06-05
+  fecha_creado: 2017-06-05
+  fecha_req: 2017-06-05
   fijo: MyString
   im: MyString
   infosoft: MyString
   movil: MyString
   otro: MyString
   parque: MyString
-  periodo: MyString
+  periodo_desde: 2017-06-05
+  periodo_hasta: 2017-06-05
   phone: MyString
   pre_post: MyString
   recargas: MyString

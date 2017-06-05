@@ -10,16 +10,17 @@ class CreateCasos < ActiveRecord::Migration[5.1]
       t.text :condiciones
       t.string :consultor
       t.string :especifique
-      t.datetime :fech_asig
-      t.datetime :fecha_creado
-      t.datetime :fecha_req
+      t.date :fech_asig
+      t.date :fecha_creado
+      t.date :fecha_req
       t.string :fijo
       t.string :im
       t.string :infosoft
       t.string :movil
       t.string :otro
       t.string :parque
-      t.string :periodo
+      t.date :periodo_desde
+      t.date :periodo_hasta
       t.string :phone
       t.string :pre_post
       t.string :recargas
