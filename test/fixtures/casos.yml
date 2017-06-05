@@ -1,0 +1,65 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  act_tabla: MyString
+  agrup: MyString
+  altas: MyString
+  arpu: MyString
+  campos: MyText
+  complejidad: MyString
+  condiciones: MyText
+  consultor: MyString
+  especifique: MyString
+  fech_asig: 2017-06-04 21:32:03
+  fecha_creado: 2017-06-04 21:32:03
+  fecha_req: 2017-06-04 21:32:03
+  fijo: MyString
+  im: MyString
+  infosoft: MyString
+  movil: MyString
+  otro: MyString
+  parque: MyString
+  periodo: MyString
+  phone: MyString
+  pre_post: MyString
+  recargas: MyString
+  separacion: MyString
+  status: MyString
+  tipo_archivo: MyString
+  tipo_caso: MyString
+  titulo: MyString
+  tlv: MyString
+  tv: MyString
+  usuario: MyString
+
+two:
+  act_tabla: MyString
+  agrup: MyString
+  altas: MyString
+  arpu: MyString
+  campos: MyText
+  complejidad: MyString
+  condiciones: MyText
+  consultor: MyString
+  especifique: MyString
+  fech_asig: 2017-06-04 21:32:03
+  fecha_creado: 2017-06-04 21:32:03
+  fecha_req: 2017-06-04 21:32:03
+  fijo: MyString
+  im: MyString
+  infosoft: MyString
+  movil: MyString
+  otro: MyString
+  parque: MyString
+  periodo: MyString
+  phone: MyString
+  pre_post: MyString
+  recargas: MyString
+  separacion: MyString
+  status: MyString
+  tipo_archivo: MyString
+  tipo_caso: MyString
+  titulo: MyString
+  tlv: MyString
+  tv: MyString
+  usuario: MyString

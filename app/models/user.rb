@@ -1,4 +1,2 @@
-class User < ActiveRecord::Base
-  attr_accessible :title
-
+class User < ApplicationRecord
 end

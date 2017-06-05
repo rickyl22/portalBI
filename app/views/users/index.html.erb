@@ -1,35 +1,51 @@
-<div class="content_p android-content mdl-layout__content">
-  <h1>Users#index</h1>
-  <p>Find me in app/views/users/index.html.erb</p>
+<p id="notice"><%= notice %></p>
 
-  <%= link_to 'New user', new_user_path %>
-  <%= link_to "Todo los usuarios", :controller => "users", :action => "index" %>
-  <%= link_to "Usuario ricardo", :controller => "users", :action => "index", :flag => 0 %>
-
-
-  <h1>Listing articles</h1>
+<h1>Users</h1>
 
 <table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-    <th>Text2</th>
-  </tr>
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Codigo empleado</th>
+      <th>Area</th>
+      <th>Gerencia</th>
+      <th>Cargo</th>
+      <th>Correo</th>
+      <th>Telefono</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Supervisor</th>
+      <th>Justificacion</th>
+      <th>Estatus</th>
+      <th>Password digest</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-  <% @users.each do |user| %>
+  <tbody>
+    <% @users.each do |user| %>
       <tr>
-        <td><%= user.title %></td>
-        <td><%= link_to 'Show', user_path(user) %></td>
+        <td><%= user.usuario %></td>
+        <td><%= user.codigo_empleado %></td>
+        <td><%= user.area %></td>
+        <td><%= user.gerencia %></td>
+        <td><%= user.cargo %></td>
+        <td><%= user.correo %></td>
+        <td><%= user.telefono %></td>
+        <td><%= user.nombre %></td>
+        <td><%= user.apellido %></td>
+        <td><%= user.supervisor %></td>
+        <td><%= user.justificacion %></td>
+        <td><%= user.estatus %></td>
+        <td><%= user.password_digest %></td>
+        <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <br>
-        <td><%= link_to 'Destroy', user_path(user),
-                        method: :delete,
-                        data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-  <% end %>
+    <% end %>
+  </tbody>
 </table>
 
+<br>
 
-
-
-  </div>
+<%= link_to 'New User', new_user_path %>

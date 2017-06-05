@@ -1,0 +1,167 @@
+<%= form_with(model: caso, local: true) do |form| %>
+  <% if caso.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(caso.errors.count, "error") %> prohibited this caso from being saved:</h2>
+
+      <ul>
+      <% caso.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :act_tabla %>
+    <%= form.text_field :act_tabla, id: :caso_act_tabla %>
+  </div>
+
+  <div class="field">
+    <%= form.label :agrup %>
+    <%= form.text_field :agrup, id: :caso_agrup %>
+  </div>
+
+  <div class="field">
+    <%= form.label :altas %>
+    <%= form.text_field :altas, id: :caso_altas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :arpu %>
+    <%= form.text_field :arpu, id: :caso_arpu %>
+  </div>
+
+  <div class="field">
+    <%= form.label :campos %>
+    <%= form.text_area :campos, id: :caso_campos %>
+  </div>
+
+  <div class="field">
+    <%= form.label :complejidad %>
+    <%= form.text_field :complejidad, id: :caso_complejidad %>
+  </div>
+
+  <div class="field">
+    <%= form.label :condiciones %>
+    <%= form.text_area :condiciones, id: :caso_condiciones %>
+  </div>
+
+  <div class="field">
+    <%= form.label :consultor %>
+    <%= form.text_field :consultor, id: :caso_consultor %>
+  </div>
+
+  <div class="field">
+    <%= form.label :especifique %>
+    <%= form.text_field :especifique, id: :caso_especifique %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fech_asig %>
+    <%= form.datetime_select :fech_asig, id: :caso_fech_asig %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fecha_creado %>
+    <%= form.datetime_select :fecha_creado, id: :caso_fecha_creado %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fecha_req %>
+    <%= form.datetime_select :fecha_req, id: :caso_fecha_req %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fijo %>
+    <%= form.text_field :fijo, id: :caso_fijo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :im %>
+    <%= form.text_field :im, id: :caso_im %>
+  </div>
+
+  <div class="field">
+    <%= form.label :infosoft %>
+    <%= form.text_field :infosoft, id: :caso_infosoft %>
+  </div>
+
+  <div class="field">
+    <%= form.label :movil %>
+    <%= form.text_field :movil, id: :caso_movil %>
+  </div>
+
+  <div class="field">
+    <%= form.label :otro %>
+    <%= form.text_field :otro, id: :caso_otro %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parque %>
+    <%= form.text_field :parque, id: :caso_parque %>
+  </div>
+
+  <div class="field">
+    <%= form.label :periodo %>
+    <%= form.text_field :periodo, id: :caso_periodo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.text_field :phone, id: :caso_phone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pre_post %>
+    <%= form.text_field :pre_post, id: :caso_pre_post %>
+  </div>
+
+  <div class="field">
+    <%= form.label :recargas %>
+    <%= form.text_field :recargas, id: :caso_recargas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :separacion %>
+    <%= form.text_field :separacion, id: :caso_separacion %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.text_field :status, id: :caso_status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tipo_archivo %>
+    <%= form.text_field :tipo_archivo, id: :caso_tipo_archivo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tipo_caso %>
+    <%= form.text_field :tipo_caso, id: :caso_tipo_caso %>
+  </div>
+
+  <div class="field">
+    <%= form.label :titulo %>
+    <%= form.text_field :titulo, id: :caso_titulo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tlv %>
+    <%= form.text_field :tlv, id: :caso_tlv %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tv %>
+    <%= form.text_field :tv, id: :caso_tv %>
+  </div>
+
+  <div class="field">
+    <%= form.label :usuario %>
+    <%= form.text_field :usuario, id: :caso_usuario %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

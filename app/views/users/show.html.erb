@@ -1,14 +1,69 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
-
-<div class="content_p android-content mdl-layout__content">
+<p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @user.title %>
+  <strong>Usuario:</strong>
+  <%= @user.usuario %>
 </p>
 
+<p>
+  <strong>Codigo empleado:</strong>
+  <%= @user.codigo_empleado %>
+</p>
 
+<p>
+  <strong>Area:</strong>
+  <%= @user.area %>
+</p>
+
+<p>
+  <strong>Gerencia:</strong>
+  <%= @user.gerencia %>
+</p>
+
+<p>
+  <strong>Cargo:</strong>
+  <%= @user.cargo %>
+</p>
+
+<p>
+  <strong>Correo:</strong>
+  <%= @user.correo %>
+</p>
+
+<p>
+  <strong>Telefono:</strong>
+  <%= @user.telefono %>
+</p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @user.nombre %>
+</p>
+
+<p>
+  <strong>Apellido:</strong>
+  <%= @user.apellido %>
+</p>
+
+<p>
+  <strong>Supervisor:</strong>
+  <%= @user.supervisor %>
+</p>
+
+<p>
+  <strong>Justificacion:</strong>
+  <%= @user.justificacion %>
+</p>
+
+<p>
+  <strong>Estatus:</strong>
+  <%= @user.estatus %>
+</p>
+
+<p>
+  <strong>Password digest:</strong>
+  <%= @user.password_digest %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
-
-  </div>

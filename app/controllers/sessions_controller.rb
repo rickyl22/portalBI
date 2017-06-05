@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
 
   def new
     p "aca en new"
-    @usuarios = Usuario.new
+    @usuarios = User.new
   end
 
   def edit
