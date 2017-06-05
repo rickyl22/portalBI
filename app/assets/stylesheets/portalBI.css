@@ -1,0 +1,1085 @@
+/**
+ * Copyright 2015 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+body {
+    margin: 0;
+}
+
+/* Disable ugly boxes around images in IE10 */
+a img{
+    border: 0px;
+}
+
+::-moz-selection {
+    background-color: #6ab344;
+    color: #fff;
+}
+
+::selection {
+    background-color: #6ab344;
+    color: #fff;
+}
+
+.android-search-box .mdl-textfield__input {
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.android-header .mdl-menu__container {
+    z-index: 50;
+    margin: 0 !important;
+}
+
+
+.mdl-textfield--expandable {
+    width: auto;
+}
+
+.android-fab {
+    position: absolute!important;
+    right: 20%;
+    bottom: -26px;
+    z-index: 3;
+    background: #64ffda !important;
+    color: black !important;
+}
+
+.android-mobile-title {
+    display: none !important;
+}
+
+
+.android-logo-image {
+    height: 50px;
+    width: 170px;
+}
+
+
+.android-header {
+    overflow: visible;
+    background-color: white!important;
+}
+
+.android-header .material-icons {
+    color: #767777 !important;
+}
+
+.android-header .mdl-layout__drawer-button {
+    background: transparent;
+    color: #767777;
+}
+
+.android-header .mdl-navigation__link {
+    color: #757575!important;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.android-navigation-container {
+    /* Simple hack to make the overflow happen to the left instead... */
+    direction: rtl;
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+    width: 500px;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.android-navigation {
+    /* ... and now make sure the content is actually LTR */
+    direction: ltr;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    width: 800px;
+}
+
+.android-search-box.is-focused + .android-navigation-container {
+    opacity: 0;
+    width: 100px;
+}
+
+
+.android-navigation .mdl-navigation__link {
+    display: inline-block;
+    height: 60px;
+    line-height: 68px;
+    background-color: transparent !important;
+    border-bottom: 4px solid transparent;
+}
+
+.android-navigation .mdl-navigation__link:hover {
+    border-bottom: 4px solid #002d3e;
+}
+
+.android-search-box {
+    -webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.android-more-button {
+    -webkit-order: 3;
+    -ms-flex-order: 3;
+    order: 3;
+}
+
+
+.android-drawer {
+    border-right: none;
+}
+
+.android-drawer-separator {
+    height: 1px;
+    background-color: #dcdcdc;
+    margin: 8px 0;
+}
+
+.android-drawer .mdl-navigation__link.mdl-navigation__link {
+    font-size: 14px;
+    color: #757575;
+}
+
+.android-drawer span.mdl-navigation__link.mdl-navigation__link {
+    color: #002d3e;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.android-drawer .mdl-layout-title {
+    position: relative;
+    background: #002d3e;
+    height: 160px;
+}
+
+.android-drawer .android-logo-image {
+    position: absolute;
+    bottom: 16px;
+    left: 23px;
+}
+
+.android-be-together-section {
+    position: relative;
+    height: 800px;
+    width: auto;
+    background-color: #f3f3f3;
+    background: url('slide01.jpg') center 30% no-repeat;
+    background-size: cover;
+}
+
+.logo-font {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    line-height: 1;
+    color: #767777;
+    font-weight: 500;
+}
+
+.android-slogan {
+    font-size: 60px;
+    padding-top: 160px;
+}
+
+.android-sub-slogan {
+    font-size: 21px;
+    padding-top: 24px;
+}
+
+.android-create-character {
+    font-size: 21px;
+    padding-top: 400px;
+}
+
+.android-create-character a {
+    text-decoration: none;
+    color: #767777;
+    font-weight: 300;
+}
+
+.android-screen-section {
+    position: relative;
+    padding-top: 60px;
+    padding-bottom: 80px;
+}
+
+.android-screens {
+    text-align: right;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.android-screen {
+    text-align: center;
+}
+
+.android-screen .android-link {
+    margin-top: 16px;
+    display: block;
+    z-index: 2;
+}
+
+.android-image-link {
+    text-decoration: none;
+}
+
+.android-wear {
+    display: inline-block;
+    width: 160px;
+    margin-right: 32px;
+}
+
+.android-wear .android-screen-image {
+    width: 40%;
+    z-index: 1;
+}
+
+
+.android-phone {
+    display: inline-block;
+    width: 64px;
+    margin-right: 48px;
+}
+
+.android-phone .android-screen-image {
+    width: 100%;
+    z-index: 1;
+}
+
+
+.android-tablet {
+    display: inline-block;
+    width: 110px;
+    margin-right: 64px;
+}
+
+.android-tablet .android-screen-image {
+    width: 100%;
+    z-index: 1;
+}
+
+.android-tablet .android-link {
+    display: block;
+    z-index: 2;
+}
+
+
+.android-tv {
+    display: inline-block;
+    width: 300px;
+    margin-right: 80px;
+}
+
+.android-tv .android-screen-image {
+    width: 100%;
+    z-index: 1;
+}
+
+
+.android-auto {
+    display: inline-block;
+    width: 300px;
+    overflow: hidden;
+}
+
+.android-auto .android-screen-image {
+    display: block;
+    height: 300px;
+    z-index: 1;
+}
+
+
+.android-wear-section {
+    position: relative;
+    background: url('wear.png') center top no-repeat;
+    background-size: cover;
+    height: 800px;
+}
+
+.android-wear-band {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #37474f;
+}
+
+.android-wear-band-text {
+    max-width: 800px;
+    margin-left: 25%;
+    padding: 24px;
+    text-align: left;
+    color: white;
+}
+
+.android-wear-band-text p {
+    padding-top: 8px;
+}
+
+.android-link {
+    text-decoration: none;
+    color: #01cc01 !important;
+}
+
+.android-link:hover {
+    color: #7cb342 !important;
+}
+
+.android-link .material-icons {
+    position: relative;
+    top: -1px;
+    vertical-align: middle;
+}
+
+.android-alt-link {
+    text-decoration: none;
+    color: #64ffda !important;
+    font-size: 16px;
+}
+
+.android-alt-link:hover {
+    color: #00bfa5 !important;
+}
+
+.android-alt-link .material-icons {
+    position: relative;
+    top: 6px;
+}
+
+.android-customized-section {
+    text-align: center;
+}
+
+.android-customized-section-text {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 80px 16px 0 16px;
+}
+
+.android-customized-section-text p {
+    padding-top: 16px;
+}
+
+.android-customized-section-image {
+    background: url('devices.jpg') center top no-repeat;
+    background-size: cover;
+    height: 400px;
+}
+
+.android-more-section {
+    padding: 80px 0;
+    max-width: 1044px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.android-more-section .android-section-title {
+    margin-left: 12px;
+    padding-bottom: 24px;
+}
+
+.android-card-container {
+}
+
+.android-card-container .mdl-card__media {
+    overflow: hidden;
+    background: transparent;
+}
+
+.android-card-container .mdl-card__media img {
+    width: 100%;
+}
+
+.android-card-container .mdl-card__title {
+    background: transparent;
+    height: auto;
+}
+
+.android-card-container .mdl-card__title-text {
+    color: black;
+    height: auto;
+}
+
+.android-card-container .mdl-card__supporting-text {
+    height: auto;
+    color: black;
+    padding-bottom: 56px;
+}
+
+.android-card-container .mdl-card__actions {
+    position: absolute;
+    bottom: 0;
+}
+
+.android-card-container .mdl-card__actions a {
+    border-top: none;
+    font-size: 16px;
+}
+
+.android-footer {
+    background-color: #fafafa;
+    position: relative;
+}
+
+.android-footer a:hover {
+    color: #01cc01;
+}
+
+.android-footer .mdl-mega-footer--top-section::after {
+    border-bottom: none;
+}
+
+.android-footer .mdl-mega-footer--middle-section::after {
+    border-bottom: none;
+}
+
+.android-footer .mdl-mega-footer--bottom-section {
+    position: relative;
+}
+
+.android-footer .mdl-mega-footer--bottom-section a {
+    margin-right: 2em;
+}
+
+.android-footer .mdl-mega-footer--right-section a .material-icons {
+    position: relative;
+    top: 6px;
+}
+
+
+.android-link-menu:hover {
+    cursor: pointer;
+}
+
+
+/**** Mobile layout ****/
+@media (max-width: 900px) {
+    .android-navigation-container {
+        display: none;
+    }
+
+    .android-title {
+        display: none !important;
+    }
+
+    .android-mobile-title {
+        display: block !important;
+        position: absolute;
+        left: calc(50% - 70px);
+        top: 12px;
+        transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* WebViews in iOS 9 break the "~" operator, and WebViews in OS X 10.10 break
+       consecutive "+" operators in some cases. Therefore, we need to use both
+       here to cover all the bases. */
+    .android.android-search-box.is-focused ~ .android-mobile-title,
+    .android-search-box.is-focused + .android-navigation-container + .android-mobile-title {
+        opacity: 0;
+    }
+
+    .android-more-button {
+        display: none;
+    }
+
+    .android-search-box.is-focused {
+        width: calc(100% - 48px);
+    }
+
+    .android-search-box .mdl-textfield__expandable-holder {
+        width: 100%;
+    }
+
+    .android-be-together-section {
+        height: 350px;
+    }
+
+    .android-slogan {
+        font-size: 26px;
+        margin: 0 16px;
+        padding-top: 24px;
+    }
+
+    .android-sub-slogan {
+        font-size: 16px;
+        margin: 0 16px;
+        padding-top: 8px;
+    }
+
+    .android-create-character {
+        padding-top: 200px;
+        font-size: 16px;
+    }
+
+    .android-create-character img {
+        height: 12px;
+    }
+
+    .android-fab {
+        display: none;
+    }
+
+    .android-wear-band-text {
+        margin-left: 0;
+        padding: 16px;
+    }
+
+    .android-footer .mdl-mega-footer--bottom-section {
+        display: none;
+    }
+}
+
+
+/* MODIFICACIONES DY*/
+#view-source {
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    z-index: 900;
+}
+
+.content_p{
+    padding-top: 5%;
+    width: 100%;
+    height: 80vh;
+    text-align: -webkit-center;
+}
+.mdl-layout__container{
+    top: 0px;
+    background-color: white;
+}
+
+#mensaje_error{
+    width: 250px;
+    text-align:center;
+    color:#900000;
+    font-weight:bold;
+    margin-left:15px;
+    font-style:italic;
+}
+
+.android-footer{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+
+
+/* ESTILOS PARA EL INICIO DE SESION Y SOLICITUD DE REGISTROS DE USUARIO - DY */
+.mdl-textfield--floating-label.is-focused .mdl-textfield__label{
+    color: #01cc01!important;
+}
+.mdl-button--accent.mdl-button--accent.mdl-button--raised{
+    background-color: #01cc01!important;
+}
+.login_singup{
+    background-image: url("bc_91.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /*min-height: 100vh;*/
+    font-family: 'Roboto', sans-serif;
+    top: 65px;
+}
+
+.login .mdl-card{
+    margin-top: 5%;
+}
+.mdl-color--primary-mf{
+    background-color: #002c3d;
+}
+.mdl-button.mdl-button--colored{
+    color: #01cc01!important;
+}
+.mdl-textfield__label:after{
+    background-color: #01cc01!important;
+}
+.input_su{
+    margin: 0px!important;
+}
+.input_su_cont_l{
+   padding-left: 20px;
+}
+
+.input_su_cont_r{
+    padding-right: 20px;
+}
+.mdl-textfield--floating-label.is-focused .mdl-textfield__label,
+.mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
+.mdl-textfield--floating-label.has-placeholder .mdl-textfield__label{
+    color: #01cc01!important;
+}
+.mdl-menu__container.is-visible .mdl-menu{
+    z-index: 9!important;
+    background-color: white;
+}
+.mdl-menu__container.is-visible .mdl-menu__outline{
+    background-color: white;
+}
+/*-----------------------------------------------------------------------------------*/
+
+body {
+    background: #e9e9e9;
+    color: #666666;
+    font-family: 'RobotoDraft', 'Roboto', sans-serif;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Pen Title */
+.pen-title {
+    padding: 50px 0;
+    text-align: center;
+    letter-spacing: 2px;
+}
+.pen-title h1 {
+    margin: 0 0 20px;
+    font-size: 48px;
+    font-weight: 300;
+}
+.pen-title span {
+    font-size: 12px;
+}
+.pen-title span .fa {
+    color: #ed2553;
+}
+.pen-title span a {
+    color: #ed2553;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Rerun */
+.rerun {
+    margin: 0 0 30px;
+    text-align: center;
+}
+.rerun a {
+    cursor: pointer;
+    display: inline-block;
+    background: #ed2553;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    padding: 10px 20px;
+    color: #ffffff;
+    text-decoration: none;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+}
+.rerun a:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+/* Scroll To Bottom */
+#codepen, #portfolio {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #363636;
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+    color: #ffffff;
+    text-align: center;
+}
+#codepen i, #portfolio i {
+    line-height: 56px;
+}
+#codepen:hover, #portfolio:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+/* CodePen */
+#portfolio {
+    bottom: 96px;
+    right: 36px;
+    background: #ed2553;
+    width: 44px;
+    height: 44px;
+    -webkit-animation: buttonFadeInUp 1s ease;
+    animation: buttonFadeInUp 1s ease;
+}
+#portfolio i {
+    line-height: 44px;
+}
+
+/* Container */
+.container {
+    position: relative;
+    max-width: 560px;
+    width: 100%;
+    margin: 0 auto 60px;
+    margin-bottom: 60px;
+}
+.container.active .card:first-child {
+    background: #f2f2f2;
+    margin: 0 15px;
+}
+.container.active .card:nth-child(2) {
+    background: #fafafa;
+    margin: 0 10px;
+}
+.container.active .card.alt {
+    top: 20px;
+    right: 0;
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    padding: 60px 0 40px;
+    overflow: hidden;
+}
+.container.active .card.alt .toggle {
+    width: 100%;
+    position: absolute;
+    top: 40px;
+    right: -70px;
+    box-shadow: none;
+    -webkit-transform: scale(10);
+    transform: scale(10);
+    -webkit-transition: -webkit-transform .3s ease;
+    transition: -webkit-transform .3s ease;
+    transition: transform .3s ease;
+    transition: transform .3s ease, -webkit-transform .3s ease;
+}
+.container.active .card.alt .toggle:before {
+    content: '';
+}
+.container.active .card.alt .title,
+.container.active .card.alt .input-container,
+.container.active .card.alt .button-container {
+    left: 0;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: .3s ease;
+    transition: .3s ease;
+}
+.container.active .card.alt .title {
+    -webkit-transition-delay: .3s;
+    transition-delay: .3s;
+}
+.container.active .card.alt .input-container {
+    -webkit-transition-delay: .4s;
+    transition-delay: .4s;
+}
+.container.active .card.alt .input-container:nth-child(2) {
+    -webkit-transition-delay: .5s;
+    transition-delay: .5s;
+}
+.container.active .card.alt .input-container:nth-child(3) {
+    -webkit-transition-delay: .6s;
+    transition-delay: .6s;
+}
+.container.active .card.alt .button-container {
+    -webkit-transition-delay: .7s;
+    transition-delay: .7s;
+}
+
+/* Card */
+.card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 5px;
+    padding: 60px 0 40px 0;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -webkit-transition: .3s ease;
+    transition: .3s ease;
+    /* Title */
+    /* Inputs */
+    /* Button */
+    /* Footer */
+    /* Alt Card */
+}
+.card:first-child {
+    background: #fafafa;
+    height: 10px;
+    border-radius: 5px 5px 0 0;
+    margin: 0 10px;
+    padding: 0;
+}
+.card .title {
+    position: relative;
+    z-index: 1;
+    border-left: 5px solid #002d3e;
+    margin: 0 0 35px;
+    padding: 10px 0 10px 50px;
+    color: #002d3e;
+    font-size: 32px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: left;
+}
+.card .input-container {
+    position: relative;
+    margin: 0 60px 50px;
+}
+.card .input-container input {
+    outline: none;
+    z-index: 1;
+    position: relative;
+    background: none;
+    width: 100%;
+    height: 40px;
+    border: 0;
+    color: #212121;
+    font-size: 16px;
+    font-weight: 400;
+}
+.card .input-container input:focus ~ label {
+    color: #9d9d9d;
+    -webkit-transform: translate(-12%, -50%) scale(0.75);
+    transform: translate(-12%, -50%) scale(0.75);
+}
+.card .input-container input:focus ~ .bar:before, .card .input-container input:focus ~ .bar:after {
+    width: 50%;
+}
+.card .input-container input:valid ~ label {
+    color: #9d9d9d;
+    -webkit-transform: translate(-12%, -50%) scale(0.75);
+    transform: translate(-12%, -50%) scale(0.75);
+}
+.card .input-container label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #757575;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 60px;
+    -webkit-transition: 0.2s ease;
+    transition: 0.2s ease;
+}
+.card .input-container .bar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #757575;
+    width: 100%;
+    height: 1px;
+}
+.card .input-container .bar:before, .card .input-container .bar:after {
+    content: '';
+    position: absolute;
+    background: #ed2553;
+    width: 0;
+    height: 2px;
+    -webkit-transition: .2s ease;
+    transition: .2s ease;
+}
+.card .input-container .bar:before {
+    left: 50%;
+}
+.card .input-container .bar:after {
+    right: 50%;
+}
+.card .button-container {
+    margin: 0 60px;
+    text-align: center;
+}
+.card .button-container button {
+    outline: 0;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    background: 0;
+    width: 180px;
+    border: 2px solid grey;
+    padding: 13px 0;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: uppercase;
+    overflow: hidden;
+    -webkit-transition: .3s ease;
+    transition: .3s ease;
+}
+.card .button-container button span {
+    position: relative;
+    z-index: 1;
+    color: grey;
+    -webkit-transition: .3s ease;
+    transition: .3s ease;
+}
+.card .button-container button:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    background: #01cc01;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin: -15px 0 0 -15px;
+    opacity: 0;
+    -webkit-transition: .3s ease;
+    transition: .3s ease;
+}
+.card .button-container button:hover, .card .button-container button:active, .card .button-container button:focus {
+    border-color: #01cc01;
+}
+.card .button-container button:hover span, .card .button-container button:active span, .card .button-container button:focus span {
+    color: #01cc01;
+}
+.card .button-container button:active span, .card .button-container button:focus span {
+    color: #ffffff;
+}
+.card .button-container button:active:before, .card .button-container button:focus:before {
+    opacity: 1;
+    -webkit-transform: scale(10);
+    transform: scale(10);
+}
+.card .footer {
+    margin: 40px 0 0;
+    color: #d3d3d3;
+    font-size: 24px;
+    font-weight: 300;
+    text-align: center;
+}
+.card .footer a {
+    color: inherit;
+    text-decoration: none;
+    -webkit-transition: .3s ease;
+    transition: .3s ease;
+}
+.card .footer a:hover {
+    color: #bababa;
+}
+.card.alt {
+    position: absolute;
+    top: 40px;
+    right: -70px;
+    z-index: 10;
+    width: 140px;
+    height: 140px;
+    background: none;
+    border-radius: 100%;
+    box-shadow: none;
+    padding: 0;
+    -webkit-transition: .3s ease;
+    transition: .3s ease;
+    /* Toggle */
+    /* Title */
+    /* Input */
+    /* Button */
+}
+.card.alt .toggle {
+    position: relative;
+    background: #002d3e;
+    width: 140px;
+    height: 140px;
+    border-radius: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    color: #ffffff;
+    font-size: 58px;
+    line-height: 140px;
+    text-align: center;
+    cursor: pointer;
+}
+.card.alt .toggle:before {
+    content: 'Regístrate';
+    display: block;
+    max-height: 140px;
+    line-height: 140px;
+    /*font: normal normal normal 14px/1 FontAwesome;*/
+    font-size: 20px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+.card.alt .title,
+.card.alt .input-container,
+.card.alt .button-container {
+    left: 100px;
+    opacity: 0;
+    visibility: hidden;
+}
+.card.alt .title {
+    position: relative;
+    border-color: #ffffff;
+    color: #ffffff;
+}
+.card.alt .title .close {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 60px;
+    display: inline;
+    color: #ffffff;
+    font-size: 58px;
+    font-weight: 400;
+}
+.card.alt .title .close:before {
+    content: '\00d7';
+}
+.card.alt .input-container input {
+    color: #ffffff;
+}
+.card.alt .input-container input:focus ~ label {
+    color: #ffffff;
+}
+.card.alt .input-container input:focus ~ .bar:before, .card.alt .input-container input:focus ~ .bar:after {
+    background: #ffffff;
+}
+.card.alt .input-container input:valid ~ label {
+    color: #ffffff;
+}
+.card.alt .input-container label {
+    color: rgba(255, 255, 255, 0.8);
+}
+.card.alt .input-container .bar {
+    background: rgba(255, 255, 255, 0.8);
+}
+.card.alt .button-container button {
+    width: 150px;
+    background: #ffffff;
+    border-color: #ffffff;
+}
+.card.alt .button-container button span {
+    color: #002d3e;
+}
+.card.alt .button-container button:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+.card.alt .button-container button:active:before, .card.alt .button-container button:focus:before {
+    display: none;
+}
+
+/* Keyframes */
+@-webkit-keyframes buttonFadeInUp {
+    0% {
+        bottom: 30px;
+        opacity: 0;
+    }
+}
+@keyframes buttonFadeInUp {
+    0% {
+        bottom: 30px;
+        opacity: 0;
+    }
+}
