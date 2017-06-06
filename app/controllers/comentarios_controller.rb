@@ -22,9 +22,12 @@ class ComentariosController < ApplicationController
   # POST /comentarios
   def create
     @comentario = Comentario.new(comentario_params)
-
+    p"hey"
+    p params[:comentario][:hidden]
+    p"yoo"
+    @caso = Caso.find(params[:comentario][:hidden])
     if @comentario.save
-      redirect_to @comentario, notice: 'Comentario was successfully created.'
+      redirect_to @caso
     else
       render :new
     end
@@ -53,6 +56,6 @@ class ComentariosController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def comentario_params
-      params.require(:comentario).permit(:fecha, :texto, :autor)
+      params.require(:comentario).permit(:fecha, :texto, :autor, :caso_id)
     end
 end

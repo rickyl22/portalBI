@@ -135,16 +135,16 @@ td.text-right {
         <td><%= caso.titulo %></td>
         <td>
             Creacion: <%= caso.fecha_creado %><br>
-            Asignacion: <%= caso.fech_asig %>
+            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : caso.fech_asig %>
         </td>
         <td>
-            Creacion: <br>
-            Asignacion: 
+            Creacion: <%= (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fecha_creado.mjd %> <br>
+            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fech_asig.mjd %>
         </td>
-        <td><%= caso.infosoft %></td>
+        <td><%= caso.infosoft == nil ? "NO" : caso.infosoft %></td>
         <td><%= caso.complejidad %></td>
         <td><%= caso.status %></td>
-        <td><%= link_to 'Show', caso %></td>
+        <td><%= link_to 'Ver', caso %></td>
       </tr>
     <% end %>
   </tbody>
@@ -152,5 +152,5 @@ td.text-right {
 
 <br>
 
-<%= link_to 'New Caso', new_caso_path %>
+<%= link_to 'Caso nuevo', new_caso_path %>
 </div>

@@ -111,7 +111,7 @@ td.text-right {
 }
   </style>
 <p id="notice"><%= notice %></p>
-<table><tr><td>
+<table ><tr><td style="vertical-align: text-top;">
 <table class="table-fill" style="width: 70vw;">
 <thead>
 <tr>
@@ -135,23 +135,23 @@ td.text-right {
 
 </td>
 <td class="text-left">
-    ARPU: <%= @caso.arpu %><br>
-    Altas: <%= @caso.altas %><br>
-    Parque: <%= @caso.parque %><br>
-    Recargas: <%= @caso.recargas %><br>
-    Act_Tabla: <%= @caso.act_tabla %><br>
-    TLV: <%= @caso.tlv %>
+    ARPU: <b><%= @caso.arpu == '0' ? "NO" : "SI" %></b><br>
+    Altas: <b><%= @caso.altas == '0' ? "NO" : "SI"%></b><br>
+    Parque: <b><%= @caso.parque == '0' ? "NO" : "SI" %></b><br>
+    Recargas: <b><%= @caso.recargas == '0' ? "NO" : "SI"%></b><br>
+    Act_Tabla: <b><%= @caso.act_tabla == '0' ? "NO" : "SI"%></b><br>
+    TLV: <b><%= @caso.tlv == '0' ? "NO" : "SI"%>
 </td>
 <td class="text-left">
-    Smartphone/No Smartphone: <%= @caso.phone %><br>
-    Prepago/Postpago: <%= @caso.pre_post %><br>
-    Otro: <%= @caso.otro %>
+    Smartphone/No Smartphone: <b><%= @caso.phone == '0' ? "NO" : "SI"%></b><br>
+    Prepago/Postpago: <b><%= @caso.pre_post == '0' ? "NO" : "SI"%></b><br>
+    Otro: <b><%= @caso.otro %></b>
 </td>
 <td class="text-left">
-    Fijo: <%= @caso.fijo %><br>
-    IM: <%= @caso.im %><br>
-    Movil: <%= @caso.movil %><br>
-    TV: <%= @caso.tv %>
+    Fijo: <b><%= @caso.fijo == '0' ? "NO" : "SI"%></b><br>
+    IM: <b><%= @caso.im == '0' ? "NO" : "SI"%></b><br>
+    Movil: <b><%= @caso.movil == '0' ? "NO" : "SI"%></b><br>
+    TV: <b><%= @caso.tv == '0' ? "NO" : "SI"%></b>
 </td>
 <td class="text-left"><%= @caso.tipo_caso %></td>
 </tr>
@@ -177,19 +177,42 @@ td.text-right {
 </tr>
 </tbody>
 </table>
-</td><td>
+</td><td >
 <table class="table-fill" ><thead>
 <tr>
 <th class="text-left">Comentarios</th>
 </tr>
 </thead>
 <tbody class="table-hover">
+<% @comments.each do |com| %>
 <tr>
-<td class="text-left" style="max-width: 300px;word-wrap: break-word;">Januaryyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy</td>
+<% if com.caso_id == @caso.id %>
+<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= com.texto %></td>
+<% end %>
 </tr>
+<% end %>
+<tr><td>
+<% comment = Comentario.new %>
+<%= form_for comment do |form| %>
 
+  <div class="field">
+    <%= form.label :texto %>
+    <%= form.text_area :texto, id: :comentario_texto %>
+  </div>
+  <% p "hlaaa" %>
+   <% p @caso.id %>
+    <% p "hlaaa" %>
+   <%= form.hidden_field :hidden, value: @caso.id %>
+   <%= form.hidden_field :caso_id, value: @caso.id %>
+  <div class="actions">
+    <%= form.submit "Enviar" %>
+  </div>
+<% end %>
+
+
+</td></tr>
 </tbody></table></td></tr></table>
 <br><br><br>
-<%= link_to 'Back', casos_path %>
+<%= link_to 'Volver', casos_path %>
 
 </div>

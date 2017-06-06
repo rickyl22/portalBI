@@ -8,6 +8,7 @@ class CasosController < ApplicationController
 
   # GET /casos/1
   def show
+    @comments = Comentario.all
   end
 
   # GET /casos/new
@@ -22,7 +23,14 @@ class CasosController < ApplicationController
   # POST /casos
   def create
     @caso = Caso.new(caso_params)
-
+    @campos = params[:campos]
+    @string = ""
+    @campos.each { |x| if x != "" then @string << x +" - " end}
+    @string = @string[0...-3]
+    p "hola"
+    p params[:campos]
+    p "hola"
+    @caso[:campos] = @string
     if @caso.save
       redirect_to @caso, notice: 'Caso was successfully created.'
     else

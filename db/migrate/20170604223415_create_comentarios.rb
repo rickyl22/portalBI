@@ -4,6 +4,7 @@ class CreateComentarios < ActiveRecord::Migration[5.1]
       t.datetime :fecha
       t.text :texto
       t.string :autor
+      t.integer :caso_id
 
       t.timestamps
     end

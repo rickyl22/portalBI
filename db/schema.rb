@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20170605174412) do
     t.datetime "fecha"
     t.text "texto"
     t.string "autor"
+    t.integer "caso_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

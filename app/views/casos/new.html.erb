@@ -1,4 +1,30 @@
 <div class="content_p android-content mdl-layout__content">
+<script type="text/javascript">
+  
+   $(document).ready(function(){
+  
+    $(".espec_otro").click(function(){
+      $(".espec")[0].disabled = false;
+    });
+
+    $(".espec_b").click(function(){
+        $(".espec")[0].disabled = true;
+        $(".espec")[0].value = null;
+    });
+
+
+  $("#addNewChoice").click(function() {
+    $("#poll_choices").append($("#new_choice_form").html())
+    }
+    );
+
+});
+
+function remove(element){
+    element.parentNode.parentNode.removeChild(element.parentNode);
+}
+
+</script>
 <style>
 table-title h3 {
    color: #fafafa;
@@ -144,7 +170,9 @@ td.text-right {
      <%= form.date_select :periodo_hasta, id: :caso_periodo_hasta %><br>
      Delimitador: <%= form.text_field :separacion, id: :caso_separacion %><br>
      Tipo de archivo: <%= form.text_field :tipo_archivo, id: :caso_tipo_archivo %><br>
-     
+     <%= form.hidden_field :complejidad, value: "No Asignada"  %>
+     <%= form.hidden_field :status, value: "Creado"  %>
+     <%= form.hidden_field :fecha_creado, value: Time.now  %>
 
 </td>
 <td class="text-left">
@@ -152,13 +180,13 @@ td.text-right {
     Altas: <%= form.check_box  :altas, id: :caso_altas %><br>
     Parque: <%= form.check_box  :parque, id: :caso_parque %><br>
     Recargas: <%= form.check_box  :recargas, id: :recargas %><br>
-    Act_Tabla: <% form.check_box :act_tabla, id: :caso_act_tabla %><br>
+    Act_Tabla: <%= form.check_box :act_tabla, id: :caso_act_tabla %><br>
     TLV: <%= form.check_box  :tlv, id: :caso_tlv %>
 </td>
 <td class="text-left">
     Smartphone/No Smartphone: <%= form.check_box  :phone, id: :caso_phone %><br>
     Prepago/Postpago: <%= form.check_box  :pre_post, id: :caso_pre_post %><br>
-    Otro: <%= form.check_box  :otro, id: :caso_otro %>
+    Otro: <%= form.text_field :otro , id: :caso_otro %>
 </td>
 <td class="text-left">
     Fijo: <%= form.check_box  :fijo, id: :caso_fijo %><br>
@@ -166,7 +194,10 @@ td.text-right {
     Movil: <%= form.check_box  :movil, id: :caso_movil %><br>
     TV: <%= form.check_box  :tv, id: :caso_tv %>
 </td>
-<td class="text-left"><%= form.text_field  :tipo_caso, id: :caso_tipo_caso %></td>
+<td class="text-left" style="white-space: nowrap;">
+    Recurrente:<%= form.radio_button :tipo_caso, 'Recurrente', :checked => true %><br>
+    No recurrente:<%= form.radio_button :tipo_caso, 'No Recurrente' %><br>  
+</td>
 </tr>
 </tbody>
 </table>
@@ -181,18 +212,28 @@ td.text-right {
 <tbody class="table-hover">
 <tr>
 <td class="text-left">
-     <%= form.text_field :agrup, id: :caso_agrup %><br>
-     Especifique: <%= form.text_field :especifique, id: :caso_especifique %>
+     Por plan <%= form.radio_button :agrup, "Por plan",id: :caso_agrup,:class => "espec_b", :checked => true %><br>
+      Por Cliente <%= form.radio_button :agrup, "Por cliente", id: :caso_agrup,:class => "espec_b" %><br>
+      Por Plataforma <%= form.radio_button :agrup, "Por plataforma", id: :caso_agrup,:class => "espec_b" %><br>
+      Por tipo de terminal <%= form.radio_button :agrup, "Por tipo de terminal", id: :caso_agrup,:class => "espec_b" %><br>
+      Por tecnologia <%= form.radio_button :agrup, "Por tecnologia", id: :caso_agrup,:class => "espec_b" %><br>
+      Otro <%= form.radio_button :agrup, "otro", id: :caso_agrup, :class => "espec_otro" %> 
+      Especifique <%= form.text_field :agrup , id: :caso_agrup,:class => "espec", :disabled => true %><br><br>
 </td>
-<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= form.text_field :condiciones, id: :caso_condiciones %></td>
-<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= form.text_field :campos, id: :caso_campos %></td>
+<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= form.text_field :condiciones, id: :caso_condiciones, :required => true %></td>
+<td class="text-left" style="max-width: 300px;word-wrap: break-word;">
+  <div id = "poll_choices"><%= render "campos" %><%= render "campos" %></div><br>
+      <div style="display: none;" id="new_choice_form">
+    <%= render partial: "campos", locals: {poll: false} %>
+</div><br><a href="javascript:;" id="addNewChoice">Agregar campo</a><br><br>
+</td>
 </tr>
 </tbody>
 </table>
 
 <br><br>
- <%= form.submit %><br>
- <% end %>
-<%= link_to 'Back', casos_path %>
+ <%= form.submit "Crear caso" %><br>
+ <% end %><br>
+<%= link_to 'Volver', casos_path %>
 
 </div>
