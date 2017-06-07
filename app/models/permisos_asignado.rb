@@ -1,0 +1,2 @@
+class PermisosAsignado < ApplicationRecord
+end
