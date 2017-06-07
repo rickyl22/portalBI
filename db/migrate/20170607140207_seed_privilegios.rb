@@ -1,0 +1,42 @@
+class SeedPrivilegios < ActiveRecord::Migration[5.1]
+  def up
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Crear Caso','Generar un nuevo caso de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Ver Caso','Visualizar un caso de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Ver todos los Casos','Visualizar todos los casos de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Actualizar Caso','Actualizar valores de un caso de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Actualizar todos los Caso','Actualizar valores de todos los casos de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Anular Caso','Anular caso de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Asignar Caso','Asignar a usuarios casos de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Asignar Complejidad','Asignar la complejidad de un caso', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Comentar Caso','Realizar comentarios sobre un caso de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Comentar todos los Caso','Realizar comentarios sobre todos los casos de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Cargar Driver de un Caso','Cargar Driver para un caso de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Cargar Driver de todos los Casos','Cargar Driver para todos los casos de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Cerrar Caso','Cerrar casos de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Actualizar estatus','Cambiar estatus de un caso de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Crear Usuarios Indicadores','Crear usuarios para el modulo , created_at, updated_at de Indicadores', 'Indicadores', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Crear Usuarios Mineria','Crear usuarios para el modulo , created_at, updated_at de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Crear Usuarios','Crear usuario en el PortalBI', 'General', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Ver Usuarios Indicadores','Visualizar los usuarios del modulo , created_at, updated_at de Indicadores', 'Indicadores', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Ver Usuarios Mineria','Visualizar los usuarios del modulo , created_at, updated_at de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Ver Usuarios','Visualizar todos los usuarios del PortalBI', 'General', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Actualizar Usuarios Indicadores','Actualizar campos de los usuarios del modulo , created_at, updated_at de Indicadores', 'Indicadores', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Actualizar Usuarios Mineria','Actualizar campos de los usuarios del modulo , created_at, updated_at de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Actualizar Usuarios','Actualizar campos de los usuarios', 'General', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Eliminar Usuarios Indicadores','Eliminar usuarios del modulo , created_at, updated_at de Indicadores', 'Indicadores', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Eliminar Usuarios Mineria','Eliminar usuarios del modulo , created_at, updated_at de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Eliminar Usuarios','Eliminar usuarios del PortalBI', 'General', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Crear Indicador','Crear un nuevo indicador', 'Indicadores', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Ver Indicador','Ver un indicador', 'Indicadores', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Ver todos los Indicador','Ver todos los indicadores', 'Indicadores', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Actualizar Indicador', 'Actualizar los datos de un indicador', 'Indicadores', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Actualizar todos los Indicador', 'Actualizar los indicadores cargados en el modulo , created_at, updated_at Indicadores', 'Indicadores', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Eliminar Indicador','Eliminar un indicadores', 'Indicadores', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Todos','Todos los privilegios', 'General', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Todos  Mineria','Todos los privilegios del modulo de Mineria', 'Mineria', NOW(), NOW())"
+    execute "INSERT INTO privilegios (nombre, descripcion, modulo , created_at, updated_at) VALUES ('Todos  Indicadores','Todos los privilegios del modulo de indicadores', 'Indicadores', NOW(), NOW())"
+
+
+
+  end
+end
