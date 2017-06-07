@@ -1,0 +1,2 @@
+class RolesPrivilegiosController < ApplicationController
+end

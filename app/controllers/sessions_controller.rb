@@ -4,27 +4,19 @@ class SessionsController < ApplicationController
   end
 
   def create
-    p "entra aca"
     usuario = Usuario.where("usuario = ?",params[:usuario]).first
-    #p "ESTATUS "+usuario.inspect
-    #p "USUARIO "+usuario.inspect
     if usuario && (usuario.estatus == "Aprobado") && usuario.authenticate(params[:password])
-      p "Autenticacion exitosa"
-      session[:usuario_id] = usuario.id
+      log_in usuario
       redirect_to menus_path, notice: 'Login exitoso!'
+      cookies[:usuario] = usuario.usuario
     else
-      p "Autenticacion fallida"
       flash.now.alert = 'Correo o clave incorrecto'
-      #redirect_to usuarios_path
-      redirect_to new_session_path, notice: 'Login fallido!'
-      #render :new
+      redirect_to login_path
     end
 
-   # p "SESSION "+session.inspect
   end
 
   def new
-    p "aca en new"
     @usuarios = Usuario.new
   end
 
@@ -38,7 +30,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:usuario_id] = nil
-    redirect_to root_url, notice: 'Logged out!'
+    log_out
+    cookies.delete(:usuario)
+    flash.now.alert = 'Logged out!'
+    redirect_to root_url
   end
 end

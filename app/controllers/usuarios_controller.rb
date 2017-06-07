@@ -43,7 +43,7 @@ class UsuariosController < ApplicationController
   end
 
   def allowed_params
-    params.require(:usuario).permit(:estatus, :usuario, :codigo_empleado, :nombre, :apellido, :correo, :cargo, :area, :supervisor, :gerencia, :telefono, :password_digest, :justificacion)
+    params.require(:usuario).permit(:estatus, :usuario, :codigo_empleado, :nombre, :apellido, :correo, :cargo, :area, :supervisor, :gerencia, :telefono, :password_digest, :justificacion, :password, :password_confirmation)
   end
 
 end

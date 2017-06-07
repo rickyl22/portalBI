@@ -1,0 +1,2 @@
+class PermisosAsignadosController < ApplicationController
+end

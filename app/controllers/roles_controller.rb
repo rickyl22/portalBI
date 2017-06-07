@@ -1,4 +1,4 @@
-class MenusController < ApplicationController
+class RolesController < ApplicationController
   before_action :require_authentication
   def index
 
