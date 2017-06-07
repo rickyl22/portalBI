@@ -131,7 +131,7 @@ td.text-right {
      Periodo: <%= @caso.periodo_desde %> - <%= @caso.periodo_hasta %><br>
      Delimitador: <%= @caso.separacion %><br>
      Tipo de archivo: <%= @caso.tipo_archivo %><br>
-     Historial de documentos:
+     Historial de documentos:<%= session[:usuario_id] %>
 
 </td>
 <td class="text-left">
@@ -177,7 +177,15 @@ td.text-right {
 </tr>
 </tbody>
 </table>
+<br><br><br>
+<%= select_tag :comp, options_for_select(['Bajo','Medio','Alto','Urgente']) %>
+
+Hacer un form for aqui
+
+<%= button_to 'Asignar Complejidad', update_caso_path(@caso), params: { par: :comp} %><br>
+<%= link_to 'Volver', casos_path %>
 </td><td >
+<% if session[:usuario_tipo] != "cliente" %>
 <table class="table-fill" ><thead>
 <tr>
 <th class="text-left">Comentarios</th>
@@ -187,7 +195,10 @@ td.text-right {
 <% @comments.each do |com| %>
 <tr>
 <% if com.caso_id == @caso.id %>
-<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= com.texto %></td>
+<td class="text-left" style="max-width: 300px;word-wrap: break-word;">
+  <b><%= com.autor %>  -  <%= com.created_at.strftime('%d/%m/%Y %H:%M') %></b><br><br>
+  <%= com.texto %>
+</td>
 <% end %>
 </tr>
 <% end %>
@@ -199,20 +210,19 @@ td.text-right {
     <%= form.label :texto %>
     <%= form.text_area :texto, id: :comentario_texto %>
   </div>
-  <% p "hlaaa" %>
-   <% p @caso.id %>
-    <% p "hlaaa" %>
+  
    <%= form.hidden_field :hidden, value: @caso.id %>
    <%= form.hidden_field :caso_id, value: @caso.id %>
+   <%= form.hidden_field :fecha, value: Time.now %>
+   <%= form.hidden_field :autor, value: session[:usuario_tipo] %>
   <div class="actions">
     <%= form.submit "Enviar" %>
   </div>
 <% end %>
-
+<% end %>
 
 </td></tr>
 </tbody></table></td></tr></table>
-<br><br><br>
-<%= link_to 'Volver', casos_path %>
+
 
 </div>

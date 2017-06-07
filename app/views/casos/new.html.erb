@@ -173,6 +173,7 @@ td.text-right {
      <%= form.hidden_field :complejidad, value: "No Asignada"  %>
      <%= form.hidden_field :status, value: "Creado"  %>
      <%= form.hidden_field :fecha_creado, value: Time.now  %>
+     <%= form.hidden_field :usuario, value: session[:usuario_id]  %>
 
 </td>
 <td class="text-left">

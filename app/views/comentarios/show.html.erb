@@ -13,7 +13,9 @@
 
 <p>
   <strong>Autor:</strong>
-  <%= @comentario.autor %>
+  <%= @comentario.autor %><br>
+  <%= session[:usuario_id] %>
+
 </p>
 
 <%= link_to 'Edit', edit_comentario_path(@comentario) %> |

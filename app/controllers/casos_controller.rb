@@ -3,7 +3,21 @@ class CasosController < ApplicationController
 
   # GET /casos
   def index
-    @casos = Caso.all
+    
+    session[:usuario_id] = 1
+    session[:usuario_tipo] = "Consultor"
+    if session[:usuario_tipo] == "Admin"
+       @casos = Caso.all
+    elsif session[:usuario_tipo] == "cliente"
+       @casos = Caso.where("usuario = "+session[:usuario_id].to_s)
+    elsif session[:usuario_tipo] == "Infosoft-Admin"
+       @casos = Caso.where("infosoft = 'SI'")
+    else 
+       @casos = Caso.where("usuario = "+session[:usuario_id].to_s)
+    end
+    p "mmm"
+    p session[:usuario_tipo]
+    p "mmmmm"
   end
 
   # GET /casos/1
@@ -18,6 +32,9 @@ class CasosController < ApplicationController
 
   # GET /casos/1/edit
   def edit
+    p "wow"
+    p params[:par]
+    redirect_back(fallback_location:root_path)
   end
 
   # POST /casos

@@ -59,9 +59,20 @@
       <div class="android-drawer-separator"></div>
       <!-- Menu para Portal de Gestion de Mineria -->
       <strong><span class="mdl-navigation__link" href="">Mineria</span></strong>
-      <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
-      <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
-      <a class="mdl-navigation__link" href="">Ver Caso</a>
+      <% if session[:usuario_tipo] == "admin" %>
+        <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
+        <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
+        <a class="mdl-navigation__link" href="/casos">Mis Casos</a>
+      <%  elsif session[:usuario_tipo] == "lider" %>
+        <a class="mdl-navigation__link" href="/casos">Gestion de Casos</a>
+        <a class="mdl-navigation__link" href="/casos">Mis Casos</a>
+      <%  elsif session[:usuario_tipo] == "cliente" %>
+        <a class="mdl-navigation__link" href="/casos">Mis Casos</a>
+        <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
+      <% else %>
+        <a class="mdl-navigation__link" href="/casos">Mis Casos</a>
+      <% end %>
+
       <div class="android-drawer-separator"></div>
 
     </nav>
