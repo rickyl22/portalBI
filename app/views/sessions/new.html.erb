@@ -1,11 +1,14 @@
 <div  class="content_p login_singup android-content mdl-layout__content">
+  <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
   <!-- Contenido -->
   <div class="container">
     <!-- Login -->
     <div class="card"></div>
     <div class="card mdl-shadow--16dp">
       <h1 class="title">Iniciar Sesión</h1>
-      <%= form_tag sessions_path do %>
+      <%= form_tag login_path do %>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="usuario" name="usuario">
             <label class="mdl-textfield__label" for="usuario">Nombre de usuario</label>
