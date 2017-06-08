@@ -178,11 +178,8 @@ td.text-right {
 </tbody>
 </table>
 <br><br><br>
-<%= select_tag :comp, options_for_select(['Bajo','Medio','Alto','Urgente']) %>
-
-Hacer un form for aqui
-
-<%= button_to 'Asignar Complejidad', update_caso_path(@caso), params: { par: :comp} %><br>
+<%= select_tag :comp, options_for_select(['Bajo','Medio','Alto','Urgente']) %><br>
+<%= button_to 'Asignar Complejidad', edit_caso_path(@caso), params: { par: :comp} %><br>
 <%= link_to 'Volver', casos_path %>
 </td><td >
 <% if session[:usuario_tipo] != "cliente" %>
