@@ -15,9 +15,6 @@ class CasosController < ApplicationController
     else 
        @casos = Caso.where("usuario = "+session[:usuario_id].to_s)
     end
-    p "mmm"
-    p session[:usuario_tipo]
-    p "mmmmm"
   end
 
   # GET /casos/1
@@ -44,9 +41,6 @@ class CasosController < ApplicationController
     @string = ""
     @campos.each { |x| if x != "" then @string << x +" - " end}
     @string = @string[0...-3]
-    p "hola"
-    p params[:campos]
-    p "hola"
     @caso[:campos] = @string
     if @caso.save
       redirect_to @caso, notice: 'Caso was successfully created.'
@@ -58,6 +52,7 @@ class CasosController < ApplicationController
   # PATCH/PUT /casos/1
   def update
     if @caso.update(caso_params)
+      AsignadoMailer.asignar(1,2,3,"ricardolira48@hotmail.com").deliver
       redirect_to @caso, notice: 'Caso was successfully updated.'
     else
       render :edit
