@@ -27,7 +27,7 @@ class UsuariosController < ApplicationController
 
   def update
     @usuario = Usuario.find(params[:id])
-
+    authorize @usuario
     if @usuario.update_attributes(params[:usuario])
       redirect_to @usuario
     else
@@ -42,6 +42,7 @@ class UsuariosController < ApplicationController
     redirect_to usuarios_path_path
   end
 
+  private
   def allowed_params
     params.require(:usuario).permit(:estatus, :usuario, :codigo_empleado, :nombre, :apellido, :correo, :cargo, :area, :supervisor, :gerencia, :telefono, :password_digest, :justificacion, :password, :password_confirmation)
   end
