@@ -177,9 +177,13 @@ td.text-right {
 </tr>
 </tbody>
 </table>
-<br><br><br>
-<%= select_tag :comp, options_for_select(['Bajo','Medio','Alto','Urgente']) %><br>
-<%= button_to 'Asignar Complejidad', edit_caso_path(@caso), method: :get %><br>
+<br>
+<%= form_for @caso, :url => {:action => "update"} do |f|%>
+<%= f.select :complejidad, ['Bajo','Medio','Alto','Urgente'] %><br>
+<%= f.hidden_field :status, :value => "En proceso" %>
+<%= f.hidden_field :infosoft, :value => "SI" %>
+<%= f.submit "Asignar Complejidad" %>
+<% end %><br>
 <%= link_to 'Volver', casos_path %>
 </td><td >
 <% if session[:usuario_tipo] != "cliente" %>

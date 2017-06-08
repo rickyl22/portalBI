@@ -5,7 +5,7 @@ class CasosController < ApplicationController
   def index
     
     session[:usuario_id] = 1
-    session[:usuario_tipo] = "Consultor"
+    session[:usuario_tipo] = "Infosoft-Admin"
     if session[:usuario_tipo] == "Admin"
        @casos = Caso.all
     elsif session[:usuario_tipo] == "cliente"
