@@ -18,12 +18,17 @@
           </div>
 
           </br></br></br>
-
+          
           <div class="button-container">
             <button><span>Acceder</span></button>
           </div>
 
       <% end %>
+      <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Consultor</a><br>
+          <%= button_to "Admin", {:controller => "casos", :action => "index", :user_tipo => "Admin"} %>
+          <%= button_to "Consultor-lider", casos_path, :user_tipo => "Infosoft-Admin" %>
+          <%= button_to "Cliente", casos_path, :user_tipo => "cliente" %>
+          <%= button_to "Consultor", casos_path, :user_tipo => "consultor" %>
     </div>
 
 

@@ -5,7 +5,8 @@ class CasosController < ApplicationController
   def index
     
     session[:usuario_id] = 1
-    session[:usuario_tipo] = "Infosoft-Admin"
+    session[:usuario_tipo] = params[:user_tipo]
+    p params[:user_tipo]
     if session[:usuario_tipo] == "Admin"
        @casos = Caso.all
     elsif session[:usuario_tipo] == "cliente"
@@ -52,7 +53,7 @@ class CasosController < ApplicationController
   # PATCH/PUT /casos/1
   def update
     if @caso.update(caso_params)
-      AsignadoMailer.asignar(1,2,3,"ricardolira48@hotmail.com").deliver
+      #AsignadoMailer.asignar(1,2,3,"ricardolira48@hotmail.com").deliver
       redirect_to @caso, notice: 'Caso was successfully updated.'
     else
       render :edit

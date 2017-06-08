@@ -178,11 +178,13 @@ td.text-right {
 </tbody>
 </table>
 <br>
+<% if session[:usuario_tipo] == "Admin" %>
 <%= form_for @caso, :url => {:action => "update"} do |f|%>
 <%= f.select :complejidad, ['Bajo','Medio','Alto','Urgente'] %><br>
 <%= f.hidden_field :status, :value => "En proceso" %>
 <%= f.hidden_field :infosoft, :value => "SI" %>
 <%= f.submit "Asignar Complejidad" %>
+<% end %>
 <% end %><br>
 <%= link_to 'Volver', casos_path %>
 </td><td >
