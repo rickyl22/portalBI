@@ -28,6 +28,8 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby'
 
 gem 'tzinfo-data'
+
+gem 'coffee-script-source', '1.8.0'
 #gem 'bcrypt', platforms: :ruby
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
