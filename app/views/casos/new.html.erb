@@ -149,7 +149,7 @@ td.text-right {
       </ul>
     </div>
   <% end %>
-<table class="table-fill" style="width: 70vw;">
+<table class="table-fill" style="width: 75vw;">
 <thead>
 <tr>
 <th class="text-left">Detalles del Caso</th>
@@ -161,13 +161,32 @@ td.text-right {
 </thead>
 <tbody class="table-hover">
 <tr>
-<td class="text-left" style="max-width: 400px;word-wrap: break-word;">
+<td class="text-left" style="max-width: 500px;word-wrap: break-word;">
      Titulo: <%= form.text_field :titulo, id: :caso_titulo %><br>
-     Fecha requerido:<br> <%= form.date_select :fecha_req, id: :caso_fecha_req %><br>
+     <% @meses = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] %>
+     Fecha requerido:<br>
+
+      <select id="caso_fecha_req_1i" name="caso[fecha_req(1i)]">
+
+        <option value="2017" selected="selected">2017</option>
+      </select>
+      <select id="caso_fecha_req_2i" name="caso[fecha_req(2i)]">
+        <% @test = @meses[(Time.now.month-1)..11] %>
+        <% @ind = Time.now.month %>
+        <% @test.each do |i|%>
+           <option value=<%= @ind %> selected="selected"><%= i %></option>
+           <% @ind = @ind + 1 %>
+        <% end %>   
+      </select>
+      <select id="caso_fecha_req_3i" name="caso[fecha_req(3i)]">
+        <option value="1">1</option>
+      </select>
+
+     <br>
      Periodo: desde<br>
-     <%= form.date_select :periodo_desde, id: :caso_periodo_desde %><br>
+     <%= form.date_select :periodo_desde, id: :caso_periodo_desde, :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'] %><br>
      hasta <br>
-     <%= form.date_select :periodo_hasta, id: :caso_periodo_hasta %><br>
+     <%= form.date_select :periodo_hasta, id: :caso_periodo_hasta, :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'] %><br>
      Delimitador: <%= form.text_field :separacion, id: :caso_separacion %><br>
      Tipo de archivo: <%= form.text_field :tipo_archivo, id: :caso_tipo_archivo %><br>
      <%= form.hidden_field :complejidad, value: "No Asignada"  %>
@@ -203,7 +222,7 @@ td.text-right {
 </tr>
 </tbody>
 </table>
-<table class="table-fill" style="width: 70vw;">
+<table class="table-fill" style="width: 75vw;">
 <thead>
 <tr>
 <th class="text-left">Agrupaciones</th>
