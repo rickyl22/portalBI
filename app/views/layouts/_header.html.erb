@@ -59,13 +59,13 @@
       <div class="android-drawer-separator"></div>
       <!-- Menu para Portal de Gestion de Mineria -->
       <strong><span class="mdl-navigation__link" href="">Mineria</span></strong>
-      <% if session[:usuario_tipo] == "admin" %>
+      <% if session[:usuario_tipo] == "Admin" %>
         <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
         <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
-        <a class="mdl-navigation__link" href="/casos">Mis Casos</a>
-      <%  elsif session[:usuario_tipo] == "lider" %>
+        <%= link_to "Mis casos", casos_path( :self => 1 ), :class => "mdl-navigation__link" %>
+      <%  elsif session[:usuario_tipo] == "Infosoft-Admin" %>
         <a class="mdl-navigation__link" href="/casos">Gestion de Casos</a>
-        <a class="mdl-navigation__link" href="/casos">Mis Casos</a>
+        <%= link_to "Mis casos", casos_path( :self => 1 ), :class => "mdl-navigation__link" %>
       <%  elsif session[:usuario_tipo] == "cliente" %>
         <a class="mdl-navigation__link" href="/casos">Mis Casos</a>
         <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>

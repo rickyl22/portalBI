@@ -172,6 +172,7 @@ td.text-right {
      Tipo de archivo: <%= form.text_field :tipo_archivo, id: :caso_tipo_archivo %><br>
      <%= form.hidden_field :complejidad, value: "No Asignada"  %>
      <%= form.hidden_field :status, value: "Creado"  %>
+     <%= form.hidden_field :infosoft, value: "NO"  %>
      <%= form.hidden_field :fecha_creado, value: Time.now  %>
      <%= form.hidden_field :usuario, value: session[:usuario_id]  %>
 

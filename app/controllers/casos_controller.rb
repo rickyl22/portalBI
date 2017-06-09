@@ -1,18 +1,35 @@
 class CasosController < ApplicationController
   before_action :set_caso, only: [:show, :edit, :update, :destroy]
 
+  def iniciar
+    session[:usuario_id] = 2
+    session[:usuario_tipo] = params[:user_tipo]
+
+  end
+
   # GET /casos
   def index
     
-    session[:usuario_id] = 1
-    session[:usuario_tipo] = params[:user_tipo]
-    p params[:user_tipo]
+   
     if session[:usuario_tipo] == "Admin"
-       @casos = Caso.all
+       if params[:self] == '1'
+          @self = "1"
+          @casos = Caso.where("usuario = "+session[:usuario_id].to_s)
+       else
+        p "no  self"
+        @self = "0"
+          @casos = Caso.where("infosoft = 'NO'")
+          @casos2 = Caso.where("status = 'En proceso'")
+          @casos3 = Caso.where("status = 'Cerrado'")
+       end
     elsif session[:usuario_tipo] == "cliente"
        @casos = Caso.where("usuario = "+session[:usuario_id].to_s)
     elsif session[:usuario_tipo] == "Infosoft-Admin"
-       @casos = Caso.where("infosoft = 'SI'")
+      if params[:self] == '1'
+          @casos = Caso.where("usuario = "+session[:usuario_id].to_s)
+      else    
+          @casos = Caso.where("infosoft = 'SI'")
+      end
     else 
        @casos = Caso.where("usuario = "+session[:usuario_id].to_s)
     end

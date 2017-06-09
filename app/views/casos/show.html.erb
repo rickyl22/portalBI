@@ -179,11 +179,31 @@ td.text-right {
 </table>
 <br>
 <% if session[:usuario_tipo] == "Admin" %>
+  <% if @caso.status == "Cerrado" %>
+    <%= form_for @caso, :url => {:action => "update"} do |f|%>
+    <%= f.hidden_field :status, :value => "En proceso" %>
+    <%= f.submit "Reabrir caso" %>
+    <% end %>
+  <% else %>  
+    <%= form_for @caso, :url => {:action => "update"} do |f|%>
+    <%= f.select :complejidad, ['Bajo','Medio','Alto','Urgente'] %><br>
+    <%= f.hidden_field :status, :value => "En proceso" %>
+    <%= f.hidden_field :infosoft, :value => "SI" %>
+    <%= f.submit "Asignar Complejidad" %>
+  <% end %>
+<% end %>
+<% end %>
+<% if session[:usuario_tipo] == "Infosoft-Admin" %>
+Asignado a: <%= @caso.consultor == nil ? "No asignado" : @caso.consultor %><br>
 <%= form_for @caso, :url => {:action => "update"} do |f|%>
-<%= f.select :complejidad, ['Bajo','Medio','Alto','Urgente'] %><br>
-<%= f.hidden_field :status, :value => "En proceso" %>
-<%= f.hidden_field :infosoft, :value => "SI" %>
-<%= f.submit "Asignar Complejidad" %>
+<%= f.select :consultor, ["Consultor-lider",'consultor1','consultor2','consultor3'] %>
+<%= f.submit "Asignar caso" %>
+<% end %>
+<% end %>
+<% if session[:usuario_tipo] == "consultor" %>
+<%= form_for @caso, :url => {:action => "update"} do |f|%>
+<%= f.hidden_field :status, :value => "Cerrado" %>
+<%= f.submit "Cerrar caso" %>
 <% end %>
 <% end %><br>
 <%= link_to 'Volver', casos_path %>

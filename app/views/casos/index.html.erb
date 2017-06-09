@@ -114,7 +114,45 @@ td.text-right {
 
 <h1>Casos</h1>
 
-<table class="table-fill" style="width: 95%;">
+<table class="table-fill" style="width: 85%;">
+  <thead>
+    <tr>
+      <th>Caso</th>
+      <th>Titulo</th>
+      <th style="word-wrap:break-word;">Fecha de creación/asignación</th>
+      <th style="word-wrap:break-word;">Dias transcurridos desde:</th>
+      <th>Asignado a Infosoft</th>
+      <th>Complejidad</th>
+      <th>Estatus</th>
+      <th>Ver Casos</th>      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @casos.each do |caso| %>
+      <tr>
+        <td><%= caso.id %></td>
+        <td><%= caso.titulo %></td>
+        <td>
+            Creacion: <%= caso.fecha_creado %><br>
+            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : caso.fech_asig %>
+        </td>
+        <td>
+            Creacion: <%= (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fecha_creado.mjd %> <br>
+            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fech_asig.mjd %>
+        </td>
+        <td><%= caso.infosoft %></td>
+        <td><%= caso.complejidad %></td>
+        <td><%= caso.status %></td>
+        <td><%= link_to 'Ver', caso %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if session[:usuario_tipo] == 'Admin' and @self != '1' %>
+  <% @casos = @casos2 %>
+  <h1>Casos asignados</h1>
+  <table class="table-fill" style="width: 85%;">
   <thead>
     <tr>
       <th>Caso</th>
@@ -149,7 +187,44 @@ td.text-right {
     <% end %>
   </tbody>
 </table>
+<% @casos = @casos3 %>
+  <h1>Casos cerrados</h1>
+<table class="table-fill" style="width: 85%;">
+  <thead>
+    <tr>
+      <th>Caso</th>
+      <th>Titulo</th>
+      <th style="word-wrap:break-word;">Fecha de creación/asignación</th>
+      <th style="word-wrap:break-word;">Dias transcurridos desde:</th>
+      <th>Asignado a Infosoft</th>
+      <th>Complejidad</th>
+      <th>Estatus</th>
+      <th>Ver Casos</th>      
+    </tr>
+  </thead>
 
+  <tbody>
+    <% @casos.each do |caso| %>
+      <tr>
+        <td><%= caso.id %></td>
+        <td><%= caso.titulo %></td>
+        <td>
+            Creacion: <%= caso.fecha_creado %><br>
+            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : caso.fech_asig %>
+        </td>
+        <td>
+            Creacion: <%= (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fecha_creado.mjd %> <br>
+            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fech_asig.mjd %>
+        </td>
+        <td><%= caso.infosoft == nil ? "NO" : caso.infosoft %></td>
+        <td><%= caso.complejidad %></td>
+        <td><%= caso.status %></td>
+        <td><%= link_to 'Ver', caso %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
 <br>
 
 <%= link_to 'Caso nuevo', new_caso_path %>
