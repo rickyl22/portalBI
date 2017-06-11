@@ -29,7 +29,7 @@ th {
   background:#1b1e24;
   border-bottom:4px solid #9ea7af;
   border-right: 1px solid #343a45;
-  font-size:23px;
+  font-size:19px;
   font-weight: 100;
   padding:24px;
   text-align:left;
@@ -50,7 +50,7 @@ tr {
   border-top: 1px solid #C1C3D1;
   border-bottom-: 1px solid #C1C3D1;
   color:#666B85;
-  font-size:16px;
+  font-size:12px;
   font-weight:normal;
   text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
 }
@@ -77,7 +77,7 @@ td {
   text-align:left;
   vertical-align:middle;
   font-weight:300;
-  font-size:18px;
+  font-size:14px;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #C1C3D1;
 }
@@ -112,7 +112,7 @@ td.text-right {
   </style>
 <p id="notice"><%= notice %></p>
 <table ><tr><td style="vertical-align: text-top;">
-<table class="table-fill" style="width: 70vw;">
+<table class="table-fill" style="width: 65vw;">
 <thead>
 <tr>
 <th class="text-left">Detalles del Caso</th>
@@ -125,13 +125,13 @@ td.text-right {
 <tbody class="table-hover">
 <tr>
 <td class="text-left" style="max-width: 400px;word-wrap: break-word;">
-     Titulo: <%= @caso.titulo %><br>
-     Fecha creado: <%= @caso.fecha_creado %><br>
-     Fecha requerido: <%= @caso.fecha_req %><br>
-     Periodo: <%= @caso.periodo_desde %> - <%= @caso.periodo_hasta %><br>
-     Delimitador: <%= @caso.separacion %><br>
-     Tipo de archivo: <%= @caso.tipo_archivo %><br>
-     Historial de documentos:<%= session[:usuario_id] %>
+     Titulo: <b><%= @caso.titulo %></b><br>
+     Fecha creado:<br>&nbsp &nbsp <b><%= @caso.fecha_creado %></b><br>
+     Fecha requerido:<br> &nbsp &nbsp<b><%= @caso.fecha_req %></b><br>
+     Periodo - desde:<br> &nbsp &nbsp <b><%= @caso.periodo_desde %></b><br> hasta:<br>&nbsp &nbsp <b><%= @caso.periodo_hasta %></b><br>
+     Delimitador: <b><%= @caso.separacion %></b><br>
+     Tipo de archivo: <b><%= @caso.tipo_archivo %></b><br>
+     Historial de documentos:
 
 </td>
 <td class="text-left">
@@ -157,7 +157,7 @@ td.text-right {
 </tr>
 </tbody>
 </table>
-<table class="table-fill">
+<table class="table-fill" style="width: 65vw;" >
 <thead>
 <tr>
 <th class="text-left">Agrupaciones</th>
@@ -181,17 +181,21 @@ td.text-right {
 <% if session[:usuario_tipo] == "Admin" %>
   <% if @caso.status == "Cerrado" %>
     <%= form_for @caso, :url => {:action => "update"} do |f|%>
-    <%= f.hidden_field :status, :value => "En proceso" %>
+    <%= f.hidden_field :status, :value => "En Proceso" %>
     <%= f.submit "Reabrir caso" %>
     <% end %>
   <% else %>  
     <%= form_for @caso, :url => {:action => "update"} do |f|%>
     <%= f.select :complejidad, ['Bajo','Medio','Alto','Urgente'] %><br>
-    <%= f.hidden_field :status, :value => "En proceso" %>
+    <%= f.hidden_field :status, :value => "En Proceso" %>
     <%= f.hidden_field :infosoft, :value => "SI" %>
     <%= f.submit "Asignar Complejidad" %>
+    <% end %><br>
+    <%= form_for @caso, :url => {:action => "update"} do |f|%>
+    <%= f.select :status, [' Anulado','BI-Afectado','BI-Planificado','Cerrado','Iniciado','En Proceso'] %><br>
+    <%= f.submit "Cambiar Estatus" %>
+    <% end %>
   <% end %>
-<% end %>
 <% end %>
 <% if session[:usuario_tipo] == "Infosoft-Admin" %>
 Asignado a: <%= @caso.consultor == nil ? "No asignado" : @caso.consultor %><br>
@@ -202,14 +206,14 @@ Asignado a: <%= @caso.consultor == nil ? "No asignado" : @caso.consultor %><br>
 <% end %>
 <% if session[:usuario_tipo] == "consultor" %>
 <%= form_for @caso, :url => {:action => "update"} do |f|%>
-<%= f.hidden_field :status, :value => "Cerrado" %>
-<%= f.submit "Cerrar caso" %>
+    <%= f.select :status, [' Anulado','BI-Afectado','BI-Planificado','Cerrado','Iniciado','En Proceso'] %><br>
+    <%= f.submit "Cambiar Estatus" %>
 <% end %>
 <% end %><br>
 <%= link_to 'Volver', casos_path %>
 </td><td >
 <% if session[:usuario_tipo] != "cliente" %>
-<table class="table-fill" ><thead>
+<table class="table-fill" style="width: 25vw;" ><thead>
 <tr>
 <th class="text-left">Comentarios</th>
 </tr>
@@ -231,7 +235,7 @@ Asignado a: <%= @caso.consultor == nil ? "No asignado" : @caso.consultor %><br>
 
   <div class="field">
     <%= form.label :texto %>
-    <%= form.text_area :texto, id: :comentario_texto %>
+    <%= form.text_area :texto, id: :comentario_texto, :cols => "40", :rows => "3" %>
   </div>
   
    <%= form.hidden_field :hidden, value: @caso.id %>

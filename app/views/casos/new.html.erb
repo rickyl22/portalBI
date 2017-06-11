@@ -18,6 +18,13 @@
     }
     );
 
+  $(".rango_desde").change(function() {
+    $(".rango_fin")[0].disabled = false;
+    $(".rango_fin")[0].value = $(".rango_desde")[0].value;
+    $(".rango_fin")[0].setAttribute("min", $(".rango_desde")[0].value);
+  
+  });
+
 });
 
 function remove(element){
@@ -26,6 +33,18 @@ function remove(element){
 
 </script>
 <style>
+
+
+
+
+input[type="date"]::-webkit-clear-button {
+ -webkit-appearance: none;
+  display: none;
+}
+input[type="date"]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
+
 table-title h3 {
    color: #fafafa;
    font-size: 30px;
@@ -163,34 +182,18 @@ td.text-right {
 <tr>
 <td class="text-left" style="max-width: 500px;word-wrap: break-word;">
      Titulo: <%= form.text_field :titulo, id: :caso_titulo %><br>
-     <% @meses = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] %>
+     <% @meses =  ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'] %>
      Fecha requerido:<br>
-
-      <select id="caso_fecha_req_1i" name="caso[fecha_req(1i)]">
-
-        <option value="2017" selected="selected">2017</option>
-      </select>
-      <select id="caso_fecha_req_2i" name="caso[fecha_req(2i)]">
-        <% @test = @meses[(Time.now.month-1)..11] %>
-        <% @ind = Time.now.month %>
-        <% @test.each do |i|%>
-           <option value=<%= @ind %> selected="selected"><%= i %></option>
-           <% @ind = @ind + 1 %>
-        <% end %>   
-      </select>
-      <select id="caso_fecha_req_3i" name="caso[fecha_req(3i)]">
-        <option value="1">1</option>
-      </select>
-
+     <%= form.date_field :fecha_req, id: :caso_fecha_req, min: Time.now, :onkeydown =>"return false"  %>
      <br>
      Periodo: desde<br>
-     <%= form.date_select :periodo_desde, id: :caso_periodo_desde, :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'] %><br>
+     <%= form.date_field :periodo_desde, id: :caso_periodo_desde, :class => "rango_desde",  :onkeydown =>"return false" %><br>
      hasta <br>
-     <%= form.date_select :periodo_hasta, id: :caso_periodo_hasta, :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'] %><br>
-     Delimitador: <%= form.text_field :separacion, id: :caso_separacion %><br>
+     <%= form.date_field :periodo_hasta, id: :caso_periodo_hasta, :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'], :class => "rango_fin", :disabled => true, :onkeydown =>"return false"  %><br>
+     Delimitador:<br> <%= form.select :separacion, ['coma ( , )','punto y coma ( ; )', 'pipe ( | )'], id: :caso_separacion %><br>
      Tipo de archivo: <%= form.text_field :tipo_archivo, id: :caso_tipo_archivo %><br>
      <%= form.hidden_field :complejidad, value: "No Asignada"  %>
-     <%= form.hidden_field :status, value: "Creado"  %>
+     <%= form.hidden_field :status, value: "Iniciado"  %>
      <%= form.hidden_field :infosoft, value: "NO"  %>
      <%= form.hidden_field :fecha_creado, value: Time.now  %>
      <%= form.hidden_field :usuario, value: session[:usuario_id]  %>
@@ -241,9 +244,18 @@ td.text-right {
       Otro <%= form.radio_button :agrup, "otro", id: :caso_agrup, :class => "espec_otro" %> 
       Especifique <%= form.text_field :agrup , id: :caso_agrup,:class => "espec", :disabled => true %><br><br>
 </td>
-<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= form.text_field :condiciones, id: :caso_condiciones, :required => true %></td>
+<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= form.text_area :condiciones, id: :caso_condiciones, :required => true, :rows => "5", :cols => "50" %></td>
 <td class="text-left" style="max-width: 300px;word-wrap: break-word;">
-  <div id = "poll_choices"><%= render "campos" %><%= render "campos" %></div><br>
+  <div id = "poll_choices">
+
+     <div class="choiceForm">
+     <%= label_tag "Campo" %>
+     <br>
+     <%= text_field_tag "campos[]",nil, :required => true %>
+     <br>
+    </div>
+
+      </div><br>
       <div style="display: none;" id="new_choice_form">
     <%= render partial: "campos", locals: {poll: false} %>
 </div><br><a href="javascript:;" id="addNewChoice">Agregar campo</a><br><br>

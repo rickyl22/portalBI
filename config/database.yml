@@ -17,7 +17,7 @@ development:
   database: portalBI_development
   pool: 5
   username: root
-  password: 5555
+  password: 123456
   socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -32,7 +32,7 @@ test:
   database: portalBI_test
   pool: 5
   username: root
-  password: 5555
+  password: 123456
   socket: /var/run/mysqld/mysqld.sock
 
 production:
@@ -44,5 +44,5 @@ production:
   database: portalBI_production
   pool: 5
   username: root
-  password: 5555
+  password: 123456
   socket: /var/run/mysqld/mysqld.sock
