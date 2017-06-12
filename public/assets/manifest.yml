@@ -1,0 +1,11 @@
+---
+logo_telefonica.png: logo_telefonica-b5e3712b9c0a7c19cd4a03394cde87a6.png
+logo_telefonica/index.png: logo_telefonica-b5e3712b9c0a7c19cd4a03394cde87a6.png
+rails.png: rails-71e944d9b39043eba50b77788c0d767f.png
+rails/index.png: rails-71e944d9b39043eba50b77788c0d767f.png
+application.js: application-cc3705c5dddaf6160b08f537f3f79382.js
+application/index.js: application-cc3705c5dddaf6160b08f537f3f79382.js
+application.css: application-9e2ca0eca0cb49d929860e4bd8c67cce.css
+application/index.css: application-9e2ca0eca0cb49d929860e4bd8c67cce.css
+jquery.min.map: jquery.min-c5a89be96c8d2def857e2657b2c155c0.map
+jquery/index.min.map: jquery.min-c5a89be96c8d2def857e2657b2c155c0.map

@@ -1,7 +1,7 @@
 class MenusController < ApplicationController
+
   before_action :require_authentication
   def index
-
   end
 
   def new

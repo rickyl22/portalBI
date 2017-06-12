@@ -60,15 +60,26 @@
       <div class="android-drawer-separator"></div>
       <!-- Menu para Portal de Gestion de Mineria -->
       <strong><span class="mdl-navigation__link" href="">Mineria</span></strong>
-      <a class="mdl-navigation__link" href="">Gestión de Casos</a>
-      <a class="mdl-navigation__link" href="">Crear Caso</a>
-      <a class="mdl-navigation__link" href="">Ver Caso</a>
+      <% if session[:usuario_tipo] == "Admin" %>
+        <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
+        <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
+        <%= link_to "Mis casos", casos_path( :self => 1 ), :class => "mdl-navigation__link" %>
+      <%  elsif session[:usuario_tipo] == "Infosoft-Admin" %>
+        <a class="mdl-navigation__link" href="/casos">Gestion de Casos</a>
+        <%= link_to "Mis casos", casos_path( :self => 1 ), :class => "mdl-navigation__link" %>
+      <%  elsif session[:usuario_tipo] == "cliente" %>
+        <a class="mdl-navigation__link" href="/casos">Mis Casos</a>
+        <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
+      <% else %>
+        <a class="mdl-navigation__link" href="/casos">Mis Casos</a>
+      <% end %>
       <div class="android-drawer-separator"></div>
 
     </nav>
   </div>
 
   <!-- Icon menus lateral -->
+
   <div class="android-content mdl-layout__content">
     <a name="top"></a>
   </div>

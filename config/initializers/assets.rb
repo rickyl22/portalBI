@@ -18,3 +18,5 @@ Rails.application.config.assets.precompile += %w( icon.css )
 Rails.application.config.assets.precompile += %w( material.min.js )
 Rails.application.config.assets.precompile += %w( portalBI.js )
 Rails.application.config.assets.precompile += %w( jquery.min.js )
+
+

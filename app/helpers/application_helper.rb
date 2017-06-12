@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   def admin?
     p "admin?"
     true if(current_user.role.alias == "admin")

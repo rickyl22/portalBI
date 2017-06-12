@@ -1,0 +1,256 @@
+<div class="content_p android-content mdl-layout__content">
+<style>
+table-title h3 {
+   color: #fafafa;
+   font-size: 30px;
+   font-weight: 400;
+   font-style:normal;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+}
+
+
+/*** Table Styles **/
+
+.table-fill {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  margin: auto;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+ 
+th {
+  color:#D5DDE5;;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:19px;
+  font-weight: 100;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+th:first-child {
+  border-top-left-radius:3px;
+}
+ 
+th:last-child {
+  border-top-right-radius:3px;
+  border-right:none;
+}
+  
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:12px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+ 
+tr:first-child {
+  border-top:none;
+}
+
+tr:last-child {
+  border-bottom:none;
+}
+ 
+tr:last-child td:first-child {
+  border-bottom-left-radius:3px;
+}
+ 
+tr:last-child td:last-child {
+  border-bottom-right-radius:3px;
+}
+ 
+td {
+  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:14px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+
+td:last-child {
+  border-right: 0px;
+}
+
+th.text-left {
+  text-align: left;
+}
+
+th.text-center {
+  text-align: center;
+}
+
+th.text-right {
+  text-align: right;
+}
+
+td.text-left {
+  text-align: left;
+}
+
+td.text-center {
+  text-align: center;
+}
+
+td.text-right {
+  text-align: right;
+}
+  </style>
+<p id="notice"><%= notice %></p>
+<table ><tr><td style="vertical-align: text-top;">
+<table class="table-fill" style="width: 65vw;">
+<thead>
+<tr>
+<th class="text-left">Detalles del Caso</th>
+<th class="text-left">Indicadores</th>
+<th class="text-left">Filtro</th>
+<th class="text-left">Linea de Negocio</th>
+<th class="text-left">Tipo de Caso</th>
+</tr>
+</thead>
+<tbody class="table-hover">
+<tr>
+<td class="text-left" style="max-width: 400px;word-wrap: break-word;">
+     Titulo: <b><%= @caso.titulo %></b><br>
+     Fecha creado:<br>&nbsp &nbsp <b><%= @caso.fecha_creado %></b><br>
+     Fecha requerido:<br> &nbsp &nbsp<b><%= @caso.fecha_req %></b><br>
+     Periodo - desde:<br> &nbsp &nbsp <b><%= @caso.periodo_desde %></b><br> hasta:<br>&nbsp &nbsp <b><%= @caso.periodo_hasta %></b><br>
+     Delimitador: <b><%= @caso.separacion %></b><br>
+     Tipo de archivo: <b><%= @caso.tipo_archivo %></b><br>
+     Historial de documentos:
+
+</td>
+<td class="text-left">
+    ARPU: <b><%= @caso.arpu == '0' ? "NO" : "SI" %></b><br>
+    Altas: <b><%= @caso.altas == '0' ? "NO" : "SI"%></b><br>
+    Parque: <b><%= @caso.parque == '0' ? "NO" : "SI" %></b><br>
+    Recargas: <b><%= @caso.recargas == '0' ? "NO" : "SI"%></b><br>
+    Act_Tabla: <b><%= @caso.act_tabla == '0' ? "NO" : "SI"%></b><br>
+    TLV: <b><%= @caso.tlv == '0' ? "NO" : "SI"%>
+</td>
+<td class="text-left">
+    Smartphone/No Smartphone: <b><%= @caso.phone == '0' ? "NO" : "SI"%></b><br>
+    Prepago/Postpago: <b><%= @caso.pre_post == '0' ? "NO" : "SI"%></b><br>
+    Otro: <b><%= @caso.otro %></b>
+</td>
+<td class="text-left">
+    Fijo: <b><%= @caso.fijo == '0' ? "NO" : "SI"%></b><br>
+    IM: <b><%= @caso.im == '0' ? "NO" : "SI"%></b><br>
+    Movil: <b><%= @caso.movil == '0' ? "NO" : "SI"%></b><br>
+    TV: <b><%= @caso.tv == '0' ? "NO" : "SI"%></b>
+</td>
+<td class="text-left"><%= @caso.tipo_caso %></td>
+</tr>
+</tbody>
+</table>
+<table class="table-fill" style="width: 65vw;" >
+<thead>
+<tr>
+<th class="text-left">Agrupaciones</th>
+<th class="text-left">Condiciones</th>
+<th class="text-left">Campos</th>
+<th class="text-left">Complejidad</th>
+<th class="text-left">Estatus</th>
+</tr>
+</thead>
+<tbody class="table-hover">
+<tr>
+<td class="text-left"><%= @caso.agrup %><%= @caso.especifique %></td>
+<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= @caso.condiciones %></td>
+<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= @caso.campos %></td>
+<td class="text-left"><%= @caso.complejidad %></td>
+<td class="text-left"><%= @caso.status %></td>
+</tr>
+</tbody>
+</table>
+<br>
+<% if session[:usuario_tipo] == "Admin" %>
+  <% if @caso.status == "Cerrado" %>
+    <%= form_for @caso, :url => {:action => "update"} do |f|%>
+    <%= f.hidden_field :status, :value => "En Proceso" %>
+    <%= f.submit "Reabrir caso" %>
+    <% end %>
+  <% else %>  
+    <%= form_for @caso, :url => {:action => "update"} do |f|%>
+    <%= f.select :complejidad, ['Bajo','Medio','Alto','Urgente'] %><br>
+    <%= f.hidden_field :status, :value => "En Proceso" %>
+    <%= f.hidden_field :infosoft, :value => "SI" %>
+    <%= f.hidden_field :fech_asig, :value => Time.now %>
+    <%= f.submit "Asignar Complejidad" %>
+    <% end %><br>
+    <%= form_for @caso, :url => {:action => "update"} do |f|%>
+    <%= f.select :status, [' Anulado','BI-Afectado','BI-Planificado','Cerrado','Iniciado','En Proceso'] %><br>
+    <%= f.submit "Cambiar Estatus" %>
+    <% end %>
+  <% end %>
+<% end %>
+<% if session[:usuario_tipo] == "Infosoft-Admin" %>
+Asignado a: <%= @caso.consultor == nil ? "No asignado" : @caso.consultor %><br>
+<%= form_for @caso, :url => {:action => "update"} do |f|%>
+<%= f.select :consultor, ["Consultor-lider",'consultor1','consultor2','consultor3'] %>
+<%= f.submit "Asignar caso" %>
+<% end %>
+<% end %>
+<% if session[:usuario_tipo] == "consultor" %>
+<%= form_for @caso, :url => {:action => "update"} do |f|%>
+    <%= f.select :status, [' Anulado','BI-Afectado','BI-Planificado','Cerrado','Iniciado','En Proceso'] %><br>
+    <%= f.submit "Cambiar Estatus" %>
+<% end %>
+<% end %><br>
+<%= link_to 'Volver', casos_path %>
+</td><td >
+<% if session[:usuario_tipo] != "cliente" %>
+<table class="table-fill" style="width: 25vw;" ><thead>
+<tr>
+<th class="text-left">Comentarios</th>
+</tr>
+</thead>
+<tbody class="table-hover">
+<% @comments.each do |com| %>
+<tr>
+<% if com.caso_id == @caso.id %>
+<td class="text-left" style="max-width: 300px;word-wrap: break-word;">
+  <b><%= com.autor %>  -  <%= com.created_at.strftime('%d/%m/%Y %H:%M') %></b><br><br>
+  <%= com.texto %>
+</td>
+<% end %>
+</tr>
+<% end %>
+<tr><td>
+<% comment = Comentario.new %>
+<%= form_for comment do |form| %>
+
+  <div class="field">
+    <%= form.label :texto %>
+    <%= form.text_area :texto, id: :comentario_texto, :cols => "40", :rows => "3" %>
+  </div>
+  
+   <%= form.hidden_field :hidden, value: @caso.id %>
+   <%= form.hidden_field :caso_id, value: @caso.id %>
+   <%= form.hidden_field :fecha, value: Time.now %>
+   <%= form.hidden_field :autor, value: session[:usuario_tipo] %>
+  <div class="actions">
+    <%= form.submit "Enviar" %>
+  </div>
+<% end %>
+<% end %>
+
+</td></tr>
+</tbody></table></td></tr></table>
+
+
+</div>

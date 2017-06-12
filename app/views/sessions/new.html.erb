@@ -1,14 +1,18 @@
 <div  class="content_p login_singup android-content mdl-layout__content">
+
   <% if flash[:notice] %>
       <div class="notice"><%= flash[:notice] %></div>
   <% end %>
+
   <!-- Contenido -->
   <div class="container">
     <!-- Login -->
     <div class="card"></div>
+
     <div class="card mdl-shadow--16dp">
       <h1 class="title">Iniciar Sesión</h1>
       <%= form_tag login_path do %>
+
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="usuario" name="usuario">
             <label class="mdl-textfield__label" for="usuario">Nombre de usuario</label>
@@ -25,9 +29,14 @@
           <div class="button-container">
             <button><span>Acceder</span></button>
           </div>
-
-      <% end %>
+      <% end %><br>
+          <%= button_to "Admin", {:controller => "casos", :action => "iniciar", :user_tipo => "Admin"} %>
+          <%= button_to "Consultor-lider", {:controller => "casos", :action => "iniciar", :user_tipo => "Infosoft-Admin"} %>
+          <%= button_to "Cliente", {:controller => "casos", :action => "iniciar", :user_tipo => "cliente"} %>
+          <%= button_to "Consultor", {:controller => "casos", :action => "iniciar", :user_tipo => "consultor"} %>
     </div>
+
+
 
   <!-- Sign up -->
     <div class="card alt mdl-shadow--16dp">
@@ -35,6 +44,7 @@
       <h1 class="title">Solicitud de Registro
         <div class="close"></div>
       </h1>
+
 
       <%= form_for(@usuarios, url: usuarios_path) do |f| %>
           <%= f.text_field  :estatus, :type => "hidden", :value => "Pendiente", :required => "required" %>
