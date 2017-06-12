@@ -22,9 +22,6 @@ class ComentariosController < ApplicationController
   # POST /comentarios
   def create
     @comentario = Comentario.new(comentario_params)
-    p"hey"
-    p params[:comentario][:hidden]
-    p"yoo"
     @caso = Caso.find(params[:comentario][:hidden])
     if @comentario.save
       redirect_to @caso

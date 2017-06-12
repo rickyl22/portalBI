@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20170607184406) do
-
 
   create_table "casos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "act_tabla"
@@ -58,7 +56,6 @@ ActiveRecord::Schema.define(version: 20170607184406) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
 
   create_table "permisos_asignados", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "privilegio_id"
@@ -116,7 +113,6 @@ ActiveRecord::Schema.define(version: 20170607184406) do
     t.datetime "updated_at", null: false
   end
 
-
   create_table "usuarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "usuario"
     t.string "codigo_empleado"
@@ -134,6 +130,5 @@ ActiveRecord::Schema.define(version: 20170607184406) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
 
 end
