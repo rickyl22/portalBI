@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :documentos
   resources :casos
   resources :comentarios
   resources :roles_privilegios

@@ -95,24 +95,6 @@ ActiveRecord::Schema.define(version: 20170607184406) do
     t.index ["role_id"], name: "index_roles_privilegios_on_role_id"
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "usuario"
-    t.string "codigo_empleado"
-    t.string "area"
-    t.string "gerencia"
-    t.string "cargo"
-    t.string "correo"
-    t.string "telefono"
-    t.string "nombre"
-    t.string "apellido"
-    t.string "supervisor"
-    t.string "justificacion"
-    t.string "estatus"
-    t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "usuarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "usuario"
     t.string "codigo_empleado"
