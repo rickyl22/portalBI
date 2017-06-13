@@ -1,3 +1,3 @@
 class Documento < ApplicationRecord
-	belongs_to :caso
+	belongs_to :caso, index: true
 end
