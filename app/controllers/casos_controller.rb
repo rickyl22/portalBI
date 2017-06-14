@@ -2,7 +2,7 @@ class CasosController < ApplicationController
   before_action :set_caso, only: [:show, :edit, :update, :destroy]
 
   def iniciar
-    session[:usuario_id] = 2
+    session[:usuario_id] = 1
     session[:usuario_tipo] = params[:user_tipo]
 
   end
@@ -47,8 +47,6 @@ class CasosController < ApplicationController
 
   # GET /casos/1/edit
   def edit
-    p "wow"
-    p params[:par]
     redirect_back(fallback_location:root_path)
   end
 
@@ -59,8 +57,13 @@ class CasosController < ApplicationController
     @string = ""
     @campos.each { |x| if x != "" then @string << x +" - " end}
     @string = @string[0...-3]
-    @caso[:campos] = @string
-    if @caso.save
+   
+    p "hola"
+    p caso_params
+    p "hola2"
+    p params
+    @usuario = Usuario.find(1)
+    if @usuario.casos.create(caso_params.merge(:campos => @string))
       redirect_to @caso, notice: 'Caso was successfully created.'
     else
       render :new
@@ -91,6 +94,6 @@ class CasosController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def caso_params
-      params.require(:caso).permit(:act_tabla, :agrup, :altas, :arpu, :campos, :complejidad, :condiciones, :consultor, :especifique, :fech_asig, :fecha_creado, :fecha_req, :fijo, :im, :infosoft, :movil, :otro, :parque, :periodo_desde, :periodo_hasta, :phone, :pre_post, :recargas, :separacion, :status, :tipo_archivo, :tipo_caso, :titulo, :tlv, :tv, :usuario)
+      params.require(:caso).permit(:act_tabla, :agrup, :altas, :arpu, :campos, :complejidad, :condiciones, :consultor, :especifique, :fech_asig, :fecha_creado, :fecha_req, :fijo, :im, :infosoft, :movil, :otro, :parque, :periodo_desde, :periodo_hasta, :phone, :pre_post, :recargas, :separacion, :status, :tipo_archivo, :tipo_caso, :titulo, :tlv, :tv, :usuario_id)
     end
 end

@@ -21,7 +21,8 @@
   </thead>
 
   <tbody>
-    <% @casos.each do |caso| %>
+    <% @user = Usuario.find(1) %>
+    <% @user.casos.each do |caso| %>
       <tr>
         <td><%= caso.id %></td>
         <td><%= caso.titulo %></td>

@@ -112,7 +112,7 @@ td.text-right {
   </style>
 <p id="notice"><%= notice %></p>
 <table ><tr><td style="vertical-align: text-top;">
-<table class="table-fill" style="width: 65vw;">
+<table class="table-fill" style="width: 75vw;">
 <thead>
 <tr>
 <th class="text-left">Detalles del Caso</th>
@@ -124,14 +124,18 @@ td.text-right {
 </thead>
 <tbody class="table-hover">
 <tr>
-<td class="text-left" style="max-width: 400px;word-wrap: break-word;">
+<td class="text-left" style="max-width: 200px;word-wrap: break-word;">
      Titulo: <b><%= @caso.titulo %></b><br>
      Fecha creado:<br>&nbsp &nbsp <b><%= @caso.fecha_creado %></b><br>
      Fecha requerido:<br> &nbsp &nbsp<b><%= @caso.fecha_req %></b><br>
      Periodo - desde:<br> &nbsp &nbsp <b><%= @caso.periodo_desde %></b><br> hasta:<br>&nbsp &nbsp <b><%= @caso.periodo_hasta %></b><br>
      Delimitador: <b><%= @caso.separacion %></b><br>
      Tipo de archivo: <b><%= @caso.tipo_archivo %></b><br>
-     Historial de documentos:
+     Documentos:<br>
+     <% @docs = @caso.documentos %>
+     <% @docs.each do |doc| %>
+        <b><%= doc.nombre %> - <%= doc.created_at.strftime('%d/%m/%Y %H:%M') %> </b><br><%= link_to "Descargar", doc.attachment_url %><%= button_to "Borrar",  doc, method: :delete %>
+     <% end %>
 
 </td>
 <td class="text-left">
@@ -157,7 +161,7 @@ td.text-right {
 </tr>
 </tbody>
 </table>
-<table class="table-fill" style="width: 65vw;" >
+<table class="table-fill" style="width: 75vw;" >
 <thead>
 <tr>
 <th class="text-left">Agrupaciones</th>
@@ -210,6 +214,16 @@ Asignado a: <%= @caso.consultor == nil ? "No asignado" : @caso.consultor %><br>
     <%= f.select :status, [' Anulado','BI-Afectado','BI-Planificado','Cerrado','Iniciado','En Proceso'] %><br>
     <%= f.submit "Cambiar Estatus" %>
 <% end %>
+<% end %><br>
+<% if session[:usuario_tipo] == "cliente" %>
+  <%  @documento = Documento.new %>
+  <%= form_for @documento, multipart: true do |doc|  %>
+  Cargar documento: <br><%= doc.file_field :attachment %>
+  <%= doc.hidden_field :estatus, :value => "open" %>
+  <%= doc.hidden_field :nombre, :value => :attachment %><br>
+  <%= doc.hidden_field :caso_id, :value => @caso.id  %>
+  <%= doc.submit %>
+  <% end %>
 <% end %><br>
 <%= link_to 'Volver', casos_path %>
 </td><td >

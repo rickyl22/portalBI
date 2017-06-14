@@ -1,3 +1,4 @@
 class Documento < ApplicationRecord
-	belongs_to :caso, index: true
+	belongs_to :caso
+	mount_uploader :attachment, AttachmentUploader
 end

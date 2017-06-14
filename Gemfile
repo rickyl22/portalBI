@@ -53,4 +53,5 @@ gem 'coffee-script-source', '1.8.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'pundit'
 
+gem 'carrierwave', '~> 1.0'
 

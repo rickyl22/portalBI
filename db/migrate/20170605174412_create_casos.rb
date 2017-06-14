@@ -31,7 +31,7 @@ class CreateCasos < ActiveRecord::Migration[5.1]
       t.string :titulo
       t.string :tlv
       t.string :tv
-      t.string :usuario
+      t.belongs_to :usuario, index: true
 
       t.timestamps
     end

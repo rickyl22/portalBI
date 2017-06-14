@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607184406) do
+ActiveRecord::Schema.define(version: 20170614180538) do
 
   create_table "casos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "act_tabla"
@@ -43,18 +43,30 @@ ActiveRecord::Schema.define(version: 20170607184406) do
     t.string "titulo"
     t.string "tlv"
     t.string "tv"
-    t.string "usuario"
+    t.bigint "usuario_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["usuario_id"], name: "index_casos_on_usuario_id"
   end
 
   create_table "comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "fecha"
     t.text "texto"
     t.string "autor"
-    t.integer "caso_id"
+    t.bigint "caso_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["caso_id"], name: "index_comentarios_on_caso_id"
+  end
+
+  create_table "documentos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "nombre"
+    t.string "attachment"
+    t.string "estatus"
+    t.bigint "caso_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["caso_id"], name: "index_documentos_on_caso_id"
   end
 
   create_table "permisos_asignados", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

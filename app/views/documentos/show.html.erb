@@ -1,13 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Titulo:</strong>
-  <%= @documento.titulo %>
+  <strong>Nombre:</strong>
+  <%= @documento.nombre %>
 </p>
 
 <p>
-  <strong>Path:</strong>
-  <%= @documento.path %>
+  <strong>Attachment:</strong>
+  <%= @documento.attachment %>
+</p>
+
+<p>
+  <strong>Estatus:</strong>
+  <%= @documento.estatus %>
 </p>
 
 <%= link_to 'Edit', edit_documento_path(@documento) %> |

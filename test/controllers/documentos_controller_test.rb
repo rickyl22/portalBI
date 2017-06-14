@@ -17,7 +17,7 @@ class DocumentosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create documento" do
     assert_difference('Documento.count') do
-      post documentos_url, params: { documento: { path: @documento.path, titulo: @documento.titulo } }
+      post documentos_url, params: { documento: { attachment: @documento.attachment, estatus: @documento.estatus, nombre: @documento.nombre } }
     end
 
     assert_redirected_to documento_url(Documento.last)
@@ -34,7 +34,7 @@ class DocumentosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update documento" do
-    patch documento_url(@documento), params: { documento: { path: @documento.path, titulo: @documento.titulo } }
+    patch documento_url(@documento), params: { documento: { attachment: @documento.attachment, estatus: @documento.estatus, nombre: @documento.nombre } }
     assert_redirected_to documento_url(@documento)
   end
 

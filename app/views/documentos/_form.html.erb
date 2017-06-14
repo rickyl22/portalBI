@@ -12,13 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :titulo %>
-    <%= form.text_field :titulo, id: :documento_titulo %>
+    <%= form.label :nombre %>
+    <%= form.text_field :nombre, id: :documento_nombre %>
   </div>
 
   <div class="field">
-    <%= form.label :path %>
-    <%= form.text_area :path, id: :documento_path %>
+    <%= form.label :attachment %>
+    <%= form.text_field :attachment, id: :documento_attachment %>
+  </div>
+
+  <div class="field">
+    <%= form.label :estatus %>
+    <%= form.text_field :estatus, id: :documento_estatus %>
   </div>
 
   <div class="actions">

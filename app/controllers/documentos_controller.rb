@@ -24,17 +24,18 @@ class DocumentosController < ApplicationController
   # POST /documentos
   # POST /documentos.json
   def create
-    @documento = Documento.new(documento_params)
-
-    respond_to do |format|
-      if @documento.save
-        format.html { redirect_to @documento, notice: 'Documento was successfully created.' }
-        format.json { render :show, status: :created, location: @documento }
+    #@documento = Documento.new(documento_params)
+    params[:nombre] = "hola"
+    p "datos"
+    params[:documento][:nombre] = params[:documento][:attachment].original_filename
+    p params[:documento][:attachment].original_filename
+    @caso = Caso.find(documento_params[:caso_id])
+      if @caso.documentos.create(documento_params)
+        redirect_back(fallback_location:root_path)
       else
-        format.html { render :new }
-        format.json { render json: @documento.errors, status: :unprocessable_entity }
+        redirect_back(fallback_location:root_path)
       end
-    end
+    
   end
 
   # PATCH/PUT /documentos/1
@@ -55,10 +56,7 @@ class DocumentosController < ApplicationController
   # DELETE /documentos/1.json
   def destroy
     @documento.destroy
-    respond_to do |format|
-      format.html { redirect_to documentos_url, notice: 'Documento was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      redirect_back(fallback_location:root_path)
   end
 
   private
@@ -69,6 +67,6 @@ class DocumentosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def documento_params
-      params.require(:documento).permit(:titulo, :path)
+      params.require(:documento).permit(:nombre, :attachment, :estatus, :caso_id)
     end
 end

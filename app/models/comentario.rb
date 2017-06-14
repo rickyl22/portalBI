@@ -1,3 +1,3 @@
 class Comentario < ApplicationRecord
-	belongs_to :caso, index: true
+	belongs_to :caso
 end

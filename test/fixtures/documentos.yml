@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  titulo: MyString
-  path: MyText
+  nombre: MyString
+  attachment: MyString
+  estatus: MyString
 
 two:
-  titulo: MyString
-  path: MyText
+  nombre: MyString
+  attachment: MyString
+  estatus: MyString
