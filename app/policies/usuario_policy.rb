@@ -1,51 +1,40 @@
 class UsuarioPolicy < ApplicationPolicy
 
-  class Scope < Scope
-    def resolve
-      if user.admin?
-        p "admin?"
-        scope.all
-      elsif user.admin_min?
-        p "admin_min??"
-        scope.all
-      elsif user.admin_ind?
-        p "admin_ind??"
-        scope.all
-      elsif user.cons_lid?
-        p "cons_lid??"
-        scope.all
-      elsif user.cons?
-        p "cons??"
-        scope.all
-      elsif user.cli?
-        p "cli??"
-        scope.all
-      end
-    end
-  end
-
   def index?
-    true
+    return true if user.present?
   end
 
   def create?
-    user.present?
+    p "ENTRA create user"
+    true
+  end
+
+  def show?
+    p "USER "+user.role.inspect
+    p "USUARIO "+usuario.inspect
+    rol = user.rol?(user.id)
+    return true if user.present? && (rol.alias == "admin" || rol.alias == "admin_min" || rol.alias == "admin_ind")
+
   end
 
   def update?
-   if (user == resource)
-     p "Si es el mismo recurso"
-   end
-    return true if logged_in? && user == article.user
+    rol = user.rol?(user.id)
+    if (user.present?)
+      return true if (rol.alias == "admin" || rol.alias == "admin_min" || rol.alias == "admin_ind")
+    end
+
+    return true if user.present? && user == article.user
+    true
   end
 
   def destroy?
-    return true if logged_in? && user == article.user
+    p "destroy"
+    true
   end
 
   private
-  def article
+
+  def usuario
     record
   end
-
 end
