@@ -14,6 +14,7 @@ class CreateUsuarios < ActiveRecord::Migration[5.1]
       t.string :justificacion
       t.string :estatus
       t.string :password_digest
+      t.integer :role_id
 
       t.timestamps
     end
