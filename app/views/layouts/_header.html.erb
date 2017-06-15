@@ -22,7 +22,7 @@
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/home/noticias">Noticias</a>
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Nosotros</a>
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Proyectos</a>
-          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/login">Login / Sign Up</a>
+          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/login">Ingresar</a>
         </nav>
       </div>
           <span class="android-mobile-title mdl-layout-title">
@@ -46,24 +46,124 @@
         </span>
     <nav class="mdl-navigation">
       <!-- Opciones Administrador -->
-      <strong><span class="mdl-navigation__link" href="">Usuarios</span></strong>
-      <a class="mdl-navigation__link" href="/usuarios/index">Lista de usuarios</a>
-      <a class="mdl-navigation__link" href="">Versión</a>
-      <a class="mdl-navigation__link" href="">Gestión de Usuarios</a>
-      <div class="android-drawer-separator"></div>
-      <!-- Menu para Portal de Indicadores -->
-      <strong><span class="mdl-navigation__link" href="">Indicadores</span></strong>
-      <a class="mdl-navigation__link" href="">Altas</a>
-      <a class="mdl-navigation__link" href="">Arpu</a>
-      <a class="mdl-navigation__link" href="">Recargas</a>
-      <a class="mdl-navigation__link" href="">Tráfico</a>
-      <div class="android-drawer-separator"></div>
-      <!-- Menu para Portal de Gestion de Mineria -->
-      <strong><span class="mdl-navigation__link" href="">Mineria</span></strong>
-      <a class="mdl-navigation__link" href="">Gestión de Casos</a>
-      <a class="mdl-navigation__link" href="">Crear Caso</a>
-      <a class="mdl-navigation__link" href="">Ver Caso</a>
-      <div class="android-drawer-separator"></div>
+      <% if admin? %>
+        <strong><span class="mdl-navigation__link" href="">Usuarios</span></strong>
+        <a class="mdl-navigation__link" href="/usuarios/index">Lista de usuarios</a>
+        <a class="mdl-navigation__link" href="">Versión</a>
+        <a class="mdl-navigation__link" href="">Gestión de Usuarios</a>
+        <div class="android-drawer-separator"></div>
+       <!-- Menu para Portal de Indicadores -->
+        <strong><span class="mdl-navigation__linkr" href="">Indicadores</span></strong>
+        <a class="mdl-navigation__link" href="">Altas</a>
+        <a class="mdl-navigation__link" href="">Arpu</a>
+        <a class="mdl-navigation__link" href="">Recargas</a>
+        <a class="mdl-navigation__link" href="">Tráfico</a>
+        <div class="android-drawer-separator"></div>
+        <!-- Menu para Portal de Gestion de Mineria -->
+        <strong><span class="mdl-navigation__link" href="">Mineria</span></strong>
+        <a class="mdl-navigation__link" href="">Gestión de Casos</a>
+        <a class="mdl-navigation__link" href="">Crear Caso</a>
+        <a class="mdl-navigation__link" href="">Ver Caso</a>
+        <div class="android-drawer-separator"></div>
+      <% elsif admin_ind? %>
+         <!-- Gestion de indicadores -->
+         <span class="mdl-navigation__link menu" href="">
+            Indicadores
+           <i class="material-icons list">timeline</i>
+          </span>
+          <div id="indicadores" class="sub-menu-container">
+            <a class="mdl-navigation__link" href="">Listar</a>
+            <a class="mdl-navigation__link" href="">Crear</a>
+          </div>
+         <!-- Gestion de usuarios de indicadores -->
+         <span class="mdl-navigation__link menu" href="">
+            Usuarios
+           <i class="material-icons list">perm_identity</i>
+          </span>
+          <div id="ind_usuarios" class="sub-menu-container">
+            <a class="mdl-navigation__link" href="">Listar</a>
+            <a class="mdl-navigation__link" href="">Crear</a>
+          </div>
+      <% elsif admin_min? %>
+        <!-- Menu para Portal de Gestion de Mineria -->
+       <span class="mdl-navigation__link menu" href="">
+          Mineria
+         <i class="material-icons list">grid_on</i>
+        </span>
+        <div id="mineria" class="sub-menu-container">
+          <a class="mdl-navigation__link" href="">Gestión de Casos</a>
+          <a class="mdl-navigation__link" href="">Crear Caso</a>
+        </div>
+       <!-- Gestion de usuarios de indicadores -->
+       <span class="mdl-navigation__link menu" href="">
+          Usuarios
+         <i class="material-icons list">group</i>
+        </span>
+        <div id="imin_usuarios" class="sub-menu-container">
+          <a class="mdl-navigation__link" href="">Listar</a>
+          <a class="mdl-navigation__link" href="">Crear</a>
+        </div>
+
+      <% elsif cons_lid? %>
+          <!-- Menu para Portal de Gestion de Mineria -->
+       <span class="mdl-navigation__link menu" href="">
+          Mineria
+         <i class="material-icons list">grid_on</i>
+        </span>
+          <div id="mineria" class="sub-menu-container">
+            <a class="mdl-navigation__link" href="">Gestión de Casos</a>
+            <a class="mdl-navigation__link" href="">Crear Caso</a>
+          </div>
+          <!-- Gestion de usuarios de indicadores -->
+       <span class="mdl-navigation__link menu" href="">
+          Usuarios
+         <i class="material-icons list">group</i>
+        </span>
+          <div id="imin_usuarios" class="sub-menu-container">
+            <a class="mdl-navigation__link" href="">Listar</a>
+            <a class="mdl-navigation__link" href="">Crear</a>
+          </div>
+
+      <% elsif cons? %>
+          <!-- Menu para Portal de Gestion de Mineria -->
+       <span class="mdl-navigation__link menu" href="">
+          Mineria
+         <i class="material-icons list">grid_on</i>
+        </span>
+          <div id="mineria" class="sub-menu-container">
+            <a class="mdl-navigation__link" href="">Gestión de Casos</a>
+            <a class="mdl-navigation__link" href="">Crear Caso</a>
+          </div>
+          <!-- Gestion de usuarios de indicadores -->
+       <span class="mdl-navigation__link menu" href="">
+          Usuarios
+         <i class="material-icons list">group</i>
+        </span>
+          <div id="imin_usuarios" class="sub-menu-container">
+            <a class="mdl-navigation__link" href="">Listar</a>
+            <a class="mdl-navigation__link" href="">Crear</a>
+          </div>
+
+      <% elsif cli? %>
+       <!-- Menu para Portal de Gestion de Mineria -->
+       <span class="mdl-navigation__link menu" href="">
+          Mineria
+         <i class="material-icons list">grid_on</i>
+        </span>
+          <div id="mineria" class="sub-menu-container">
+            <a class="mdl-navigation__link" href="">Gestión de Casos</a>
+            <a class="mdl-navigation__link" href="">Crear Caso</a>
+          </div>
+          <!-- Gestion de usuarios de indicadores -->
+       <span class="mdl-navigation__link menu" href="">
+          Usuarios
+         <i class="material-icons list">group</i>
+        </span>
+          <div id="imin_usuarios" class="sub-menu-container">
+            <a class="mdl-navigation__link" href="">Listar</a>
+            <a class="mdl-navigation__link" href="">Crear</a>
+          </div>
+      <% end %>
 
     </nav>
   </div>
