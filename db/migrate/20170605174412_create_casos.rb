@@ -13,6 +13,7 @@ class CreateCasos < ActiveRecord::Migration[5.1]
       t.date :fech_asig
       t.date :fecha_creado
       t.date :fecha_req
+      t.date :fecha_cerrado
       t.string :fijo
       t.string :im
       t.string :infosoft

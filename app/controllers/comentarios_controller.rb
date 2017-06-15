@@ -21,9 +21,9 @@ class ComentariosController < ApplicationController
 
   # POST /comentarios
   def create
-    @comentario = Comentario.new(comentario_params)
-    @caso = Caso.find(params[:comentario][:hidden])
-    if @comentario.save
+    
+    @caso = Caso.find(params[:comentario][:caso_id])
+    if @caso.comentarios.create(comentario_params)
       redirect_to @caso
     else
       render :new

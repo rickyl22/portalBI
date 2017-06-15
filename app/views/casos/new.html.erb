@@ -191,7 +191,7 @@ td.text-right {
      hasta <br>
      <%= form.date_field :periodo_hasta, id: :caso_periodo_hasta, :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'], :class => "rango_fin", :disabled => true, :onkeydown =>"return false"  %><br>
      Delimitador:<br> <%= form.select :separacion, ['coma ( , )','punto y coma ( ; )', 'pipe ( | )'], id: :caso_separacion, :required => true %><br>
-     Tipo de archivo: <%= form.select :tipo_archivo, ['txt','xls', 'csv'], id: :caso_tipo_archivo,     :required => true %><br>
+     Tipo de archivo: <%= form.select :tipo_archivo, ['txt','xlsx', 'csv'], id: :caso_tipo_archivo,     :required => true %><br>
      <%= form.hidden_field :complejidad, value: "No Asignada"  %>
      <%= form.hidden_field :status, value: "Iniciado"  %>
      <%= form.hidden_field :infosoft, value: "NO"  %>

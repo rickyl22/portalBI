@@ -21,8 +21,7 @@
   </thead>
 
   <tbody>
-    <% @user = Usuario.find(1) %>
-    <% @user.casos.each do |caso| %>
+    <% @casos.each do |caso| %>
       <tr>
         <td><%= caso.id %></td>
         <td><%= caso.titulo %></td>
@@ -103,11 +102,13 @@
         <td><%= caso.titulo %></td>
         <td>
             Creacion: <%= caso.fecha_creado %><br>
-            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : caso.fech_asig %>
+            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : caso.fech_asig %><br>
+            Cierre: <%= caso.fecha_cerrado %>
         </td>
         <td>
             Creacion: <%= (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fecha_creado.mjd %> <br>
-            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fech_asig.mjd %>
+            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fech_asig.mjd %><br>
+            Cierre:  <%= (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fecha_cerrado.mjd %> 
         </td>
         <td><%= caso.infosoft == nil ? "NO" : caso.infosoft %></td>
         <td><%= caso.complejidad %></td>

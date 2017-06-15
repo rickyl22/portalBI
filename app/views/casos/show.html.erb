@@ -29,7 +29,7 @@ th {
   background:#1b1e24;
   border-bottom:4px solid #9ea7af;
   border-right: 1px solid #343a45;
-  font-size:19px;
+  font-size:15px;
   font-weight: 100;
   padding:24px;
   text-align:left;
@@ -50,7 +50,7 @@ tr {
   border-top: 1px solid #C1C3D1;
   border-bottom-: 1px solid #C1C3D1;
   color:#666B85;
-  font-size:12px;
+  font-size:10px;
   font-weight:normal;
   text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
 }
@@ -77,7 +77,7 @@ td {
   text-align:left;
   vertical-align:middle;
   font-weight:300;
-  font-size:14px;
+  font-size:12px;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #C1C3D1;
 }
@@ -111,8 +111,49 @@ td.text-right {
 }
   </style>
 <p id="notice"><%= notice %></p>
-<table ><tr><td style="vertical-align: text-top;">
-<table class="table-fill" style="width: 75vw;">
+<table ><tr>
+<td style="vertical-align: text-top;">
+  <table class="table-fill" style="table-layout: fixed;">
+  <tr> <th>Documentos</th></tr>
+  <tr ><td style="word-wrap: break-word;width:20vw">
+    <% @docs = @caso.documentos %>
+     <% @docs.each do |doc| %>
+        -)<%= doc.nombre %> <br> <%= doc.created_at.strftime('%d/%m/%Y %H:%M') %> <br>
+        <% if doc.estatus == "Borrado" %>
+           <b>Eliminado </b><br>
+        <% else %>
+        <%= link_to "Descargar", doc.attachment_url, :style => 'color:blue' %>
+          <% if session[:usuario_tipo] == "cliente" and doc.estatus != "Borrado" %>
+              <%= button_to "Borrar",  doc, method: :delete %>
+          <% else %>
+            <br>     
+          <% end %>
+        <% end %>
+     <% end %>
+
+  </td>
+  </tr>
+  
+    
+    <% if session[:usuario_tipo] == "cliente" and @caso.complejidad == "No Asignada" %>
+    <tr><td style="word-wrap: break-word;">
+  <%  @documento = Documento.new %>
+  <%= form_for @documento, multipart: true do |doc|  %>
+  Cargar documento: <br><%= doc.file_field :attachment %>
+  <%= doc.hidden_field :estatus, :value => "open" %>
+  <%= doc.hidden_field :nombre, :value => :attachment %><br>
+  <%= doc.hidden_field :caso_id, :value => @caso.id  %><br>
+  <%= doc.submit "Cargar" %>
+  <% end %>
+  </td></tr>
+<% end %><br>
+  
+  </table>
+</td>
+
+
+<td style="vertical-align: text-top;">
+<table class="table-fill" style="width: 50vw;">
 <thead>
 <tr>
 <th class="text-left">Detalles del Caso</th>
@@ -124,18 +165,14 @@ td.text-right {
 </thead>
 <tbody class="table-hover">
 <tr>
-<td class="text-left" style="max-width: 200px;word-wrap: break-word;">
+<td class="text-left" style="white-space: nowrap;word-wrap: break-word;">
      Titulo: <b><%= @caso.titulo %></b><br>
      Fecha creado:<br>&nbsp &nbsp <b><%= @caso.fecha_creado %></b><br>
      Fecha requerido:<br> &nbsp &nbsp<b><%= @caso.fecha_req %></b><br>
      Periodo - desde:<br> &nbsp &nbsp <b><%= @caso.periodo_desde %></b><br> hasta:<br>&nbsp &nbsp <b><%= @caso.periodo_hasta %></b><br>
-     Delimitador: <b><%= @caso.separacion %></b><br>
-     Tipo de archivo: <b><%= @caso.tipo_archivo %></b><br>
-     Documentos:<br>
-     <% @docs = @caso.documentos %>
-     <% @docs.each do |doc| %>
-        <b><%= doc.nombre %> - <%= doc.created_at.strftime('%d/%m/%Y %H:%M') %> </b><br><%= link_to "Descargar", doc.attachment_url %><%= button_to "Borrar",  doc, method: :delete %>
-     <% end %>
+     Delimitador: <br>&nbsp &nbsp<b><%= @caso.separacion %></b><br>
+     Tipo de archivo: <br>&nbsp &nbsp<b><%= @caso.tipo_archivo %></b><br>
+     
 
 </td>
 <td class="text-left">
@@ -149,7 +186,7 @@ td.text-right {
 <td class="text-left">
     Smartphone/No Smartphone: <b><%= @caso.phone == '0' ? "NO" : "SI"%></b><br>
     Prepago/Postpago: <b><%= @caso.pre_post == '0' ? "NO" : "SI"%></b><br>
-    Otro: <b><%= @caso.otro %></b>
+    Otro: <b><%= @caso.otro == "" ? "NO" : @caso.otro %></b>
 </td>
 <td class="text-left">
     Fijo: <b><%= @caso.fijo == '0' ? "NO" : "SI"%></b><br>
@@ -161,7 +198,7 @@ td.text-right {
 </tr>
 </tbody>
 </table>
-<table class="table-fill" style="width: 75vw;" >
+<table class="table-fill" style="width: 50vw;" >
 <thead>
 <tr>
 <th class="text-left">Agrupaciones</th>
@@ -184,9 +221,12 @@ td.text-right {
 <br>
 <% if session[:usuario_tipo] == "Admin" %>
   <% if @caso.status == "Cerrado" %>
+    <% @reapertura = (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - @caso.fecha_cerrado.mjd %>
+    <% if (@caso.complejidad == "Bajo" and @reapertura <= 1) or (@caso.complejidad == "Medio" and @reapertura <= 2) or (@caso.complejidad == "Alto" and @reapertura <= 4) or (@caso.complejidad == "Urgente" and @reapertura <= 1) %>
     <%= form_for @caso, :url => {:action => "update"} do |f|%>
     <%= f.hidden_field :status, :value => "En Proceso" %>
     <%= f.submit "Reabrir caso" %>
+    <% end %>
     <% end %>
   <% else %>  
     <%= form_for @caso, :url => {:action => "update"} do |f|%>
@@ -215,45 +255,30 @@ Asignado a: <%= @caso.consultor == nil ? "No asignado" : @caso.consultor %><br>
     <%= f.submit "Cambiar Estatus" %>
 <% end %>
 <% end %><br>
-<% if session[:usuario_tipo] == "cliente" %>
-  <%  @documento = Documento.new %>
-  <%= form_for @documento, multipart: true do |doc|  %>
-  Cargar documento: <br><%= doc.file_field :attachment %>
-  <%= doc.hidden_field :estatus, :value => "open" %>
-  <%= doc.hidden_field :nombre, :value => :attachment %><br>
-  <%= doc.hidden_field :caso_id, :value => @caso.id  %>
-  <%= doc.submit %>
-  <% end %>
-<% end %><br>
+
 <%= link_to 'Volver', casos_path %>
-</td><td >
+</td><td style="vertical-align: text-top;width: 10vw">
 <% if session[:usuario_tipo] != "cliente" %>
-<table class="table-fill" style="width: 25vw;" ><thead>
+<table class="table-fill" style="table-layout: fixed;width: 20vw" >
 <tr>
 <th class="text-left">Comentarios</th>
 </tr>
-</thead>
-<tbody class="table-hover">
-<% @comments.each do |com| %>
+<% @caso.comentarios.each do |com| %>
 <tr>
-<% if com.caso_id == @caso.id %>
-<td class="text-left" style="max-width: 300px;word-wrap: break-word;">
+<td class="text-left" style="word-wrap: break-word;">
   <b><%= com.autor %>  -  <%= com.created_at.strftime('%d/%m/%Y %H:%M') %></b><br><br>
   <%= com.texto %>
 </td>
-<% end %>
 </tr>
 <% end %>
-<tr><td>
+<tr><td style="word-wrap: break-word;">
 <% comment = Comentario.new %>
 <%= form_for comment do |form| %>
 
   <div class="field">
     <%= form.label :texto %>
-    <%= form.text_area :texto, id: :comentario_texto, :cols => "40", :rows => "3" %>
+    <%= form.text_area :texto, id: :comentario_texto, :style => 'width:17vw;', :rows => "3" %>
   </div>
-  
-   <%= form.hidden_field :hidden, value: @caso.id %>
    <%= form.hidden_field :caso_id, value: @caso.id %>
    <%= form.hidden_field :fecha, value: Time.now %>
    <%= form.hidden_field :autor, value: session[:usuario_tipo] %>
@@ -264,7 +289,7 @@ Asignado a: <%= @caso.consultor == nil ? "No asignado" : @caso.consultor %><br>
 <% end %>
 
 </td></tr>
-</tbody></table></td></tr></table>
+</table></td></tr></table>
 
 
 </div>

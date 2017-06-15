@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20170614180538) do
     t.date "fech_asig"
     t.date "fecha_creado"
     t.date "fecha_req"
+    t.date "fecha_cerrado"
     t.string "fijo"
     t.string "im"
     t.string "infosoft"

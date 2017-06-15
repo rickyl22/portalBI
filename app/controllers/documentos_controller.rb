@@ -41,21 +41,20 @@ class DocumentosController < ApplicationController
   # PATCH/PUT /documentos/1
   # PATCH/PUT /documentos/1.json
   def update
-    respond_to do |format|
-      if @documento.update(documento_params)
-        format.html { redirect_to @documento, notice: 'Documento was successfully updated.' }
-        format.json { render :show, status: :ok, location: @documento }
-      else
-        format.html { render :edit }
-        format.json { render json: @documento.errors, status: :unprocessable_entity }
+      if @doc.update(documento_params)
+        redirect_back(fallback_location:root_path)
       end
-    end
   end
 
   # DELETE /documentos/1
   # DELETE /documentos/1.json
   def destroy
-    @documento.destroy
+    @doc = Documento.find(params[:id])
+    p "yo"
+    p @doc.estatus
+    @doc.estatus = "Borrado"
+    p @doc.estatus
+    @doc.save
       redirect_back(fallback_location:root_path)
   end
 
