@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :kpis
   resources :roles_privilegios
   resources :privilegios
   resources :roles
