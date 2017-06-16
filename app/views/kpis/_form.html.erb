@@ -1,0 +1,32 @@
+<%= form_with(model: kpi, local: true) do |form| %>
+  <% if kpi.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(kpi.errors.count, "error") %> prohibited this kpi from being saved:</h2>
+
+      <ul>
+      <% kpi.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nombre %>
+    <%= form.text_area :nombre, id: :kpi_nombre %>
+  </div>
+
+  <div class="field">
+    <%= form.label :descripcion %>
+    <%= form.text_area :descripcion, id: :kpi_descripcion %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url %>
+    <%= form.text_area :url, id: :kpi_url %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

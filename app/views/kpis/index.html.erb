@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Kpis</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kpis.each do |kpi| %>
+      <tr>
+        <td><%= kpi.nombre %></td>
+        <td><%= kpi.descripcion %></td>
+        <td><%= kpi.url %></td>
+        <td><%= link_to 'Show', kpi %></td>
+        <td><%= link_to 'Edit', edit_kpi_path(kpi) %></td>
+        <td><%= link_to 'Destroy', kpi, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Kpi', new_kpi_path %>
