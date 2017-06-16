@@ -1,35 +1,29 @@
 class UsuarioPolicy < ApplicationPolicy
 
+  rol = user.rol?(user.id)
   def index?
-    return true if user.present?
+    p "usuario- poli -index"
+    return true if user.present? && (rol.alias == "admin" || rol.alias == "admin_ind" || rol.alias == "admin_min")
   end
 
   def create?
-    p "ENTRA create user"
+    p "usuario- poli -create"
     true
   end
 
   def show?
-    p "USER "+user.role.inspect
-    p "USUARIO "+usuario.inspect
-    rol = user.rol?(user.id)
-    return true if user.present? && (rol.alias == "admin" || rol.alias == "admin_min" || rol.alias == "admin_ind")
-
+    p "usuario- poli -show"
+    return true if user.present? && (rol.alias == "admin" || rol.alias == "admin_ind" || rol.alias == "admin_min")
   end
 
   def update?
-    rol = user.rol?(user.id)
-    if (user.present?)
-      return true if (rol.alias == "admin" || rol.alias == "admin_min" || rol.alias == "admin_ind")
-    end
-
-    return true if user.present? && user == article.user
-    true
+    p "usuario- poli -update"
+    return true if user.present? && (rol.alias == "admin" || rol.alias == "admin_ind" || rol.alias == "admin_min")
   end
 
   def destroy?
-    p "destroy"
-    true
+    p "usuario- poli -destroy"
+    return true if user.present? && (rol.alias == "admin" || rol.alias == "admin_ind" || rol.alias == "admin_min")
   end
 
   private
