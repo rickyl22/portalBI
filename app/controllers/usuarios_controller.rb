@@ -57,8 +57,8 @@ class UsuariosController < ApplicationController
   private
     def set_usuario
       p"ENTRA ACAAA"
-      @usurios = Usuario.find(params[:id])
-      #authorize @usuarios
+      @usurio = Usuario.find(params[:id])
+      authorize @usuario
     end
 
   def allowed_params
