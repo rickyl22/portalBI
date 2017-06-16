@@ -41,7 +41,7 @@
     <% end %>
   </tbody>
 </table>
-<% if session[:usuario_tipo] == 'Admin' and @self != '1' %>
+<% if admin? %>
   <% @casos = @casos2 %>
   <h1>Casos asignados</h1>
   <table class="mdl-data-table mdl-js-data-table" style="width: 85%;">

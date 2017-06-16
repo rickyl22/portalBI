@@ -1,8 +1,10 @@
 class CasosController < ApplicationController
   before_action :set_caso, only: [:show, :edit, :update, :destroy]
+  skip_after_action :verify_policy_scoped
+  skip_after_action :verify_authorized
 
   def iniciar
-    session[:usuario_id] = 1
+    #session[:usuario_id] = 1
     session[:usuario_tipo] = params[:user_tipo]
 
   end
@@ -10,28 +12,27 @@ class CasosController < ApplicationController
   # GET /casos
   def index
     
-   
-    if session[:usuario_tipo] == "Admin"
-       if params[:self] == '1'
-          @self = "1"
-          @casos = Caso.where("usuario = "+session[:usuario_id].to_s)
-       else
-        p "no  self"
-        @self = "0"
+    p "current is"
+    p current_user
+    p current_user.role.alias
+    if admin?
+      p "es ad"
           @casos = Caso.where("infosoft = 'NO' and status != 'Cerrado' ")
           @casos2 = Caso.where("status = 'En proceso'")
           @casos3 = Caso.where("status = 'Cerrado'")
-       end
-    elsif session[:usuario_tipo] == "cliente"
+    elsif cli?
+      p "es cli"
        @casos = Caso.where("usuario_id = "+session[:usuario_id].to_s)
-    elsif session[:usuario_tipo] == "Infosoft-Admin"
+    elsif cons_lid?
+      p "es inf lid"
       if params[:self] == '1'
-          @casos = Caso.where("usuario = "+session[:usuario_id].to_s)
+          @casos = Caso.where("usuario_id = "+session[:usuario_id].to_s)
       else    
           @casos = Caso.where("infosoft = 'SI'")
       end
     else 
-       @casos = Caso.where("usuario = "+session[:usuario_id].to_s)
+       p "es inf"
+       @casos = Caso.all#where("usuario_id = "+session[:usuario_id].to_s)
     end
   end
 
@@ -57,9 +58,8 @@ class CasosController < ApplicationController
     @string = ""
     @campos.each { |x| if x != "" then @string << x +" - " end}
     @string = @string[0...-3]
-    @usuario = Usuario.find(1)
-    if @usuario.casos.create(caso_params.merge(:campos => @string))
-      redirect_to @caso, notice: 'Caso was successfully created.'
+    if current_user.casos.create(caso_params.merge(:campos => @string))
+      redirect_to @caso, notice: 'Caso creado satisfactoriamente'
     else
       render :new
     end

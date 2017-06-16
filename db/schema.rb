@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 20170614180538) do
     t.string "justificacion"
     t.string "estatus"
     t.string "password_digest"
+    t.integer "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

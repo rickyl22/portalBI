@@ -1,7 +1,8 @@
 module ApplicationHelper
 
   def admin?
-    p "admin?"
+    p "admin? oooppp"
+    p current_user
     true if(!current_user.nil? && current_user.role.alias == "admin")
   end
 
@@ -27,7 +28,7 @@ module ApplicationHelper
 
   def cli?
     p "cli??"
-    true if(!current_user.nil? && current_user.role.alias == "clis")
+    true if(!current_user.nil? && current_user.role.alias == "cli")
   end
 
 

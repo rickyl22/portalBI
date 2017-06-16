@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
-  #after_action :verify_authorized
-  #after_action :verify_policy_scoped
+  after_action :verify_authorized
+  after_action :verify_policy_scoped
   include SessionsHelper
   include Pundit
 
@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
 
   def admin?
-    p "admin?"
+    p "admin?puu"
     true if(current_user.role.alias == "admin")
   end
 
@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
 
   def cli?
     p "cli??"
-    true if(current_user.role.alias == "clis")
+    true if(current_user.role.alias == "cli")
   end
 
   private

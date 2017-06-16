@@ -15,6 +15,8 @@ class UsuariosController < ApplicationController
   end
 
   def create
+    p "yoo"
+    p allowed_params
     @usuario = Usuario.create(allowed_params)
     authorize @usuario
     @usuario.save

@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
   def create
     usuario = Usuario.where("usuario = ?",params[:usuario]).first
-    if usuario && (usuario.estatus == "Aprobado") && usuario.authenticate(params[:password])
+    if usuario  && usuario.authenticate(params[:password]) #&& (usuario.estatus == "Aprobado")
       log_in usuario
       redirect_to menus_path, notice: 'Login exitoso!'
       cookies[:usuario] = usuario.usuario

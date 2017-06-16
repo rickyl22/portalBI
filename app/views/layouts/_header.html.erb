@@ -62,9 +62,9 @@
         <div class="android-drawer-separator"></div>
         <!-- Menu para Portal de Gestion de Mineria -->
         <strong><span class="mdl-navigation__link" href="">Mineria</span></strong>
-        <a class="mdl-navigation__link" href="">Gestión de Casos</a>
-        <a class="mdl-navigation__link" href="">Crear Caso</a>
-        <a class="mdl-navigation__link" href="">Ver Caso</a>
+        <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
+        <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
+        
         <div class="android-drawer-separator"></div>
       <% elsif admin_ind? %>
          <!-- Gestion de indicadores -->
@@ -87,22 +87,6 @@
           </div>
       <% elsif admin_min? %>
         <!-- Menu para Portal de Gestion de Mineria -->
-         <!-- Menu para Portal de Gestion de Mineria -->
-      <strong><span class="mdl-navigation__link" href="">Mineria</span></strong>
-      <% if session[:usuario_tipo] == "Admin" %>
-        <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
-        <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
-        <%= link_to "Mis casos", casos_path( :self => 1 ), :class => "mdl-navigation__link" %>
-      <%  elsif session[:usuario_tipo] == "Infosoft-Admin" %>
-        <a class="mdl-navigation__link" href="/casos">Gestion de Casos</a>
-        <%= link_to "Mis casos", casos_path( :self => 1 ), :class => "mdl-navigation__link" %>
-      <%  elsif session[:usuario_tipo] == "cliente" %>
-        <a class="mdl-navigation__link" href="/casos">Mis Casos</a>
-        <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
-      <% else %>
-        <a class="mdl-navigation__link" href="/casos">Mis Casos</a>
-      <% end %>
-      <div class="android-drawer-separator"></div>
 
 
        <span class="mdl-navigation__link menu" href="">
@@ -110,8 +94,8 @@
          <i class="material-icons list">grid_on</i>
         </span>
         <div id="mineria" class="sub-menu-container">
-          <a class="mdl-navigation__link" href="">Gestión de Casos</a>
-          <a class="mdl-navigation__link" href="">Crear Caso</a>
+          <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
+          <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
         </div>
        <!-- Gestion de usuarios de indicadores -->
        <span class="mdl-navigation__link menu" href="">
@@ -130,8 +114,8 @@
          <i class="material-icons list">grid_on</i>
         </span>
           <div id="mineria" class="sub-menu-container">
-            <a class="mdl-navigation__link" href="">Gestión de Casos</a>
-            <a class="mdl-navigation__link" href="">Crear Caso</a>
+            <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
+            <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
           </div>
           <!-- Gestion de usuarios de indicadores -->
        <span class="mdl-navigation__link menu" href="">
@@ -150,8 +134,8 @@
          <i class="material-icons list">grid_on</i>
         </span>
           <div id="mineria" class="sub-menu-container">
-            <a class="mdl-navigation__link" href="">Gestión de Casos</a>
-            <a class="mdl-navigation__link" href="">Crear Caso</a>
+            <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
+            <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
           </div>
           <!-- Gestion de usuarios de indicadores -->
        <span class="mdl-navigation__link menu" href="">
@@ -170,8 +154,8 @@
          <i class="material-icons list">grid_on</i>
         </span>
           <div id="mineria" class="sub-menu-container">
-            <a class="mdl-navigation__link" href="">Gestión de Casos</a>
-            <a class="mdl-navigation__link" href="">Crear Caso</a>
+            <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
+            <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
           </div>
           <!-- Gestion de usuarios de indicadores -->
        <span class="mdl-navigation__link menu" href="">

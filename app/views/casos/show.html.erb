@@ -135,7 +135,7 @@ td.text-right {
   </tr>
   
     
-    <% if session[:usuario_tipo] == "cliente" and @caso.complejidad == "No Asignada" %>
+    <% if cli? and @caso.complejidad == "No Asignada" %>
     <tr><td style="word-wrap: break-word;">
   <%  @documento = Documento.new %>
   <%= form_for @documento, multipart: true do |doc|  %>
@@ -219,7 +219,7 @@ td.text-right {
 </tbody>
 </table>
 <br>
-<% if session[:usuario_tipo] == "Admin" %>
+<% if admin?  %>
   <% if @caso.status == "Cerrado" %>
     <% @reapertura = (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - @caso.fecha_cerrado.mjd %>
     <% if (@caso.complejidad == "Bajo" and @reapertura <= 1) or (@caso.complejidad == "Medio" and @reapertura <= 2) or (@caso.complejidad == "Alto" and @reapertura <= 4) or (@caso.complejidad == "Urgente" and @reapertura <= 1) %>
@@ -242,14 +242,14 @@ td.text-right {
     <% end %>
   <% end %>
 <% end %>
-<% if session[:usuario_tipo] == "Infosoft-Admin" %>
+<% if cons_lid? %>
 Asignado a: <%= @caso.consultor == nil ? "No asignado" : @caso.consultor %><br>
 <%= form_for @caso, :url => {:action => "update"} do |f|%>
 <%= f.select :consultor, ["Consultor-lider",'consultor1','consultor2','consultor3'] %>
 <%= f.submit "Asignar caso" %>
 <% end %>
 <% end %>
-<% if session[:usuario_tipo] == "consultor" %>
+<% if cons? %>
 <%= form_for @caso, :url => {:action => "update"} do |f|%>
     <%= f.select :status, [' Anulado','BI-Afectado','BI-Planificado','Cerrado','Iniciado','En Proceso'] %><br>
     <%= f.submit "Cambiar Estatus" %>
@@ -281,7 +281,7 @@ Asignado a: <%= @caso.consultor == nil ? "No asignado" : @caso.consultor %><br>
   </div>
    <%= form.hidden_field :caso_id, value: @caso.id %>
    <%= form.hidden_field :fecha, value: Time.now %>
-   <%= form.hidden_field :autor, value: session[:usuario_tipo] %>
+   <%= form.hidden_field :autor, value: current_user.role.alias %>
   <div class="actions">
     <%= form.submit "Enviar" %>
   </div>
