@@ -29,6 +29,13 @@ module ApplicationHelper
     true if(!current_user.nil? && current_user.role.alias == "clis")
   end
 
+  def cli_ind?
+    p "cli_ind?"
+    true if(!current_user.nil? && current_user.role.alias == "cli_ind")
+  end
+
+
+
 
 
   def log_in(usuario)
