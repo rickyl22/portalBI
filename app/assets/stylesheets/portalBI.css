@@ -1084,3 +1084,26 @@ body {
     }
 }
 
+
+/* MENU */
+.sub-menu  {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.sub-menu-container {
+    display: none;
+}
+
+.material-icons.list {
+    position: absolute;
+    right: 10px;
+    font-size: 18px;
+    margin-right: initial;
+}
+#panel-oculto {
+    display: none;
+}
+

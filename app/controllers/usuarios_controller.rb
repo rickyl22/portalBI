@@ -1,20 +1,30 @@
 class UsuariosController < ApplicationController
+  before_action :set_usuario,  only: [:edit, :update, :destroy]
+  skip_after_action :verify_policy_scoped
+  #skip_after_action :verify_authorized#, :only => [:create, :allowed_params]
+  #after_action :verify_authorized
+  #after_action :verify_authorized, :except => :index, unless: :devise_controller?
+  #after_action :verify_authorized, :only => :index
+
   def index
-    if(params[:flag])
-      @usuarios = Usuario.where("title='Ricardo' ")
-    else
-      @users = Usuario.all
-    end
+
+    @usuarios = Usuario.all
+    #reset_session
+    p "Usuario d ela sesion index "+session[:usuario_id].inspect
+    authorize @usuarios
   end
 
   def create
     @usuario = Usuario.create(allowed_params)
+    authorize @usuario
     @usuario.save
-    redirect_to @usuario
+    p "Usuario d ela sesion create "+session[:usuario_id].inspect
+    redirect_to login_path
   end
 
   def new
     @usuario = Usuario.new
+    #authorize @usuario
   end
 
   def edit
@@ -22,12 +32,14 @@ class UsuariosController < ApplicationController
   end
 
   def show
-    @usuario = Usuario.find(params[:id])
+   @usuario = Usuario.find(params[:id])
+   p "Usuario d ela sesion show "+session[:usuario_id].inspect
+   authorize @usuario
   end
 
   def update
     @usuario = Usuario.find(params[:id])
-    authorize @usuario
+    # authorize @usuario
     if @usuario.update_attributes(params[:usuario])
       redirect_to @usuario
     else
@@ -43,8 +55,14 @@ class UsuariosController < ApplicationController
   end
 
   private
+    def set_usuario
+      p"ENTRA ACAAA"
+      @usurios = Usuario.find(params[:id])
+      #authorize @usuarios
+    end
+
   def allowed_params
-    params.require(:usuario).permit(:estatus, :usuario, :codigo_empleado, :nombre, :apellido, :correo, :cargo, :area, :supervisor, :gerencia, :telefono, :password_digest, :justificacion, :password, :password_confirmation)
+    params.require(:usuario).permit(:estatus, :role_id, :usuario, :codigo_empleado, :nombre, :apellido, :correo, :cargo, :area, :supervisor, :gerencia, :telefono, :password_digest, :justificacion, :password, :password_confirmation)
   end
 
 end
