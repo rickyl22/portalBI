@@ -6,6 +6,37 @@ class ApplicationPolicy
     @record = record
   end
 
+  def rol
+    @user.role.alias
+  end
+  def admin?
+    true if(@user.role.alias == "admin")
+  end
+
+  def admin_min?
+    true if(@user.role.alias == "admin_min")
+  end
+
+  def admin_ind?
+    true if(@user.role.alias == "admin_ind")
+  end
+
+  def cons_lid?
+    true if(@user.role.alias == "cons_lid")
+  end
+
+  def cons?
+    true if(@user.role.alias == "cons")
+  end
+
+  def cli?
+    true if(@user.role.alias == "clis")
+  end
+
+  def modulo
+    @user.role.privilegio.modulo
+  end
+
   def index?
     false
   end
@@ -44,6 +75,17 @@ class ApplicationPolicy
     def initialize(user, scope)
       @user = user
       @scope = scope
+    end
+    def admin?
+      true if(@user.role.alias == "admin")
+    end
+
+    def admin_min?
+      true if(@user.role.alias == "admin_min")
+    end
+
+    def admin_ind?
+      true if(@user.role.alias == "admin_ind")
     end
 
     def resolve
