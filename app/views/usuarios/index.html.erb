@@ -1,151 +1,45 @@
 <div class="content_p android-content mdl-layout__content">
+  <div class="contenido-in">
+    <% @usuarios.each do |usuario| %>
+        <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
+          <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us">
+            <%= "Cod: "+usuario.codigo_empleado %>
+            </br>
+            <%= usuario.role.nombre %>
+            </br>
+            <%= image_tag "admin_1.png", class:"icon_rol"%>
+          </header>
+          <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
+              <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
+                <h5>
+                  <%= usuario.nombre+" "+usuario.apellido %>
+                </h5>
+                <p>
+                  <%= usuario.cargo %>
+                </p>
+              </div>
+              <div class="mdl-card__actions us_cart_actions">
+                <a href="#" class="mdl-button">Más detalles</a>
+              </div>
 
-  <% @usuarios.each do |usuario| %>
-      <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-        <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color--indigo-500 mdl-color-text--white">
-          <%= usuario.role.nombre %>
-        </header>
-        <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone">
-          <div class="cont_cab">
-            <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
-              <h5>
-                <%= usuario.nombre+" "+usuario.apellido+" - "+usuario.codigo_empleado %>
-              </h5>
-              <p>
-                <%= usuario.justificacion %>
-              </p>
+            <div class="cont_bottom">
+              <%= link_to  edit_usuario_path(usuario), class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do%>
+                  <i class="material-icons">edit</i>
+              <% end %>
+              <%= button_to usuario_path(usuario), class:"mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect",:method => "delete" do%>
+                  <i class="material-icons">delete</i>
+              <% end %>
+
             </div>
-          </div>
-          <div class="cont_bottom">
-            <%= link_to 'Editar', usuario_path(usuario), :class =>"mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" %>
-                <i class="material-icons">edit</i>
 
           </div>
 
+          </sectio>
+
+        </section>
+
+    <% end %>
 
 
-
-          .cont_bottom
-          -if session[:alias] == 'adminPlat'
-          =link_to edit_question_type_path(question_type), :confirm => 'Esta seguro desea EDITAR esta opción de respuesta?',id:"edit_question_type_#{question_type.id}", class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do
-          %i.material-icons> edit
-          .mdl-tooltip{:for => "edit_question_type_#{question_type.id}"}
-          Editar Tipo
-          %button.mdl-button.mdl-button--icon.mdl-js-button.mdl-js-ripple-effect.delete-botton{:id =>"delete_question_type_#{question_type.id}", :type=> 'button',:confirm => 'Esta seguro desea ELIMINAR esta opción de respuesta?', :onclick => "deleteAction('/question_types/', '#{question_type.id}', 'question_types','#{form_authenticity_token.to_s}')"}
-          %i.material-icons> delete
-          .mdl-tooltip{:for => "delete_question_type_#{question_type.id}"}
-          Eliminar Tipo
-        </div>
-
-
-
-
-
-      </section>
-
-  <% end %>
-
-
-
-
-
-
-  <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-    <thead>
-    <tr>
-      <th class="mdl-data-table__cell--non-numeric">Usuario</th>
-      <th>Nombre y Apellido</th>
-      <th>Correo</th>
-      <th>Télefono</th>
-      <th>Justificación</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
-      <td>25</td>
-      <td>$2.90</td>
-      <td>$2.90</td>
-      <td>$2.90</td>
-    </tr>
-
-    </tbody>
-  </table>
-
-
-
-
-  <table class="mdl-data-table mdl-js-data-table">
-    <thead>
-    <tr>
-      <th class="mdl-data-table__cell--non-numeric">Name</th>
-      <th class="mdl-data-table__cell--non-numeric">Nickname</th>
-      <th>Age</th>
-      <th class="mdl-data-table__cell--non-numeric">Living?</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">John Lennon</td>
-      <td class="mdl-data-table__cell--non-numeric">The smart one</td>
-      <td>40</td>
-      <td class="mdl-data-table__cell--non-numeric">No</td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Paul McCartney</td>
-      <td class="mdl-data-table__cell--non-numeric">The cute one</td>
-      <td>73</td>
-      <td class="mdl-data-table__cell--non-numeric">Yes</td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">George Harrison</td>
-      <td class="mdl-data-table__cell--non-numeric">The shy one</td>
-      <td>58</td>
-      <td class="mdl-data-table__cell--non-numeric">No</td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Ringo Starr</td>
-      <td class="mdl-data-table__cell--non-numeric">The funny one</td>
-      <td>74</td>
-      <td class="mdl-data-table__cell--non-numeric">Yes</td>
-    </tr>
-    </tbody>
-  </table>
-
-
-
-
-
-  <h1>Users#index</h1>
-
-  <%= link_to 'New user', new_usuario_path %>
-  <%= link_to "Todo los usuarios", :controller => "usuarios", :action => "index" %>
-  <%= link_to "Usuario ricardo", :controller => "usuarios", :action => "index", :flag => 0 %>
-
-
-  <h1>Listing articles</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-    <th>Text2</th>
-  </tr>
-
-  <% @usuarios.each do |usuario| %>
-      <tr>
-        <td><%= usuario.usuario %></td>
-        <td><%= link_to 'Show', usuario_path(usuario) %></td>
-        <td><%= link_to 'Edit', edit_usuario_path(usuario) %></td>
-        <br>
-        <td><%= link_to 'Destroy', usuario_path(usuario),
-                        method: :delete,
-                        data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-  <% end %>
-</table>
-
-
-
-
+  </div>
   </div>
