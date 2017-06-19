@@ -243,9 +243,13 @@ td.text-right {
   <% end %>
 <% end %>
 <% if cons_lid? %>
-Asignado a: <%= @caso.consultor == nil ? "No asignado" : @caso.consultor %><br>
+Asignado a: <%= @caso.consultor_id == nil ? "No asignado" : @caso.consultor_id %><br>
 <%= form_for @caso, :url => {:action => "update"} do |f|%>
-<%= f.select :consultor, ["Consultor-lider",'consultor1','consultor2','consultor3'] %>
+<% @lista = [] %>
+<% Usuario.where("role_id = 5").each do |u| %>
+  <% @lista.append( u.usuario) %>
+<% end %>  
+<%= f.select :consultor_id, @lista  %>
 <%= f.submit "Asignar caso" %>
 <% end %>
 <% end %>

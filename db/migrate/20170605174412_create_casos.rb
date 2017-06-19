@@ -8,7 +8,7 @@ class CreateCasos < ActiveRecord::Migration[5.1]
       t.text :campos
       t.string :complejidad
       t.text :condiciones
-      t.string :consultor
+      t.string :consultor_id
       t.string :especifique
       t.date :fech_asig
       t.date :fecha_creado

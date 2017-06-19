@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170614180538) do
+ActiveRecord::Schema.define(version: 20170616210132) do
 
   create_table "casos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "act_tabla"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20170614180538) do
     t.text "campos"
     t.string "complejidad"
     t.text "condiciones"
-    t.string "consultor"
+    t.string "consultor_id"
     t.string "especifique"
     t.date "fech_asig"
     t.date "fecha_creado"
@@ -68,6 +68,14 @@ ActiveRecord::Schema.define(version: 20170614180538) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["caso_id"], name: "index_documentos_on_caso_id"
+  end
+
+  create_table "kpis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text "nombre"
+    t.text "descripcion"
+    t.text "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "permisos_asignados", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -4,13 +4,14 @@
   </style>
 <p id="notice"><%= notice %></p>
 
-<h1>Casos</h1>
+<h1>Casos no asignados</h1>
 
 <table class="mdl-data-table mdl-js-data-table" style="width: 85%;">
   <thead>
     <tr>
       <th>Caso</th>
       <th>Titulo</th>
+      <th>Autor</th>
       <th style="word-wrap:break-word;">Fecha de creación/asignación</th>
       <th style="word-wrap:break-word;">Dias transcurridos desde:</th>
       <th>Asignado a Infosoft</th>
@@ -21,10 +22,16 @@
   </thead>
 
   <tbody>
-    <% @casos.each do |caso| %>
+    <% if admin? %>
+      <% @casos_cur = @casos.where("infosoft = 'NO' and status != 'Cerrado' ") %>
+    <% else %>
+      <% @casos_cur = @casos %>
+    <% end %>  
+    <% @casos_cur.each do |caso| %>
       <tr>
         <td><%= caso.id %></td>
         <td><%= caso.titulo %></td>
+        <td><%= Usuario.find(caso.usuario_id).usuario %></td>
         <td>
             Creacion: <%= caso.fecha_creado %><br>
             Asignacion: <%= caso.fech_asig == nil ? "No asignada" : caso.fech_asig %>
@@ -42,13 +49,13 @@
   </tbody>
 </table>
 <% if admin? %>
-  <% @casos = @casos2 %>
   <h1>Casos asignados</h1>
   <table class="mdl-data-table mdl-js-data-table" style="width: 85%;">
   <thead>
     <tr>
       <th>Caso</th>
       <th>Titulo</th>
+      <th>Autor</th>
       <th style="word-wrap:break-word;">Fecha de creación/asignación</th>
       <th style="word-wrap:break-word;">Dias transcurridos desde:</th>
       <th>Asignado a Infosoft</th>
@@ -59,10 +66,12 @@
   </thead>
 
   <tbody>
-    <% @casos.each do |caso| %>
+    <% @casos_cur = @casos.where(" status = 'En proceso' ") %>
+    <% @casos_cur.each do |caso| %>
       <tr>
         <td><%= caso.id %></td>
         <td><%= caso.titulo %></td>
+        <td><%= Usuario.find(caso.usuario_id).usuario %></td>
         <td>
             Creacion: <%= caso.fecha_creado %><br>
             Asignacion: <%= caso.fech_asig == nil ? "No asignada" : caso.fech_asig %>
@@ -79,13 +88,13 @@
     <% end %>
   </tbody>
 </table>
-<% @casos = @casos3 %>
   <h1>Casos cerrados</h1>
 <table class="mdl-data-table mdl-js-data-table" style="width: 85%;">
   <thead>
     <tr>
       <th>Caso</th>
       <th>Titulo</th>
+      <th>Autor</th>
       <th style="word-wrap:break-word;">Fecha de creación/asignación</th>
       <th style="word-wrap:break-word;">Dias transcurridos desde:</th>
       <th>Asignado a Infosoft</th>
@@ -96,10 +105,12 @@
   </thead>
 
   <tbody>
-    <% @casos.each do |caso| %>
+    <% @casos_cur = @casos.where(" status = 'Cerrado' ") %>
+    <% @casos_cur.each do |caso| %>
       <tr>
         <td><%= caso.id %></td>
         <td><%= caso.titulo %></td>
+        <td><%= Usuario.find(caso.usuario_id).usuario %></td>
         <td>
             Creacion: <%= caso.fecha_creado %><br>
             Asignacion: <%= caso.fech_asig == nil ? "No asignada" : caso.fech_asig %><br>

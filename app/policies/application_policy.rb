@@ -30,7 +30,7 @@ class ApplicationPolicy
   end
 
   def cli?
-    true if(@user.role.alias == "clis")
+    true if(@user.role.alias == "cli")
   end
 
   def modulo

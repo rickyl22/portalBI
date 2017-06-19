@@ -1,6 +1,6 @@
 class UsuariosController < ApplicationController
   before_action :set_usuario,  only: [:edit, :update, :destroy]
-  after_action :verify_policy_scoped
+  skip_after_action :verify_policy_scoped
   #skip_after_action :verify_authorized#, :only => [:create, :allowed_params]
   #after_action :verify_authorized
   #after_action :verify_authorized, :except => :index, unless: :devise_controller?
