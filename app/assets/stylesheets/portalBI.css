@@ -1110,3 +1110,16 @@ body {
 #panel-oculto {
     display: none;
 }
+/* INDEX USUARIOS*/
+.cont_cab{
+    display: inline-flex;
+    min-height: 30px;
+}
+
+.cont_cab .mdl-card__supporting-text{
+    width: 90%;
+}
+
+.cont_cab .cont_bottom{
+    width: 10%;
+}
