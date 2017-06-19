@@ -1,4 +1,7 @@
 module ApplicationHelper
+  def rol
+    return current_user.role.alias
+  end
   def admin?
     p "admin?"
     true if(!current_user.nil? && current_user.role.alias == "admin")
@@ -33,10 +36,6 @@ module ApplicationHelper
     p "cli_ind?"
     true if(!current_user.nil? && current_user.role.alias == "cli_ind")
   end
-
-
-
-
 
   def log_in(usuario)
     session[:usuario_id] = usuario.id
