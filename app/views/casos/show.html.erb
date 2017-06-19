@@ -234,7 +234,7 @@ td.text-right {
     <%= f.hidden_field :status, :value => "En Proceso" %>
     <%= f.hidden_field :infosoft, :value => "SI" %>
     <%= f.hidden_field :fech_asig, :value => Time.now %>
-    <%= f.submit "Asignar Complejidad" %>
+    <%= f.submit (@caso.infosoft == "NO" ? "Asignar Complejidad" : "Re-asignar Complejidad" ) %>
     <% end %><br>
     <%= form_for @caso, :url => {:action => "update"} do |f|%>
     <%= f.select :status, [' Anulado','BI-Afectado','BI-Planificado','Cerrado','Iniciado','En Proceso'] %><br>

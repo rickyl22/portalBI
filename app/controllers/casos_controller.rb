@@ -1,7 +1,7 @@
 class CasosController < ApplicationController
   before_action :set_caso, only: [:show, :edit, :update, :destroy]
   after_action :verify_policy_scoped, :only => :index
-  after_action :verify_authorized, :only => [:index, :create, :new]
+  after_action :verify_authorized, :only => [:index, :create, :new, :show]
 
   def iniciar
     #session[:usuario_id] = 1
@@ -50,8 +50,6 @@ class CasosController < ApplicationController
   def update
 
     @asig = @caso.complejidad == "No Asignada"
-    p "aqui los paramsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-    p params
     if params[:caso][:status] == "Cerrado"
        params[:caso][:fecha_cerrado] = Date.today
     end

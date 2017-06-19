@@ -16,6 +16,12 @@ class CasoPolicy < ApplicationPolicy
     return true if user.present? && (rol == "admin" || rol == "cli" || rol == "admin_min" ) 
   end
 
+  def show?
+    p "usuario- poli -create"
+    p "EL ROL "+rol.inspect
+    return true if user.present? && (rol == "admin" || rol == "cli" || rol == "admin_min" ) 
+  end
+
   class Scope < Scope
     def resolve
       if admin?
