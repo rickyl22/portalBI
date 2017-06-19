@@ -1,6 +1,7 @@
 class DocumentosController < ApplicationController
   before_action :set_documento, only: [:show, :edit, :update, :destroy]
-
+  skip_after_action :verify_policy_scoped
+  skip_after_action :verify_authorized
   # GET /documentos
   # GET /documentos.json
   def index

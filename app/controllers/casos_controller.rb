@@ -12,9 +12,6 @@ class CasosController < ApplicationController
   # GET /casos
   def index
     
-    p "current is"
-    p current_user
-    p current_user.role.alias
     if admin?
       p "es ad"
           @casos = Caso.where("infosoft = 'NO' and status != 'Cerrado' ")

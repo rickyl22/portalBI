@@ -1,5 +1,7 @@
 class ComentariosController < ApplicationController
   before_action :set_comentario, only: [:show, :edit, :update, :destroy]
+  skip_after_action :verify_policy_scoped
+  skip_after_action :verify_authorized
 
   # GET /comentarios
   def index

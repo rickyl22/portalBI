@@ -123,7 +123,7 @@ td.text-right {
            <b>Eliminado </b><br>
         <% else %>
         <%= link_to "Descargar", doc.attachment_url, :style => 'color:blue' %>
-          <% if session[:usuario_tipo] == "cliente" and doc.estatus != "Borrado" %>
+          <% if cli? and doc.estatus != "Borrado" %>
               <%= button_to "Borrar",  doc, method: :delete %>
           <% else %>
             <br>     
@@ -258,7 +258,7 @@ Asignado a: <%= @caso.consultor == nil ? "No asignado" : @caso.consultor %><br>
 
 <%= link_to 'Volver', casos_path %>
 </td><td style="vertical-align: text-top;width: 10vw">
-<% if session[:usuario_tipo] != "cliente" %>
+<% if !cli? %>
 <table class="table-fill" style="table-layout: fixed;width: 20vw" >
 <tr>
 <th class="text-left">Comentarios</th>
@@ -281,7 +281,7 @@ Asignado a: <%= @caso.consultor == nil ? "No asignado" : @caso.consultor %><br>
   </div>
    <%= form.hidden_field :caso_id, value: @caso.id %>
    <%= form.hidden_field :fecha, value: Time.now %>
-   <%= form.hidden_field :autor, value: current_user.role.alias %>
+   <%= form.hidden_field :autor, value: current_user.role.nombre %>
   <div class="actions">
     <%= form.submit "Enviar" %>
   </div>
