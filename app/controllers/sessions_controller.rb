@@ -9,7 +9,14 @@ class SessionsController < ApplicationController
     usuario = Usuario.where("usuario = ?",params[:usuario]).first
     if usuario  && usuario.authenticate(params[:password]) #&& (usuario.estatus == "Aprobado")
       log_in usuario
-      redirect_to menus_path, notice: 'Login exitoso!'
+      if admin?
+        redirect_to menus_path
+      elsif admin_ind?
+        redirect_to kpis_path
+      elsif admin_min?
+        redirect_to menus_path
+      end
+      #redirect_to menus_path, notice: 'Login exitoso!'
       cookies[:usuario] = usuario.usuario
     else
       flash.now.alert = 'Correo o clave incorrecto'

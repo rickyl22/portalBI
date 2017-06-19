@@ -1,6 +1,6 @@
 class UsuariosController < ApplicationController
   before_action :set_usuario,  only: [:edit, :update, :destroy]
-  skip_after_action :verify_policy_scoped
+  after_action :verify_policy_scoped
   #skip_after_action :verify_authorized#, :only => [:create, :allowed_params]
   #after_action :verify_authorized
   #after_action :verify_authorized, :except => :index, unless: :devise_controller?
@@ -8,7 +8,7 @@ class UsuariosController < ApplicationController
 
   def index
 
-    @usuarios = Usuario.all
+    @usuarios = policy_scope(Usuario)
     #reset_session
     p "Usuario d ela sesion index "+session[:usuario_id].inspect
     authorize @usuarios
@@ -59,8 +59,8 @@ class UsuariosController < ApplicationController
   private
     def set_usuario
       p"ENTRA ACAAA"
-      @usurios = Usuario.find(params[:id])
-      #authorize @usuarios
+      @usurio = Usuario.find(params[:id])
+      authorize @usuario
     end
 
   def allowed_params

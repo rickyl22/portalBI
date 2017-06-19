@@ -1,35 +1,47 @@
 class UsuarioPolicy < ApplicationPolicy
-
-  def index?
-    return true if user.present?
+    def index?
+    p "usuario- poli -index"
+    p "EL ROL "+rol.inspect
+    return true if user.present? && (rol == "admin" || rol == "admin_ind" || rol == "admin_min")
   end
 
   def create?
-    p "ENTRA create user"
+    p "usuario- poli -create"
+    p "EL ROL "+rol.inspect
     true
   end
 
   def show?
-    p "USER "+user.role.inspect
-    p "USUARIO "+usuario.inspect
-    rol = user.rol?(user.id)
-    return true if user.present? && (rol.alias == "admin" || rol.alias == "admin_min" || rol.alias == "admin_ind")
-
+    p "usuario- poli -show"
+    p "EL ROL "+rol.inspect
+    return true if user.present? && (rol == "admin" || rol.alias == "admin_ind" || rol == "admin_min")
   end
 
   def update?
-    rol = user.rol?(user.id)
-    if (user.present?)
-      return true if (rol.alias == "admin" || rol.alias == "admin_min" || rol.alias == "admin_ind")
-    end
-
-    return true if user.present? && user == article.user
-    true
+    p "usuario- poli -update"
+    p "EL ROL "+rol.inspect
+    return true if user.present? && (rol == "admin" || rol == "admin_ind" || rol == "admin_min")
   end
 
   def destroy?
-    p "destroy"
-    true
+    p "usuario- poli -destroy"
+    p "EL ROL "+rol.inspect
+    return true if user.present? && (rol == "admin" || rol == "admin_ind" || rol == "admin_min")
+  end
+
+  class Scope < Scope
+    def resolve
+      if admin?
+        p "Scope- es admin"
+        scope.all
+      elsif admin_min?
+        p "Scope- es admin mineria"
+        scope.where("role_id in (?)", "2,4,5,6")
+      elsif admin_ind?
+        p "Scope- es indicadores"
+        scope.where("role_id in (?)", "3,7")
+      end
+    end
   end
 
   private
