@@ -6,7 +6,9 @@ class SessionsController < ApplicationController
   end
 
   def create
+    p "ACA??"
     usuario = Usuario.where("usuario = ?",params[:usuario]).first
+    p"USUARIO "+usuario.inspect
     if usuario && (usuario.estatus == "Aprobado") && usuario.authenticate(params[:password])
       log_in usuario
       if admin?
@@ -20,7 +22,7 @@ class SessionsController < ApplicationController
       cookies[:usuario] = usuario.usuario
     else
       flash.now.alert = 'Correo o clave incorrecto'
-      redirect_to login_path
+      redirect_to login_path, alert: "Correo o clave incorrecto"
     end
 
   end
