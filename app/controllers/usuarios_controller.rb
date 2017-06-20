@@ -1,5 +1,5 @@
 class UsuariosController < ApplicationController
-  before_action :set_usuario,  only: [:edit, :update, :destroy]
+  before_action :set_usuario,  only: [:show, :edit, :update, :destroy]
   after_action :verify_policy_scoped, :except => :create
   #after_action :verify_policy_scoped#, :except => [:index]
   #skip_after_action :verify_authorized#, :only => [:create, :allowed_params]
@@ -19,9 +19,13 @@ class UsuariosController < ApplicationController
   def create
     @usuario = Usuario.create(allowed_params)
     authorize @usuario
-    @usuario.save
-    p "Usuario d ela sesion create "+session[:usuario_id].inspect
-    redirect_to login_path
+    if @usuario.save
+      p "Usuario d ela sesion create "+session[:usuario_id].inspect
+      redirect_to login_path, notice: 'Petición enviada'
+    else
+      redirect_to login_path, error: 'Error creando usuario'
+    end
+
   end
 
   def new
@@ -37,23 +41,24 @@ class UsuariosController < ApplicationController
   def show
    @usuario = Usuario.find(params[:id])
    p "Usuario d ela sesion show "+session[:usuario_id].inspect
-   authorize @usuario
+   #authorize @usuario
   end
 
   def update
     @usuario = Usuario.find(params[:id])
     # authorize @usuario
-    if @usuario.update_attributes(params[:usuario])
-      redirect_to @usuario
+    if @usuario.update_attributes(allowed_params)
+      redirect_to @usuario,  notice: 'Usuario actualizado'
     else
-      render 'edit'
+      render 'edit', error: 'Error actualizando usuario'
     end
   end
 
   def destroy
     @usuario = Usuario.find(params[:id])
     @usuario.destroy
-    redirect_to usuarios_path
+    p"Antes de hacer redirect"
+    redirect_to usuarios_path, notice: 'Usuario #{@usuario.codigo_empleado} eliminado'
   end
 
   private
