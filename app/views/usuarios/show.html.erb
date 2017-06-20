@@ -1,14 +1,45 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
-
 <div class="content_p android-content mdl-layout__content">
+  <!-- Contenido -->
+  <div class="contenido-in ">
+    <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
+      <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us">
+        <%= "Cod: "+@usuario.codigo_empleado %>
+        </br>
+        <%= @usuario.role.nombre %>
+        </br>
+        <%= image_tag "admin.png", class:"icon_rol"%>
+      </header>
+      <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
+        <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
+          <h5>
+            <%= "Nombre: "+@usuario.nombre+" "+@usuario.apellido %>
+          </h5>
+          <p>
+            <%= "Cargo: "+@usuario.cargo %>
+            </br>
+            <%= "Usuario: "+@usuario.usuario %>
+            </br>
+            <%= "Área: "+@usuario.area %>
+            </br>
+            <%= "Gerencia: "+@usuario.gerencia %>
+            </br>
+            <%= "Télefono: "+@usuario.telefono %>
+            </br>
+            <%= "Correo: "+@usuario.correo %>
+            </br>
+            <%= "Supervisor: "+@usuario.supervisor %>
+            </br>
+            <%= "Justificacioń: "+@usuario.justificacion %>
+            </br>
+            <%= "Estatus: "+@usuario.estatus %>
+          </p>
+        </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @usuario.nombre %>
-</p>
+      </div>
+
+    </section>
+    </div>
+  <%= link_to 'Regresar', usuarios_path %>
 
 
-<%= link_to 'Back', usuarios_path %>
-
-  </div>
+</div>
