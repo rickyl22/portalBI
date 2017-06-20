@@ -1,6 +1,6 @@
 class CasosController < ApplicationController
   before_action :set_caso, only: [:show, :edit, :update, :destroy]
-  after_action :verify_policy_scoped, :only => :index
+  after_action :verify_policy_scoped, :only => [:index, :show]
   after_action :verify_authorized, :only => [:index, :create, :new, :show]
 
   def iniciar
@@ -17,7 +17,11 @@ class CasosController < ApplicationController
 
   # GET /casos/1
   def show
+    @casos = policy_scope(Caso)
+    p "casos"
+    p @casos
     @comments = Comentario.all
+    authorize @caso
   end
 
   # GET /casos/new

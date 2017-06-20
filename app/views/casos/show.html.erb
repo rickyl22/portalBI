@@ -146,6 +146,8 @@ td.text-right {
   <%= doc.submit "Cargar" %>
   <% end %>
   </td></tr>
+<% elsif cli? %>
+   <tr><td><span style="font-size: 2.2em">&#9888</span>  <%= "No se puede cargar documentos luego de asignar el caso" %></td></tr>
 <% end %><br>
   
   </table>
