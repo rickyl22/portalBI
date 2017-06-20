@@ -4,22 +4,22 @@ class ComentariosController < ApplicationController
   skip_after_action :verify_authorized
 
   # GET /comentarios
-  def index
-    @comentarios = Comentario.all
-  end
+  #def index
+    #@comentarios = Comentario.all
+  #end
 
   # GET /comentarios/1
-  def show
-  end
+  #def show
+  #end
 
   # GET /comentarios/new
-  def new
-    @comentario = Comentario.new
-  end
+  #def new
+    #@comentario = Comentario.new
+  #end
 
   # GET /comentarios/1/edit
-  def edit
-  end
+  #def edit
+  #end
 
   # POST /comentarios
   def create

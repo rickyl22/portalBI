@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   def create
     p "ACA??"
     usuario = Usuario.where("usuario = ?",params[:usuario]).first
-    if usuario  && usuario.authenticate(params[:password]) #&& (usuario.estatus == "Aprobado")
+    if usuario  && usuario.authenticate(params[:password]) && (usuario.estatus == "Aprobado")
 
       log_in usuario
       if admin?

@@ -4,37 +4,38 @@ class DocumentosController < ApplicationController
   skip_after_action :verify_authorized
   # GET /documentos
   # GET /documentos.json
-  def index
-    @documentos = Documento.all
-  end
+  #def index
+    #@documentos = Documento.all
+  #end
 
   # GET /documentos/1
   # GET /documentos/1.json
-  def show
-  end
+  #def show
+    #authorize @caso
+  #end
 
   # GET /documentos/new
-  def new
-    @documento = Documento.new
-  end
+  #def new
+    #@documento = Documento.new
+  #end
 
   # GET /documentos/1/edit
-  def edit
-  end
+  #def edit
+  #end
 
   # POST /documentos
   # POST /documentos.json
   def create
     #@documento = Documento.new(documento_params)
-    params[:nombre] = "hola"
-    p "datos"
     params[:documento][:nombre] = params[:documento][:attachment].original_filename
     p params[:documento][:attachment].original_filename
     @caso = Caso.find(documento_params[:caso_id])
       if @caso.documentos.create(documento_params)
+        p "a no pues y entonssssssssssssssssssssssssssssssssss"
         redirect_back(fallback_location:root_path)
       else
-        redirect_back(fallback_location:root_path)
+        p "vea pues"
+        redirect_back(fallback_location:root_path, notice: "fuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu") 
       end
     
   end
