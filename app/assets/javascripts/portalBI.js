@@ -1,6 +1,11 @@
 var openMenu = "";
 
 $(document).ready(function() {
+    /*FUNCION PARA CONTRAER Y DESPLEGAR DETALLES*/
+    $(".us_detalle").click(function(){
+        console.log("entra aca");
+        $(this).next().toggle(1000);
+    });
 
     /*FUNCION PARA VISUALIZAR-OCULTAR SUBMENU*/
     $(".menu").click(function() {
