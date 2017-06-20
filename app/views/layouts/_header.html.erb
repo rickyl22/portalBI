@@ -47,24 +47,35 @@
     <nav class="mdl-navigation">
       <!-- Opciones Administrador -->
       <% if admin? %>
-        <strong><span class="mdl-navigation__link" href="">Usuarios</span></strong>
-        <a class="mdl-navigation__link" href="/usuarios/index">Lista de usuarios</a>
-        <a class="mdl-navigation__link" href="">Versión</a>
-        <a class="mdl-navigation__link" href="">Gestión de Usuarios</a>
-        <div class="android-drawer-separator"></div>
-       <!-- Menu para Portal de Indicadores -->
-        <strong><span class="mdl-navigation__linkr" href="">Indicadores</span></strong>
-        <a class="mdl-navigation__link" href="">Altas</a>
-        <a class="mdl-navigation__link" href="">Arpu</a>
-        <a class="mdl-navigation__link" href="">Recargas</a>
-        <a class="mdl-navigation__link" href="">Tráfico</a>
-        <div class="android-drawer-separator"></div>
-        <!-- Menu para Portal de Gestion de Mineria -->
-        <strong><span class="mdl-navigation__link" href="">Mineria</span></strong>
-        <a class="mdl-navigation__link" href="">Gestión de Casos</a>
-        <a class="mdl-navigation__link" href="">Crear Caso</a>
-        <a class="mdl-navigation__link" href="">Ver Caso</a>
-        <div class="android-drawer-separator"></div>
+          <!-- Menu para Portal de Gestion de Mineria -->
+       <span class="mdl-navigation__link menu" href="">
+          Indicadores
+         <i class="material-icons list">grid_on</i>
+        </span>
+        <div id="mineria" class="sub-menu-container">
+          <a class="mdl-navigation__link" href="">Gestión de  Indicadores</a>
+          <a class="mdl-navigation__link" href="">Crear Indicador</a>
+        </div>
+
+        <span class="mdl-navigation__link menu" href="">
+          Mineria
+         <i class="material-icons list">grid_on</i>
+        </span>
+          <div id="mineria" class="sub-menu-container">
+            <a class="mdl-navigation__link" href="">Gestión de Casos</a>
+            <a class="mdl-navigation__link" href="">Crear Caso</a>
+          </div>
+          <!-- Gestion de usuarios de indicadores -->
+        <span class="mdl-navigation__link menu" href="">
+          Usuarios
+         <i class="material-icons list">group</i>
+        </span>
+          <div id="imin_usuarios" class="sub-menu-container">
+            <a class="mdl-navigation__link" href="">Crear</a>
+            <a class="mdl-navigation__link" href="">Aprobar</a>
+          </div>
+
+
       <% elsif admin_ind? %>
          <!-- Gestion de indicadores -->
          <span class="mdl-navigation__link menu" href="">
@@ -166,10 +177,22 @@
       <% end %>
 
     </nav>
+
+    <!-- Alertas -->
+    <% if flash[:notice] %>
+        <div class="notice mdl-shadow--16dp"><%= flash[:notice] %></div>
+    <% end %>
+    <% if flash[:alert] %>
+        <div class="alert mdl-shadow--16dp"><%= flash[:alert] %></div>
+    <% end %>
+    <% if flash[:error] %>
+        <div class="alert mdl-shadow--16dp"><%= flash[:error] %></div>
+    <% end %>
   </div>
 
   <!-- Icon menus lateral -->
   <div class="android-content mdl-layout__content">
     <a name="top"></a>
   </div>
+
 </div>
