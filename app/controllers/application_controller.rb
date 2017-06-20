@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
 
   def user_not_authorized
     p "ENTRA a rechazar usuario"
-    redirect_to login_path, notice: 'Debe iniciar session para acceder al sistema sapo!!!'
+    redirect_to login_path, notice: 'Debe iniciar sesión para acceder al sistema'
   end
 
 
