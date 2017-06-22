@@ -1,17 +1,19 @@
 class KpisController < ApplicationController
-  before_action :set_indicador, only: [:edit, :update, :destroy]
-  skip_after_action :verify_policy_scoped
+  before_action :set_kpi, only: [:show, :edit, :update, :destroy]
+  after_action :verify_policy_scoped, :except => [:create, :new]
 
   # GET /kpis
   # GET /kpis.json
   def index
     @kpis = Kpi.all
     authorize @kpis
+    @kpis = policy_scope(Kpi)
   end
 
   # GET /kpis/1
   # GET /kpis/1.json
   def show
+    @kpi = Kpi.find(params[:id])
   end
 
   # GET /kpis/new
@@ -22,6 +24,7 @@ class KpisController < ApplicationController
 
   # GET /kpis/1/edit
   def edit
+    @kpi = Kpi.find(params[:id])
   end
 
   # POST /kpis
@@ -32,7 +35,7 @@ class KpisController < ApplicationController
 
     respond_to do |format|
       if @kpi.save
-        format.html { redirect_to @kpi, notice: 'Kpi was successfully created.' }
+        format.html { redirect_to @kpi, notice: 'indicador creado satisfactoriamente' }
         format.json { render :show, status: :created, location: @kpi }
       else
         format.html { render :new }
@@ -46,7 +49,7 @@ class KpisController < ApplicationController
   def update
     respond_to do |format|
       if @kpi.update(kpi_params)
-        format.html { redirect_to @kpi, notice: 'Kpi was successfully updated.' }
+        format.html { redirect_to @kpi, notice: 'Indicador actualizado' }
         format.json { render :show, status: :ok, location: @kpi }
       else
         format.html { render :edit }
@@ -60,7 +63,7 @@ class KpisController < ApplicationController
   def destroy
     @kpi.destroy
     respond_to do |format|
-      format.html { redirect_to kpis_url, notice: 'Kpi was successfully destroyed.' }
+      format.html { redirect_to kpis_url, notice: 'Indicador eliminado' }
       format.json { head :no_content }
     end
   end
@@ -70,10 +73,11 @@ class KpisController < ApplicationController
     def set_kpi
       @kpi = Kpi.find(params[:id])
       authorize @kpi
+      @kpi = policy_scope(Kpi).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kpi_params
-      params.require(:kpi).permit(:nombre, :descripcion, :url)
+      params.require(:kpi).permit(:nombre, :descripcion, :portada, :url)
     end
 end
