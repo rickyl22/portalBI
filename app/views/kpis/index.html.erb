@@ -1,31 +1,54 @@
-<p id="notice"><%= notice %></p>
+<div class="content_p android-content mdl-layout__content">
+  <div class="contenido-in contenido-kpis">
+    <h2>Indicadores</h2>
+    <div class=" mdl-grid mdl-grid--no-spacing">
+      <% @kpis.each do |kpi| %>
+          <div class="mdl-cell mdl-cell--4-col">
+            <div class="demo-card-wide mdl-card mdl-shadow--4dp mdl-card-kpis">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text"><%= kpi.nombre%></h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                <%= kpi.descripcion%>
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect", target="_blank", href="<%= kpi.url%>">
+                  Acceder
+                </a>
+                <div class="boton_act_kpis">
+                  <%= link_to  edit_kpi_path(kpi), id:"edit_kpi_#{kpi.id}", class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect bnt_act" do%>
+                      <i class="material-icons">edit</i>
+                  <% end %>
+                  <div class="mdl-tooltip" data-mdl-for="edit_kpi_<%=kpi.id%>">
+                    Editar Indicador:  <strong><%=kpi.nombre%></strong>
+                  </div>
+                  <%= button_to kpi_path(kpi),id:"delete_kpi_#{kpi.id}", class:"mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect bnt_act",:method => "delete" do%>
+                      <i class="material-icons">delete</i>
+                  <% end %>
+                  <div class="mdl-tooltip" data-mdl-for="delete_kpi_<%=kpi.id%>">
+                    Eliminar Indicador:  <strong><%=kpi.nombre%></strong>
+                  </div>
+                  <%= link_to kpi,id:"ver_kpi_#{kpi.id}", class:"mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect bnt_act" do%>
+                      <i class="material-icons">visibility</i>
+                  <% end %>
+                  <div class="mdl-tooltip" data-mdl-for="ver_kpi_<%=kpi.id%>">
+                    Ver Indicador:  <strong><%=kpi.nombre%></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="mdl-card__menu mdl-card__menu-kpis">
+                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                  <i class="material-icons">visibility</i>
+                </button>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+  <a href="/kpis/new" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Agregar KPI</a>
 
-<h1>Kpis</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Descripcion</th>
-      <th>Url</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+</div>
 
-  <tbody>
-    <% @kpis.each do |kpi| %>
-      <tr>
-        <td><%= kpi.nombre %></td>
-        <td><%= kpi.descripcion %></td>
-        <td><%= kpi.url %></td>
-        <td><%= link_to 'Show', kpi %></td>
-        <td><%= link_to 'Edit', edit_kpi_path(kpi) %></td>
-        <td><%= link_to 'Destroy', kpi, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
-
-<%= link_to 'New Kpi', new_kpi_path %>
