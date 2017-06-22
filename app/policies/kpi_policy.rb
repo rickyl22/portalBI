@@ -1,9 +1,20 @@
 class KpiPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope
+      if user.present?
+        if (admin? || admin_ind?)
+          p "Scope- es admin y admin ind kpi"
+          scope.all
+        elsif cli_ind?
+          p "Scope- es admin mineria kpi"
+          #ind = PermisosAsignado.where("usuario_id = ? and role_id = ?", usuario.id, 7).pluck(:recurso)
+          #scope.where("id in (?)", ind)
+          scope.all
+        end
+      end
     end
   end
+
 
   def index?
     p "usuario- poli -index"
@@ -32,7 +43,7 @@ class KpiPolicy < ApplicationPolicy
 
   private
 
-  def usuario
+  def kpi
     record
   end
 end
