@@ -1,19 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class="content_p android-content mdl-layout__content kpi-k">
+  <h2>Indicador <%= @kpi.nombre%></h2>
+  <div class="contenido-in contenido-kpis kpis-show mdl-shadow--8dp">
+    <p>
+      <strong>Descripcion:</strong>
+      <%= @kpi.descripcion %>
+    </p>
+    <p>
+      <strong>Url:</strong>
+      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect", target="_blank", href="<%= @kpi.url%>">
+        Acceder
+      </a>
+    </p>
+    <div class="dash_kpi">
+      <iframe src="http://localhost:5601/app/kibana#/dashboard/fa3b2cd0-5138-11e7-ba68-6b8bc8219ec4?embed=true&_g=()"></iframe>
+    </div>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @kpi.nombre %>
-</p>
 
-<p>
-  <strong>Descripcion:</strong>
-  <%= @kpi.descripcion %>
-</p>
+    <%= link_to 'Edit', edit_kpi_path(@kpi) %> |
+    <%= link_to 'Back', kpis_path %>
 
-<p>
-  <strong>Url:</strong>
-  <%= @kpi.url %>
-</p>
 
-<%= link_to 'Edit', edit_kpi_path(@kpi) %> |
-<%= link_to 'Back', kpis_path %>
+
+  </div>
+</div>
+
