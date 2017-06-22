@@ -1,4 +1,75 @@
-<%= form_with(model: kpi, local: true) do |form| %>
+<div class="content_p android-content mdl-layout__content">
+  <!-- Contenido -->
+  <h2>Agregar Indicador</h2>
+  <div class="contenido-in form_us mdl-shadow--8dp">
+  <!-- Contenido -->
+    <%= form_for @kpi do |f|  %>
+        <% if kpi.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(kpi.errors.count, "error") %> No se pudo crear el Indicador:</h2>
+
+              <ul>
+                <% kpi.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+        <div class="mdl-grid">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+            <%= f.text_field  :nombre, :class => 'mdl-textfield__input', :required => "required" %>
+            <label class="mdl-textfield__label" for="kpi_nombre">Nombre</label>
+          </div>
+
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+            <%= f.text_field  :descripcion, :class => 'mdl-textfield__input', :required => "required" %>
+            <label class="mdl-textfield__label" for="kpi_descripcion">Descripción</label>
+          </div>
+        </div>
+        <div class="mdl-grid">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+            <%= f.text_field  :portada, :class => 'mdl-textfield__input', :required => "required" %>
+            <label class="mdl-textfield__label" for="kpi_portada">Portada</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+            <%= f.text_field  :url, :class => 'mdl-textfield__input', :required => "required" %>
+            <label class="mdl-textfield__label" for="kpi_url">URL</label>
+          </div>
+        </div>
+
+        </br>
+
+        <div class="button-container">
+          <button><span>Crear</span></button>
+        </div>
+
+
+    <% end %>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="content_p android-content mdl-layout__content">
+  <!-- Contenido -->
+  <div class="contenido-in form_us mdl-shadow--8dp">
+
+<%= form_with(model: kpi, local: true) do |f| %>
   <% if kpi.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(kpi.errors.count, "error") %> prohibited this kpi from being saved:</h2>
@@ -11,22 +82,28 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :nombre %>
-    <%= form.text_area :nombre, id: :kpi_nombre %>
+  <div class="mdl-grid">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+      <%= f.text_field  :nombre, :class => 'mdl-textfield__input', :required => "required" %>
+      <label class="mdl-textfield__label" for="kpi_nombre">Nombre</label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+      <%= f.text_field  :descripcion, :class => 'mdl-textfield__input', :required => "required" %>
+      <label class="mdl-textfield__label" for="kpi_descripcion">Descripción</label>
+    </div>
+  </div>
+  <div class="mdl-grid">
+
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+      <%= f.text_field  :url, :class => 'mdl-textfield__input', :required => "required" %>
+      <label class="mdl-textfield__label" for="kpi_url">URL</label>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :descripcion %>
-    <%= form.text_area :descripcion, id: :kpi_descripcion %>
-  </div>
 
-  <div class="field">
-    <%= form.label :url %>
-    <%= form.text_area :url, id: :kpi_url %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
+
+</div>
+</div>
