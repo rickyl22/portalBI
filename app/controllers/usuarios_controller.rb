@@ -1,6 +1,6 @@
 class UsuariosController < ApplicationController
   before_action :set_usuario,  only: [:show, :edit, :update, :destroy]
-  after_action :verify_policy_scoped, :except => :create
+  after_action :verify_policy_scoped, :except => [:create, :new]
   #after_action :verify_policy_scoped#, :except => [:index]
   #skip_after_action :verify_authorized#, :only => [:create, :allowed_params]
   #after_action :verify_authorized
@@ -30,7 +30,7 @@ class UsuariosController < ApplicationController
 
   def new
     @usuario = Usuario.new
-    #authorize @usuario
+    authorize @usuario
   end
 
   def edit
@@ -47,7 +47,7 @@ class UsuariosController < ApplicationController
   def update
     @usuario = Usuario.find(params[:id])
     # authorize @usuario
-    if @usuario.update_attributes(allowed_params)
+    if @usuario.update_attributes(usuario_params)
       redirect_to @usuario,  notice: 'Usuario actualizado'
     else
       render 'edit', error: 'Error actualizando usuario'
@@ -70,7 +70,7 @@ class UsuariosController < ApplicationController
       @usuario = policy_scope(Usuario).find(params[:id])
     end
 
-  def allowed_params
+  def usuario_params
     params.require(:usuario).permit(:estatus, :role_id, :usuario, :codigo_empleado, :nombre, :apellido, :correo, :cargo, :area, :supervisor, :gerencia, :telefono, :password_digest, :justificacion, :password, :password_confirmation)
   end
 
