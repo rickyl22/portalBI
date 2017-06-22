@@ -17,8 +17,9 @@ class SessionsController < ApplicationController
         redirect_to kpis_path
       elsif admin_min?
         redirect_to menus_path
+      else
+        redirect_to menus_path
       end
-      #redirect_to menus_path, notice: 'Login exitoso!'
       cookies[:usuario] = usuario.usuario
     else
       flash.now.alert = 'Correo o clave incorrecto'
@@ -43,6 +44,7 @@ class SessionsController < ApplicationController
   def destroy
     log_out
     cookies.delete(:usuario)
+    current_user = nil
     flash.now.alert = 'Logged out!'
     redirect_to root_url
   end

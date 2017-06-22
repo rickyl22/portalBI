@@ -113,50 +113,7 @@ td.text-right {
 
 <table ><tr>
 <td style="vertical-align: text-top;">
-  <table class="table-fill" style="table-layout: fixed;">
-  <tr> <th>Documentos</th></tr>
-  <tr ><td style="word-wrap: break-word;width:20vw">
-    <% @docs = @caso.documentos %>
-     <% @docs.each do |doc| %>
-        -)<%= doc.nombre %> <br> <%= doc.created_at.strftime('%d/%m/%Y %H:%M') %> <br>
-        <% if doc.estatus == "Borrado" %>
-           <b>Eliminado </b><br>
-        <% else %>
-        <%= link_to "Descargar", doc.attachment_url, :style => 'color:blue' %>
-          <% if cli? and doc.estatus != "Borrado" %>
-              <%= button_to "Borrar",  doc, method: :delete %>
-          <% else %>
-            <br>     
-          <% end %>
-        <% end %>
-     <% end %>
-
-  </td>
-  </tr>
-  
-    
-    <% if cli? and @caso.complejidad == "No Asignada" %>
-    <tr><td style="word-wrap: break-word;">
-  <%  @documento = Documento.new %>
-  <%= form_for @documento, multipart: true do |doc|  %>
-  Cargar documento: <br><%= doc.file_field :attachment %><br>
-  Solo se permiten archivos ('.xlsx' , '.txt', '.csv')
-  <%= doc.hidden_field :estatus, :value => "open" %>
-  <%= doc.hidden_field :nombre, :value => :attachment %><br>
-  <%= doc.hidden_field :caso_id, :value => @caso.id  %><br>
-  <%= doc.submit "Cargar" %>
-  <% end %>
-  </td></tr>
-<% elsif cli? %>
-   <tr><td><span style="font-size: 2.2em">&#9888</span>  <%= "No se puede cargar documentos luego de asignar el caso" %></td></tr>
-<% end %><br>
-  
-  </table>
-</td>
-
-
-<td style="vertical-align: text-top;">
-<table class="table-fill" style="width: 50vw;">
+  <table class="table-fill" style="width: 50vw;">
 <thead>
 <tr>
 <th class="text-left">Detalles del Caso</th>
@@ -264,6 +221,50 @@ Asignado a: <%= @caso.consultor_id == nil ? "No asignado" : @caso.consultor_id %
 <% end %><br>
 
 <%= link_to 'Volver', casos_path %>
+</td>
+
+
+<td style="vertical-align: text-top;">
+<table class="table-fill" style="table-layout: fixed;">
+  <tr> <th>Documentos</th></tr>
+  <tr ><td style="word-wrap: break-word;width:20vw">
+    <% @docs = @caso.documentos %>
+     <% @docs.each do |doc| %>
+        -)<%= doc.nombre %> <br> <%= doc.created_at.strftime('%d/%m/%Y %H:%M') %> <br>
+        <% if doc.estatus == "Borrado" %>
+           <b>Eliminado </b><br>
+        <% else %>
+        <%= link_to "Descargar", doc.attachment_url, :style => 'color:blue' %>
+          <% if cli? and doc.estatus != "Borrado" %>
+              <%= button_to "Borrar",  doc, method: :delete %>
+          <% else %>
+            <br>     
+          <% end %>
+        <% end %>
+     <% end %>
+
+  </td>
+  </tr>
+  
+    
+    <% if cli? and @caso.complejidad == "No Asignada" %>
+    <tr><td style="word-wrap: break-word;">
+  <%  @documento = Documento.new %>
+  <%= form_for @documento, multipart: true do |doc|  %>
+  Cargar documento: <br><%= doc.file_field :attachment %><br>
+  Solo se permiten archivos ('.xlsx' , '.txt', '.csv')
+  <%= doc.hidden_field :estatus, :value => "open" %>
+  <%= doc.hidden_field :nombre, :value => :attachment %><br>
+  <%= doc.hidden_field :caso_id, :value => @caso.id  %><br>
+  <%= doc.submit "Cargar" %>
+  <% end %>
+  </td></tr>
+<% elsif cli? %>
+   <tr><td><span style="font-size: 2.2em">&#9888</span>  <%= "No se puede cargar documentos luego de asignar el caso" %></td></tr>
+<% end %><br>
+  
+  </table>
+
 </td><td style="vertical-align: text-top;width: 10vw">
 <% if !cli? %>
 <table class="table-fill" style="table-layout: fixed;width: 20vw" >

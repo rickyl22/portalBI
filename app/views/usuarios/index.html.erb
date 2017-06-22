@@ -2,7 +2,7 @@
   <div class="contenido-in">
     <% @usuarios.each do |usuario| %>
         <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
-          <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us">
+          <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us" style="word-wrap: break-word;">
             <%= "Cod: "+usuario.codigo_empleado %>
             </br>
             <%= usuario.role.nombre %>

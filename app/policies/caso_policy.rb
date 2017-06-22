@@ -2,7 +2,7 @@ class CasoPolicy < ApplicationPolicy
 
   def index?
     p "usuario- poli -icasos"
-    p "EL ROL "+rol.inspect
+    p user
     return true if user.present? && rol != "admin_ind"
   end
 

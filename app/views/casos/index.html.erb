@@ -1,136 +1,128 @@
 <div class="content_p android-content mdl-layout__content">
-<style>
-
-  </style>
+<div class="contenido-in">
 <p id="notice"><%= notice %></p>
 
-<h1>Casos no asignados</h1>
-
-<table class="mdl-data-table mdl-js-data-table" style="width: 85%;">
-  <thead>
-    <tr>
-      <th>Caso</th>
-      <th>Titulo</th>
-      <th>Autor</th>
-      <th style="word-wrap:break-word;">Fecha de creación/asignación</th>
-      <th style="word-wrap:break-word;">Dias transcurridos desde:</th>
-      <th>Asignado a Infosoft</th>
-      <th>Complejidad</th>
-      <th>Estatus</th>
-      <th>Ver Casos</th>      
-    </tr>
-  </thead>
-
-  <tbody>
+<h1><%= admin? ? "Casos no asignados" : "Casos" %></h1>
     <% if admin? %>
       <% @casos_cur = @casos.where("infosoft = 'NO' and status != 'Cerrado' ") %>
+    <% elsif cons_lid? and params != nil %>
+      <% @casos_cur = @casos.where("consultor_id = ?", current_user.usuario) %>
     <% else %>
       <% @casos_cur = @casos %>
     <% end %>  
     <% @casos_cur.each do |caso| %>
-      <tr>
-        <td><%= caso.id %></td>
-        <td><%= caso.titulo %></td>
-        <td><%= Usuario.find(caso.usuario_id).usuario %></td>
-        <td>
-            Creacion: <%= caso.fecha_creado %><br>
-            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : caso.fech_asig %>
-        </td>
-        <td>
-            Creacion: <%= (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fecha_creado.mjd %> <br>
-            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fech_asig.mjd %>
-        </td>
-        <td><%= caso.infosoft %></td>
-        <td><%= caso.complejidad %></td>
-        <td><%= caso.status %></td>
-        <td><%= link_to 'Ver', caso %></td>
-      </tr>
+
+        <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
+          <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us" style="word-wrap: break-word;">
+            <%= "Caso:#000"+caso.id.to_s %>
+            </br>
+            <%= caso.titulo %>
+            </br>
+            <%= image_tag "admin.png", class:"icon_rol"%>
+          </header>
+          <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
+              <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
+                <p>
+                  <%= "Fecha requerido: "+caso.fecha_req.to_s %><br>
+                  <%= "GG: "+Usuario.find(caso.usuario_id).gerencia %><br>
+                  Cliente: <%= link_to ""+Usuario.find(caso.usuario_id).nombre+" "+Usuario.find(caso.usuario_id).apellido, Usuario.find(caso.usuario_id) %>
+                </p>
+              </div>
+              <div class="mdl-card__actions us_cart_actions">
+                <a href="#" class="mdl-button us_detalle">Más detalles</a>
+                <div class="desplegable">
+                  <p>         
+                    <%= "Estatus: "+caso.status %><br>
+                    <%= "Complejidad: "+caso.complejidad %><br>
+                    Creado hace: <%= (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fecha_creado.mjd %> días<br>
+                    Asignado hace: <%= caso.fech_asig == nil ? "No asignada" : ((Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fech_asig.mjd).to_s + " días" %><br>
+                  </p>
+                </div>
+              </div>
+              <div class="cont_bottom">
+                <%= link_to 'Ver', caso %>
+              </div>
+          </div>
+          </section>
     <% end %>
-  </tbody>
-</table>
 <% if admin? %>
   <h1>Casos asignados</h1>
-  <table class="mdl-data-table mdl-js-data-table" style="width: 85%;">
-  <thead>
-    <tr>
-      <th>Caso</th>
-      <th>Titulo</th>
-      <th>Autor</th>
-      <th style="word-wrap:break-word;">Fecha de creación/asignación</th>
-      <th style="word-wrap:break-word;">Dias transcurridos desde:</th>
-      <th>Asignado a Infosoft</th>
-      <th>Complejidad</th>
-      <th>Estatus</th>
-      <th>Ver Casos</th>      
-    </tr>
-  </thead>
-
-  <tbody>
     <% @casos_cur = @casos.where(" status = 'En proceso' ") %>
     <% @casos_cur.each do |caso| %>
-      <tr>
-        <td><%= caso.id %></td>
-        <td><%= caso.titulo %></td>
-        <td><%= Usuario.find(caso.usuario_id).usuario %></td>
-        <td>
-            Creacion: <%= caso.fecha_creado %><br>
-            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : caso.fech_asig %>
-        </td>
-        <td>
-            Creacion: <%= (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fecha_creado.mjd %> <br>
-            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fech_asig.mjd %>
-        </td>
-        <td><%= caso.infosoft == nil ? "NO" : caso.infosoft %></td>
-        <td><%= caso.complejidad %></td>
-        <td><%= caso.status %></td>
-        <td><%= link_to 'Ver', caso %></td>
-      </tr>
+      <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
+          <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us" style="word-wrap: break-word;">
+            <%= "Caso:#000"+caso.id.to_s %>
+            </br>
+            <%= caso.titulo %>
+            </br>
+            <%= image_tag "admin.png", class:"icon_rol"%>
+          </header>
+          <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
+              <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
+                <p>
+                  <%= "Fecha requerido: "+caso.fecha_req.to_s %>
+                <br>
+                  <%= "GG: "+Usuario.find(caso.usuario_id).gerencia %><br>
+                  Cliente: <%= link_to ""+Usuario.find(caso.usuario_id).nombre+" "+Usuario.find(caso.usuario_id).apellido, Usuario.find(caso.usuario_id) %>
+                </p>
+              </div>
+              <div class="mdl-card__actions us_cart_actions">
+                <a href="#" class="mdl-button us_detalle">Más detalles</a>
+                <div class="desplegable">
+                  <p>
+                    <%= "Estatus: "+caso.status %><br>
+                    <%= "Complejidad: "+caso.complejidad %><br>
+                    Creado hace: <%= (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fecha_creado.mjd %> días<br>
+                    Asignado hace: <%= caso.fech_asig == nil ? "No asignada" : ((Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fech_asig.mjd).to_s + " días" %><br>
+                  </p>
+                </div>
+              </div>
+              <div class="cont_bottom">
+                <%= link_to 'Ver', caso %>
+              </div>
+          </div>
+          </section>
     <% end %>
-  </tbody>
-</table>
+  
   <h1>Casos cerrados</h1>
-<table class="mdl-data-table mdl-js-data-table" style="width: 85%;">
-  <thead>
-    <tr>
-      <th>Caso</th>
-      <th>Titulo</th>
-      <th>Autor</th>
-      <th style="word-wrap:break-word;">Fecha de creación/asignación</th>
-      <th style="word-wrap:break-word;">Dias transcurridos desde:</th>
-      <th>Asignado a Infosoft</th>
-      <th>Complejidad</th>
-      <th>Estatus</th>
-      <th>Ver Casos</th>      
-    </tr>
-  </thead>
-
-  <tbody>
     <% @casos_cur = @casos.where(" status = 'Cerrado' ") %>
     <% @casos_cur.each do |caso| %>
-      <tr>
-        <td><%= caso.id %></td>
-        <td><%= caso.titulo %></td>
-        <td><%= Usuario.find(caso.usuario_id).usuario %></td>
-        <td>
-            Creacion: <%= caso.fecha_creado %><br>
-            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : caso.fech_asig %><br>
-            Cierre: <%= caso.fecha_cerrado %>
-        </td>
-        <td>
-            Creacion: <%= (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fecha_creado.mjd %> <br>
-            Asignacion: <%= caso.fech_asig == nil ? "No asignada" : (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fech_asig.mjd %><br>
-            Cierre:  <%= (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fecha_cerrado.mjd %> 
-        </td>
-        <td><%= caso.infosoft == nil ? "NO" : caso.infosoft %></td>
-        <td><%= caso.complejidad %></td>
-        <td><%= caso.status %></td>
-        <td><%= link_to 'Ver', caso %></td>
-      </tr>
+      <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
+          <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us" style="word-wrap: break-word;">
+            <%= "Caso:#000"+caso.id.to_s %>
+            </br>
+            <%= caso.titulo %>
+            </br>
+            <%= image_tag "admin.png", class:"icon_rol"%>
+          </header>
+          <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
+              <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
+                <p>
+                  <%= "Fecha requerido: "+caso.fecha_req.to_s %><br>
+                  <%= "GG: "+Usuario.find(caso.usuario_id).gerencia %><br>
+                  Cliente: <%= link_to ""+Usuario.find(caso.usuario_id).nombre+" "+Usuario.find(caso.usuario_id).apellido, Usuario.find(caso.usuario_id) %>
+                </p>
+              </div>
+              <div class="mdl-card__actions us_cart_actions">
+                <a href="#" class="mdl-button us_detalle">Más detalles</a>
+                <div class="desplegable">
+                  <p>
+                    <%= "Estatus: "+caso.status %><br>
+                    <%= "Complejidad: "+caso.complejidad %><br>
+                    Creado hace: <%= (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fecha_creado.mjd %> días<br>
+                    Asignado hace: <%= caso.fech_asig == nil ? "No asignada" : ((Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fech_asig.mjd).to_s + " días"%> <br>
+                  </p>
+                </div>
+              </div>
+              <div class="cont_bottom">
+                <%= link_to 'Ver', caso %>
+              </div>
+          </div>
+          </section>
     <% end %>
-  </tbody>
-</table>
 <% end %>
 <br>
 
 <%= link_to 'Caso nuevo', new_caso_path %>
+</div>
 </div>

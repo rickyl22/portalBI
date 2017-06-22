@@ -22,7 +22,7 @@
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/home/noticias">Noticias</a>
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Nosotros</a>
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Proyectos</a>
-          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/login">Ingresar</a>
+          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/login"><%= current_user != nil ? "Cerrar sesion" :       "Ingresar" %></a>
         </nav>
       </div>
           <span class="android-mobile-title mdl-layout-title">
@@ -63,8 +63,8 @@
          <i class="material-icons list">grid_on</i>
         </span>
           <div id="mineria" class="sub-menu-container">
-            <a class="mdl-navigation__link" href="">Gestión de Casos</a>
-            <a class="mdl-navigation__link" href="">Crear Caso</a>
+            <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
+            <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
           </div>
           <!-- Gestion de usuarios de indicadores -->
         <span class="mdl-navigation__link menu" href="">
@@ -72,8 +72,8 @@
          <i class="material-icons list">group</i>
         </span>
           <div id="imin_usuarios" class="sub-menu-container">
-            <a class="mdl-navigation__link" href="">Crear</a>
-            <a class="mdl-navigation__link" href="">Aprobar</a>
+            <a class="mdl-navigation__link" href="/usuarios">Listar</a>
+            <a class="mdl-navigation__link" href="/usuarios/new">Crear</a>
           </div>
 
 
@@ -114,8 +114,8 @@
          <i class="material-icons list">group</i>
         </span>
         <div id="imin_usuarios" class="sub-menu-container">
-          <a class="mdl-navigation__link" href="">Listar</a>
-          <a class="mdl-navigation__link" href="">Crear</a>
+          <a class="mdl-navigation__link" href="/usuarios">Listar</a>
+          <a class="mdl-navigation__link" href="/usuarios/new">Crear</a>
         </div>
 
       <% elsif cons_lid? %>
@@ -126,18 +126,8 @@
         </span>
           <div id="mineria" class="sub-menu-container">
             <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
-            <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
+            <%= link_to "Mis casos", casos_path, :class => "mdl-navigation__link", :car => "1"  %>
           </div>
-          <!-- Gestion de usuarios de indicadores -->
-       <span class="mdl-navigation__link menu" href="">
-          Usuarios
-         <i class="material-icons list">group</i>
-        </span>
-          <div id="imin_usuarios" class="sub-menu-container">
-            <a class="mdl-navigation__link" href="">Listar</a>
-            <a class="mdl-navigation__link" href="">Crear</a>
-          </div>
-
       <% elsif cons? %>
           <!-- Menu para Portal de Gestion de Mineria -->
        <span class="mdl-navigation__link menu" href="">
@@ -145,19 +135,8 @@
          <i class="material-icons list">grid_on</i>
         </span>
           <div id="mineria" class="sub-menu-container">
-            <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
-            <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
-          </div>
-          <!-- Gestion de usuarios de indicadores -->
-       <span class="mdl-navigation__link menu" href="">
-          Usuarios
-         <i class="material-icons list">group</i>
-        </span>
-          <div id="imin_usuarios" class="sub-menu-container">
-            <a class="mdl-navigation__link" href="">Listar</a>
-            <a class="mdl-navigation__link" href="">Crear</a>
-          </div>
-
+            <a class="mdl-navigation__link" href="/casos">Mis Casos</a>
+          </div>          
       <% elsif cli? %>
        <!-- Menu para Portal de Gestion de Mineria -->
        <span class="mdl-navigation__link menu" href="">
@@ -165,18 +144,10 @@
          <i class="material-icons list">grid_on</i>
         </span>
           <div id="mineria" class="sub-menu-container">
-            <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
+            <a class="mdl-navigation__link" href="/casos">Mis Casos</a>
             <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
           </div>
-          <!-- Gestion de usuarios de indicadores -->
-       <span class="mdl-navigation__link menu" href="">
-          Usuarios
-         <i class="material-icons list">group</i>
-        </span>
-          <div id="imin_usuarios" class="sub-menu-container">
-            <a class="mdl-navigation__link" href="">Listar</a>
-            <a class="mdl-navigation__link" href="">Crear</a>
-          </div>
+      
       <% end %>
 
 

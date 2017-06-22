@@ -3,23 +3,23 @@ class CasosController < ApplicationController
   after_action :verify_policy_scoped, :only => [:index, :show]
   after_action :verify_authorized, :only => [:index, :create, :new, :show]
 
-  def iniciar
+  #def iniciar
     #session[:usuario_id] = 1
-    session[:usuario_tipo] = params[:user_tipo]
+   # session[:usuario_tipo] = params[:user_tipo]
 
-  end
+  #end
 
   # GET /casos
   def index
     @casos = policy_scope(Caso)
+    p "well wtfffffffffffffffffffffffffffffffffffffffff"
+    p params
     authorize @casos
   end
 
   # GET /casos/1
   def show
     @casos = policy_scope(Caso)
-    p "casos"
-    p @casos
     @comments = Comentario.all
     authorize @caso
   end

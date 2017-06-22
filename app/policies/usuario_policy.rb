@@ -11,7 +11,7 @@ class UsuarioPolicy < ApplicationPolicy
 
   def show?
     p "usuario- poli -show"
-    return true if user.present? && (rol == "admin" || rol.alias == "admin_ind" || rol == "admin_min")
+    return true if user.present? && (rol == "admin" || rol == "admin_ind" || rol == "admin_min")
   end
 
   def update?
