@@ -20,8 +20,8 @@
         <nav class="android-navigation mdl-navigation">
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/">Inicio</a>
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/home/noticias">Noticias</a>
-          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Nosotros</a>
-          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Proyectos</a>
+          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/home/nosotros">Nosotros</a>
+          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/home/proyectos">Proyectos</a>
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/login">Ingresar</a>
         </nav>
       </div>
@@ -48,13 +48,13 @@
       <!-- Opciones Administrador -->
       <% if admin? %>
           <!-- Menu para Portal de Gestion de Mineria -->
-       <span class="mdl-navigation__link menu" href="">
+       <span class="mdl-navigation__link menu" href="#">
           Indicadores
          <i class="material-icons list">grid_on</i>
         </span>
         <div id="mineria" class="sub-menu-container">
-          <a class="mdl-navigation__link" href="">Gestión de  Indicadores</a>
-          <a class="mdl-navigation__link" href="">Crear Indicador</a>
+          <a class="mdl-navigation__link" href="/kpis">Gestión de  Indicadores</a>
+          <a class="mdl-navigation__link" href="/kpis/new">Crear Indicador</a>
         </div>
 
         <span class="mdl-navigation__link menu" href="">
