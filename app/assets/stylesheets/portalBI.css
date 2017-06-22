@@ -1270,15 +1270,21 @@ body {
 .kpis-show{
     background-color: white;
     text-align: left;
-    padding: 30px;
+   /* padding: 30px;*/
+}
+.kpis-show p{
+    /* background-color: white;
+    color: white; */
+    padding: 20px 35px;
 }
 
 .dash_kpi iframe{
     width: 100%;
     height: 110vh;
+    border: 0px;
 }
 .kpi-k{
-    background-image: url("k_7.jpg");
+    background-image: url("kpi_1.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
