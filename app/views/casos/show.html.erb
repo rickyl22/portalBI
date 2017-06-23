@@ -197,7 +197,7 @@ td.text-right {
     <%= f.submit (@caso.infosoft == "NO" ? "Asignar Complejidad" : "Re-asignar Complejidad" ) %>
     <% end %><br>
     <%= form_for @caso, :url => {:action => "update"} do |f|%>
-    <%= f.select :status, [' Anulado','BI-Afectado','BI-Planificado','Cerrado','Iniciado','En Proceso'] %><br>
+    <%= f.select :status, [' Anulado','BI-Afectado','BI-Planificado','Iniciado','En Proceso', 'Cerrado'] %><br>
     <%= f.submit "Cambiar Estatus" %>
     <% end %>
   <% end %>
@@ -206,21 +206,21 @@ td.text-right {
 Asignado a: <%= @caso.consultor_id == nil ? "No asignado" : @caso.consultor_id %><br>
 <%= form_for @caso, :url => {:action => "update"} do |f|%>
 <% @lista = [] %>
-<% Usuario.where("role_id = 5").each do |u| %>
+<% Usuario.where("role_id in (5,4)").each do |u| %>
   <% @lista.append( u.usuario) %>
 <% end %>  
 <%= f.select :consultor_id, @lista  %>
 <%= f.submit "Asignar caso" %>
 <% end %>
 <% end %>
-<% if cons? %>
+<% if cons? or (cons_lid? and @caso.consultor_id == current_user.usuario)%>
 <%= form_for @caso, :url => {:action => "update"} do |f|%>
-    <%= f.select :status, [' Anulado','BI-Afectado','BI-Planificado','Cerrado','Iniciado','En Proceso'] %><br>
+    <br><%= f.select :status, ['Iniciado','En Proceso','Cerrado'] %><br>
     <%= f.submit "Cambiar Estatus" %>
 <% end %>
 <% end %><br>
 
-<%= link_to 'Volver', casos_path %>
+<%= link_to 'Volver', :back %>
 </td>
 
 

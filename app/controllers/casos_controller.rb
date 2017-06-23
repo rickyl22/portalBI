@@ -11,9 +11,13 @@ class CasosController < ApplicationController
 
   # GET /casos
   def index
+    @flag = 0
     @casos = policy_scope(Caso)
     p "well wtfffffffffffffffffffffffffffffffffffffffff"
     p params
+    if params[:flag] != nil
+      @flag = 1
+    end
     authorize @casos
   end
 
@@ -80,6 +84,10 @@ class CasosController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
+    def car_params
+        params.require(:car)
+    end
+
     def caso_params
       params.require(:caso).permit(:consultor_id, :act_tabla, :agrup, :altas, :arpu, :campos, :complejidad, :condiciones, :consultor, :especifique, :fech_asig, :fecha_creado, :fecha_req, :fecha_cerrado, :fijo, :im, :infosoft, :movil, :otro, :parque, :periodo_desde, :periodo_hasta, :phone, :pre_post, :recargas, :separacion, :status, :tipo_archivo, :tipo_caso, :titulo, :tlv, :tv, :usuario_id)
     end

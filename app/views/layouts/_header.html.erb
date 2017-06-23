@@ -126,7 +126,8 @@
         </span>
           <div id="mineria" class="sub-menu-container">
             <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
-            <%= link_to "Mis casos", casos_path, :class => "mdl-navigation__link", :car => "1"  %>
+            <a class="mdl-navigation__link" href="/casos?flag=1">Mis Casos</a>
+            <!--%= link_to "Mis casos", casos_path, :class => "mdl-navigation__link", :car => "1"  %-->
           </div>
       <% elsif cons? %>
           <!-- Menu para Portal de Gestion de Mineria -->

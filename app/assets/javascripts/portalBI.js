@@ -1,11 +1,25 @@
 var openMenu = "";
+var clicked = 0;
+
+function foo(thiss) {
+  $(thiss).next().toggle(1000);
+
+  }
 
 $(document).ready(function() {
-    /*FUNCION PARA CONTRAER Y DESPLEGAR DETALLES*/
+    /*FUNCION PARA CONTRAER Y DESPLEGAR DETALLES
     $(".us_detalle").click(function(){
-        console.log("entra aca");
-        $(this).next().toggle(1000);
-    });
+        
+        if (clicked == 0){
+            console.log("0000");
+            $(this).next().show(1000);
+            clicked = 1;
+        }else{
+            console.log("11111");
+            $(this).next().hide(1000);
+            clicked = 0;
+        }
+    });*/
 
     /*FUNCION PARA VISUALIZAR-OCULTAR SUBMENU*/
     $(".menu").click(function() {
