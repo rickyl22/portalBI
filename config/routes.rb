@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :historials
   resources :documentos
   resources :casos
   resources :comentarios

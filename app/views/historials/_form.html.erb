@@ -1,0 +1,42 @@
+<%= form_with(model: historial, local: true) do |form| %>
+  <% if historial.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(historial.errors.count, "error") %> prohibited this historial from being saved:</h2>
+
+      <ul>
+      <% historial.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :evento %>
+    <%= form.text_field :evento, id: :historial_evento %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fecha %>
+    <%= form.datetime_select :fecha, id: :historial_fecha %>
+  </div>
+
+  <div class="field">
+    <%= form.label :usuario_id %>
+    <%= form.number_field :usuario_id, id: :historial_usuario_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :estatus %>
+    <%= form.text_field :estatus, id: :historial_estatus %>
+  </div>
+
+  <div class="field">
+    <%= form.label :caso_id %>
+    <%= form.text_field :caso_id, id: :historial_caso_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

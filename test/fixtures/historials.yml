@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  evento: MyString
+  fecha: 2017-06-25 10:54:09
+  usuario_id: 1
+  estatus: MyString
+  caso: one
+
+two:
+  evento: MyString
+  fecha: 2017-06-25 10:54:09
+  usuario_id: 1
+  estatus: MyString
+  caso: two

@@ -1,0 +1,33 @@
+<div class="content_p android-content mdl-layout__content">
+  <!-- Contenido -->
+  <div class="contenido-in ">
+    <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
+      <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us">
+        <%= "Cod: #000"+@caso.id.to_s %>
+        </br>
+        <%= @caso.titulo %>
+        </br>
+        <%= image_tag "admin.png", class:"icon_rol"%>
+      </header>
+      <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
+        <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
+        <% @last = " " %>
+        <b>Historial:</b><br><br>
+        <% @historials.each do |hist| %>      
+            &nbsp<%= "("+hist.fecha.strftime("%d/%m/%Y %H:%M")+") "+hist.evento %>
+            <% @last = hist.estatus %>
+            </br>
+        <% end %>
+        &nbsp<b>......</b>
+        </div>
+           
+
+      </div>
+
+
+    </section>
+    </div>
+  <%= link_to 'Regresar', :back %>
+
+
+</div>

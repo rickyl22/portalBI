@@ -2,7 +2,6 @@ class CasosController < ApplicationController
   before_action :set_caso, only: [:show, :edit, :update, :destroy]
   after_action :verify_policy_scoped, :only => [:index, :show]
   after_action :verify_authorized, :only => [:index, :create, :new, :show]
-
   #def iniciar
     #session[:usuario_id] = 1
    # session[:usuario_tipo] = params[:user_tipo]
@@ -48,6 +47,8 @@ class CasosController < ApplicationController
     @string = @string[0...-3]
     authorize @caso
     if current_user.casos.create(caso_params.merge(:campos => @string))
+      current_user.casos.order("created_at").last.historial.create(:evento => "Creacion del caso", :usuario_id => current_user.id, :fecha => Time.now, :estatus => "Esperando asignacion de complejidad" )
+
       redirect_to @caso, notice: 'Caso creado satisfactoriamente'
     else
       render :new
@@ -56,12 +57,23 @@ class CasosController < ApplicationController
 
   # PATCH/PUT /casos/1
   def update
-
+    @estatus = ""
+    if params[:caso][:status] != nil
+      if params[:caso][:complejidad] != nil
+        @estatus = "" + params[:estatus] + params[:caso][:complejidad]
+      else
+        @estatus = "" + params[:estatus] + params[:caso][:status]
+      end
+    else
+       @estatus = params[:estatus]
+    end
     @asig = @caso.complejidad == "No Asignada"
+    
     if params[:caso][:status] == "Cerrado"
        params[:caso][:fecha_cerrado] = Date.today
     end
     if @caso.update(caso_params)
+      @caso.historial.create(:evento => @estatus, :fecha => Time.now, :usuario_id => current_user.id)
       if @asig and caso_params[:complejidad] != "No Asignada"
           #AsignadoMailer.asignar(1,2,3,"ricardolira48@hotmail.com").deliver  
       end  

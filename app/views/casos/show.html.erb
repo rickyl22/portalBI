@@ -185,6 +185,7 @@ td.text-right {
     <% if (@caso.complejidad == "Bajo" and @reapertura <= 1) or (@caso.complejidad == "Medio" and @reapertura <= 2) or (@caso.complejidad == "Alto" and @reapertura <= 4) or (@caso.complejidad == "Urgente" and @reapertura <= 1) %>
     <%= form_for @caso, :url => {:action => "update"} do |f|%>
     <%= f.hidden_field :status, :value => "En Proceso" %>
+    <%= hidden_field_tag :estatus, "Caso reabierto por Administrador, nuevo estatus: " %>
     <%= f.submit "Reabrir caso" %>
     <% end %>
     <% end %>
@@ -194,10 +195,12 @@ td.text-right {
     <%= f.hidden_field :status, :value => "En Proceso" %>
     <%= f.hidden_field :infosoft, :value => "SI" %>
     <%= f.hidden_field :fech_asig, :value => Time.now %>
+    <%= hidden_field_tag :estatus, "Asignada complejiad del caso por Aministrador a: " %>
     <%= f.submit (@caso.infosoft == "NO" ? "Asignar Complejidad" : "Re-asignar Complejidad" ) %>
     <% end %><br>
     <%= form_for @caso, :url => {:action => "update"} do |f|%>
     <%= f.select :status, [' Anulado','BI-Afectado','BI-Planificado','Iniciado','En Proceso', 'Cerrado'] %><br>
+    <%= hidden_field_tag :estatus, "Actualizacion de estatus a: " %>
     <%= f.submit "Cambiar Estatus" %>
     <% end %>
   <% end %>
@@ -210,17 +213,19 @@ Asignado a: <%= @caso.consultor_id == nil ? "No asignado" : @caso.consultor_id %
   <% @lista.append( u.usuario) %>
 <% end %>  
 <%= f.select :consultor_id, @lista  %>
+<%= hidden_field_tag :estatus, "Caso asignado a Consultor" %>
 <%= f.submit "Asignar caso" %>
 <% end %>
 <% end %>
 <% if cons? or (cons_lid? and @caso.consultor_id == current_user.usuario)%>
 <%= form_for @caso, :url => {:action => "update"} do |f|%>
     <br><%= f.select :status, ['Iniciado','En Proceso','Cerrado'] %><br>
+    <%= hidden_field_tag :estatus, "Actualizacion de estatus a: " %>
     <%= f.submit "Cambiar Estatus" %>
 <% end %>
 <% end %><br>
 
-<%= link_to 'Volver', :back %>
+<%= link_to 'Volver', casos_path %>
 </td>
 
 

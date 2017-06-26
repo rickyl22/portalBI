@@ -6,10 +6,8 @@
     <% if admin? %>
       <% @casos_cur = @casos.where("infosoft = 'NO' and status != 'Cerrado' ") %>
     <% elsif cons_lid? and @flag == 1 %>
-    <% p "aqui dodoiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiaaa" %>
       <% @casos_cur = @casos.where("consultor_id = ?", current_user.usuario) %>
     <% elsif cons_lid? %>
-      <% p "aqui dodoiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii" %>
       <% @casos_cur = @casos.where(" consultor_id is NULL ") %>
     <% else %>
       <% @casos_cur = @casos %>
@@ -44,7 +42,12 @@
                 </div>
               </div>
               <div class="cont_bottom">
-                <%= link_to 'Ver', caso %>
+                <%= link_to  caso, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+                    <i class="material-icons">settings</i>
+                <% end %>
+                <%= link_to  "/historials?caso="+caso.id.to_s, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+                    <i class="material-icons">list</i>
+                <% end %>
               </div>
           </div>
           </section>
@@ -87,7 +90,12 @@
                 </div>
               </div>
               <div class="cont_bottom">
-                <%= link_to 'Ver', caso %>
+                <%= link_to  caso, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+                    <i class="material-icons">settings</i>
+                <% end %>
+                <%= link_to  "/historials?caso="+caso.id.to_s, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+                    <i class="material-icons">list</i>
+                <% end %>
               </div>
           </div>
           </section>
@@ -124,7 +132,12 @@
                 </div>
               </div>
               <div class="cont_bottom">
-                <%= link_to 'Ver', caso %>
+                <%= link_to  caso, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+                    <i class="material-icons">settings</i>
+                <% end %>
+                <%= link_to  "/historials?caso="+caso.id.to_s, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+                    <i class="material-icons">list</i>
+                <% end %>
               </div>
           </div>
           </section>
