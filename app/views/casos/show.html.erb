@@ -247,7 +247,6 @@ Asignado a: <%= @caso.consultor_id == nil ? "No asignado" : @caso.consultor_id %
           <% end %>
         <% end %>
      <% end %>
-
   </td>
   </tr>
   
@@ -257,12 +256,16 @@ Asignado a: <%= @caso.consultor_id == nil ? "No asignado" : @caso.consultor_id %
   <%  @documento = Documento.new %>
   <%= form_for @documento, multipart: true do |doc|  %>
   Cargar documento: <br><%= doc.file_field :attachment %><br>
-  Solo se permiten archivos ('.xlsx' , '.txt', '.csv')
+  <% if !flash[:notice].blank? %>
+  <b style="color: red;"><%= flash[:notice] %></b>
+<% end %>
   <%= doc.hidden_field :estatus, :value => "open" %>
   <%= doc.hidden_field :nombre, :value => :attachment %><br>
   <%= doc.hidden_field :caso_id, :value => @caso.id  %><br>
   <%= doc.submit "Cargar" %>
   <% end %>
+
+
   </td></tr>
 <% elsif cli? %>
    <tr><td><span style="font-size: 2.2em">&#9888</span>  <%= "No se puede cargar documentos luego de asignar el caso" %></td></tr>

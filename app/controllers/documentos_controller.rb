@@ -26,16 +26,18 @@ class DocumentosController < ApplicationController
   # POST /documentos
   # POST /documentos.json
   def create
-    #@documento = Documento.new(documento_params)
+    
     params[:documento][:nombre] = params[:documento][:attachment].original_filename
     p params[:documento][:attachment].original_filename
     @caso = Caso.find(documento_params[:caso_id])
-      if @caso.documentos.create(documento_params)
+    @documento = Documento.new(documento_params)
+      if @documento.save 
         p "a no pues y entonssssssssssssssssssssssssssssssssss"
+        p @documento.errors
         redirect_back(fallback_location:root_path)
       else
         p "vea pues"
-        redirect_back(fallback_location:root_path, notice: "fuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu") 
+        redirect_back(fallback_location:root_path, notice: "Solo se permiten archivos ('.xlsx' , '.txt', '.csv')") 
       end
     
   end

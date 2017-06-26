@@ -3,7 +3,7 @@ class HistorialPolicy < ApplicationPolicy
   def index?
     p "usuario- poli -icasos"
     p user
-    return true if user.present? && rol != "admin_ind"
+    return true if user.present? 
   end
 
   def new
