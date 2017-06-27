@@ -4,7 +4,8 @@ class MenusController < ApplicationController
   skip_after_action :verify_authorized
 
   def index
-
+    @usuario = Usuario.find(current_user.id)
+    @usuarios_pendientes = Usuario.where("estatus = ?", "Pendiente")
 
   end
 

@@ -41,8 +41,7 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized
-    p "ENTRA a rechazar usuario"
-    redirect_to login_path, notice: 'Debe iniciar sesión para acceder al sistema'
+    redirect_to login_path, alert: 'Debe iniciar sesión para acceder al sistema'
   end
 
 

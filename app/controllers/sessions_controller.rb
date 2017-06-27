@@ -1,14 +1,11 @@
 class SessionsController < ApplicationController
   skip_after_action :verify_policy_scoped
   skip_after_action :verify_authorized
-  layout 'layout'
   def index
   end
 
   def create
-    p "ACA??"
     usuario = Usuario.where("usuario = ?",params[:usuario]).first
-    p"USUARIO "+usuario.inspect
     if usuario && (usuario.estatus == "Aprobado") && usuario.authenticate(params[:password])
       log_in usuario
       if admin?

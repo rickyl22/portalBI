@@ -17,7 +17,7 @@ class UsuariosController < ApplicationController
   end
 
   def create
-    @usuario = Usuario.create(allowed_params)
+    @usuario = Usuario.create(usuario_params)
     authorize @usuario
     if @usuario.save
       p "Usuario d ela sesion create "+session[:usuario_id].inspect
@@ -47,7 +47,7 @@ class UsuariosController < ApplicationController
   def update
     @usuario = Usuario.find(params[:id])
     # authorize @usuario
-    if @usuario.update_attributes(usuario_params)
+    if @usuario.update_attributes(set_usuario)
       redirect_to @usuario,  notice: 'Usuario actualizado'
     else
       render 'edit', error: 'Error actualizando usuario'
