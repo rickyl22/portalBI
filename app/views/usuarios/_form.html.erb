@@ -1,8 +1,23 @@
 <div class="content_p android-content mdl-layout__content">
   <!-- Contenido -->
-  <h2>Editar Usuario</h2>
+  <% if @usuario.new_record? %>
+      <h2>Agregar Usuario</h2>
+  <% else %>
+      <h2>Editar Usuario</h2>
+  <% end %>
+
   <div class="contenido-in form_us mdl-shadow--8dp">
     <%= form_for @usuario do |f|  %>
+        <% if @usuario.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@usuario.errors.count, "error") %> No se pudo crear el Usuario:</h2>
+              <ul>
+                <% @usuario.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
         <div class="mdl-grid">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
             <%= f.text_field  :usuario, :class => 'mdl-textfield__input', :required => "required" %>
@@ -23,14 +38,14 @@
 
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
             <%= f.text_field  :apellido, :class => 'mdl-textfield__input', :required => "required" %>
-            <label class="mdl-textfield__label" for="apellido">Código</label>
+            <label class="mdl-textfield__label" for="apellido">Apellido</label>
           </div>
         </div>
 
         <div class="mdl-grid">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
             <%= f.text_field  :correo, :class => 'mdl-textfield__input', :required => "required" %>
-            <label class="mdl-textfield__label" for="correo">Nombre</label>
+            <label class="mdl-textfield__label" for="correo">Correo</label>
           </div>
 
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
@@ -47,7 +62,7 @@
 
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
             <%= f.text_field  :supervisor, :class => 'mdl-textfield__input', :required => "required" %>
-            <label class="mdl-textfield__label" for="supervisor">Cargo</label>
+            <label class="mdl-textfield__label" for="supervisor">Supervisor</label>
           </div>
         </div>
 
@@ -64,13 +79,16 @@
         </div>
 
         <div class="mdl-grid">
+
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-            <%= f.select "estatus", "<option>Pendiente</option><option>Aprobado</option><option>Rechazar</option>".html_safe, :class => 'mdl-textfield__input', :required => "required" %>
-            <label class="mdl-textfield__label" for="estatus">estatus</label>
+            <%= f.select :estatus, ['Aprobado', 'Rechazado', 'Pendiente'],{prompt: ''}, :required => "required", :class => "mdl-textfield__input" %>
+            <label class="mdl-textfield__label" for="estatus">Estatus</label>
           </div>
+
+
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
             <%= f.collection_select :role_id, Role.all, :id, :nombre, {:prompt => ''}, :class => 'mdl-textfield__input', :required => "required" %>
-            <label class="mdl-textfield__label" for="role_id">rol</label>
+            <label class="mdl-textfield__label" for="role_id">Rol</label>
           </div>
         </div>
 
