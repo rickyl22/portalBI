@@ -18,7 +18,7 @@
       <!-- Navigation -->
       <div class="android-navigation-container">
         <nav class="android-navigation mdl-navigation">
-          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/">Inicio</a>
+          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/">Inicio --- </a>
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/home/noticias">Noticias</a>
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/home/nosotros">Nosotros</a>
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/home/proyectos">Proyectos</a>
@@ -47,10 +47,20 @@
     <nav class="mdl-navigation">
       <!-- Opciones Administrador -->
       <% if admin? %>
+          <!-- Mi cuenta -->
+       <span class="mdl-navigation__link menu" href="#">
+          Mi Cuenta
+         <i class="material-icons list">face</i>
+        </span>
+          <div id="mineria" class="sub-menu-container">
+            <a class="mdl-navigation__link" href="/menus">Gestión de  cuenta</a>
+        </div>
+
+
           <!-- Menu para Portal de Gestion de Mineria -->
        <span class="mdl-navigation__link menu" href="#">
           Indicadores
-         <i class="material-icons list">grid_on</i>
+         <i class="material-icons list">trending_up</i>
         </span>
         <div id="mineria" class="sub-menu-container">
           <a class="mdl-navigation__link" href="/kpis">Gestión de  Indicadores</a>
@@ -71,7 +81,7 @@
          <i class="material-icons list">group</i>
         </span>
           <div id="imin_usuarios" class="sub-menu-container">
-            <a class="mdl-navigation__link" href="">Crear</a>
+            <a class="mdl-navigation__link" href="/usuarios/new">Crear</a>
             <a class="mdl-navigation__link" href="">Aprobar</a>
           </div>
 
@@ -80,7 +90,7 @@
          <!-- Gestion de indicadores -->
          <span class="mdl-navigation__link menu" href="">
             Indicadores
-           <i class="material-icons list">timeline</i>
+            <i class="material-icons list">trending_up</i>
           </span>
           <div id="indicadores" class="sub-menu-container">
             <a class="mdl-navigation__link" href="">Listar</a>
@@ -178,8 +188,18 @@
 
     </nav>
 
-    <!-- Alertas -->
-    <% if flash[:notice] %>
+  </div>
+
+  <% if logged_in? %>
+      <!-- Icon menus lateral -->
+      <div class="android-content mdl-layout__content">
+        <a name="top"></a>
+      </div>
+
+  <% end %>
+
+  <!-- Alertas -->
+    <% if flash[:notice]  %>
         <div class="notice mdl-shadow--16dp"><%= flash[:notice] %></div>
     <% end %>
     <% if flash[:alert] %>
@@ -188,11 +208,6 @@
     <% if flash[:error] %>
         <div class="alert mdl-shadow--16dp"><%= flash[:error] %></div>
     <% end %>
-  </div>
 
-  <!-- Icon menus lateral -->
-  <div class="android-content mdl-layout__content">
-    <a name="top"></a>
-  </div>
 
 </div>

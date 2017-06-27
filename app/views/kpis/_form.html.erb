@@ -1,15 +1,18 @@
 <div class="content_p android-content mdl-layout__content">
   <!-- Contenido -->
-  <h2>Agregar Indicador</h2>
+  <% if @kpi.new_record? %>
+      <h2>Agregar Indicador</h2>
+  <% else %>
+      <h2>Editar Indicador</h2>
+  <% end %>
   <div class="contenido-in form_us mdl-shadow--8dp">
   <!-- Contenido -->
     <%= form_for @kpi do |f|  %>
-        <% if kpi.errors.any? %>
+        <% if @kpi.errors.any? %>
             <div id="error_explanation">
-              <h2><%= pluralize(kpi.errors.count, "error") %> No se pudo crear el Indicador:</h2>
-
+              <h2><%= pluralize(@kpi.errors.count, "error") %> No se pudo crear el Indicador:</h2>
               <ul>
-                <% kpi.errors.full_messages.each do |message| %>
+                <% @kpi.errors.full_messages.each do |message| %>
                     <li><%= message %></li>
                 <% end %>
               </ul>
