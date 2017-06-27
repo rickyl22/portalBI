@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   get "home/index"
   get "home/noticias"
+  get "home/nosotros"
+  get "home/proyectos"
   root :to => "home#index" #Pagina de inicio de la App
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
