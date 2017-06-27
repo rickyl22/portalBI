@@ -1105,8 +1105,9 @@ body {
 .material-icons.list {
     position: absolute;
     right: 10px;
-    font-size: 18px;
+    font-size: 22px;
     margin-right: initial;
+    padding-right: 25px;
 }
 #panel-oculto {
     display: none;
@@ -1127,8 +1128,6 @@ body {
 .contenido-in{
     width: 60%;
     margin-top: 50px;
-
-    /*padding: 100px 250px;*/
 }
 .mdl-card__supporting-text-im{
     text-align: left;
@@ -1261,8 +1260,8 @@ body {
     background-color: #f3f3f3;
 }
 .mdl-textfield.is-invalid .mdl-textfield__input,.mdl-textfield__label{
-    border-color: lightgrey!important;
-    color: lightgrey!important;
+    border-color: darkgray!important;
+    color: darkgray!important;
     font-size: 14px!important;
 }
 
@@ -1292,4 +1291,21 @@ body {
  /*  modificando iframe de kibana*/
 .gridster{
     background-color: black;
+}
+
+/* MENU ADMIN*/
+.contenido-menu{
+    padding: 35px!important;
+    background-color: white;
+}
+.usuario_pendientes h5{
+    text-align: left;
+    padding-top: 20px;
+}
+.demo-list-three {
+    width: 100%;
+    padding: 0px 20px;
+}
+.demo-list-three li span{
+    text-align: left;
 }
