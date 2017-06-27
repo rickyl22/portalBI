@@ -54,7 +54,7 @@ module ApplicationHelper
     @current_user = nil
   end
   def require_authentication
-    current_user || redirect_to(home_index_path, :alert => 'El acceso sin sessions esta restrigido')
+    current_user || redirect_to(home_index_path, :alert => 'Debe iniciar sesión para ingresar al sistema')
   end
 
 end
