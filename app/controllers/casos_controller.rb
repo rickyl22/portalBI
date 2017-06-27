@@ -12,8 +12,6 @@ class CasosController < ApplicationController
   def index
     @flag = 0
     @casos = policy_scope(Caso)
-    p "well wtfffffffffffffffffffffffffffffffffffffffff"
-    p params
     if params[:flag] != nil
       @flag = 1
     end

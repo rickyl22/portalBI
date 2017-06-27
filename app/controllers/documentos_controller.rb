@@ -32,12 +32,9 @@ class DocumentosController < ApplicationController
     @caso = Caso.find(documento_params[:caso_id])
     @documento = Documento.new(documento_params)
       if @documento.save 
-        p "a no pues y entonssssssssssssssssssssssssssssssssss"
-        p @documento.errors
         redirect_back(fallback_location:root_path)
       else
-        p "vea pues"
-        redirect_back(fallback_location:root_path, notice: "Solo se permiten archivos ('.xlsx' , '.txt', '.csv')") 
+        redirect_back(fallback_location:root_path, notice: "Solo se permiten archivos ('.xlsx' , '.txt', '.csv', '.doc')") 
       end
     
   end

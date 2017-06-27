@@ -1,13 +1,14 @@
 class HistorialsController < ApplicationController
   before_action :set_historial, only: [:show, :edit, :update, :destroy]
   skip_after_action :verify_policy_scoped
-  skip_after_action :verify_authorized
+  after_action :verify_authorized, only: [:index]
 
   # GET /historials
   # GET /historials.json
   def index
     @caso = Caso.find(params[:caso])
     @historials = @caso.historial
+    authorize @historials
   end
 
   # GET /historials/1

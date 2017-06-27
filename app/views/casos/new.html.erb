@@ -184,7 +184,7 @@ td.text-right {
      Titulo: <%= form.text_field :titulo, id: :caso_titulo, :required => true %><br>
      <% @meses =  ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'] %>
      Fecha requerido:<br>
-     <%= form.date_field :fecha_req, id: :caso_fecha_req,  min: Time.now, :onkeydown =>"return false", :required => true  %>
+     <%= form.date_field :fecha_req, id: :caso_fecha_req,  min: (Time.now.to_date + 3), :onkeydown =>"return false", :required => true  %>
      <br>
      Periodo: desde<br>
      <%= form.date_field :periodo_desde, id: :caso_periodo_desde, :class => "rango_desde",  :onkeydown =>"return false", :required => true %><br>
