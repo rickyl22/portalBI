@@ -34,7 +34,7 @@ class DocumentosController < ApplicationController
       if @documento.save 
         redirect_back(fallback_location:root_path)
       else
-        redirect_back(fallback_location:root_path, notice: "Solo se permiten archivos ('.xlsx' , '.txt', '.csv', '.doc')") 
+        redirect_back(fallback_location:root_path, notice: @documento.errors.messages[:attachment][0]) 
       end
     
   end

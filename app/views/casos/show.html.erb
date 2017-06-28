@@ -251,7 +251,7 @@ Asignado a: <%= @caso.consultor_id == nil ? "No asignado" : @caso.consultor_id %
   </tr>
   
     
-    <% if cli? and @caso.complejidad == "No Asignada" %>
+    <% if cli? and @caso.complejidad == "No Asignada" and @caso.documentos.where("estatus != 'Borrado'").length < 5 %>
     <tr><td style="word-wrap: break-word;">
   <%  @documento = Documento.new %>
   <%= form_for @documento, multipart: true do |doc|  %>
@@ -267,6 +267,8 @@ Asignado a: <%= @caso.consultor_id == nil ? "No asignado" : @caso.consultor_id %
 
 
   </td></tr>
+<% elsif cli? and @caso.complejidad == "No Asignada" %>
+   <tr><td><span style="font-size: 2.2em">&#9888</span>  <%= "Solo se permite cargar un maximo de 5 documentos" %></td></tr>
 <% elsif cli? %>
    <tr><td><span style="font-size: 2.2em">&#9888</span>  <%= "No se puede cargar documentos luego de asignar el caso" %></td></tr>
 <% end %><br>

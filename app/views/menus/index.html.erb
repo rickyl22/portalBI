@@ -10,11 +10,14 @@
 <div class="mdl-layout mdl-js-layout">
 <!-- Contenido -->
   <div class="android-content mdl-layout__content">
-    <div class="android-be-together-section mdl-typography--text-center">
-      <div class="logo-font android-slogan"><%= "Bienvenido "+current_user.nombre+" "+current_user.apellido+"!" %></div>
-      <div class="logo-font android-create-character">
+    <div class="android-be-together-section mdl-typography--text-center"><br><br><br>
+      <% if notice != nil %>
+         <div class="notice mdl-shadow--16dp"><%= notice  %></div>
+      <% end %>
+      <div class="logo-font android-slogan"><% "Bienvenido "+current_user.nombre+" "+current_user.apellido+"!" %></div>
+      <!--div class="logo-font android-create-character">
         <a href=""><img src="assets/andy.png"> create your android character</a>
-      </div>
+      </div-->
 
       <a href="#screens">
         <button class="android-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">

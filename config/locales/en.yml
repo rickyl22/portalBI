@@ -32,4 +32,4 @@
 en:
   errors:
     messages:
-      extension_whitelist_error: 'My Custom Message'
+      extension_whitelist_error: "Solo se permiten archivos ('.xlsx' , '.txt', '.csv', '.doc')"
