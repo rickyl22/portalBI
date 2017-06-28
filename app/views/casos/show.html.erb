@@ -194,6 +194,7 @@ td.text-right {
     <%= f.select :complejidad, ['Bajo','Medio','Alto','Urgente'] %><br>
     <%= f.hidden_field :status, :value => "En Proceso" %>
     <%= f.hidden_field :infosoft, :value => "SI" %>
+    
     <%= f.hidden_field :fech_asig, :value => Time.now %>
     <%= hidden_field_tag :estatus, "Asignada complejiad del caso por Aministrador a: " %>
     <%= f.submit (@caso.infosoft == "NO" ? "Asignar Complejidad" : "Re-asignar Complejidad" ) %>
