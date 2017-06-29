@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
       log_in usuario
       if admin?
-        if Caso.where(" complejidad = 'No Asignada' and fecha_creado < ?", Time.now.to_date - 3).length > 0 
+        if Caso.where(" complejidad = 'No Asignada' and fecha_creado < ?", Time.now.to_date + 3).length > 0 
           redirect_to menus_path, notice: "Advertencia: Tiene casos con mas de 7 dias de creación sin complejidad asignada"
         else 
           redirect_to menus_path
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
       elsif admin_ind?
         redirect_to kpis_path
       elsif admin_min?
-        if Caso.where(" complejidad = 'No Asignada' and fecha_creado < ?", Time.now.to_date - 5).length > 0 
+        if Caso.where(" complejidad = 'No Asignada' and fecha_creado < ?", Time.now.to_date - 3).length > 0 
           redirect_to menus_path, notice: "Advertencia: Tiene casos con mas de 7 dias de creación sin complejidad asignada"
         else 
           redirect_to menus_path
