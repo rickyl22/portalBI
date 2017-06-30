@@ -1,5 +1,64 @@
 <div class="content_p android-content mdl-layout__content">
   <div class="contenido-in">
+    <% @usuarios = Usuario.where("estatus = 'Aprobado'") %>
+    <% @usuarios.each do |usuario| %>
+        <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
+          <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us" style="word-wrap: break-word;">
+            <%= "Cod: "+usuario.codigo_empleado %>
+            </br>
+            <%= usuario.role.nombre %>
+            </br>
+            <%= image_tag "admin.png", class:"icon_rol"%>
+          </header>
+          <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
+              <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
+                <h5>
+                  <%= "Nombre: "+usuario.nombre+" "+usuario.apellido %>
+                </h5>
+                <p>
+                  <%= "Cargo: "+usuario.cargo %>
+                </p>
+              </div>
+              <div class="mdl-card__actions us_cart_actions">
+                <a href="#" onclick="foo(this); return false;" class="mdl-button us_detalle">Más detalles</a>
+                <div class="desplegable">
+                  <p>
+                    <%= "Usuario: "+usuario.usuario %>
+                    </br>
+                    <%= "Área: "+usuario.area %>
+                    </br>
+                    <%= "Gerencia: "+usuario.gerencia %>
+                    </br>
+                    <%= "Télefono: "+usuario.telefono %>
+                    </br>
+                    <%= "Correo: "+usuario.correo %>
+                    </br>
+                    <%= "Supervisor: "+usuario.supervisor %>
+                    </br>
+                    <%= "Justificacioń: "+usuario.justificacion %>
+                    </br>
+                    <%= "Estatus: "+usuario.estatus %>
+                  </p>
+                </div>
+              </div>
+
+            <div class="cont_bottom">
+              <%= link_to  edit_usuario_path(usuario), class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do%>
+                  <i class="material-icons">edit</i>
+              <% end %>
+              <%= button_to usuario_path(usuario), class:"mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect",:method => "delete" do%>
+                  <i class="material-icons">delete</i>
+              <% end %>
+
+            </div>
+
+          </div>
+
+          </section>
+
+    <% end %>
+    <h1>Usuarios pendientes</h1>
+    <% @usuarios = Usuario.where("estatus != 'Aprobado'") %>
     <% @usuarios.each do |usuario| %>
         <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
           <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us" style="word-wrap: break-word;">

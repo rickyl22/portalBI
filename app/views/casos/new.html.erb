@@ -181,13 +181,13 @@ td.text-right {
 <tbody class="table-hover">
 <tr>
 <td class="text-left" style="max-width: 500px;word-wrap: break-word;">
-     Titulo: <%= form.text_field :titulo, id: :caso_titulo, :required => true %><br>
+     Titulo: <%= form.text_field :titulo, id: :caso_titulo, :required => true, :oninvalid => "this.setCustomValidity('Por favor complete este campo')", :oninput => "setCustomValidity('')" %><br>
      <% @meses =  ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'] %>
      Fecha requerido:<br>
-     <%= form.date_field :fecha_req, id: :caso_fecha_req,  min: (Time.now.to_date + 3), :onkeydown =>"return false", :required => true  %>
+     <%= form.date_field :fecha_req, id: :caso_fecha_req,  min: (Time.now.to_date + 3), :onkeydown =>"return false", :required => true, :oninvalid => "this.setCustomValidity('Por favor complete este campo')", :oninput => "setCustomValidity('')"  %>
      <br>
      Periodo: desde<br>
-     <%= form.date_field :periodo_desde, id: :caso_periodo_desde, :class => "rango_desde",  :onkeydown =>"return false", :required => true %><br>
+     <%= form.date_field :periodo_desde, id: :caso_periodo_desde, :class => "rango_desde",  :onkeydown =>"return false", :required => true, :oninvalid => "this.setCustomValidity('Por favor complete este campo')", :oninput => "setCustomValidity('')" %><br>
      hasta <br>
      <%= form.date_field :periodo_hasta, id: :caso_periodo_hasta, :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'], :class => "rango_fin", :disabled => true, :onkeydown =>"return false"  %><br>
      Delimitador:<br> <%= form.select :separacion, ['coma ( , )','punto y coma ( ; )', 'pipe ( | )'], id: :caso_separacion, :required => true %><br>
@@ -244,14 +244,14 @@ td.text-right {
       Otro <%= form.radio_button :agrup, "otro", id: :caso_agrup, :class => "espec_otro" %> 
       Especifique <%= form.text_field :agrup , id: :caso_agrup,:class => "espec", :disabled => true %><br><br>
 </td>
-<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= form.text_area :condiciones, id: :caso_condiciones, :required => true, :rows => "5", :width => "100%" %></td>
+<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= form.text_area :condiciones, id: :caso_condiciones, :required => true, :rows => "5", :width => "100%", :oninvalid => "this.setCustomValidity('Por favor complete este campo')", :oninput => "setCustomValidity('')" %></td>
 <td class="text-left" style="max-width: 300px;word-wrap: break-word;">
   <div id = "poll_choices">
 
      <div class="choiceForm">
      <%= label_tag "Campo" %>
      <br>
-     <%= text_field_tag "campos[]",nil, :required => true %>
+     <%= text_field_tag "campos[]",nil, :required => true, :oninvalid => "this.setCustomValidity('Por favor complete este campo')", :oninput => "setCustomValidity('')" %>
      <br>
     </div>
 

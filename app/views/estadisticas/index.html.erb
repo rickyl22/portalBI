@@ -1,0 +1,28 @@
+<div class="content_p android-content mdl-layout__content">
+  <div class="contenido-in">
+    
+    
+        <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
+          <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us" style="word-wrap: break-word;">
+            <%= "Cod: " %>
+            </br>
+            <%= image_tag "admin.png", class:"icon_rol"%>
+          </header>
+          <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
+              <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
+                <p>
+                  <% @usuarios = Usuario.where("role_id = 4 or role_id = 5") %>
+                  <% @usuarios.each do |usuario| %>
+                    <% @casos = Caso.where("consultor_id = ?",usuario.usuario) %>
+                    <%= ""+usuario.usuario+": "+@casos.length.to_s %><br>
+                  <% end %>
+                </p>
+              </div>
+
+          </div>
+
+          </section>
+
+    
+  </div>
+  </div>

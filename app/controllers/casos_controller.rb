@@ -66,7 +66,6 @@ class CasosController < ApplicationController
        @estatus = params[:estatus]
     end
     @asig = @caso.complejidad == "No Asignada"
-    
     if params[:caso][:status] == "Cerrado"
        params[:caso][:fecha_cerrado] = Date.today
     end
@@ -74,7 +73,12 @@ class CasosController < ApplicationController
       @caso.historial.create(:evento => @estatus, :fecha => Time.now, :usuario_id => current_user.id)
       if @asig and caso_params[:complejidad] != "No Asignada"
           #AsignadoMailer.asignar(1,2,3,"ricardolira48@hotmail.com").deliver  
-      end  
+      end 
+      if params[:caso][:status] != nil
+          if params[:caso][:status] == "BI-Afectado"
+            #AsignadoMailer.asignar(1,2,3,"ricardolira48@hotmail.com").deliver
+          end
+      end
       redirect_to @caso, notice: 'Caso was successfully updated.'
     else
       render :edit

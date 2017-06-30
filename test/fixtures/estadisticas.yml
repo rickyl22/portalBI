@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  descripcion: MyText
+  fecha_desde: 2017-06-30
+  fecha_hasta: 2017-06-30
+  cantidad: 1
+
+two:
+  descripcion: MyText
+  fecha_desde: 2017-06-30
+  fecha_hasta: 2017-06-30
+  cantidad: 1

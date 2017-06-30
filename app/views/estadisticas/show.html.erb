@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @estadistica.descripcion %>
+</p>
+
+<p>
+  <strong>Fecha desde:</strong>
+  <%= @estadistica.fecha_desde %>
+</p>
+
+<p>
+  <strong>Fecha hasta:</strong>
+  <%= @estadistica.fecha_hasta %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @estadistica.cantidad %>
+</p>
+
+<%= link_to 'Edit', edit_estadistica_path(@estadistica) %> |
+<%= link_to 'Back', estadisticas_path %>
