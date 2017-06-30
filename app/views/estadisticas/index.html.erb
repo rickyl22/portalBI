@@ -1,3 +1,6 @@
+<script src="https://code.highcharts.com/highcharts-3d.js" >
+
+</script>
 <div class="content_p android-content mdl-layout__content">
   <div class="contenido-in">
     
@@ -18,7 +21,7 @@
                   <% end %>
                 </p>
               </div>
-
+              <%= pie_chart Usuario.where("role_id = 4 or role_id = 5").group(:role_id).count, library: {chart: { options3d: {enabled: true,alpha: 45,beta: 0},plotOptions: {pie: {depth: 35}}}} %>
           </div>
 
           </section>

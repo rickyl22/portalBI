@@ -55,6 +55,6 @@ gem 'pundit'
 
 gem 'carrierwave', '~> 1.0'
 
-gem 'delayed_job'
-
 gem 'bcrypt'
+
+gem "chartkick"
