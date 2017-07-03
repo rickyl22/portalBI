@@ -6,6 +6,8 @@ class MenusController < ApplicationController
   def index
     @usuario = Usuario.find(current_user.id)
     @usuarios_pendientes = Usuario.where("estatus = ?", "Pendiente")
+    #@casos_recientes = Caso.where().ord
+    @indicadores_recientes = Kpi.where("limit")
 
   end
 
