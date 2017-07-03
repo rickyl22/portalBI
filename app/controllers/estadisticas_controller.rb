@@ -26,17 +26,13 @@ class EstadisticasController < ApplicationController
   # POST /estadisticas
   # POST /estadisticas.json
   def create
-    @estadistica = Estadistica.new(estadistica_params)
-
-    respond_to do |format|
-      if @estadistica.save
-        format.html { redirect_to @estadistica, notice: 'Estadistica was successfully created.' }
-        format.json { render :show, status: :created, location: @estadistica }
-      else
-        format.html { render :new }
-        format.json { render json: @estadistica.errors, status: :unprocessable_entity }
-      end
-    end
+    #@estadistica = Estadistica.new(estadistica_params)
+    @desde = params[:desde]
+    @hasta = params[:hasta]
+    p "fack"
+    p @desde
+    p @hasta
+    redirect_to "/estadisticas?desde="+@desde+"&hasta="+@hasta
   end
 
   # PATCH/PUT /estadisticas/1

@@ -207,13 +207,13 @@ td.text-right {
   <% end %>
 <% end %>
 <% if cons_lid? %>
-Asignado a: <%= @caso.consultor_id == nil ? "No asignado" : @caso.consultor_id %><br>
+Asignado a: <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("usuario = ?",@caso.consultor_id).first.nombre + " " +Usuario.where("usuario = ?",@caso.consultor_id).first.apellido) %><br>
 <%= form_for @caso, :url => {:action => "update"} do |f|%>
-<% @lista = [] %>
+<select name="caso[consultor_id]" id="caso_consultor_id">
 <% Usuario.where("role_id in (5,4)").each do |u| %>
-  <% @lista.append( u.usuario) %>
+  <option value="<%= u.usuario %>"><%= u.nombre+" "+u.apellido %></option>
 <% end %>  
-<%= f.select :consultor_id, @lista  %>
+</select>
 <%= hidden_field_tag :estatus, "Caso asignado a Consultor" %>
 <%= f.submit "Asignar caso" %>
 <% end %>
