@@ -7,14 +7,7 @@
           </span>
       <!-- Add spacer, to align navigation to the right in desktop -->
       <div class="android-header-spacer mdl-layout-spacer"></div>
-      <div class="android-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
-        <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
-          <i class="material-icons">search</i>
-        </label>
-        <div class="mdl-textfield__expandable-holder">
-          <input class="mdl-textfield__input" type="text" id="search-field">
-        </div>
-      </div>
+
       <!-- Navigation -->
       <div class="android-navigation-container">
         <nav class="android-navigation mdl-navigation">
@@ -22,20 +15,18 @@
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/home/noticias">Noticias</a>
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/home/nosotros">Nosotros</a>
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/home/proyectos">Proyectos</a>
-          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/login">Ingresar</a>
+          <% if logged_in? %>
+              <a class="mdl-navigation__link mdl-typography--text-uppercase btn-sesion" rel="nofollow" data-method="delete" href="/logout">Salir</a>
+              <%= link_to('Logout', logout_path, method: :delete) %>
+        <% else %>
+              <a class="mdl-navigation__link mdl-typography--text-uppercase btn-sesion" href="/login">Ingresar</a>
+          <% end %>
         </nav>
       </div>
           <span class="android-mobile-title mdl-layout-title">
             <%= image_tag "logo_telefonica.png", class: "android-logo-image" %>
           </span>
-      <!-- Boton para mas opciones -->
-      <button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
-        <i class="material-icons">more_vert</i>
-      </button>
-      <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect mdl-shadow--8dp"  for="more-button">
-        <li class="mdl-menu__item">Mi cuenta</li>
-        <li class="mdl-menu__item">Salir</li>
-      </ul>
+
     </div>
   </div>
 
