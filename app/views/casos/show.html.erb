@@ -180,6 +180,7 @@ td.text-right {
 </table>
 <br>
 <% if admin?  %>
+Asignado a: <b><%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("usuario = ?",@caso.consultor_id).first.nombre + " " +Usuario.where("usuario = ?",@caso.consultor_id).first.apellido) %></b><br><br>
   <% if @caso.status == "Cerrado" %>
     <% @reapertura = (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - @caso.fecha_cerrado.mjd %>
     <% if (@caso.complejidad == "Bajo" and @reapertura <= 1) or (@caso.complejidad == "Medio" and @reapertura <= 2) or (@caso.complejidad == "Alto" and @reapertura <= 4) or (@caso.complejidad == "Urgente" and @reapertura <= 1) %>
@@ -192,7 +193,7 @@ td.text-right {
   <% else %>  
     <%= form_for @caso, :url => {:action => "update"} do |f|%>
     <%= f.select :complejidad, ['Bajo','Medio','Alto','Urgente'] %><br>
-    <%= f.hidden_field :status, :value => "En Proceso" %>
+    <%= f.hidden_field :status, :value => "Pendiente" %>
     <%= f.hidden_field :infosoft, :value => "SI" %>
     
     <%= f.hidden_field :fech_asig, :value => Time.now %>
@@ -200,27 +201,28 @@ td.text-right {
     <%= f.submit (@caso.infosoft == "NO" ? "Asignar Complejidad" : "Re-asignar Complejidad" ) %>
     <% end %><br>
     <%= form_for @caso, :url => {:action => "update"} do |f|%>
-    <%= f.select :status, [' Anulado','BI-Afectado','BI-Planificado','Iniciado','En Proceso', 'Cerrado'] %><br>
+    <%= f.select :status, ['Anulado','BI-Afectado','BI-Planificado','Iniciado','En Proceso', 'Pendiente','Cerrado'] %><br>
     <%= hidden_field_tag :estatus, "Actualizacion de estatus a: " %>
     <%= f.submit "Cambiar Estatus" %>
     <% end %>
   <% end %>
 <% end %>
 <% if cons_lid? %>
-Asignado a: <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("usuario = ?",@caso.consultor_id).first.nombre + " " +Usuario.where("usuario = ?",@caso.consultor_id).first.apellido) %><br>
+Asignado a: <b> <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("usuario = ?",@caso.consultor_id).first.nombre + " " +Usuario.where("usuario = ?",@caso.consultor_id).first.apellido) %></b><br><br>
 <%= form_for @caso, :url => {:action => "update"} do |f|%>
 <select name="caso[consultor_id]" id="caso_consultor_id">
 <% Usuario.where("role_id in (5,4)").each do |u| %>
   <option value="<%= u.usuario %>"><%= u.nombre+" "+u.apellido %></option>
 <% end %>  
 </select>
+<%= f.hidden_field :status, value: "En Proceso" %>
 <%= hidden_field_tag :estatus, "Caso asignado a Consultor" %>
 <%= f.submit "Asignar caso" %>
 <% end %>
 <% end %>
 <% if cons? or (cons_lid? and @caso.consultor_id == current_user.usuario)%>
 <%= form_for @caso, :url => {:action => "update"} do |f|%>
-    <br><%= f.select :status, ['Iniciado','En Proceso','Cerrado'] %><br>
+    <br><%= f.select :status, ['Pendiente','En Proceso','Cerrado'] %><br>
     <%= hidden_field_tag :estatus, "Actualizacion de estatus a: " %>
     <%= f.submit "Cambiar Estatus" %>
 <% end %>

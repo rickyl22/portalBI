@@ -237,6 +237,10 @@ td.text-right {
                   <td><%= @caso.where("status = 'En Proceso'").length %></td>
                 </tr>
                 <tr>
+                  <td>Pendiente</td>
+                  <td><%= @caso.where("status = 'Pendiente'").length %></td>
+                </tr>
+                <tr>
                   <td>Cerrado</td>
                   <td><%= @caso.where("status = 'Cerrado'").length %></td>
                 </tr>
@@ -413,6 +417,66 @@ td.text-right {
          
       </td>
       
+    </tr>
+    <tr>
+      <td>
+        <h1 style="font-size: 2em;text-align: center">Estatus período: <%= @desde %> - <%= @hasta %></h1>
+        <table class="table-fill">
+                <tr>
+                  <th>
+                    Estatus
+                  </th>
+                  <th>Cantidad</th>
+                </tr>
+                <tr>
+                  <td>Entregados</td>
+                  <td><%= @caso.where("status = 'Cerrado' and fecha_cerrado <= ?", @hasta).length %></td>
+                </tr>
+                <tr>
+                  <td>Pendientes</td>
+                  <td><%= @caso.where("(status != 'Cerrado' and status != 'Anulado') or (status = 'Cerrado' and fecha_cerrado > ?)", @hasta).length %></td>
+                </tr>
+                <tr>
+                  <td>Anulado</td>
+                  <td><%= @caso.where("status = 'Anulado'").length %></td>
+                </tr>
+                <tr>
+                  <td><b>Total</b></td>
+                  <td><b><%= @caso.length %></b></td>
+                </tr>
+              </table><br>
+              <%= pie_chart ({ "Entregados" => @caso.where("status = 'Cerrado' and fecha_cerrado <= ?", @hasta).length, "Pendientes" => @caso.where("(status != 'Cerrado' and status != 'Anulado') or (status = 'Cerrado' and fecha_cerrado > ?)", @hasta).length, "Anulados" => @caso.where("status = 'Anulado'").length}),legend: 'bottom' %>
+      </td>
+      <td>
+        <h1 style="font-size: 2em;text-align: center">Reapertura de casos por Consultor</h1>
+        <table class="table-fill">
+                <tr>
+                  <th>
+                    Consultor
+                  </th>
+                  <th>Reaperturas</th>
+                </tr>
+                <% @total = 0 %>
+                <% Usuario.where("role_id in (4,5)").each do |cons| %>
+                  <tr>
+                    <td><%= cons.nombre+" "+cons.apellido %></td>
+                    <% @reap = 0 %>
+                    <% @caso.where("consultor_id = ?", cons.usuario).each do |caso| %>
+                      <% if caso.historial.where("evento LIKE 'Caso reabierto%'").length > 0 %>
+                         <% @reap += 1 %>
+                         <% @total += 1 %>
+                      <% end %>  
+                    <% end %>
+                    <td><%= @reap %></td>
+                  </tr>
+                <% end %>
+                <tr>
+                  <td><b>Total</b></td>
+                  <td><b><%= @total %></b></td>
+                </tr>
+              </table><br>
+              <%= pie_chart ({ "Entregados" => @caso.where("status = 'Cerrado' and fecha_cerrado <= ?", @hasta).length, "Pendientes" => @caso.where("(status != 'Cerrado' and status != 'Anulado') or (status = 'Cerrado' and fecha_cerrado > ?)", @hasta).length, "Anulados" => @caso.where("status = 'Anulado'").length}),legend: 'bottom' %>
+      </td>
     </tr>
   </table>
   <% end %>

@@ -56,7 +56,7 @@
     <% end %>
 <% if admin? or (cons_lid? and @flag == 0) %>
   <% if admin? %>
-    <% @casos_cur = @casos.where(" infosoft = 'SI' ") %>
+    <% @casos_cur = @casos.where(" infosoft = 'SI' and status != 'Anulado' and status != 'Cerrado'") %>
   <% else %>
     <% @casos_cur = @casos.where(" consultor_id is not NULL ") %>
   <% end %>  
@@ -104,7 +104,7 @@
     <% end %>
   <% if admin? %>
   <h1>Casos cerrados</h1>
-    <% @casos_cur = @casos.where(" status = 'Cerrado' ") %>
+    <% @casos_cur = @casos.where(" status = 'Cerrado' or status = 'Anulado'") %>
     <% @casos_cur.each do |caso| %>
       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
           <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us" style="word-wrap: break-word;">
