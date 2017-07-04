@@ -1335,3 +1335,25 @@ body {
     color: #fff;
     background: url('../assets/k_1.jpg') bottom right 15% no-repeat white;
 }
+
+/* Lista de usuarios en el menu de admin*/
+.menu_list_user_p{
+
+}
+.menu_list_user_s{
+
+}
+
+/* HEADER */
+.btn-sesion{
+    line-height: 64px;
+    padding: 0 24px;
+    border-top:none!important;
+    border-left:none!important;
+    border-right:none!important;
+    margin-bottom: -6px!important;
+    line-height: 59px!important;
+}
+form.button_to{
+   margin-bottom: 2px;
+}
