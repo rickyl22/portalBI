@@ -16,10 +16,9 @@
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/home/nosotros">Nosotros</a>
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/home/proyectos">Proyectos</a>
           <% if logged_in? %>
-              <a class="mdl-navigation__link mdl-typography--text-uppercase btn-sesion" rel="nofollow" data-method="delete" href="/logout">Salir</a>
-              <%= link_to('Logout', logout_path, method: :delete) %>
+              <%= button_to "Salir",logout_path,:method => "delete", :class => "mdl-navigation__link mdl-typography--text-uppercase btn-sesion" %>
         <% else %>
-              <a class="mdl-navigation__link mdl-typography--text-uppercase btn-sesion" href="/login">Ingresar</a>
+              <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/login">Ingresar</a>
           <% end %>
         </nav>
       </div>
