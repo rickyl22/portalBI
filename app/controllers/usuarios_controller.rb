@@ -9,7 +9,6 @@ class UsuariosController < ApplicationController
   #after_action :verify_authorized, :only => :index
 
   def index
-    p "Entra index"
     @usuarios = Usuario.all
     authorize @usuarios
     @usuarios = policy_scope(Usuario)
@@ -18,12 +17,9 @@ class UsuariosController < ApplicationController
   end
 
   def create
-    p "yoo"
-    p allowed_params
     @usuario = Usuario.create(allowed_params)
     authorize @usuario
     if @usuario.save
-      p "Usuario d ela sesion create "+session[:usuario_id].inspect
       redirect_to login_path, notice: 'Petición enviada'
     else
       redirect_to login_path, error: 'Error creando usuario'

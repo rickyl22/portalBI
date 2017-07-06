@@ -186,6 +186,7 @@ Asignado a: <b><%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("u
     <% if (@caso.complejidad == "Bajo" and @reapertura <= 1) or (@caso.complejidad == "Medio" and @reapertura <= 2) or (@caso.complejidad == "Alto" and @reapertura <= 4) or (@caso.complejidad == "Urgente" and @reapertura <= 1) %>
     <%= form_for @caso, :url => {:action => "update"} do |f|%>
     <%= f.hidden_field :status, :value => "En Proceso" %>
+    <%= f.hidden_field :fech_asig, :value => Time.now %>
     <%= hidden_field_tag :estatus, "Caso reabierto por Administrador, nuevo estatus: " %>
     <%= f.submit "Reabrir caso" %>
     <% end %>
@@ -228,7 +229,7 @@ Asignado a: <b> <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("
 <% end %>
 <% end %><br>
 
-<%= link_to 'Volver', casos_path %>
+<%= link_to 'Volver', :back %>
 </td>
 
 

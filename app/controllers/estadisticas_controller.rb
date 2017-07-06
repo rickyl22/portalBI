@@ -1,12 +1,13 @@
 class EstadisticasController < ApplicationController
   before_action :set_estadistica, only: [:show, :edit, :update, :destroy]
   skip_after_action :verify_policy_scoped
-  skip_after_action :verify_authorized 
+  after_action :verify_authorized, only: [:create, :index]  
   
   # GET /estadisticas
   # GET /estadisticas.json
   def index
     @estadisticas = Estadistica.all
+    authorize @estadisticas
   end
 
   # GET /estadisticas/1
@@ -26,13 +27,16 @@ class EstadisticasController < ApplicationController
   # POST /estadisticas
   # POST /estadisticas.json
   def create
-    #@estadistica = Estadistica.new(estadistica_params)
+    @estadistica = Estadistica.new
+    authorize @estadistica
     @desde = params[:desde]
     @hasta = params[:hasta]
-    p "fack"
-    p @desde
-    p @hasta
-    redirect_to "/estadisticas?desde="+@desde+"&hasta="+@hasta
+    if params[:hist]
+       p "pide m,as hist"
+       redirect_to "/estadisticas?hist=1&desde="+@desde+"&hasta="+@hasta
+    else
+       redirect_to "/estadisticas?desde="+@desde+"&hasta="+@hasta
+    end
   end
 
   # PATCH/PUT /estadisticas/1

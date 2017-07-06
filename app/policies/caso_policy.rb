@@ -1,8 +1,6 @@
 class CasoPolicy < ApplicationPolicy
 
   def index?
-    p "usuario- poli -icasos"
-    p user
     return true if user.present? && rol != "admin_ind"
   end
 
@@ -11,14 +9,10 @@ class CasoPolicy < ApplicationPolicy
   end
 
   def create?
-    p "usuario- poli -create"
-    p "EL ROL "+rol.inspect
     return true if user.present? && (rol == "admin" || rol == "cli" || rol == "admin_min" ) 
   end
 
   def show?
-    p "usuario- poli -create"
-    p "EL ROL "+rol.inspect
     return true if user.present? && (rol == "admin" || rol == "admin_min" || (rol == "cli" && @record.usuario_id == user.id) || (rol == "cons" && @record.consultor_id == user.usuario) || ( rol == "cons_lid" && @record.infosoft == "SI") ) 
   end
 

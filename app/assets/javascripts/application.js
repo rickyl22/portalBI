@@ -12,6 +12,7 @@
 //
 //= require jsapi
 //= require highcharts
+//= require highcharts-3d
 //= require chartkick
 //= require rails-ujs
 //= require turbolinks

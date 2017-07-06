@@ -69,4 +69,9 @@ config.action_mailer.perform_deliveries = true
 
   }
 
+
+  config.after_initialize do
+  ActiveRecord::Base.logger = Rails.logger.clone
+  ActiveRecord::Base.logger.level = Logger::INFO
+end
 end

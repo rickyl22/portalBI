@@ -1,4 +1,4 @@
-class HistorialPolicy < ApplicationPolicy
+class EstadisticaPolicy < ApplicationPolicy
 
   def index?
     return true if user.present? and (rol == "admin" or rol == "admin_min" or rol == "cons_lid") 
@@ -9,7 +9,7 @@ class HistorialPolicy < ApplicationPolicy
   end
 
   def create?
-    return true if user.present? && (rol == "admin" || rol == "cli" || rol == "admin_min" ) 
+    return true if user.present? && (rol == "admin" || rol == "admin_min" || rol == "cons_lid" ) 
   end
 
   def show?

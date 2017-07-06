@@ -3,22 +3,22 @@ class SessionPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.admin?
-        p "admin?"
+        
         scope.all
       elsif user.admin_min?
-        p "admin_min??"
+        
         scope.all
       elsif user.admin_ind?
-        p "admin_ind??"
+        
         scope.all
       elsif user.cons_lid?
-        p "cons_lid??"
+        
         scope.all
       elsif user.cons?
-        p "cons??"
+        
         scope.all
       elsif user.cli?
-        p "cli??"
+        
         scope.all
       end
     end

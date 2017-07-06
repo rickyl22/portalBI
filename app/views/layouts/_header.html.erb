@@ -66,6 +66,7 @@
             <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
             <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
             <a class="mdl-navigation__link" href="/estadisticas">Estadisticas</a>
+            <a class="mdl-navigation__link" href="/estadisticas?hist=1">Historial</a>
           </div>
           <!-- Gestion de usuarios de indicadores -->
         <span class="mdl-navigation__link menu" href="">
@@ -128,7 +129,6 @@
           <div id="mineria" class="sub-menu-container">
             <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
             <a class="mdl-navigation__link" href="/casos?flag=1">Mis Casos</a>
-            <!--%= link_to "Mis casos", casos_path, :class => "mdl-navigation__link", :car => "1"  %-->
           </div>
       <% elsif cons? %>
           <!-- Menu para Portal de Gestion de Mineria -->
@@ -155,16 +155,6 @@
 
     </nav>
 
-    <!-- Alertas 
-    <% if flash[:notice] %>
-        <div class="notice mdl-shadow--16dp"><%= flash[:notice] %></div>
-    <% end %>
-    <% if flash[:alert] %>
-        <div class="alert mdl-shadow--16dp"><%= flash[:alert] %></div>
-    <% end %>
-    <% if flash[:error] %>
-        <div class="alert mdl-shadow--16dp"><%= flash[:error] %></div>
-    <% end %>-->
   </div>
 
   <!-- Icon menus lateral -->
