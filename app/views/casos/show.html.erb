@@ -110,7 +110,9 @@ td.text-right {
   text-align: right;
 }
   </style>
-
+<% if session[:notice] != nil %>
+         <div class="notice mdl-shadow--16dp"><%= session[:notice]  %></div>
+      <% end %>
 <table ><tr>
 <td style="vertical-align: text-top;">
   <table class="table-fill" style="width: 50vw;">

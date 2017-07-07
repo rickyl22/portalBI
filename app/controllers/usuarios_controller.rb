@@ -62,9 +62,7 @@ class UsuariosController < ApplicationController
 
   private
     def set_usuario
-      p"ENTRA ACAAA "+params[:id].inspect
       @usuario = Usuario.find(params[:id])
-      p "Usiaro "+@usuario.inspect
       authorize @usuario
       @usuario = policy_scope(Usuario).find(params[:id])
     end

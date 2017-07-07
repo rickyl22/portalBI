@@ -1,4 +1,7 @@
 <div class="content_p android-content mdl-layout__content">
+<% if session[:notice] != nil %>
+         <div class="notice mdl-shadow--16dp"><%= session[:notice]  %></div>
+      <% end %>
   <!-- Contenido -->
   <div class="contenido-in ">
     <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">

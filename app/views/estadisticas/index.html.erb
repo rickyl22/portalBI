@@ -3,7 +3,23 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script type="text/javascript">
 
+/*
+window.setInterval(function(){
+  $.ajax({
+    url: "/casos",
+    type: 'GET'
+  });
+  console.log("si sirve")
+  if ($(".rango_desde")[0].disabled == true){
+    console.log("true")
+       $(".rango_desde")[0].disabled = false;
+  }else{
+    console.log("false")
+    $(".rango_desde")[0].disabled = true;
+  }
 
+}, 5000);*/
+ 
    $(document).ready(function(){
   
   $(".rango_desde").change(function() {
@@ -127,6 +143,9 @@ td.text-right {
 }
   </style>
 <div class="content_p android-content mdl-layout__content">
+<% if session[:notice] != nil %>
+         <div class="notice mdl-shadow--16dp"><%= session[:notice]  %></div><br>
+      <% end %>    
   <% @hasta = params[:hasta] %>
   <% @desde = params[:desde] %>
   <% @caso = Caso.where("fecha_creado >= ? and fecha_creado <= ?",@desde,@hasta) %>
@@ -140,7 +159,7 @@ td.text-right {
   <% end %>
   <% if params[:desde] %>
   <% if params[:hist] %>
-    <h1 style="font-size: 2em">Historial de casos</h1>
+    <h1 style="font-size: 2em">Historial de casos: <%= params[:desde] %> hasta <%= params[:hasta] %> </h1>
     <table>
       <tr>
         <th>ID</th>
@@ -170,6 +189,7 @@ td.text-right {
       <% end %>
     </table>
   <% else %>
+  <h1 style="font-size: 2em">Estadísticas: <%= params[:desde] %> hasta <%= params[:hasta] %> </h1>
   <table style="width: 100%;">
     <tr>
       <td style="width: 50%;">
@@ -205,7 +225,7 @@ td.text-right {
                  <% @data.push([user.nombre+" "+user.apellido,@caso.where("consultor_id = ?", user.usuario).length]) %>
               <% end %>
               
-              <%= pie_chart @data, width: '50%', library: {chart: { options3d: {enabled: true,alpha: 45,beta: 0}},plotOptions: {pie: {depth: 35}}, tooltip: {pointFormat: "Casos: {point.y} ({point.percentage:.1f}%)"}}, showEmpty: 0, legend: 'bottom' %>
+              <%= pie_chart @data, width: '50%', library: {chart: { options3d: {enabled: true,alpha: 45,beta: 0}},plotOptions: {pie: {depth: 35}}, tooltip: {pointFormat: "Casos: {point.y} ({point.percentage:.1f}%)"}}, legend: 'bottom' %>
              
           
       </td>
@@ -304,15 +324,15 @@ td.text-right {
                 <tr>
                   <td>Within SLA</td>
                   <td><%= @caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
-                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 4) or
-                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 3) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 4) or
                                                                  (complejidad = 'Urgente' and fecha_cerrado - fech_asig <= 3))").length %></td>
                 </tr>
                 <tr>
                   <td>Exceeding SLA</td>
                   <td><%= @caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig > 7) or
-                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig > 4) or
-                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig > 3) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig > 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig > 4) or
                                                                  (complejidad = 'Urgente' and fecha_cerrado - fech_asig > 3))").length %> </td>
                 </tr>
                 <tr>
@@ -321,12 +341,12 @@ td.text-right {
                 </tr>
               </table><br>
               <% @puntual = @caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
-                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 4) or
-                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 3) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 4) or
                                                                  (complejidad = 'Urgente' and fecha_cerrado - fech_asig <= 3))").length %>
               <% @inpuntual = @caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig > 7) or
-                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig > 4) or
-                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig > 3) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig > 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig > 4) or
                                                                  (complejidad = 'Urgente' and fecha_cerrado - fech_asig > 3))").length %>
               <%= pie_chart ({ "Within SLA" => @puntual, "Exceeding SLA" => @inpuntual}), library: {chart: { options3d: {enabled: true,alpha: 45,beta: 0}},plotOptions: {pie: {depth: 35}}, tooltip: {pointFormat: "Casos: {point.y} ({point.percentage:.1f}%)"}} ,legend: 'bottom' %>
           
@@ -401,14 +421,14 @@ td.text-right {
                   </td>
                   <td>
                     <%= @caso.where("consultor_id = ? and status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
-                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 4) or
-                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 3) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 4) or
                                                                  (complejidad = 'Urgente' and fecha_cerrado - fech_asig <= 3))",user.usuario).length %>
                   </td>
                   <td>
                     <%= @caso.where("consultor_id = ? and status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig > 7) or
-                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig > 4) or
-                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig > 3) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig > 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig > 4) or
                                                                  (complejidad = 'Urgente' and fecha_cerrado - fech_asig > 3))",user.usuario).length %>
                   </td>
                   <td>
@@ -419,15 +439,15 @@ td.text-right {
                 <tr>
                   <td><b>Total</b></td>
                   <td><b><%= @caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
-                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 4) or
-                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 3) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 4) or
                                                                  (complejidad = 'Urgente' and fecha_cerrado - fech_asig <= 3))").length %>
                                                           </b>
                                                                  </td>
                   <td>
                     <b><%= @caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig > 7) or
-                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig > 4) or
-                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig > 3) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig > 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig > 4) or
                                                                  (complejidad = 'Urgente' and fecha_cerrado - fech_asig > 3))").length %></b>
                   </td>
                   <td>
@@ -440,12 +460,12 @@ td.text-right {
               <% @inpuntual = [] %>
               <% @users.each do |user| %>
                  <% @puntual.push([user.nombre + " "+ user.apellido,@caso.where("consultor_id = ? and status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
-                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 4) or
-                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 3) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 4) or
                                                                  (complejidad = 'Urgente' and fecha_cerrado - fech_asig <= 3))",user.usuario).length]) %>
               <% @inpuntual.push([user.nombre + " "+ user.apellido,@caso.where("consultor_id = ? and status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig > 7) or
-                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig > 4) or
-                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig > 3) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig > 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig > 4) or
                                                                  (complejidad = 'Urgente' and fecha_cerrado - fech_asig > 3))",user.usuario).length]) %>
               <% end %>
               <%= bar_chart [{name: "Within SLA", data: @puntual},{ name: "Exceeding SLA", data: @inpuntual}], stacked: true, legend: 'bottom', width: '100%' %>
@@ -540,8 +560,8 @@ td.text-right {
     </tr>
     <tr>
       <td style="text-align: center"><%= (@caso.where("status = 'Cerrado'").length == 0 ? "No hay casos cerrados" : ((@caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
-                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 4) or
-                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 3) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 4) or
                                                                  (complejidad = 'Urgente' and fecha_cerrado - fech_asig <= 3))").length*100.0/(@caso.where("status = 'Cerrado'").length)).round(2).to_s + "%"))  %></td>
       <td style="text-align: center"><%= (@caso.where("status = 'Cerrado'").length == 0 ? "No hay casos cerrados" : ((@total*100.0/(@caso.where("status = 'Cerrado'").length)).round(2).to_s + "%"))  %></td>
       <td style="text-align: center"><%= @total %></td>

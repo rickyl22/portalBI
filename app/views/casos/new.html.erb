@@ -155,6 +155,9 @@ td.text-right {
   text-align: right;
 }
   </style>
+  <% if session[:notice] != nil %>
+         <div class="notice mdl-shadow--16dp"><%= session[:notice]  %></div>
+      <% end %>
 <p id="notice"><%= notice %></p>
 <%= form_with(model: @caso, local: true) do |form| %>
   <% if @caso.errors.any? %>
