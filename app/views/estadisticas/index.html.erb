@@ -299,6 +299,14 @@ td.text-right {
                   <td><%= @caso.where("status = 'Pendiente'").length %></td>
                 </tr>
                 <tr>
+                  <td>BI-Afectado</td>
+                  <td><%= @caso.where("status = 'BI-Afectado'").length %></td>
+                </tr>
+                <tr>
+                  <td>BI-Planificado</td>
+                  <td><%= @caso.where("status = 'BI-Planificado'").length %></td>
+                </tr>
+                <tr>
                   <td>Cerrado</td>
                   <td><%= @caso.where("status = 'Cerrado'").length %></td>
                 </tr>
@@ -308,10 +316,10 @@ td.text-right {
                 </tr>
                 <tr>
                   <td><b>Total</b></td>
-                  <td><b><%= @caso.where("status != 'BI-Afectado' and status != 'BI-Planificado'").length %></b></td>
+                  <td><b><%= @caso.length %></b></td>
                 </tr>
               </table><br>
-              <%= pie_chart @caso.where("status != 'BI-Afectado' and status != 'BI-Planificado'").group(:status).count, library: {chart: { options3d: {enabled: true,alpha: 45,beta: 0}},plotOptions: {pie: {depth: 35}}, tooltip: {pointFormat: "Casos: {point.y} ({point.percentage:.1f}%)"}} ,legend: 'bottom' %>
+              <%= pie_chart @caso.group(:status).count, library: {chart: { options3d: {enabled: true,alpha: 45,beta: 0}},plotOptions: {pie: {depth: 35}}, tooltip: {pointFormat: "Casos: {point.y} ({point.percentage:.1f}%)"}} ,legend: 'bottom' %>
           
       </td>
       <td style="vertical-align: top;">
