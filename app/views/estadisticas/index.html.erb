@@ -18,14 +18,41 @@ window.setInterval(function(){
     $(".rango_desde")[0].disabled = true;
   }
 
-}, 5000);*/
+}, 5000);
  
+function downloadInnerHtml(filename, elId, mimeType) {
+    var elHtml = document.getElementById(elId).innerHTML;
+    var link = document.createElement('a');
+    mimeType = mimeType || 'text/plain';
+
+    link.setAttribute('download', filename);
+    link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(elHtml));
+    link.click(); 
+}
+
+var fileName =  'tags.html'; // You can use the .txt extension if you want
+
+$('#downloadLink').click(function(){
+    downloadInnerHtml(fileName, 'main','text/html');
+});*/
+    
+var cell = document.getElementById("puntualidad");
+if (parseInt(cell.innerHTML,10) < 50){
+   console.log("buehh");
+   cell.style.backgroundColor = "green";
+}else{
+  console.log("noooooo");
+   cell.style.backgroundColor = "red";
+}
+
+
    $(document).ready(function(){
-  
+
   $(".rango_desde").change(function() {
     $(".rango_fin")[0].disabled = false;
     $(".rango_fin")[0].value = $(".rango_desde")[0].value;
     $(".rango_fin")[0].setAttribute("min", $(".rango_desde")[0].value);
+
   
   });
 
@@ -149,12 +176,32 @@ td.text-right {
   <% @hasta = params[:hasta] %>
   <% @desde = params[:desde] %>
   <% @caso = Caso.where("fecha_creado >= ? and fecha_creado <= ?",@desde,@hasta) %>
+  <% if params[:status] %>
+  <% @caso = @caso.where("status = ?",params[:status]) %>
+  <% end %>
+  <% if params[:comp] %>
+  <% @caso = @caso.where("complejidad = ?",params[:comp]) %>
+  <% end %>
+  <% if params[:req] %>
+  <% @caso = @caso.where("tipo_caso = ?",params[:req]) %>
+  <% end %>
+  <% if params[:cons] %>
+  <% @caso = @caso.where("consultor_id = ?",params[:cons]) %>
+  <% end %>
   <%= form_tag estadisticas_path do %>
-    Período: desde <%= date_field_tag :desde,{}, :class => "rango_desde",  :onkeydown =>"return false", :required => true, :oninvalid => "this.setCustomValidity('Por favor complete este campo')", :oninput => "setCustomValidity('')", max: Date.today %> hasta <%= date_field_tag :hasta, {},:class => "rango_fin", :disabled => true, :onkeydown =>"return false", max: Date.today %>
+    Período: desde <%= date_field_tag :desde,{}, :class => "rango_desde",  :onkeydown =>"return false", :required => true, :oninvalid => "this.setCustomValidity('Por favor complete este campo')", :oninput => "setCustomValidity('')", max: Date.today %> hasta <%= date_field_tag :hasta, {},:class => "rango_fin", :disabled => true, :onkeydown =>"return false", max: Date.today %><br>
     <% if params[:hist] %>
-       <% p "pide hist" %>
+        Estatus: <%= select_tag :status, options_for_select(["Iniciado","Pendiente","En Proceso","Anulado","BI-Planificado","BI-Afectado","Cerrado"]),:include_blank => "N/A" %>
+        Complejidad: <%= select_tag :complejidad, options_for_select(["Bajo","Medio","Alto","Urgente"]),:include_blank => "N/A" %>
+        Requerimiento: <%= select_tag :req, options_for_select(["Recurrente","No Recurrente"]),:include_blank => "N/A" %>
+        Consultor: <select name="consultor_id" id="consultor_id">
+                    <option value>N/A</option>
+                    <% Usuario.where("role_id in (5,4)").each do |u| %>
+                    <option value="<%= u.usuario %>"><%= u.nombre+" "+u.apellido %></option>
+                    <% end %>  
+                   </select>
        <%= hidden_field_tag :hist, :value => 1 %>
-    <% end %>
+    <% end %><br>
     <%= submit_tag 'Buscar' %>   
   <% end %>
   <% if params[:desde] %>
@@ -189,6 +236,7 @@ td.text-right {
       <% end %>
     </table>
   <% else %>
+  
   <h1 style="font-size: 2em">Estadísticas: <%= params[:desde] %> hasta <%= params[:hasta] %> </h1>
   <table style="width: 100%;">
     <tr>
@@ -230,6 +278,7 @@ td.text-right {
           
       </td>
       <td style="width:50%;">
+      
       <h1 style="font-size: 2em;text-align: center">Por Complejidad</h1>
               <table class="table-fill">
                 <tr>
@@ -272,6 +321,7 @@ td.text-right {
                 </tr>
               </table><br>
               <%= pie_chart @caso.where("complejidad != 'No Asignada'").group(:complejidad).count, library: {chart: { options3d: {enabled: true,alpha: 45,beta: 0}},plotOptions: {pie: {depth: 35}}, tooltip: {pointFormat: "Casos: {point.y} ({point.percentage:.1f}%)"}} ,legend: 'bottom' %>
+              </div>
          
       </td>
      
@@ -567,7 +617,7 @@ td.text-right {
       <th>Corrección de incidencia en tiempo</th>
     </tr>
     <tr>
-      <td style="text-align: center"><%= (@caso.where("status = 'Cerrado'").length == 0 ? "No hay casos cerrados" : ((@caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
+      <td style="text-align: center" class="puntualidad"><%= (@caso.where("status = 'Cerrado'").length == 0 ? "No hay casos cerrados" : ((@caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
                                                                  (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 5) or
                                                                  (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 4) or
                                                                  (complejidad = 'Urgente' and fecha_cerrado - fech_asig <= 3))").length*100.0/(@caso.where("status = 'Cerrado'").length)).round(2).to_s + "%"))  %></td>

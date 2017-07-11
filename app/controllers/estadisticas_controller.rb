@@ -31,11 +31,23 @@ class EstadisticasController < ApplicationController
     authorize @estadistica
     @desde = params[:desde]
     @hasta = params[:hasta]
+    @data = "&desde="+@desde+"&hasta="+@hasta
+    if params[:status] and params[:status] != ""
+       @data += "&status="+params[:status]
+    end  
+    if params[:complejidad] and params[:complejidad] != ""
+       @data += "&comp="+params[:complejidad]
+    end
+    if params[:req] and params[:req] != ""
+       @data += "&req="+params[:req]
+    end
+    if params[:consultor_id] and params[:consultor_id] != ""
+       @data += "&cons="+params[:consultor_id]
+    end
     if params[:hist]
-       p "pide m,as hist"
-       redirect_to "/estadisticas?hist=1&desde="+@desde+"&hasta="+@hasta
+       redirect_to "/estadisticas?hist=1"+@data
     else
-       redirect_to "/estadisticas?desde="+@desde+"&hasta="+@hasta
+       redirect_to "/estadisticas?"+@data
     end
   end
 
