@@ -74,4 +74,6 @@ config.action_mailer.perform_deliveries = true
   ActiveRecord::Base.logger = Rails.logger.clone
   ActiveRecord::Base.logger.level = Logger::INFO
 end
+
+config.time_zone = "Caracas"
 end

@@ -25,6 +25,8 @@ class ComentariosController < ApplicationController
   def create
     
     @caso = Caso.find(params[:comentario][:caso_id])
+    p "ya me ladille"
+    p params
     if @caso.comentarios.create(comentario_params)
       redirect_to @caso
     else

@@ -304,7 +304,7 @@ Asignado a: <b> <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("
     <%= form.text_area :texto, id: :comentario_texto, :style => 'width:17vw;', :rows => "3" %>
   </div>
    <%= form.hidden_field :caso_id, value: @caso.id %>
-   <%= form.hidden_field :fecha, value: Time.now %>
+   <%= form.hidden_field :fecha, value: Time.now.in_time_zone("Caracas") %>
    <%= form.hidden_field :autor, value: current_user.role.nombre %>
   <div class="actions">
     <%= form.submit "Enviar" %>

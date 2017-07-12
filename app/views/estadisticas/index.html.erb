@@ -1,24 +1,25 @@
 <script src="https://code.highcharts.com/highcharts.js" ></script>
 <script src="https://code.highcharts.com/highcharts-3d.js" ></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
 <script type="text/javascript">
 
-/*
+
 window.setInterval(function(){
-  $.ajax({
+  /*$.ajax({
     url: "/casos",
     type: 'GET'
-  });
-  console.log("si sirve")
-  if ($(".rango_desde")[0].disabled == true){
-    console.log("true")
-       $(".rango_desde")[0].disabled = false;
-  }else{
-    console.log("false")
-    $(".rango_desde")[0].disabled = true;
-  }
+  });and TIME_TO_SEC(TIMEDIFF(created_at, ?)) < 10*/
+  
+  <% @coms = Comentario.where(" DATE(created_at) = ? and TIME_TO_SEC(TIMEDIFF(created_at, NOW())) < 20",Date.today) %>
+  <% if @coms.length > 0 %>
+    <% p @coms %>
+    alert("Tienes nuevos mensajes en los casos");
+  <%  else %>
 
-}, 5000);
+  <% p "dont" %>
+  <% end %>
+}, 20000);/*
  
 function downloadInnerHtml(filename, elId, mimeType) {
     var elHtml = document.getElementById(elId).innerHTML;
@@ -34,19 +35,42 @@ var fileName =  'tags.html'; // You can use the .txt extension if you want
 
 $('#downloadLink').click(function(){
     downloadInnerHtml(fileName, 'main','text/html');
-});*/
+});
     
-var cell = document.getElementById("puntualidad");
-if (parseInt(cell.innerHTML,10) < 50){
-   console.log("buehh");
-   cell.style.backgroundColor = "green";
-}else{
-  console.log("noooooo");
-   cell.style.backgroundColor = "red";
-}
+*/
 
 
    $(document).ready(function(){
+
+   var cell = document.getElementById("puntualidad");
+   
+if (parseInt(cell.innerHTML,10) < 95){
+   
+   cell.style.backgroundColor = 'red';
+   cell.sty
+}else{
+  
+   cell.style.backgroundColor = 'green';
+}
+
+var cell = document.getElementById("reap");
+   
+if (parseInt(cell.innerHTML,10) > 5){
+   
+   cell.style.backgroundColor = 'red';
+   cell.sty
+}else{
+  
+   cell.style.backgroundColor = 'green';
+}
+
+var doc = new jsPDF();
+
+    $('#cmd').click(function () {
+      console.log("descargo");
+        doc.fromHTML($('#pdf').html(), 15, 15);
+        doc.save('Estadisticas.pdf');
+    });
 
   $(".rango_desde").change(function() {
     $(".rango_fin")[0].disabled = false;
@@ -236,7 +260,7 @@ td.text-right {
       <% end %>
     </table>
   <% else %>
-  
+  <div id="pdf">
   <h1 style="font-size: 2em">Estadísticas: <%= params[:desde] %> hasta <%= params[:hasta] %> </h1>
   <table style="width: 100%;">
     <tr>
@@ -617,15 +641,17 @@ td.text-right {
       <th>Corrección de incidencia en tiempo</th>
     </tr>
     <tr>
-      <td style="text-align: center" class="puntualidad"><%= (@caso.where("status = 'Cerrado'").length == 0 ? "No hay casos cerrados" : ((@caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
+      <td style="text-align: center;color: black;" id="puntualidad" ><%= (@caso.where("status = 'Cerrado'").length == 0 ? "No hay casos cerrados" : ((@caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
                                                                  (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 5) or
                                                                  (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 4) or
                                                                  (complejidad = 'Urgente' and fecha_cerrado - fech_asig <= 3))").length*100.0/(@caso.where("status = 'Cerrado'").length)).round(2).to_s + "%"))  %></td>
-      <td style="text-align: center"><%= (@caso.where("status = 'Cerrado'").length == 0 ? "No hay casos cerrados" : ((@total*100.0/(@caso.where("status = 'Cerrado'").length)).round(2).to_s + "%"))  %></td>
-      <td style="text-align: center"><%= @total %></td>
-      <td style="text-align: center"><%= (@incidencias == 0 ? "No hay casos cerrados" : ((@incidencias_cor*100.0/@incidencias).round(2).to_s + "%")) %></td>
+      <td style="text-align: center;color: black;" id="reap"><%= (@caso.where("status = 'Cerrado'").length == 0 ? "No hay casos cerrados" : ((@total*100.0/(@caso.where("status = 'Cerrado'").length)).round(2).to_s + "%"))  %></td>
+      <td style="text-align: center;color: black;background-color: green"><%= @total %></td>
+      <td style="text-align: center;color: black;background-color: green"><%= (@incidencias == 0 ? "No hay casos cerrados" : ((@incidencias_cor*100.0/@incidencias).round(2).to_s + "%")) %></td>
     </tr>
-  </table><br><br><br><br>
+  </table>
+  <button id="cmd">Descargar PDF</button><br><br><br><br>
   <% end %>
+  </div>
   <% end %>
   </div>
