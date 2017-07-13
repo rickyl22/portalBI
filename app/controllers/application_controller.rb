@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
 
-  #handle_asynchronously :in_the_future, :run_at => Proc.new { 10.hours.from_now }
   protect_from_forgery with: :exception
   after_action :verify_authorized
   after_action :verify_policy_scoped
@@ -9,9 +8,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  #def in_the_future
-   #p "hola ricky"
-  #end
+  
   
   def admin?
     true if(current_user.role.alias == "admin")

@@ -26,7 +26,7 @@ class ComentariosController < ApplicationController
     
     @caso = Caso.find(params[:comentario][:caso_id])
     p "ya me ladille"
-    p params
+    p comentario_params
     if @caso.comentarios.create(comentario_params)
       redirect_to @caso
     else
@@ -57,6 +57,6 @@ class ComentariosController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def comentario_params
-      params.require(:comentario).permit(:fecha, :texto, :autor, :caso_id)
+      params.require(:comentario).permit(:fecha, :texto, :autor, :caso_id, :role_id)
     end
 end
