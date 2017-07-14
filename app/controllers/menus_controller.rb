@@ -9,7 +9,7 @@ class MenusController < ApplicationController
     #@casos_recientes = Caso.where().ord
     @indicadores_recientes = Kpi.all
 
-    p "Indicadores "+@indicadores_recientes.inspect
+   # p "Indicadores "+@indicadores_recientes.inspect
 
   end
 
