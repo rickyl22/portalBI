@@ -8,10 +8,11 @@ class SessionsController < ApplicationController
   def create
     
     usuario = Usuario.where("usuario = ?",params[:usuario]).first
-    if usuario  && usuario.authenticate(params[:password]) #&& (usuario.estatus == "Aprobado")
+    if usuario  && usuario.authenticate(params[:password]) && (usuario.estatus == "Aprobado")
 
       log_in usuario
       session[:notice] = nil
+      session[:last_check] = Time.now
       if admin?
         if Caso.where(" complejidad = 'No Asignada' and fecha_creado < ?", Time.now.to_date - 7).length > 0 
           session[:notice] = "Advertencia: Tiene casos con mas de 7 dias de creación sin complejidad asignada"
