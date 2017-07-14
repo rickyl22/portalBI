@@ -1222,10 +1222,12 @@ body {
 /* INDEX KPIS */
 .demo-card-wide.mdl-card {
     width: 90%;
+    min-height: 330px!important;
 }
-.demo-card-wide > .mdl-card__title {
+.demo-card-wide > .mdl-card__title-kpi {
     color: #fff;
-    height: 176px;
+    height: 235px;
+    padding: 16px 0px;
    /* background: url(http://www.eduliticas.com/wp-content/uploads/2015/07/diagrama-de-sectores.png) bottom right 15% no-repeat white;;*/
 }
 .demo-card-wide > .mdl-card__title img{
@@ -1236,11 +1238,12 @@ body {
 
 .demo-card-wide > .mdl-card__title h3{
     position: absolute;
-    top: 150px;
+    top: 205px;
     left: 0px;
     width: 100%;
     background-color: white;
     opacity: 0.8;
+    padding-left: 15px;
 }
 
 .demo-card-wide > .mdl-card__title h3 span {
