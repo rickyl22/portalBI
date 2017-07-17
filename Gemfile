@@ -53,3 +53,5 @@ gem "pundit"
 
 #gem 'bcrypt'
 gem 'bcrypt-ruby', '3.0.0'
+#subida de archivos
+gem 'carrierwave'
