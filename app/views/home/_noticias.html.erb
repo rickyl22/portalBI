@@ -1,0 +1,31 @@
+<script>
+  $( document ).ready(function(){
+    $('#mycarousel').carousel();
+  });
+</script>
+<div class="android-screen-section mdl-typography--text-center grip-noticias">
+  <a name="noticias"></a>
+  <div class="mdl-typography--display-1-color-contrast titulo-noticias">Entérate del beta</div>
+
+  <% noticias = Noticia.all %>
+  <div class=" mdl-grid">
+    <% noticias.each do |noticia| %>
+      <div class="mdl-cell mdl-cell--6-col">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-card-kpis mdl-card-noticias">
+          <div class="mdl-card__title mdl-card__title-kpi">
+            <%= image_tag "k_1.jpg" %>
+          </div>
+          <div class="mdl-card__supporting-text">
+            <h3 class="mdl-card__title-text"><span><%= noticia.titulo %></span></h3>
+            <br>
+            <p>
+              <%= noticia.descripcion %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
