@@ -1,4 +1,4 @@
-class NoticiaPolicy < ApplicationPolicy
+class PublicacionPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.present?
@@ -32,7 +32,7 @@ class NoticiaPolicy < ApplicationPolicy
 
   private
 
-  def noticia
+  def publicacion
     record
   end
 end
