@@ -1,24 +1,31 @@
 class ProyectosController < ApplicationController
   before_action :set_proyecto, only: [:show, :edit, :update, :destroy]
+  after_action :verify_policy_scoped, :except => [:create, :new]
+  skip_after_action :verify_authorized
 
   # GET /proyectos
   # GET /proyectos.json
   def index
     @proyectos = Proyecto.all
+    authorize @proyectos
+    @proyectos = policy_scope(Proyecto)
   end
 
   # GET /proyectos/1
   # GET /proyectos/1.json
   def show
+    @proyecto = Proyecto.find(params[:id])
   end
 
   # GET /proyectos/new
   def new
     @proyecto = Proyecto.new
+    authorize @proyecto
   end
 
   # GET /proyectos/1/edit
   def edit
+    @proyecto = Proyecto.find(params[:id])
   end
 
   # POST /proyectos
@@ -69,6 +76,6 @@ class ProyectosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def proyecto_params
-      params.fetch(:proyecto, {})
+      params.require(:proyecto).permit(:titulo, :descripcion, :imagen, :estado)
     end
 end
