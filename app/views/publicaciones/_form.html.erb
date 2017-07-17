@@ -1,0 +1,53 @@
+<div class="content_p android-content mdl-layout__content">
+  <!-- Contenido -->
+  <% if @publicacion.new_record? %>
+      <h2>Agregar Publicación</h2>
+  <% else %>
+      <h2>Editar Publicación</h2>
+  <% end %>
+  <div class="contenido-in form_us mdl-shadow--8dp">
+    <!-- Contenido -->
+    <%= form_for @publicacion do |f|  %>
+        <% if @publicacion.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@publicacion.errors.count, "error") %> No se pudo crear el Indicador:</h2>
+              <ul>
+                <% @publicacion.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+        <div class="mdl-grid">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+            <%= f.text_field  :titulo, :class => 'mdl-textfield__input', :required => "required" %>
+            <label class="mdl-textfield__label" for="kpi_nombre">Titulo</label>
+          </div>
+
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+            <%= f.text_field  :descripcion, :class => 'mdl-textfield__input', :required => "required" %>
+            <label class="mdl-textfield__label" for="kpi_descripcion">Descripción</label>
+          </div>
+        </div>
+        <div class="mdl-grid">
+          <div class="mdl-file mdl-js-file mdl-file--floating-label mdl-cell mdl-cell--6-col">
+            <%= f.file_field :imagen %>
+            <label class="mdl-textfield__label" for="kpi_portada">Portada</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+            <%= f.select :estatus, ['Activo', 'Inactivo', 'Pendiente'],{prompt: ''}, :required => "required", :class => "mdl-textfield__input" %>
+            <label class="mdl-textfield__label" for="estatus">Estatus</label>
+          </div>
+        </div>
+
+        </br>
+
+        <div class="button-container">
+          <button><span>Crear</span></button>
+        </div>
+
+
+    <% end %>
+
+  </div>
+</div>

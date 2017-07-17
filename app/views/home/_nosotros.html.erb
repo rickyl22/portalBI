@@ -1,3 +1,14 @@
+<div class="android-screen-section mdl-typography--text-center grip-nostros">
+  <a name="nosotros"></a>
+  <div class="mdl-typography--display-1-color-contrast titulo-noticias">Entérate del beta</div>
+
+  <h1>SECCION DE NOSOTROS</h1>
+</div>
+
+
+
+
+
 <div class="android-customized-section">
   <div class="android-customized-section-text">
     <div class="mdl-typography--font-light mdl-typography--display-1-color-contrast">Customised by you, for you</div>
@@ -9,29 +20,29 @@
   </div>
   <div class="android-customized-section-image"></div>
 </div>
-
-
 <div class="slideshow-container">
+
   <div class="mySlides fade">
     <div class="numbertext">1 / 3</div>
-    <img class="mySlides" src="assets/k_1.jpg" style="width:100%">
+    <h1>HELLO WORD!!!!!</h1>
     <div class="text">Caption Text</div>
   </div>
 
   <div class="mySlides fade">
     <div class="numbertext">2 / 3</div>
-    <img class="mySlides" src="assets/k_5.jpg" style="width:100%">
+    <img src="assets/k_5.jpg" style="width:100%">
     <div class="text">Caption Two</div>
   </div>
 
   <div class="mySlides fade">
     <div class="numbertext">3 / 3</div>
-    <img class="mySlides" src="assets/k_6.jpg" style="width:100%">
+    <img src="assets/k_6.jpg" style="width:100%">
     <div class="text">Caption Three</div>
   </div>
 
   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
   <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
 </div>
 <br>
 
@@ -40,8 +51,31 @@
   <span class="dot" onclick="currentSlide(2)"></span>
   <span class="dot" onclick="currentSlide(3)"></span>
 </div>
-
 <script>
+  var slideIndex = 1;
+  showSlides(slideIndex);
 
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
 
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "block";
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
+  }
 </script>
