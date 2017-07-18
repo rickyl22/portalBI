@@ -1,14 +1,14 @@
 <script type="text/javascript">
 
 
-
+/*
 
 window.setInterval(function(){
-  /*$.ajax({
+  $.ajax({
     url: "/estadisticas",
     type: 'GET'
     TIME_TO_SEC(TIMEDIFF( ?,created_at)) < 10
-  });*/
+  });
   
   <% @coms = Comentario.where(" DATE(created_at) = ? and TIME(created_at) >= ? ",Time.now.to_date,session[:last_check]) %>
   <% if @coms.length > 0 #and session[:usuario_id] != nil and @coms.where("role_id != ?",current_user.role_id).length > 0%>
@@ -32,7 +32,7 @@ window.setInterval(function(){
     <% session[:last_check] = Time.now.utc.strftime("%H:%M:%S") %>
   <% end %>
 
-}, 10000);
+}, 10000);*/
 </script>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
