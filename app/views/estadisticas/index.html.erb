@@ -7,7 +7,7 @@ function download(){
   var a = document.body.appendChild(
       document.createElement("a")
     );
-  a.download = "Estadisticas.html"
+  a.download = "Estadisticas.html";
   a.href = "data:text/html," + document.getElementById("content").innerHTML;
   a.click();
 
@@ -618,18 +618,12 @@ td.text-right {
       <td style="text-align: center;color: black;background-color: green"><%= @total %></td>
       <td style="text-align: center;color: black;background-color: green"><%= (@incidencias == 0 ? "No hay casos cerrados" : ((@incidencias_cor*100.0/@incidencias).round(2).to_s + "%")) %></td>
     </tr>
-<<<<<<< HEAD
-  </table>
-  </div>
-  <button onClick="download()">Download</button><br><br><br><br>
-  <% end %>
-  
-=======
+
   </table><br><br>
   
   <% end %>
   </div>
   <button onclick="download()" >Descargar Estadisticas</button>
->>>>>>> 6f67bc4a1575e59cfe12c7f02c492b5715b4d621
+
   <% end %>
   </div>

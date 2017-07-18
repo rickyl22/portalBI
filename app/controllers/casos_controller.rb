@@ -72,11 +72,11 @@ class CasosController < ApplicationController
     if @caso.update(caso_params)
       @caso.historial.create(:evento => @estatus, :fecha => Time.now, :usuario_id => current_user.id)
       if @asig and caso_params[:complejidad] != "No Asignada"
-          #AsignadoMailer.asignar(1,2,3,"ricardolira48@hotmail.com").deliver  
+          AsignadoMailer.asignar(1,2,3,Usuario.find(@caso.usuario_id).correo).deliver  
       end 
       if params[:caso][:status] != nil
           if params[:caso][:status] == "BI-Afectado"
-            #AsignadoMailer.asignar(1,2,3,"ricardolira48@hotmail.com").deliver
+            AsignadoMailer.asignar(1,2,3,Usuario.find(@caso.usuario_id).correo).deliver
           end
       end
       redirect_to @caso, notice: 'Caso was successfully updated.'
