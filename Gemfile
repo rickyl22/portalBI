@@ -55,3 +55,4 @@ gem "pundit"
 gem 'bcrypt-ruby', '3.0.0'
 #subida de archivos
 gem 'carrierwave'
+gem 'bootstrap-sass'
