@@ -1449,10 +1449,6 @@ form.button_to{
 }
 
 /* ESTILOS SLIDESHOW*/
-.carousel {
-    margin-bottom: 0;
-    padding: 0 40px 30px 40px;
-}
 /* The controlsy */
 .carousel-control {
     left: -12px;
