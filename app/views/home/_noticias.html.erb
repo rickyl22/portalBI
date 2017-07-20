@@ -2,8 +2,9 @@
   <a name="noticias"></a>
   <div class="mdl-typography--display-1-color-contrast titulo-noticias">Entérate del beta</div>
 
-  <% publicaciones = Publicacion.last(2) %>
+  <% publicaciones = Publicacion.all %>
   <div class=" mdl-grid">
+    <div class="mdl-cell mdl-cell--6-col">
       <% publicaciones.each do |publicacion| %>
             <div class="mdl-cell mdl-cell--6-col">
               <div class="demo-card-wide mdl-card mdl-shadow--4dp mdl-card-kpis mdl-card-noticias">
@@ -20,6 +21,7 @@
               </div>
             </div>
       <% end %>
+    </div>
   </div>
 
 </div>
