@@ -52,7 +52,8 @@ gem 'coffee-script-source', '1.8.0'
 gem "pundit"
 
 #gem 'bcrypt'
-gem 'bcrypt-ruby', '3.0.0'
+#gem 'bcrypt-ruby', '3.0.0'
+gem 'bcrypt-ruby', '3.1.2'
 #subida de archivos
 gem 'carrierwave'
 gem 'bootstrap-sass'
