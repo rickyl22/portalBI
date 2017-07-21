@@ -6,6 +6,9 @@ class CreateComentarios < ActiveRecord::Migration[5.1]
       t.string :autor
       t.integer :caso_id
       t.integer :role_id
+      t.integer :leido_admin
+      t.integer :leido_cons_lid
+      t.integer :leido_cons
       t.belongs_to :caso
 
       t.timestamps

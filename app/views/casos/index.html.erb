@@ -45,6 +45,13 @@
                 </div>
               </div>
               <div class="cont_bottom">
+                <% if admin? and caso.comentarios.where("leido_admin = 0").length > 0 %>
+                  <b style="color: red"><%= caso.comentarios.where("leido_admin = 0").length %> mensajes nuevos</b>
+                <% elsif cons_lid? and caso.comentarios.where("leido_cons_lid = 0").length > 0 %>
+                  <b style="color: red"><%= caso.comentarios.where("leido_cons_lid = 0").length %> mensajes nuevos</b>
+                <% elsif cons? and caso.comentarios.where("leido_cons = 0").length > 0 %>
+                  <b style="color: red"><%= caso.comentarios.where("leido_cons = 0").length %> mensajes nuevos</b>
+                <% end %>
                 <%= link_to  caso, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
                     <i class="material-icons">settings</i>
                 <% end %>
@@ -95,6 +102,13 @@
                 </div>
               </div>
               <div class="cont_bottom">
+                <% if admin? and caso.comentarios.where("leido_admin = 0").length > 0 %>
+                  <b style="color: red"><%= caso.comentarios.where("leido_admin = 0").length %> mensajes nuevos</b>
+                <% elsif cons_lid? and caso.comentarios.where("leido_cons_lid = 0").length > 0 %>
+                  <b style="color: red"><%= caso.comentarios.where("leido_cons_lid = 0").length %> mensajes nuevos</b>
+                <% elsif cons? and caso.comentarios.where("leido_cons = 0").length > 0 %>
+                  <b style="color: red"><%= caso.comentarios.where("leido_cons = 0").length %> mensajes nuevos</b>
+                <% end %>
                 <%= link_to  caso, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
                     <i class="material-icons">settings</i>
                 <% end %>
@@ -137,6 +151,13 @@
                 </div>
               </div>
               <div class="cont_bottom">
+                <% if admin? and caso.comentarios.where("leido_admin = 0").length > 0 %>
+                  <b style="color: red"><%= caso.comentarios.where("leido_admin = 0").length %> mensajes nuevos</b>
+                <% elsif cons_lid? and caso.comentarios.where("leido_cons_lid = 0").length > 0 %>
+                  <b style="color: red"><%= caso.comentarios.where("leido_cons_lid = 0").length %> mensajes nuevos</b>
+                <% elsif cons? and caso.comentarios.where("leido_cons = 0").length > 0 %>
+                  <b style="color: red"><%= caso.comentarios.where("leido_cons = 0").length %> mensajes nuevos</b>
+                <% end %>
                 <%= link_to  caso, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
                     <i class="material-icons">settings</i>
                 <% end %>

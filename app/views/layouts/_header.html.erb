@@ -12,8 +12,7 @@ window.setInterval(function(){
   
   <% @coms = Comentario.where(" DATE(created_at) = ? and TIME(created_at) >= ? ",Time.now.to_date,session[:last_check]) %>
   <% if @coms.length > 0 #and session[:usuario_id] != nil and @coms.where("role_id != ?",current_user.role_id).length > 0%>
-    <% p session[:last_check] %>
-    <% p Comentario.last.created_at %>
+    
     <% session[:last_check] = Time.now.utc.strftime("%H:%M:%S") %>
     <% @caso = Caso.find(@coms.first.caso_id) %>
     if (confirm("Tienes nuevos mensajes en los casos. Presione 'Aceptar' para ver el mensaje, 'Cancelar' para ignorar.")){
@@ -26,9 +25,8 @@ window.setInterval(function(){
     
   <%  else %>
 
-  <% p "dont ja" %>
-  <% p session[:last_check] %>
-    <% p Comentario.last.created_at %>
+  
+    
     <% session[:last_check] = Time.now.utc.strftime("%H:%M:%S") %>
   <% end %>
 

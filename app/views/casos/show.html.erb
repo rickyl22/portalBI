@@ -231,7 +231,7 @@ Asignado a: <b> <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("
 <% end %>
 <% end %><br>
 
-<%= link_to 'Volver', :back %>
+<!--%= #link_to 'Volver', :back %-->
 </td>
 
 
@@ -292,17 +292,36 @@ Asignado a: <b> <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("
 <td class="text-left" style="word-wrap: break-word;">
   <b><%= com.autor %>  -  <%= com.created_at.strftime('%d/%m/%Y %H:%M') %></b><br><br>
   <%= com.texto %>
+  <% if admin? %>
+    <% com.update(:leido_admin => 1) %>
+  <% elsif cons_lid? %>
+    <% com.update(:leido_cons_lid => 1) %>
+  <% elsif cons? %>
+    <% com.update(:leido_cons => 1) %>
+  <% end %>
 </td>
 </tr>
 <% end %>
 <tr><td style="word-wrap: break-word;">
 <% comment = Comentario.new %>
 <%= form_for comment do |form| %>
-
   <div class="field">
     <%= form.label :texto %>
     <%= form.text_area :texto, id: :comentario_texto, :style => 'width:17vw;', :rows => "3" %>
   </div>
+   <% if admin? %> 
+     <%= form.hidden_field :leido_admin, value: 1  %>
+     <%= form.hidden_field :leido_cons, value: 0  %>
+     <%= form.hidden_field :leido_cons_lid, value: 0  %>
+   <% elsif cons_lid? %>
+     <%= form.hidden_field :leido_admin, value: 0  %>
+     <%= form.hidden_field :leido_cons, value: 0  %>
+     <%= form.hidden_field :leido_cons_lid, value: 1  %>
+   <% else %>
+     <%= form.hidden_field :leido_admin, value: 0  %>
+     <%= form.hidden_field :leido_cons, value: 1  %>
+     <%= form.hidden_field :leido_cons_lid, value: 0  %>
+   <% end %>
    <%= form.hidden_field :caso_id, value: @caso.id %>
    <%= form.hidden_field :role_id, value: current_user.role_id %>
    <%= form.hidden_field :fecha, value: Time.now.in_time_zone("Caracas") %>
