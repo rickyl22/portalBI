@@ -1,7 +1,8 @@
 class ProyectosController < ApplicationController
   before_action :set_proyecto, only: [:show, :edit, :update, :destroy]
-  after_action :verify_policy_scoped, :except => [:create, :new]
+  #after_action :verify_policy_scoped, :except => [:create, :new]
   skip_after_action :verify_authorized
+  skip_after_action :verify_policy_scoped
 
   # GET /proyectos
   # GET /proyectos.json

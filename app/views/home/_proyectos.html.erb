@@ -7,24 +7,149 @@
   <div class="android-more-section android-screen-section">
   <div class="android-section-title mdl-typography--display-1-color-contrast titulo-proyecto">Nuestros Proyectos</div>
   <div class="android-card-container mdl-grid">
-    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
-      <div class="mdl-card__media">
-        <img src="assets/more-from-1.png">
-      </div>
-      <div class="mdl-card__title">
-        <h4 class="mdl-card__title-text">Get going on Android</h4>
-      </div>
-      <div class="mdl-card__supporting-text">
-        <span class="mdl-typography--font-light mdl-typography--subhead">Four tips to make your switch to Android quick and easy</span>
-      </div>
-      <div class="mdl-card__actions">
-        <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="">
-          Make the switch
-          <i class="material-icons">chevron_right</i>
-        </a>
-      </div>
-    </div>
+    <% proyectos = Proyecto.all  %>
+      <div id="Carousel2" class="carousel slide">
+        <ol class="carousel-indicators">
+          <li data-target="#Carousel" data-slide-to="0" class="active"></li>
+          <li data-target="#Carousel" data-slide-to="1"></li>
+          <li data-target="#Carousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <!--.item-->
+          <div class="item active">
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media mdl-card__media-proyectos">
+                <%= image_tag(proyectos[0].imagen_url.to_s) %>
+              </div>
+              <div class="mdl-card__supporting-text text-proyecto">
+                <h3 class="mdl-card__title-text"><span><%= proyectos[0].titulo %></span></h3>
+                <br>
+                <div class="descp_proyecto">
+                  <%= proyectos[0].descripcion %>
+                </div>
+              </div>
+            </div>
 
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media mdl-card__media-proyectos">
+                <%= image_tag(proyectos[1].imagen_url.to_s) %>
+              </div>
+              <div class="mdl-card__supporting-text text-proyecto">
+                <h3 class="mdl-card__title-text"><span><%= proyectos[1].titulo %></span></h3>
+                <br>
+                <div class="descp_proyecto">
+                  <%= proyectos[1].descripcion %>
+                </div>
+              </div>
+            </div>
+
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media mdl-card__media-proyectos">
+                <%= image_tag(proyectos[2].imagen_url.to_s) %>
+              </div>
+              <div class="mdl-card__supporting-text text-proyecto">
+                <h3 class="mdl-card__title-text"><span><%= proyectos[2].titulo %></span></h3>
+                <br>
+                <div class="descp_proyecto">
+                  <%= proyectos[2].descripcion %>
+                </div>
+              </div>
+            </div>
+
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media mdl-card__media-proyectos">
+                <%= image_tag(proyectos[3].imagen_url.to_s) %>
+              </div>
+              <div class="mdl-card__supporting-text text-proyecto">
+                <h3 class="mdl-card__title-text"><span><%= proyectos[3].titulo %></span></h3>
+                <br>
+                <div class="descp_proyecto">
+                  <%= proyectos[3].descripcion %>
+                </div>
+              </div>
+            </div>
+
+          </div><!--.item-->
+
+          <!--.item-->
+          <div class="item">
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media mdl-card__media-proyectos">
+                <%= image_tag(proyectos[4].imagen_url.to_s) %>
+              </div>
+              <div class="mdl-card__supporting-text text-proyecto">
+                <h3 class="mdl-card__title-text"><span><%= proyectos[4].titulo %></span></h3>
+                <br>
+                <div class="descp_proyecto">
+                  <%= proyectos[4].descripcion %>
+                </div>
+              </div>
+            </div>
+
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media mdl-card__media-proyectos">
+                <%= image_tag(proyectos[5].imagen_url.to_s) %>
+              </div>
+              <div class="mdl-card__supporting-text text-proyecto">
+                <h3 class="mdl-card__title-text"><span><%= proyectos[5].titulo %></span></h3>
+                <br>
+                <div class="descp_proyecto">
+                  <%= proyectos[5].descripcion %>
+                </div>
+              </div>
+            </div>
+
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media mdl-card__media-proyectos">
+                <%= image_tag(proyectos[6].imagen_url.to_s) %>
+              </div>
+              <div class="mdl-card__supporting-text text-proyecto">
+                <h3 class="mdl-card__title-text"><span><%= proyectos[6].titulo %></span></h3>
+                <br>
+                <div class="descp_proyecto">
+                  <%= proyectos[6].descripcion %>
+                </div>
+              </div>
+            </div>
+
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media mdl-card__media-proyectos">
+                <%= image_tag(proyectos[7].imagen_url.to_s) %>
+              </div>
+              <div class="mdl-card__supporting-text text-proyecto">
+                <h3 class="mdl-card__title-text"><span><%= proyectos[7].titulo %></span></h3>
+                <br>
+                <div class="descp_proyecto">
+                  <%= proyectos[7].descripcion %>
+                </div>
+              </div>
+            </div>
+
+          </div><!--.item-->
+
+          <!--.item-->
+          <div class="item">
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+              <div class="mdl-card__media mdl-card__media-proyectos">
+                <%= image_tag(proyectos[8].imagen_url.to_s) %>
+              </div>
+              <div class="mdl-card__supporting-text text-proyecto">
+                <h3 class="mdl-card__title-text"><span><%= proyectos[8].titulo %></span></h3>
+                <br>
+                <div class="descp_proyecto">
+                  <%= proyectos[8].descripcion %>
+                </div>
+              </div>
+            </div>
+
+          </div><!--.item-->
+
+        </div><!--.carousel-inner-->
+        <a data-slide="prev" href="#Carousel2" class="left carousel-control carousel-control-p"><i class="material-icons">chevron_left</i></a>
+        <a data-slide="next" href="#Carousel2" class="right carousel-control carousel-control-p"><i class="material-icons">chevron_right</i></a>
+
+
+      </div><!--.Carousel2-->
 
   </div>
 

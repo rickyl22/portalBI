@@ -123,7 +123,6 @@ a img{
 
 .android-navigation .mdl-navigation__link:hover {
     border-bottom: 4px solid #002d3e;
-    text-decoration: none;
 }
 
 .android-search-box {
@@ -1084,12 +1083,15 @@ body {
         opacity: 0;
     }
 }
-
-
-
-
-
-
+a {
+    text-decoration: none!important;
+}
+#view-source{
+    background-color: #01cc01!important;
+}
+.mdl-textfield__label{
+    margin-bottom: 0px!important;
+}
 
 /* MENU */
 .sub-menu  {
@@ -1127,7 +1129,7 @@ body {
     width: 10%;
 }
 .contenido-in{
-    width: 60%;
+    width: 65%;
     margin-top: 50px;
 }
 .mdl-card__supporting-text-im{
@@ -1217,7 +1219,7 @@ body {
 }
 
 .form_us{
-    width: 45%;
+    width: 65%;
     padding: 20px 50px;
     background-color: white;
 
@@ -1254,10 +1256,8 @@ body {
     color: #002d3e;
     width: 100%;
     background: white;
-   /* opacity: 0.7;*/
     padding: 5px 20px;
     font-weight: 500;
-
 }
 .mdl-card-kpis {
     text-align: left;
@@ -1273,7 +1273,6 @@ body {
     display: flex;
     /*display: -webkit-inline-box;*/
 }
-
 .boton_act_kpis{
     display: inline-flex;
 }
@@ -1287,6 +1286,16 @@ body {
     border-color: darkgray!important;
     color: darkgray!important;
     font-size: 14px!important;
+}
+.mdl-text-area{
+    width: 100%;
+    min-height: 80px;
+    text-align: left;
+}
+.text-area-d{
+    font-size: 14px;
+    color: darkgrey;
+    text-align: left;
 }
 
 /* SHOW KPI*/
@@ -1396,14 +1405,36 @@ form.button_to{
     width: 250px!important;
 }
 .mdl-card-noticias .mdl-card__supporting-text{
-    width: 42%;
+    width: 49%;
 }
 .mdl-card-noticias .mdl-card__supporting-text h3{
     font-size: 20px;
 }
-.mdl-card-noticias .mdl-card__supporting-text p{
-    font-size: 12px;
+.mdl-card-noticias .mdl-card__supporting-text .descp_noticia{
+    font-size: 12px!important;
+    min-height: 100px;
+    max-height: 105px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+.descp_noticia{
+    font-size: 12px!important;
+    min-height: 100px;
+    max-height: 105px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ver_noticia {
+    font-size: 13px;
+    text-align: right;
+    color: #01cc01!important;
+    text-decoration: none!important;
+}
+.ver_noticia:hover{
+    color: #1eb6e5!important;
+}
+
 .grip-noticias{
     background-color: white;
     padding: 0px 70px!important;
@@ -1422,12 +1453,29 @@ form.button_to{
     height: 50px;
 }
 .grip-proyectos{
-    margin-top: 40px;
+    margin-top: 90px;
 }
 .grip-nostros{
     background-color: white;
 }
-
+.mdl-card-noticias{
+    max-height: 270px;
+}
+.mdl-card__media-proyectos img{
+    min-height: 181px;
+    max-height: 181px;
+}
+.text-proyecto{
+    width: 100%!important;
+}
+.descp_proyecto{
+    font-size: 12px!important;
+    min-height: 120px;
+    max-height: 125px;
+    padding-bottom: 0px!important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 /*ESTILO DE LAS NOTICIAS*/
 .mdl-card-index-ntc{
@@ -1447,32 +1495,59 @@ form.button_to{
 .index-noticia > .mdl-card__title img{
     width: 150px!important;
 }
+.mdl-file{
+    padding-top: 23px;
+    padding-right: 10%;
+}
 
 /* ESTILOS SLIDESHOW*/
-/* The controlsy */
 .carousel-control {
     left: -12px;
     height: 40px;
-    width: 40px;
-    background: none repeat scroll 0 0 #222222;
-    border: 4px solid #FFFFFF;
-    border-radius: 23px 23px 23px 23px;
+    width: 60px!important;
     margin-top: 90px;
+    background: none!important;
 }
-.carousel-control.right {
-    right: -12px;
+.carousel-control-p {
+    margin-top: 200px;
+}
+.carousel-control i {
+    padding-top: 4px;
+    color: #01cc01;
+    font-size: 45px;
+}
+.carousel-control.right i{
+    padding-left: 8px;
+}
+.carousel-control.left i{
+    padding-right: 8px;
 }
 /* The indicators */
 .carousel-indicators {
     right: 50%;
     top: auto;
-    bottom: -10px;
+    bottom: -10px!important;
     margin-right: -19px;
 }
 /* The colour of the indicators */
 .carousel-indicators li {
-    background: #cecece;
+    background: gray!important;
 }
 .carousel-indicators .active {
-    background: #428bca;
+    background: #01cc01!important;
 }
+
+.carousel-control.right{
+    right: -50px!important;
+}
+.carousel-control.left{
+    left: -50px!important;
+}
+/*CAROUSEL NOTICIAS*/
+.carousel{
+    width: 100%;
+}
+.item.active{
+    display: -webkit-box!important;
+}
+
