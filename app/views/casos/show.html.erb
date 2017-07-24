@@ -246,7 +246,7 @@ Asignado a: <b> <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("
            <b>Eliminado </b><br>
         <% else %>
         <%= link_to "Descargar", doc.attachment_url, :style => 'color:blue' %>
-          <% if cli? and doc.estatus != "Borrado" %>
+          <% if (cli? or session[:usuario_id] == @caso.usuario_id) and doc.estatus != "Borrado" %>
               <%= button_to "Borrar",  doc, method: :delete %>
           <% else %>
             <br>     
@@ -257,7 +257,7 @@ Asignado a: <b> <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("
   </tr>
   
     
-    <% if cli? and @caso.complejidad == "No Asignada" and @caso.documentos.where("estatus != 'Borrado'").length < 5 %>
+    <% if (cli? or session[:usuario_id] == @caso.usuario_id)  and @caso.complejidad == "No Asignada" and @caso.documentos.where("estatus != 'Borrado'").length < 5 %>
     <tr><td style="word-wrap: break-word;">
   <%  @documento = Documento.new %>
   <%= form_for @documento, multipart: true do |doc|  %>
@@ -273,9 +273,9 @@ Asignado a: <b> <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("
 
 
   </td></tr>
-<% elsif cli? and @caso.complejidad == "No Asignada" %>
+<% elsif (cli? or session[:usuario_id] == @caso.usuario_id) and @caso.complejidad == "No Asignada" %>
    <tr><td><span style="font-size: 2.2em">&#9888</span>  <%= "Solo se permite cargar un maximo de 5 documentos" %></td></tr>
-<% elsif cli? %>
+<% elsif (cli? or session[:usuario_id] == @caso.usuario_id) %>
    <tr><td><span style="font-size: 2.2em">&#9888</span>  <%= "No se puede cargar documentos luego de asignar el caso" %></td></tr>
 <% end %><br>
   

@@ -82,11 +82,11 @@ class CasosController < ApplicationController
          @dias = 3
       end
       if @asig and caso_params[:complejidad] != "No Asignada"
-          #AsignadoMailer.asignar(@caso.complejidad,@caso.titulo,@dias,Usuario.find(@caso.usuario_id).correo).deliver  
+          AsignadoMailer.asignar(@caso.complejidad,@caso.titulo,@dias,Usuario.find(@caso.usuario_id).correo).deliver  
       end 
       if params[:caso][:status] != nil
           if params[:caso][:status] == "BI-Afectado"
-            #AsignadoMailer.bi_afectado(Usuario.find(@caso.usuario_id).correo,@caso.titulo).deliver
+            AsignadoMailer.bi_afectado(Usuario.find(@caso.usuario_id).correo,@caso.titulo).deliver
           end
       end
       redirect_to @caso, notice: 'Caso was successfully updated.'
