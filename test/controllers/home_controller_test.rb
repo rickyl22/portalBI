@@ -6,7 +6,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get noticia" do
+  test "should get noticias" do
     get home_noticia_url
     assert_response :success
   end

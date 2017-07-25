@@ -31,7 +31,8 @@
             </br>
             <%= "Justificacioń: "+@usuario.justificacion %>
             </br>
-            <%= "Estatus: "+@usuario.estatus %>
+              <%= "Estatus: Pendiente" if (@usuario.estatus == false) %>
+              <%= "Estatus: Aprobado" if (@usuario.estatus == true) %>
           </p>
         </div>
 

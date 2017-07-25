@@ -1,33 +1,47 @@
 <div class="android-screen-section mdl-typography--text-center grip-noticias">
   <a name="noticias"></a>
   <div class="mdl-typography--display-1-color-contrast titulo-noticias">Entérate</div>
-  <% publicaciones = Publicacion.all  %>
+  <% publicaciones = Publicacion.all
+    cant_slider = publicaciones.length / 2
+    if (publicaciones.length % 2 != 0)
+      cant_slider = cant_slider + 1
+    end
+    cant_noticia = publicaciones.length
+    i = 0
+    t = 0
+  %>
 
-    <div class="mdl-grid">
-        <div id="Carousel" class="carousel slide">
+  <div class="mdl-grid">
+    <div id="CarouselNoticias" class="carousel slide">
+      <ol class="carousel-indicators carousel-indicators-noticias">
+        <% while t<cant_slider %>
+            <% if t == 0 %>
+                <li data-target="#CarouselNoticias" data-slide-to="<%= t %>" class="active"></li>
+            <% else %>
+                <li data-target="#CarouselNoticias" data-slide-to="<%=t %>"></li>
+            <% end %>
+            <% t = t+1 %>
+        <% end %>
+      </ol>
 
-          <ol class="carousel-indicators">
-            <li data-target="#Carousel" data-slide-to="0" class="active"></li>
-            <li data-target="#Carousel" data-slide-to="1"></li>
-          </ol>
-
-          <!-- Carousel items -->
-          <div class="carousel-inner">
-
-            <div class="item active">
+      <div class="carousel-inner">
+        <% while i < cant_noticia %>
+          <% if i == 0%>
+            <% if (i+1) < cant_noticia %>
+              <div class="item active">
                 <div class="mdl-cell mdl-cell--6-col">
                   <div class="demo-card-wide mdl-card mdl-shadow--4dp mdl-card-kpis mdl-card-noticias">
                     <div class="mdl-card__title mdl-card__title-kpi">
-                      <%= image_tag(publicaciones[0].imagen_url.to_s) %>
+                      <%= image_tag(publicaciones[i].imagen_url.to_s) %>
                     </div>
                     <div class="mdl-card__supporting-text">
-                      <h3 class="mdl-card__title-text"><span><%= publicaciones[0].titulo %></span></h3>
+                      <h3 class="mdl-card__title-text"><span><%= publicaciones[i].titulo %></span></h3>
                       <br>
                       <div class="descp_noticia">
-                        <%= publicaciones[0].descripcion %>
+                        <%= publicaciones[i].descripcion %>
                       </div>
                       <br>
-                      <%= link_to publicaciones[0],id:"ver_ntc_#{publicaciones[1].id}", class:"ver_noticia" do%>
+                      <%= link_to publicaciones[i],id:"ver_ntc_#{publicaciones[i].id}", class:"ver_noticia" do%>
                           VER NOTICIA
                       <% end %>
                     </div>
@@ -37,76 +51,123 @@
                 <div class="mdl-cell mdl-cell--6-col">
                   <div class="demo-card-wide mdl-card mdl-shadow--4dp mdl-card-kpis mdl-card-noticias">
                     <div class="mdl-card__title mdl-card__title-kpi">
-                      <%= image_tag(publicaciones[1].imagen_url.to_s) %>
+                      <%= image_tag(publicaciones[i+1].imagen_url.to_s) %>
                     </div>
                     <div class="mdl-card__supporting-text">
-                      <h3 class="mdl-card__title-text"><span><%= publicaciones[1].titulo %></span></h3>
+                      <h3 class="mdl-card__title-text"><span><%= publicaciones[i+1].titulo %></span></h3>
                       <br>
                       <div class="descp_noticia">
-                        <%= publicaciones[1].descripcion %>
+                        <%= publicaciones[i+1].descripcion %>
                       </div>
                       <br>
-                      <%= link_to publicaciones[1],id:"ver_ntc_#{publicaciones[1].id}", class:"ver_noticia" do%>
+                      <%= link_to publicaciones[i+1],id:"ver_ntc_#{publicaciones[i+1].id}", class:"ver_noticia" do%>
                           VER NOTICIA
                       <% end %>
                     </div>
                   </div>
                 </div>
-
-            </div><!--.item-->
-
-
-            <div class="item">
-              <div class="mdl-cell mdl-cell--6-col">
-                <div class="demo-card-wide mdl-card mdl-shadow--4dp mdl-card-kpis mdl-card-noticias">
-                  <div class="mdl-card__title mdl-card__title-kpi">
-                    <%= image_tag(publicaciones[0].imagen_url.to_s) %>
-                  </div>
-                  <div class="mdl-card__supporting-text">
-                    <h3 class="mdl-card__title-text"><span><%= publicaciones[0].titulo %></span></h3>
-                    <br>
-                    <div class="descp_noticia">
-                      <%= publicaciones[0].descripcion %>
+              </div>
+              <% i = i+2 %>
+            <% else %>
+              <!-- Items -->
+              <div class="item active">
+                <div class="mdl-cell mdl-cell--6-col">
+                  <div class="demo-card-wide mdl-card mdl-shadow--4dp mdl-card-kpis mdl-card-noticias">
+                    <div class="mdl-card__title mdl-card__title-kpi">
+                      <%= image_tag(publicaciones[i].imagen_url.to_s) %>
                     </div>
-                    <br>
-                    <%= link_to publicaciones[0],id:"ver_ntc_#{publicaciones[1].id}", class:"ver_noticia" do%>
-                        VER NOTICIA
-                    <% end %>
+                    <div class="mdl-card__supporting-text">
+                      <h3 class="mdl-card__title-text"><span><%= publicaciones[i].titulo %></span></h3>
+                      <br>
+                      <div class="descp_noticia">
+                        <%= publicaciones[i].descripcion %>
+                      </div>
+                      <br>
+                      <%= link_to publicaciones[i],id:"ver_ntc_#{publicaciones[i].id}", class:"ver_noticia" do%>
+                          VER NOTICIA
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              <div class="mdl-cell mdl-cell--6-col">
-                <div class="demo-card-wide mdl-card mdl-shadow--4dp mdl-card-kpis mdl-card-noticias">
-                  <div class="mdl-card__title mdl-card__title-kpi">
-                    <%= image_tag(publicaciones[1].imagen_url.to_s) %>
-                  </div>
-                  <div class="mdl-card__supporting-text">
-                    <h3 class="mdl-card__title-text"><span><%= publicaciones[1].titulo %></span></h3>
-                    <br>
-                    <div class="descp_noticia">
-                      <%= publicaciones[1].descripcion %>
+              <% i = i+2 %>
+            <% end %>
+          <% else %>
+            <% if (i+1) < cant_noticia %>
+                <div class="item">
+                  <div class="mdl-cell mdl-cell--6-col">
+                    <div class="demo-card-wide mdl-card mdl-shadow--4dp mdl-card-kpis mdl-card-noticias">
+                      <div class="mdl-card__title mdl-card__title-kpi">
+                        <%= image_tag(publicaciones[i].imagen_url.to_s) %>
+                      </div>
+                      <div class="mdl-card__supporting-text">
+                        <h3 class="mdl-card__title-text"><span><%= publicaciones[i].titulo %></span></h3>
+                        <br>
+                        <div class="descp_noticia">
+                          <%= publicaciones[i].descripcion %>
+                        </div>
+                        <br>
+                        <%= link_to publicaciones[i],id:"ver_ntc_#{publicaciones[i].id}", class:"ver_noticia" do%>
+                            VER NOTICIA
+                        <% end %>
+                      </div>
                     </div>
-                    <br>
-                    <%= link_to publicaciones[1],id:"ver_ntc_#{publicaciones[1].id}", class:"ver_noticia" do%>
-                        VER NOTICIA
-                    <% end %>
+                  </div>
+
+                  <div class="mdl-cell mdl-cell--6-col">
+                    <div class="demo-card-wide mdl-card mdl-shadow--4dp mdl-card-kpis mdl-card-noticias">
+                      <div class="mdl-card__title mdl-card__title-kpi">
+                        <%= image_tag(publicaciones[i+1].imagen_url.to_s) %>
+                      </div>
+                      <div class="mdl-card__supporting-text">
+                        <h3 class="mdl-card__title-text"><span><%= publicaciones[i+1].titulo %></span></h3>
+                        <br>
+                        <div class="descp_noticia">
+                          <%= publicaciones[i+1].descripcion %>
+                        </div>
+                        <br>
+                        <%= link_to publicaciones[i+1],id:"ver_ntc_#{publicaciones[i+1].id}", class:"ver_noticia" do%>
+                            VER NOTICIA
+                        <% end %>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+                <% i = i+2 %>
+            <% else %>
+                <!-- Items -->
+                <div class="item">
+                  <div class="mdl-cell mdl-cell--6-col">
+                    <div class="demo-card-wide mdl-card mdl-shadow--4dp mdl-card-kpis mdl-card-noticias">
+                      <div class="mdl-card__title mdl-card__title-kpi">
+                        <%= image_tag(publicaciones[i].imagen_url.to_s) %>
+                      </div>
+                      <div class="mdl-card__supporting-text">
+                        <h3 class="mdl-card__title-text"><span><%= publicaciones[i].titulo %></span></h3>
+                        <br>
+                        <div class="descp_noticia">
+                          <%= publicaciones[i].descripcion %>
+                        </div>
+                        <br>
+                        <%= link_to publicaciones[i],id:"ver_ntc_#{publicaciones[i].id}", class:"ver_noticia" do%>
+                            VER NOTICIA
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% i = i+2 %>
+            <% end %>
+          <% end %>
+        <% end %>
 
-            </div><!--.item-->
+      </div>
+      <a data-slide="prev" href="#CarouselNoticias" class="left carousel-control carousel-control-noticias"><i class="material-icons">chevron_left</i></a>
+      <a data-slide="next" href="#CarouselNoticias" class="right carousel-control carousel-control-noticias"><i class="material-icons">chevron_right</i></a>
 
+    </div>
+  </div>
 
-
-
-
-          </div><!--.carousel-inner-->
-          <a data-slide="prev" href="#Carousel" class="left carousel-control"><i class="material-icons">chevron_left</i></a>
-          <a data-slide="next" href="#Carousel" class="right carousel-control"><i class="material-icons">chevron_right</i></a>
-        </div><!--.Carousel-->
-
-    </div><!--.mdl-grip-->
 
 </div>
 

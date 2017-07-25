@@ -20,22 +20,22 @@
 
               <div class="mdl-card__actions mdl-card--border">
                 <div class="boton_act_kpis">
-                  <%= link_to  edit_publicacion_path(proyecto), id:"edit_kpi_#{proyecto.id}", class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect bnt_act" do%>
+                  <%= link_to  edit_proyecto_path(proyecto), id:"edit_proyecto_#{proyecto.id}", class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect bnt_act" do%>
                       <i class="material-icons">edit</i>
                   <% end %>
-                  <div class="mdl-tooltip" data-mdl-for="edit_kpi_<%=proyecto.id%>">
+                  <div class="mdl-tooltip" data-mdl-for="edit_proyecto_<%=proyecto.id%>">
                     Editar Proyecto:  <strong><%=proyecto.titulo%></strong>
                   </div>
-                  <%= button_to publicacion_path(proyecto),id:"delete_kpi_#{proyecto.id}", class:"mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect bnt_act",:method => "delete" do%>
+                  <%= button_to proyecto_path(proyecto),id:"delete_proyecto_#{proyecto.id}", class:"mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect bnt_act",:method => "delete" do%>
                       <i class="material-icons">delete</i>
                   <% end %>
-                  <div class="mdl-tooltip" data-mdl-for="delete_kpi_<%=proyecto.id%>">
+                  <div class="mdl-tooltip" data-mdl-for="delete_proyecto_<%=proyecto.id%>">
                     Eliminar Proyecto:  <strong><%=proyecto.titulo%></strong>
                   </div>
-                  <%= link_to proyecto,id:"ver_kpi_#{proyecto.id}", class:"mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect bnt_act" do%>
+                  <%= link_to proyecto,id:"ver_proyecto_#{proyecto.id}", class:"mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect bnt_act" do%>
                       <i class="material-icons">visibility</i>
                   <% end %>
-                  <div class="mdl-tooltip" data-mdl-for="ver_kpi_<%=proyecto.id%>">
+                  <div class="mdl-tooltip" data-mdl-for="ver_proyecto_<%=proyecto.id%>">
                     Ver Proyecto:  <strong><%=proyecto.titulo%></strong>
                   </div>
                 </div>

@@ -10,9 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607140207) do
+ActiveRecord::Schema.define(version: 20170717143637) do
 
-  create_table "privilegios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "kpis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.text "nombre"
+    t.text "descripcion"
+    t.text "portada"
+    t.text "dashboard"
+    t.text "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "noticia", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.text "imagen"
+    t.text "titulo"
+    t.text "descripcion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "permisos_asignados", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "privilegio_id"
+    t.bigint "role_id"
+    t.bigint "usuario_id"
+    t.integer "recurso"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["privilegio_id"], name: "index_permisos_asignados_on_privilegio_id"
+    t.index ["role_id"], name: "index_permisos_asignados_on_role_id"
+    t.index ["usuario_id"], name: "index_permisos_asignados_on_usuario_id"
+  end
+
+  create_table "privilegios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "nombre"
     t.string "descripcion"
     t.string "modulo"
@@ -20,7 +50,25 @@ ActiveRecord::Schema.define(version: 20170607140207) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "proyectos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.text "imagen"
+    t.text "titulo"
+    t.text "descripcion"
+    t.text "area"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "publicaciones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.text "titulo"
+    t.text "descripcion"
+    t.text "imagen"
+    t.text "estatus"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "alias"
     t.string "descripcion"
     t.string "nombre"
@@ -28,14 +76,17 @@ ActiveRecord::Schema.define(version: 20170607140207) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "roles_privilegios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "privilegio_id"
-    t.string "role_id"
+  create_table "roles_privilegios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "privilegio_id"
+    t.bigint "role_id"
+    t.integer "alcance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["privilegio_id"], name: "index_roles_privilegios_on_privilegio_id"
+    t.index ["role_id"], name: "index_roles_privilegios_on_role_id"
   end
 
-  create_table "usuarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "usuarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "usuario"
     t.string "codigo_empleado"
     t.string "area"
@@ -47,8 +98,9 @@ ActiveRecord::Schema.define(version: 20170607140207) do
     t.string "apellido"
     t.string "supervisor"
     t.string "justificacion"
-    t.string "estatus"
+    t.boolean "estatus"
     t.string "password_digest"
+    t.integer "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

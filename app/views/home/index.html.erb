@@ -3,17 +3,53 @@
 <!-- Contenido -->
   <div class="android-content mdl-layout__content">
     <div class="android-be-together-section mdl-typography--text-center">
-      <div class="logo-font android-slogan">Texto Principal</div>
-      <div class="logo-font android-sub-slogan">Que colocar aca? Sliders? o asi como esta una imagen de fondo y ya... </div>
-      <div class="logo-font android-create-character">
-        <a href=""><img src="assets/andy.png"> create your android character</a>
+      <div class="home_slider">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+          </ol>
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <div class="item active item-home">
+              <img src="assets/slider_home_5.jpg" alt="Los Angeles" style="width:100%;">
+              <div class="carousel-caption">
+                <h1>Portal de Mercadeo</h1>
+                <p>Bienvenidos al portal de Mercadeo</p>
+              </div>
+            </div>
+
+            <div class="item item-home">
+              <img src="assets/slide3.jpg" alt="Los Angeles" style="width:100%;">
+              <div class="carousel-caption">
+                <h1>Mineria</h1>
+                <p>Realice seguimiento a sus casos de Mineria</p>
+              </div>
+            </div>
+
+            <div class="item item-home">
+              <img src="assets//slide2.jpg" alt="Los Angeles" style="width:100%;">
+              <div class="carousel-caption">
+                <h1>Noticias y más</h1>
+                <p></p>
+              </div>
+            </div>
+
+            <div class="item item-home">
+              <img src="assets/slider_home_4.jpg" alt="Los Angeles" style="width:100%;">
+              <div class="carousel-caption">
+                <h1>Gestión de los indicadores del Área</h1>
+                <p>Obtenga una visión de como esta el negocio a través de indicadores</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
 
-      <a href="#noticias">
-        <button class="android-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect btn-noticias">
-          <i class="material-icons">expand_more</i>
-        </button>
-      </a>
     </div>
 
     <!-- Lista de las noticias a mostrar en el portal  -->

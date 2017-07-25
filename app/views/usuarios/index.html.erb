@@ -12,10 +12,13 @@
           <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
               <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
                 <h5>
-                  <%= "Nombre: "+usuario.nombre+" "+usuario.apellido %>
+                  <strong><%= "Nombre: "+usuario.nombre+" "+usuario.apellido %></strong>
                 </h5>
                 <p>
                   <%= "Cargo: "+usuario.cargo %>
+                  </br>
+                  <%= "Estatus: Pendiente" if (usuario.estatus == false) %>
+                  <%= "Estatus: Aprobado" if (usuario.estatus == true) %>
                 </p>
               </div>
               <div class="mdl-card__actions us_cart_actions">
@@ -35,8 +38,6 @@
                     <%= "Supervisor: "+usuario.supervisor %>
                     </br>
                     <%= "Justificacioń: "+usuario.justificacion %>
-                    </br>
-                    <%= "Estatus: "+usuario.estatus %>
                   </p>
                 </div>
               </div>
@@ -60,3 +61,4 @@
 
   </div>
   </div>
+<a href="/usuarios/new" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Agregar Usuario</a>

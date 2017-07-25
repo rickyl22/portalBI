@@ -12,7 +12,7 @@ class CreateUsuarios < ActiveRecord::Migration[5.1]
       t.string :apellido
       t.string :supervisor
       t.string :justificacion
-      t.string :estatus
+      t.boolean :estatus
       t.string :password_digest
       t.integer :role_id
 

@@ -3,31 +3,16 @@ class MenusController < ApplicationController
   skip_after_action :verify_policy_scoped
   skip_after_action :verify_authorized
 
-  def index
+  def menu_principal
     @usuario = Usuario.find(current_user.id)
-    @usuarios_pendientes = Usuario.where("estatus = ?", "Pendiente")
-    #@casos_recientes = Caso.where().ord
-    @indicadores_recientes = Kpi.all
-
-   # p "Indicadores "+@indicadores_recientes.inspect
-
+    @usuarios_pendientes = Usuario.where("estatus = ?", "0")
+    #@casos_recientes = Caso.all.ord.order("id DESC")
+    @indicadores_recientes = Kpi.all.order("id DESC")
   end
 
-  def new
+  def menu_ind
   end
 
-  def create
-  end
-
-  def show
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
+  def menu_min
   end
 end

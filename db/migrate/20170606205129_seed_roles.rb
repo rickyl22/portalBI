@@ -7,6 +7,8 @@ class SeedRoles < ActiveRecord::Migration[5.1]
     execute "INSERT INTO roles (alias, nombre, descripcion, created_at, updated_at) VALUES ('cons','Consultor','Rol utilizado por el proveedor para realizar los casos', NOW(), NOW())"
     execute "INSERT INTO roles (alias, nombre, descripcion, created_at, updated_at) VALUES ('cli','Cliente','Cliente que solicita los casos', NOW(), NOW())"
     execute "INSERT INTO roles (alias, nombre, descripcion, created_at, updated_at) VALUES ('cli_ind','Cliente de Indicadores','Cliente que puede visualizar los indicadores', NOW(), NOW())"
+    execute "INSERT INTO roles (alias, nombre, descripcion, created_at, updated_at) VALUES ('pendiente','Rol por definir','Rol por defecto de los usuarios pendientes por aprobacion', NOW(), NOW())"
+
 
 
   end

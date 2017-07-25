@@ -29,20 +29,17 @@
           </div>
         </div>
         <div class="mdl-grid">
-          <div class="mdl-file mdl-js-file mdl-file--floating-label mdl-cell mdl-cell--6-col mdl-file">
+          <div class="mdl-file mdl-js-file mdl-file--floating-label mdl-cell mdl-cell--12-col mdl-file">
             <%= f.file_field :imagen %>
             <label class="mdl-textfield__label" for="publicacion_imagen">Portada</label>
           </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-            <%= f.select :estatus, ['Activo', 'Inactivo', 'Pendiente'],{prompt: ''}, :required => "required", :class => "mdl-textfield__input" %>
-            <label class="mdl-textfield__label" for="publicacion_estatus">Estatus</label>
-          </div>
+
         </div>
 
         </br>
 
         <div class="button-container">
-          <button><span>Crear</span></button>
+          <button><span>Enviar</span></button>
         </div>
 
 

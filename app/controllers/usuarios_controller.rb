@@ -8,22 +8,33 @@ class UsuariosController < ApplicationController
   #after_action :verify_authorized, :only => :index
 
   def index
-    p "Entra index"
     @usuarios = Usuario.all
     authorize @usuarios
     @usuarios = policy_scope(Usuario)
     #reset_session
-    p "Usuario d ela sesion index "+session[:usuario_id].inspect
   end
 
   def create
     @usuario = Usuario.create(usuario_params)
     authorize @usuario
+    if (params[:solicitud_reg])
+      p "Es una solicitud de registro de usuario"
+      @usuario.estatus = 0
+      @usuario.role_id = 8
+    end
+
     if @usuario.save
-      p "Usuario d ela sesion create "+session[:usuario_id].inspect
-      redirect_to login_path, notice: 'Petición enviada'
+      if logged_in?
+        redirect_to usuarios_path
+      else
+        redirect_to login_path, notice: 'Petición enviada'
+      end
     else
-      redirect_to login_path, error: 'Error creando usuario'
+      if logged_in?
+        redirect_to usuarios_path
+      else
+        redirect_to login_path, error: 'Error creando usuario'
+      end
     end
 
   end
@@ -40,14 +51,29 @@ class UsuariosController < ApplicationController
 
   def show
    @usuario = Usuario.find(params[:id])
-   p "Usuario d ela sesion show "+session[:usuario_id].inspect
+   respond_to do |format|
+     format.html
+     format.json {
+       if params[:checked]
+         @usuario.estatus = 1
+         @usuario.role_id = params[:rol_id]
+       else
+         @usuario.estatus = 0
+         @usuario.role_id = 8
+       end
+       @usuario.password_digest = @usuario.password_digest
+       @usuario.save
+       render json: @usuario }
+   end
+
+
    #authorize @usuario
   end
 
   def update
     @usuario = Usuario.find(params[:id])
     # authorize @usuario
-    if @usuario.update_attributes(set_usuario)
+    if @usuario.update_attributes(usuario_params)
       redirect_to @usuario,  notice: 'Usuario actualizado'
     else
       render 'edit', error: 'Error actualizando usuario'
@@ -55,17 +81,15 @@ class UsuariosController < ApplicationController
   end
 
   def destroy
+
     @usuario = Usuario.find(params[:id])
     @usuario.destroy
-    p"Antes de hacer redirect"
-    redirect_to usuarios_path, notice: 'Usuario #{@usuario.codigo_empleado} eliminado'
+    redirect_to usuarios_path, notice: "Usuario #{@usuario.nombre} - #{@usuario.codigo_empleado} Eliminado"
   end
 
   private
     def set_usuario
-      p"ENTRA ACAAA "+params[:id].inspect
       @usuario = Usuario.find(params[:id])
-      p "Usiaro "+@usuario.inspect
       authorize @usuario
       @usuario = policy_scope(Usuario).find(params[:id])
     end

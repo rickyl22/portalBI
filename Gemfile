@@ -57,3 +57,6 @@ gem 'bcrypt-ruby', '3.1.2'
 #subida de archivos
 gem 'carrierwave'
 gem 'bootstrap-sass'
+#Busqueda sobre elasticsearch
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'

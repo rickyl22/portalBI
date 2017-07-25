@@ -12,13 +12,26 @@
       <div class="android-navigation-container">
         <nav class="android-navigation mdl-navigation">
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/">Inicio</a>
-          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="#noticias">Noticias</a>
-          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="#project">Proyectos</a>
-          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="#nosotros">Nosotros</a>
+          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/#noticias">Noticias</a>
+          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/#project">Proyectos</a>
+          <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/#nosotros">Nosotros</a>
           <% if logged_in? %>
-              <%= button_to "Salir",logout_path,:method => "delete", :class => "mdl-navigation__link mdl-typography--text-uppercase btn-sesion" %>
+              <% if admin? %>
+                  <a class="mdl-navigation__link link_res" href="/menus/menu_principal"> MI CUENTA</a>
+              <% elsif admin_min? %>
+                  <a class="mdl-navigation__link link_res" href="/menus/menu_min"> MI CUENTA</a>
+              <% elsif admin_ind? %>
+                  <a class="mdl-navigation__link link_res" href="/menus/menu_ind"> MI CUENTA</a>
+              <% elsif cons? %>
+                  <a class="mdl-navigation__link link_res" href="/menus/menu_consultor"> MI CUENTA</a>
+              <% elsif cons_lid? %>
+                  <a class="mdl-navigation__link link_res" href="/menus/menu_consultor_lid"> MI CUENTA</a>
+              <% elsif cli? %>
+                  <a class="mdl-navigation__link link_res" href="/menus/menu_cliente"> MI CUENTA</a>
+              <% end %>
+              <%= button_to "Salir",logout_path,:method => "delete", :class => "mdl-navigation__link mdl-typography--text-uppercase btn-sesion link_res" %>
         <% else %>
-              <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/login">Ingresar</a>
+              <a class="mdl-navigation__link mdl-typography--text-uppercase link_res" href="/login">Ingresar</a>
           <% end %>
         </nav>
       </div>
@@ -37,15 +50,14 @@
     <nav class="mdl-navigation">
       <!-- Opciones Administrador -->
       <% if admin? %>
-          <!-- Mi cuenta -->
+       <!-- Mi cuenta -->
        <span class="mdl-navigation__link menu" href="#">
           Mi Cuenta
          <i class="material-icons list">face</i>
         </span>
           <div id="mineria" class="sub-menu-container">
-            <a class="mdl-navigation__link" href="/menus">Gestión de  cuenta</a>
+            <a class="mdl-navigation__link" href="/menus/menu_principal">Gestión de  cuenta</a>
         </div>
-
 
           <!-- Menu para Portal de Gestion de Mineria -->
        <span class="mdl-navigation__link menu" href="#">
@@ -71,8 +83,8 @@
          <i class="material-icons list">group</i>
         </span>
           <div id="admin_usuarios" class="sub-menu-container">
+            <a class="mdl-navigation__link" href="/usuarios">Gestión de usuarios</a>
             <a class="mdl-navigation__link" href="/usuarios/new">Crear</a>
-            <a class="mdl-navigation__link" href="">Aprobar</a>
           </div>
 
           <!-- Gestion de las Noticias -->
@@ -81,7 +93,7 @@
          <i class="material-icons list">group</i>
         </span>
           <div id="publicaciones" class="sub-menu-container">
-            <a class="mdl-navigation__link" href="/publicaciones">Gestionar publicaiones</a>
+            <a class="mdl-navigation__link" href="/publicaciones">Gestión publicaiones</a>
             <a class="mdl-navigation__link" href="/publicaciones/new">Crear</a>
           </div>
 
@@ -91,11 +103,21 @@
          <i class="material-icons list">group</i>
         </span>
           <div id="proyectos" class="sub-menu-container">
+            <a class="mdl-navigation__link" href="/proyectos">Gestión de Proyectos</a>
             <a class="mdl-navigation__link" href="/proyectos/new">Crear</a>
           </div>
 
 
       <% elsif admin_ind? %>
+       <!-- Mi cuenta -->
+       <span class="mdl-navigation__link menu" href="#">
+          Mi Cuenta
+         <i class="material-icons list">face</i>
+        </span>
+        <div id="mineria" class="sub-menu-container">
+          <a class="mdl-navigation__link" href="/menus/menu_ind">Gestión de  cuenta</a>
+        </div>
+
          <!-- Gestion de indicadores -->
          <span class="mdl-navigation__link menu" href="">
             Indicadores
@@ -115,6 +137,15 @@
             <a class="mdl-navigation__link" href="">Crear</a>
           </div>
       <% elsif admin_min? %>
+          <!-- Mi cuenta -->
+       <span class="mdl-navigation__link menu" href="#">
+          Mi Cuenta
+         <i class="material-icons list">face</i>
+        </span>
+        <div id="mineria" class="sub-menu-container">
+          <a class="mdl-navigation__link" href="/menus/menu_min">Gestión de  cuenta</a>
+        </div>
+
         <!-- Menu para Portal de Gestion de Mineria -->
        <span class="mdl-navigation__link menu" href="">
           Mineria
@@ -135,6 +166,15 @@
         </div>
 
       <% elsif cons_lid? %>
+       <!-- Mi cuenta -->
+       <span class="mdl-navigation__link menu" href="#">
+          Mi Cuenta
+         <i class="material-icons list">face</i>
+        </span>
+        <div id="mineria" class="sub-menu-container">
+          <a class="mdl-navigation__link" href="/menus/menu_consultor_lid">Gestión de  cuenta</a>
+        </div>
+
           <!-- Menu para Portal de Gestion de Mineria -->
        <span class="mdl-navigation__link menu" href="">
           Mineria
@@ -155,6 +195,15 @@
           </div>
 
       <% elsif cons? %>
+       <!-- Mi cuenta -->
+       <span class="mdl-navigation__link menu" href="#">
+          Mi Cuenta
+         <i class="material-icons list">face</i>
+        </span>
+        <div id="mineria" class="sub-menu-container">
+          <a class="mdl-navigation__link" href="/menus/menu_consultor">Gestión de  cuenta</a>
+        </div>
+
           <!-- Menu para Portal de Gestion de Mineria -->
        <span class="mdl-navigation__link menu" href="">
           Mineria
@@ -175,6 +224,14 @@
           </div>
 
       <% elsif cli? %>
+       <!-- Mi cuenta -->
+       <span class="mdl-navigation__link menu" href="#">
+          Mi Cuenta
+         <i class="material-icons list">face</i>
+        </span>
+          <div id="mineria" class="sub-menu-container">
+            <a class="mdl-navigation__link" href="/menus/menu_cliente">Gestión de  cuenta</a>
+          </div>
        <!-- Menu para Portal de Gestion de Mineria -->
        <span class="mdl-navigation__link menu" href="">
           Mineria

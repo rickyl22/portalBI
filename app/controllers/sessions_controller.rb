@@ -6,14 +6,21 @@ class SessionsController < ApplicationController
 
   def create
     usuario = Usuario.where("usuario = ?",params[:usuario]).first
-    if usuario && (usuario.estatus == "Aprobado") && usuario.authenticate(params[:password])
+    p "Estatus "+usuario.estatus.to_s
+    if usuario && (usuario.estatus) && usuario.authenticate(params[:password])
       log_in usuario
       if admin?
-        redirect_to menus_path
+        redirect_to '/menus/menu_principal'
       elsif admin_ind?
-        redirect_to kpis_path
+        redirect_to '/menus/menu_ind'
       elsif admin_min?
-        redirect_to menus_path
+        redirect_to '/menus/menu_min'
+      elsif cons_lid?
+        redirect_to '/menus/menu_consultor_lid'
+      elsif cons?
+        redirect_to '/menus/menus/menu_consultor'
+      elsif cli?
+        redirect_to '/menus/menus/menu_cliente'
       end
       #redirect_to menus_path, notice: 'Login exitoso!'
       cookies[:usuario] = usuario.usuario
@@ -43,4 +50,5 @@ class SessionsController < ApplicationController
     flash.now.alert = 'Logged out!'
     redirect_to root_url
   end
+
 end

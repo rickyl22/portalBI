@@ -34,8 +34,7 @@
       </h1>
 
       <%= form_for(@usuarios, url: usuarios_path) do |f| %>
-          <%= f.text_field  :estatus, :type => "hidden", :value => "Pendiente", :required => "required" %>
-          <%= f.text_field  :role_id, :type => "hidden", :value => 1 , :required => "required" %>
+          <input type="hidden" name="solicitud_reg">
           <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--6-col input_su_cont_l">
               <div class="input-container input_su">

@@ -35,7 +35,7 @@ class KpisController < ApplicationController
 
     respond_to do |format|
       if @kpi.save
-        format.html { redirect_to @kpi, notice: 'indicador creado satisfactoriamente' }
+        format.html { redirect_to @kpi, notice: ' Indicador creado satisfactoriamente' }
         format.json { render :show, status: :created, location: @kpi }
       else
         format.html { render :new }
@@ -66,6 +66,11 @@ class KpisController < ApplicationController
       format.html { redirect_to kpis_url, notice: 'Indicador eliminado' }
       format.json { head :no_content }
     end
+  end
+
+  def estatus
+    endpoint = "localhost:9200/portal_mercadeo/recargas/_search?q=TERMINAL:SMARTPHONE"
+
   end
 
   private

@@ -1,5 +1,24 @@
-<p id="notice"><%= notice %></p>
-algo
+<div class="content_p android-content mdl-layout__content">
+  <div class="contenido-in">
+    <div class="show-publicacion mdl-shadow--4dp">
+      <h1>
+        <%=@publicacion.titulo %>
+      </h1>
+      </br>
+        <%= image_tag(@publicacion.imagen_url.to_s) %>
+        </br>
+        </br>
+        <%=@publicacion.descripcion %>
+  </div>
 
-<%= link_to 'Edit', edit_publicacion_path(@publicacion) %> |
-<%= link_to 'Back', publicaciones_path %>
+  </div>
+</div>
+</br>
+<a href="/publicaciones/new" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Agregar Publicación</a>
+<a href="/publicaciones" id="btn-back" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons">chevron_left</i>Regresar</a>
+<%= link_to  edit_publicacion_path(@publicacion), class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect",id: "btn-edit" do%>
+    <i class="material-icons">edit</i>
+    Editar
+<% end %>
+
+
