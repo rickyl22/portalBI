@@ -115,7 +115,7 @@ td.text-right {
       <% end %>
 <table ><tr>
 <td style="vertical-align: text-top;">
-  <table class="table-fill" style="width: 50vw;">
+  <table class="table-fill" style="width: 50vw;table-layout: fixed;">
 <thead>
 <tr>
 <th class="text-left">Detalles del Caso</th>
@@ -127,11 +127,11 @@ td.text-right {
 </thead>
 <tbody class="table-hover">
 <tr>
-<td class="text-left" style="white-space: nowrap;word-wrap: break-word;">
+<td class="text-left" style="word-wrap: break-word;">
      Titulo: <b><%= @caso.titulo %></b><br>
-     Fecha creado:<br>&nbsp &nbsp <b><%= @caso.fecha_creado %></b><br>
-     Fecha requerido:<br> &nbsp &nbsp<b><%= @caso.fecha_req %></b><br>
-     Periodo - desde:<br> &nbsp &nbsp <b><%= @caso.periodo_desde %></b><br> hasta:<br>&nbsp &nbsp <b><%= @caso.periodo_hasta %></b><br>
+     Fecha creado:<br>&nbsp <b><%= @caso.fecha_creado %></b><br>
+     Fecha requerido:<br> &nbsp <b><%= @caso.fecha_req %></b><br>
+     Periodo - desde:<br> &nbsp <b><%= @caso.periodo_desde %></b><br> hasta:<br>&nbsp <b><%= @caso.periodo_hasta %></b><br>
      Delimitador: <br>&nbsp &nbsp<b><%= @caso.separacion %></b><br>
      Tipo de archivo: <br>&nbsp &nbsp<b><%= @caso.tipo_archivo %></b><br>
      
