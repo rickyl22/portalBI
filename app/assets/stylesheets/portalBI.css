@@ -577,7 +577,7 @@ a img{
 .content_p{
     padding-top: 6%;
     width: 100%;
-    min-height: 80vh;
+    min-height: 100vh;
     text-align: -webkit-center;
     background-color: #f3f3f3;
 }
@@ -1379,7 +1379,7 @@ h2,h3,h4,h1{
 
 .dash_kpi iframe{
     width: 100%;
-    height: 110vh;
+    min-height: 1500px;
     border: 0;
 }
 .kpi-k{
