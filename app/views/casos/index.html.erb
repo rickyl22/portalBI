@@ -121,7 +121,8 @@
     <% end %>
   <% if admin? %>
   <h1 style="font-size: 2em">Casos cerrados</h1>
-    <% @casos_cur = @casos.where(" status = 'Cerrado' or status = 'Anulado'") %>
+    
+    <% @casos_cur = @casos.where(" status = 'Cerrado' and ((complejidad = 'Bajo' and datediff(NOW(),fecha_cerrado) <= 1) or (complejidad = 'Medio' and datediff(NOW(),fecha_cerrado) <= 2) or (complejidad = 'Alto' and datediff(NOW(),fecha_cerrado) <= 4) or (complejidad = 'Urgente' and datediff(NOW(),fecha_cerrado) <= 1))") %>
     <% @casos_cur.each do |caso| %>
       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
           <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us" style="word-wrap: break-word;">

@@ -9,7 +9,7 @@ window.setInterval(function(){
     type: 'GET'
     TIME_TO_SEC(TIMEDIFF( ?,created_at)) < 10
   });*/
-  <% p "EXECUTE" %>
+  
   <% @coms = Comentario.where(" DATE(created_at) = ? and TIME_TO_SEC(TIMEDIFF( ?,created_at)) < 10 ",Time.now.to_date,Time.now) %>
   <% if @coms.length > 0 and session[:usuario_id] != nil and @coms.where("role_id != ?",current_user.role_id).length > 0%>
     
