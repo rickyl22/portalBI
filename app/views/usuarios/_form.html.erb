@@ -87,7 +87,7 @@
 
 
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-            <%= f.collection_select :role_id, Role.all, :id, :nombre, {:prompt => ''}, :class => 'mdl-textfield__input', :required => "required" %>
+            <%= f.collection_select :role_id, @roles, :id, :nombre, {:prompt => ''}, :class => 'mdl-textfield__input', :required => "required" %>
             <label class="mdl-textfield__label" for="role_id">Rol</label>
           </div>
         </div>
@@ -116,6 +116,7 @@
         </br>
 
         <div class="button-container">
+          <a href="/usuarios" class="mdl-button mdl-js-button btn-cancelar"><i class="material-icons">chevron_left</i>CANCELAR</a>
           <button><span>Enviar</span></button>
         </div>
 

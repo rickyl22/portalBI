@@ -1,8 +1,149 @@
 <div  class="content_p android-content mdl-layout__content">
   <!-- Contenido -->
-  <h2>Mi cuenta INDICADORES</h2>
+  <h2>Mi cuenta</h2>
   <div class="contenido-in contenido-menu  mdl-shadow--2dp">
+    <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp section-us">
+      <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us">
+        <%= "Cod: "+@usuario.codigo_empleado %>
+        </br>
+        <%= @usuario.role.nombre %>
+        </br>
+        <%= image_tag "admin.png", class:"icon_rol"%>
+      </header>
+      <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
+        <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
+          <h5>
+            <strong><%=@usuario.usuario+": "+@usuario.nombre+" "+@usuario.apellido %></strong>
+          </h5>
+          <p>
+            <%= "Cargo: "+@usuario.cargo %>
+            </br>
+            <%= "Estatus: Pendiente" if (@usuario.estatus == false) %>
+            <%= "Estatus: Aprobado" if (@usuario.estatus == true) %>
+          </p>
+        </div>
+        <div class="mdl-card__actions us_cart_actions">
+          <a href="#" class="mdl-button us_detalle">Más detalles</a>
+          <div class="desplegable">
+            <p>
+              <%= "Usuario: "+@usuario.usuario %>
+              </br>
+              <%= "Área: "+@usuario.area %>
+              </br>
+              <%= "Gerencia: "+@usuario.gerencia %>
+              </br>
+              <%= "Télefono: "+@usuario.telefono %>
+              </br>
+              <%= "Correo: "+@usuario.correo %>
+              </br>
+              <%= "Supervisor: "+@usuario.supervisor %>
+              </br>
+              <%= "Justificacioń: "+@usuario.justificacion %>
+            </p>
+          </div>
+        </div>
 
+        <div class="cont_bottom">
+          <%= link_to  edit_usuario_path(@usuario), class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do%>
+              <i class="material-icons">edit</i>
+          <% end %>
+        </div>
+      </div>
+    </section>
+    <!-- Listado de informacion de indicadores -->
+    </br>
+    <section class="mdl-grid mdl-grid--no-spacing">
+      <div class="mdl-cell mdl-cell--4-col mdl-shadow--2dp">
+        <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--10-col">
+                <h4>Total de indicadores: </h4>
+              </div>
+              <div class="mdl-cell mdl-cell--2-col">
+                12
+              </div>
+        </div>
+        </br>
+      </div>
+      <div class="mdl-cell mdl-cell--4-col mdl-shadow--2dp">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--10-col">
+            <h4>Indicadores en Alerta: </h4>
+          </div>
+          <div class="mdl-cell mdl-cell--2-col">
+            3
+          </div>
+        </div>
+      </div>
+      <div class="mdl-cell mdl-cell--4-col mdl-shadow--2dp">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--10-col">
+            <h4>Indicadores Criticos: </h4>
+          </div>
+          <div class="mdl-cell mdl-cell--2-col">
+            6
+          </div>
+        </div>
+      </div>
+    </section>
+    </br>
+    <!-- Listado indicadores recientes -->
+    <section class="mdl-grid mdl-grid--no-spacing">
+      <div class="indicadores-mi mdl-cell mdl-cell--12-col mdl-shadow--2dp">
+        <h4 class="h4-pb">Indicadores Recientes</h4>
+        <div class="mdl-grid">
+          <% @indicadores_recientes.each do |indicador| %>
+              <div class="mdl-cell mdl-cell--10-col">
+                <a href="/kpis/<%=indicador.id %>"><%=indicador.nombre %></a>
+              </div>
+              <div class="mdl-cell mdl-cell--2-col">
+                Estatus
+              </div>
+          <% end %>
+        </div>
+        </br>
+        <a href="/kpis" class="mdl-button link_admin">Administrar Indicadores</a>
+      </div>
+    </section>
+    <!-- Listado de usuarios pendientes por aceptar y asignar rol -->
+    </br>
+    <section class="mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+      <div class="usuario_pendientes mdl-cell mdl-cell--12-col">
+        <h4 class="h4-pb">Usuarios por Aprobar</h4>
+        <h5><strong>Nota: Si desea aprobar un usuario, primero debe seleccionar el Rol que tendrá dicho usuario, luego haga uso del switch para aprobar.</strong></h5>
+        <% if @usuarios_pendientes.empty? %>
+            <p >No hay usuarios pendientes por aprobar</p>
+        <% else %>
+          <ul class="demo-list-three mdl-list">
+            <% @usuarios_pendientes.each do |usuario| %>
+                <li class="mdl-list__item mdl-list__item--three-line">
+              <span class="mdl-list__item-primary-content menu_list_user_p">
+                <i class="material-icons  mdl-list__item-avatar">person</i>
+                <span><%=usuario.usuario+": "+usuario.nombre+" "+ usuario.apellido %></span>
+                <span class="mdl-list__item-text-body">
+                  <strong>Código de empleado: </strong><%= usuario.codigo_empleado%>
+                  <strong>, Cargo: </strong><%= usuario.cargo%>
+                  <strong>, Justificación: </strong><%= usuario.justificacion%>
+                </span>
+              </span>
+              <span class="mdl-list__item-secondary-action">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--11-col">
+                <%=collection_select "","#{usuario.id}", Role.where("id != 8"), :id, :nombre, {:prompt => ''}, :class => 'mdl-textfield__input role_id', :required => "required", :onclick => "habilitar(this)" %>
+                  <label class="mdl-textfield__label" for="role_id">Rol</label>
+              </div>
+              </span>
+
+             <span class="mdl-list__item-secondary-action menu_list_user_s">
+              <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="<%= "estatus_usuario_"+usuario.id.to_s%>">
+                <%=check_box_tag "estatus_usuario_#{usuario.id}", usuario.id, usuario.estatus, class: "mdl-switch__input", :disabled => true %>
+              </label>
+             </span>
+                </li>
+            <% end %>
+          </ul>
+      <% end %>
+        <a href="/usuarios" class="mdl-button link_admin">Administrar Usuarios</a>
+      </div>
+    </section>
 
   </div>
 

@@ -14,11 +14,13 @@
   </div>
 </div>
 </br>
-<a href="/publicaciones/new" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Agregar Publicación</a>
-<a href="/publicaciones" id="btn-back" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons">chevron_left</i>Regresar</a>
-<%= link_to  edit_publicacion_path(@publicacion), class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect",id: "btn-edit" do%>
-    <i class="material-icons">edit</i>
-    Editar
+<% if admin? %>
+    <a href="/publicaciones/new" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Agregar Publicación</a>
+    <a href="/publicaciones" id="btn-back" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons">chevron_left</i>Regresar</a>
+    <%= link_to  edit_publicacion_path(@publicacion), class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect",id: "btn-edit" do%>
+        <i class="material-icons">edit</i>
+        Editar
+    <% end %>
 <% end %>
 
 

@@ -1,4 +1,5 @@
 module SessionsHelper
+
   # Logs in the given user.
   def log_in(usuario)
     session[:usuario_id] = usuario.id
@@ -19,4 +20,5 @@ module SessionsHelper
   def require_authentication
     current_user || redirect_to(home_index_path, :alert => 'El acceso sin sessions esta restrigido')
   end
+
 end

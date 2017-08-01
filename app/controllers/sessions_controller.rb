@@ -6,11 +6,17 @@ class SessionsController < ApplicationController
 
   def create
     usuario = Usuario.where("usuario = ?",params[:usuario]).first
-    p "Estatus "+usuario.estatus.to_s
     if usuario && (usuario.estatus) && usuario.authenticate(params[:password])
       log_in usuario
+      session[:notice] = nil
+      session[:last_check] = Time.now
+      casos = Caso.where(" complejidad = 'No Asignada' and fecha_creado < ?", Time.now.to_date - 7)
       if admin?
-        redirect_to '/menus/menu_principal'
+        if casos.length > 0
+          redirect_to '/menus/menu_principal', alert: "Tiene casos con mas de 7 dias de creación sin complejidad asignada"
+        else
+          redirect_to '/menus/menu_principal'
+        end
       elsif admin_ind?
         redirect_to '/menus/menu_ind'
       elsif admin_min?
@@ -20,12 +26,15 @@ class SessionsController < ApplicationController
       elsif cons?
         redirect_to '/menus/menus/menu_consultor'
       elsif cli?
-        redirect_to '/menus/menus/menu_cliente'
+        if casos.length > 0
+          redirect_to '/menus/menu_principal', alert: "Tiene casos con mas de 7 dias de creación sin complejidad asignada"
+        else 
+          redirect_to '/menus/menu_principal'
+        end
+      elsif cli_ind?
       end
-      #redirect_to menus_path, notice: 'Login exitoso!'
       cookies[:usuario] = usuario.usuario
     else
-      flash.now.alert = 'Correo o clave incorrecto'
       redirect_to login_path, alert: "Correo o clave incorrecto"
     end
 
@@ -47,7 +56,9 @@ class SessionsController < ApplicationController
   def destroy
     log_out
     cookies.delete(:usuario)
-    flash.now.alert = 'Logged out!'
+    session[:notice] = nil
+    current_user = nil
+    flash.now.alert = 'Sesión cerrada'
     redirect_to root_url
   end
 

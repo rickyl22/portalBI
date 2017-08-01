@@ -1,0 +1,156 @@
+<div class="content_p android-content mdl-layout__content">
+<% if session[:notice] != nil %>
+         <div class="notice mdl-shadow--16dp"><%= session[:notice]  %></div>
+      <% end %>
+<div class="contenido-in">
+<p id="notice"><%= notice %></p>
+
+<h1 style="font-size: 2em"><%= (admin? or (cons_lid? and @flag == 0 )) ? "Casos no asignados" : "Casos" %></h1>
+    <% if admin? %>
+      <% @casos_cur = @casos.where("infosoft = 'NO' and status != 'Cerrado' ") %>
+    <% elsif cons_lid? and @flag == 1 %>
+      <% @casos_cur = @casos.where("consultor_id = ?", current_user.usuario) %>
+    <% elsif cons_lid? %>
+      <% @casos_cur = @casos.where(" consultor_id is NULL ") %>
+    <% else %>
+      <% @casos_cur = @casos %>
+    <% end %>  
+    <% @casos_cur.each do |caso| %>
+
+        <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
+          <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us" style="word-wrap: break-word;">
+            <%= "Caso:#000"+caso.id.to_s %>
+            </br>
+            <%= caso.titulo %>
+            </br>
+            <%= image_tag "admin.png", class:"icon_rol"%>
+          </header>
+          <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
+              <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
+                <p>
+                  <%= "Fecha requerido: "+caso.fecha_req.to_s %><br>
+                  <%= "GG: "+Usuario.find(caso.usuario_id).gerencia %><br>
+                  Cliente: <%= link_to ""+Usuario.find(caso.usuario_id).nombre+" "+Usuario.find(caso.usuario_id).apellido, Usuario.find(caso.usuario_id) %>
+                </p>
+              </div>
+              <div class="mdl-card__actions us_cart_actions">
+                <a href="#" onclick="foo(this); return false;" class="mdl-button us_detalle">Más detalles</a>
+                <div class="desplegable">
+                  <p>         
+                    <%= "Estatus: "+caso.status %><br>
+                    <%= "Complejidad: "+caso.complejidad %><br>
+                    Creado hace: <%= (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fecha_creado.mjd %> días<br>
+                    Asignado hace: <%= caso.fech_asig == nil ? "No asignada" : ((Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fech_asig.mjd).to_s + " días" %><br>
+                  </p>
+                </div>
+              </div>
+              <div class="cont_bottom">
+                <%= link_to  caso, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+                    <i class="material-icons">settings</i>
+                <% end %>
+                <% if admin? or cons_lid? %>
+                    <%= link_to  "/historials?caso="+caso.id.to_s, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+                      <i class="material-icons">list</i>
+                    <% end %>
+                <% end %>
+              </div>
+          </div>
+          </section>
+    <% end %>
+<% if admin? or (cons_lid? and @flag == 0) %>
+  <% if admin? %>
+    <% @casos_cur = @casos.where(" infosoft = 'SI' and status != 'Anulado' and status != 'Cerrado'") %>
+  <% else %>
+    <% @casos_cur = @casos.where(" consultor_id is not NULL ") %>
+  <% end %>  
+  <h1 style="font-size: 2em">Casos asignados</h1>
+    
+    <% @casos_cur.each do |caso| %>
+      <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
+          <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us" style="word-wrap: break-word;">
+            <%= "Caso:#000"+caso.id.to_s %>
+            </br>
+            <%= caso.titulo %>
+            </br>
+            <%= image_tag "admin.png", class:"icon_rol"%>
+          </header>
+          <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
+              <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
+                <p>
+                  <%= "Fecha requerido: "+caso.fecha_req.to_s %>
+                <br>
+                  <%= "GG: "+Usuario.find(caso.usuario_id).gerencia %><br>
+                  Cliente: <%= link_to ""+Usuario.find(caso.usuario_id).nombre+" "+Usuario.find(caso.usuario_id).apellido, Usuario.find(caso.usuario_id) %>
+                </p>
+              </div>
+              <div class="mdl-card__actions us_cart_actions">
+                <a href="#" onclick="foo(this); return false;" class="mdl-button us_detalle">Más detalles</a>
+                <div class="desplegable">
+                  <p>
+                    <%= "Estatus: "+caso.status %><br>
+                    <%= "Complejidad: "+caso.complejidad %><br>
+                    Creado hace: <%= (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fecha_creado.mjd %> días<br>
+                    Asignado hace: <%= caso.fech_asig == nil ? "No asignada" : ((Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fech_asig.mjd).to_s + " días" %><br>
+                  </p>
+                </div>
+              </div>
+              <div class="cont_bottom">
+                <%= link_to  caso, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+                    <i class="material-icons">settings</i>
+                <% end %>
+                <%= link_to  "/historials?caso="+caso.id.to_s, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+                    <i class="material-icons">list</i>
+                <% end %>
+              </div>
+          </div>
+          </section>
+    <% end %>
+  <% if admin? %>
+  <h1 style="font-size: 2em">Casos cerrados</h1>
+    <% @casos_cur = @casos.where(" status = 'Cerrado' or status = 'Anulado'") %>
+    <% @casos_cur.each do |caso| %>
+      <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
+          <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us" style="word-wrap: break-word;">
+            <%= "Caso:#000"+caso.id.to_s %>
+            </br>
+            <%= caso.titulo %>
+            </br>
+            <%= image_tag "admin.png", class:"icon_rol"%>
+          </header>
+          <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
+              <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
+                <p>
+                  <%= "Fecha requerido: "+caso.fecha_req.to_s %><br>
+                  <%= "GG: "+Usuario.find(caso.usuario_id).gerencia %><br>
+                  Cliente: <%= link_to ""+Usuario.find(caso.usuario_id).nombre+" "+Usuario.find(caso.usuario_id).apellido, Usuario.find(caso.usuario_id) %>
+                </p>
+              </div>
+              <div class="mdl-card__actions us_cart_actions">
+                <a href="#" onclick="foo(this); return false;" class="mdl-button us_detalle">Más detalles</a>
+                <div class="desplegable">
+                  <p>
+                    <%= "Estatus: "+caso.status %><br>
+                    <%= "Complejidad: "+caso.complejidad %><br>
+                    Creado hace: <%= (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fecha_creado.mjd %> días<br>
+                    Asignado hace: <%= caso.fech_asig == nil ? "No asignada" : ((Date.parse Time.now.strftime("%Y/%m/%d")).mjd - caso.fech_asig.mjd).to_s + " días"%> <br>
+                  </p>
+                </div>
+              </div>
+              <div class="cont_bottom">
+                <%= link_to  caso, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+                    <i class="material-icons">settings</i>
+                <% end %>
+                <%= link_to  "/historials?caso="+caso.id.to_s, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+                    <i class="material-icons">list</i>
+                <% end %>
+              </div>
+          </div>
+          </section>
+    <% end %>
+    <% end %>
+<% end %>
+<br>
+
+<%= link_to 'Caso nuevo', new_caso_path %>
+</div>
+</div>

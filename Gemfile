@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -18,7 +19,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
+gem 'jquery-rails'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -49,14 +50,16 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'coffee-script-source', '1.8.0'
-gem "pundit"
 
+gem 'pundit'
 #gem 'bcrypt'
 #gem 'bcrypt-ruby', '3.0.0'
-gem 'bcrypt-ruby', '3.1.2'
+#gem 'bcrypt-ruby', '3.1.2'
 #subida de archivos
 gem 'carrierwave'
 gem 'bootstrap-sass'
 #Busqueda sobre elasticsearch
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'bcrypt'
+gem "chartkick"

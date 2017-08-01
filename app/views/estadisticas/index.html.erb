@@ -1,0 +1,629 @@
+<script src="https://code.highcharts.com/highcharts.js" ></script>
+<script src="https://code.highcharts.com/highcharts-3d.js" ></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript">
+
+function download(){
+  var a = document.body.appendChild(
+      document.createElement("a")
+    );
+  a.download = "Estadisticas.html";
+  a.href = "data:text/html," + document.getElementById("content").innerHTML;
+  a.click();
+
+}
+
+
+   $(document).ready(function(){
+
+    $(".rango_desde").change(function() {
+    $(".rango_fin")[0].disabled = false;
+    $(".rango_fin")[0].value = $(".rango_desde")[0].value;
+    $(".rango_fin")[0].setAttribute("min", $(".rango_desde")[0].value);
+
+  
+  });
+
+if(true){
+   var cell = document.getElementById("puntualidad");
+   
+if (parseInt(cell.innerHTML,10) < 95){
+   
+   cell.style.backgroundColor = 'red';
+   
+}else{
+  
+   cell.style.backgroundColor = 'green';
+}
+
+var cell = document.getElementById("reap");
+   
+if (parseInt(cell.innerHTML,10) > 5){
+   
+   cell.style.backgroundColor = 'red';
+   cell.sty
+}else{
+  
+   cell.style.backgroundColor = 'green';
+}
+
+  }
+
+});
+</script>
+<style>
+table-title h3 {
+   color: #fafafa;
+   font-size: 30px;
+   font-weight: 400;
+   font-style:normal;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+}
+
+
+/*** Table Styles **/
+
+.table-fill {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  margin: auto;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+ 
+th {
+  color:#D5DDE5;;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:15px;
+  font-weight: 100;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+th:first-child {
+  border-top-left-radius:3px;
+}
+ 
+th:last-child {
+  border-top-right-radius:3px;
+  border-right:none;
+}
+  
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:10px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+ 
+tr:first-child {
+  border-top:none;
+}
+
+tr:last-child {
+  border-bottom:none;
+}
+ 
+tr:last-child td:first-child {
+  border-bottom-left-radius:3px;
+}
+ 
+tr:last-child td:last-child {
+  border-bottom-right-radius:3px;
+}
+ 
+td {
+  background:#FFFFFF;
+  padding:5px;
+  text-align:left;
+  vertical-align:top;
+  font-weight:300;
+  font-size:12px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+
+td:last-child {
+  border-right: 0px;
+}
+
+th.text-left {
+  text-align: left;
+}
+
+th.text-center {
+  text-align: center;
+}
+
+th.text-right {
+  text-align: right;
+}
+
+td.text-left {
+  text-align: left;
+}
+
+td.text-center {
+  text-align: center;
+}
+
+td.text-right {
+  text-align: right;
+}
+  </style>
+<div class="content_p android-content mdl-layout__content">
+<% if session[:notice] != nil %>
+         <div class="notice mdl-shadow--16dp"><%= session[:notice]  %></div><br>
+      <% end %>    
+  <% @hasta = params[:hasta] %>
+  <% @desde = params[:desde] %>
+  <% @caso = Caso.where("fecha_creado >= ? and fecha_creado <= ?",@desde,@hasta) %>
+  <% if params[:status] %>
+  <% @caso = @caso.where("status = ?",params[:status]) %>
+  <% end %>
+  <% if params[:comp] %>
+  <% @caso = @caso.where("complejidad = ?",params[:comp]) %>
+  <% end %>
+  <% if params[:req] %>
+  <% @caso = @caso.where("tipo_caso = ?",params[:req]) %>
+  <% end %>
+  <% if params[:cons] %>
+  <% @caso = @caso.where("consultor_id = ?",params[:cons]) %>
+  <% end %>
+  <%= form_tag estadisticas_path do %>
+    Período: desde <%= date_field_tag :desde,{}, :class => "rango_desde",  :onkeydown =>"return false", :required => true, :oninvalid => "this.setCustomValidity('Por favor complete este campo')", :oninput => "setCustomValidity('')", max: Date.today %> hasta <%= date_field_tag :hasta, {},:class => "rango_fin", :disabled => true, :onkeydown =>"return false", max: Date.today %><br>
+    <% if params[:hist] %>
+        Estatus: <%= select_tag :status, options_for_select(["Iniciado","Pendiente","En Proceso","Anulado","BI-Planificado","BI-Afectado","Cerrado"]),:include_blank => "N/A" %>
+        Complejidad: <%= select_tag :complejidad, options_for_select(["Bajo","Medio","Alto","Urgente"]),:include_blank => "N/A" %>
+        Requerimiento: <%= select_tag :req, options_for_select(["Recurrente","No Recurrente"]),:include_blank => "N/A" %>
+        Consultor: <select name="consultor_id" id="consultor_id">
+                    <option value>N/A</option>
+                    <% Usuario.where("role_id in (5,4)").each do |u| %>
+                    <option value="<%= u.usuario %>"><%= u.nombre+" "+u.apellido %></option>
+                    <% end %>  
+                   </select>
+       <%= hidden_field_tag :hist, :value => 1 %>
+    <% end %><br>
+    <%= submit_tag 'Buscar' %>   
+  <% end %>
+  <% if params[:desde] %>
+  <% if params[:hist] %>
+    <h1 style="font-size: 2em">Historial de casos: <%= params[:desde] %> hasta <%= params[:hasta] %> </h1>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Titulo</th>
+        <th>Estatus</th>
+        <th>Fecha requerido</th>
+        <th>Complejidad</th>
+        <th>Asignado a</th>
+        <th>Fecha cerrado</th>
+        <th>Tipo de requerimiento</th>
+        <th>Reapertura</th>
+        <th>Ver</th>
+      </tr>
+      <% @caso.each do |caso| %>
+      <tr>
+        <td><%= caso.id %></td>
+        <td><%= caso.titulo %></td>
+        <td><%= caso.status %></td>
+        <td><%= caso.fecha_req %></td>
+        <td><%= caso.complejidad %></td>
+        <td><%= caso.consultor_id == nil ? "No asignado" : Usuario.where("usuario = ?",caso.consultor_id).first.nombre + " " + Usuario.where("usuario = ?",caso.consultor_id).first.apellido %></td>
+        <td><%= caso.fecha_cerrado == nil ? "Abierto" : caso.fecha_cerrado %></td>
+        <td><%= caso.tipo_caso %></td>
+        <td><%= caso.historial.where("evento LIKE 'Caso reabierto%'").length > 0 ? "SI" : "NO" %></td>
+        <td><%= link_to "Ver", caso %></td>
+      </tr>
+      <% end %>
+    </table>
+  <% else %>
+  <div id="content">
+  <h1 style="font-size: 2em">Estadísticas: <%= params[:desde] %> hasta <%= params[:hasta] %> </h1>
+  <table style="width: 100%;">
+    <tr>
+      <td style="width: 50%;">
+      <h1 style="font-size: 2em;text-align: center">Por Consultor</h1>
+      <% @users = Usuario.where("role_id = 4 or role_id = 5") %>
+              <table class="table-fill">
+                <tr>
+                  <th>
+                    Consultor
+                  </th>
+                  <th>
+                    Casos
+                  </th>
+                </tr>
+                <% @users.each do |user| %>
+                  <tr>
+                   <td>
+                     <%= user.nombre+" "+user.apellido %>
+                   </td>
+                  <td><%= @caso.where("consultor_id = ?",user.usuario).length %></td>
+                </tr>
+                <% end %>
+                <tr>
+                   <td>
+                     <b>Total</b>
+                   </td>
+                  <td><b><%= @caso.where("consultor_id != 'No asignado'").length %></b></td>
+                </tr>
+              </table><br>
+              
+              <% @data = [] %>
+              <% @users.each do |user| %>
+                 <% @data.push([user.nombre+" "+user.apellido,@caso.where("consultor_id = ?", user.usuario).length]) %>
+              <% end %>
+              
+              <%= pie_chart @data, width: '50%', library: {chart: { options3d: {enabled: true,alpha: 45,beta: 0}},plotOptions: {pie: {depth: 35}}, tooltip: {pointFormat: "Casos: {point.y} ({point.percentage:.1f}%)"}}, legend: 'bottom' %>
+             
+          
+      </td>
+      <td style="width:50%;">
+      
+      <h1 style="font-size: 2em;text-align: center">Por Complejidad</h1>
+              <table class="table-fill">
+                <tr>
+                  <th>
+                    Complejidad
+                  </th>
+                  <th>
+                    Cantidad
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    Bajo
+                  </td>
+                  <td><%= @caso.where("complejidad = 'Bajo'").length %></td>
+                </tr>
+                <tr>
+                  <td>
+                    Medio
+                  </td>
+                  <td><%= @caso.where("complejidad = 'Medio'").length %></td>
+                </tr>
+                <tr>
+                  <td>
+                    Alto
+                  </td>
+                  <td><%= @caso.where("complejidad = 'Alto'").length %></td>
+                </tr>
+                <tr>
+                  <td>
+                    Urgente
+                  </td>
+                  <td><%= @caso.where("complejidad = 'Urgente'").length %></td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Total</b>
+                  </td>
+                  <td><b><%= @caso.where("complejidad != 'No Asignada'").length %></b></td>
+                </tr>
+              </table><br>
+              <%= pie_chart @caso.where("complejidad != 'No Asignada'").group(:complejidad).count, library: {chart: { options3d: {enabled: true,alpha: 45,beta: 0}},plotOptions: {pie: {depth: 35}}, tooltip: {pointFormat: "Casos: {point.y} ({point.percentage:.1f}%)"}} ,legend: 'bottom' %>
+              </div>
+         
+      </td>
+     
+    </tr>
+    <tr>
+      <td>
+      <h1 style="font-size: 2em;text-align: center">Por Estatus</h1>
+              <table class="table-fill">
+                <tr>
+                  <th>
+                    Estatus
+                  </th>
+                  <th>Cantidad</th>
+                </tr>
+                <tr>
+                  <td>Iniciado</td>
+                  <td><%= @caso.where("status = 'Iniciado'").length %></td>
+                </tr>
+                <tr>
+                  <td>En Proceso</td>
+                  <td><%= @caso.where("status = 'En Proceso'").length %></td>
+                </tr>
+                <tr>
+                  <td>Pendiente</td>
+                  <td><%= @caso.where("status = 'Pendiente'").length %></td>
+                </tr>
+                <tr>
+                  <td>BI-Afectado</td>
+                  <td><%= @caso.where("status = 'BI-Afectado'").length %></td>
+                </tr>
+                <tr>
+                  <td>BI-Planificado</td>
+                  <td><%= @caso.where("status = 'BI-Planificado'").length %></td>
+                </tr>
+                <tr>
+                  <td>Cerrado</td>
+                  <td><%= @caso.where("status = 'Cerrado'").length %></td>
+                </tr>
+                <tr>
+                  <td>Anulado</td>
+                  <td><%= @caso.where("status = 'Anulado'").length %></td>
+                </tr>
+                <tr>
+                  <td><b>Total</b></td>
+                  <td><b><%= @caso.length %></b></td>
+                </tr>
+              </table><br>
+              <%= pie_chart @caso.group(:status).count, library: {chart: { options3d: {enabled: true,alpha: 45,beta: 0}},plotOptions: {pie: {depth: 35}}, tooltip: {pointFormat: "Casos: {point.y} ({point.percentage:.1f}%)"}} ,legend: 'bottom' %>
+          
+      </td>
+      <td style="vertical-align: top;">
+      <h1 style="font-size: 2em;text-align: center">Por SLA</h1>
+              <table class="table-fill">
+                <tr>
+                  <th>Alerta SLA</th>
+                  <th>Cantidad</th>
+                </tr>
+                <tr>
+                  <td>Within SLA</td>
+                  <td><%= @caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 4) or
+                                                                 (complejidad = 'Urgente' and fecha_cerrado - fech_asig <= 3))").length %></td>
+                </tr>
+                <tr>
+                  <td>Exceeding SLA</td>
+                  <td><%= @caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig > 7) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig > 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig > 4) or
+                                                                 (complejidad = 'Urgente' and fecha_cerrado - fech_asig > 3))").length %> </td>
+                </tr>
+                <tr>
+                  <td><b>Total</b></td>
+                  <td><b><%= @caso.where("status = 'Cerrado'").length %></b></td>
+                </tr>
+              </table><br>
+              <% @puntual = @caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 4) or
+                                                                 (complejidad = 'Urgente' and fecha_cerrado - fech_asig <= 3))").length %>
+              <% @inpuntual = @caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig > 7) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig > 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig > 4) or
+                                                                 (complejidad = 'Urgente' and fecha_cerrado - fech_asig > 3))").length %>
+              <%= pie_chart ({ "Within SLA" => @puntual, "Exceeding SLA" => @inpuntual}), library: {chart: { options3d: {enabled: true,alpha: 45,beta: 0}},plotOptions: {pie: {depth: 35}}, tooltip: {pointFormat: "Casos: {point.y} ({point.percentage:.1f}%)"}} ,legend: 'bottom' %>
+          
+      </td>
+      
+    </tr>
+    <tr>
+      <td>
+      <h1 style="font-size: 2em;text-align: center">Por Tipo de Caso y Consultor</h1>
+              <% @users = Usuario.where("role_id = 4 or role_id = 5") %>
+              <table class="table-fill" >
+                <tr>
+                  <th>Nombre</th>
+                  <th>Recurrente</th>
+                  <th>No recurrente</th>
+                  <th>Total</th>
+                </tr>
+                <% @users.each do |user| %>
+                <tr>
+                  <td>
+                    <%= user.nombre + " " + user.apellido %>
+                  </td>
+                  <td>
+                    <%= @caso.where("tipo_caso = 'Recurrente' and consultor_id = ?", user.usuario).length %>
+                  </td>
+                  <td>
+                    <%= @caso.where("tipo_caso = 'No Recurrente' and consultor_id = ?", user.usuario).length %>
+                  </td>
+                  <td>
+                    <%= @caso.where("consultor_id = ?", user.usuario).length %>
+                  </td>
+                </tr>  
+                <% end %>
+                <tr>
+                  <td>
+                    <b>Total</b>
+                  </td>
+                  <td>
+                    <b><%= @caso.where("tipo_caso = 'Recurrente' and consultor_id != 'No asignado' ").length %></b>
+                  </td>
+                  <td>
+                    <b><%= @caso.where("tipo_caso = 'No Recurrente' and consultor_id != 'No asignado' ").length %></b>
+                  </td>
+                  <td>
+                    <b><%= @caso.where("consultor_id != 'No asignado' ").length %></b>
+                  </td>
+                </tr>
+              </table><br>
+              <% @rec = [] %>
+              <% @norec = [] %>
+              <% @users.each do |user| %>
+                 <% @rec.push([user.nombre + " "+ user.apellido,@caso.where("tipo_caso = 'Recurrente' and consultor_id = ?", user.usuario).length]) %>
+                 <% @norec.push([user.nombre + " "+ user.apellido,@caso.where("tipo_caso = 'No Recurrente' and consultor_id = ?", user.usuario).length]) %>
+              <% end %>
+              <%= bar_chart [{name: "Recurrente", data: @rec},{ name: "No Recurrente", data: @norec}], stacked: true, legend: 'bottom' %>
+          
+      </td>
+      <td>  
+      <h1 style="font-size: 2em;text-align: center">Por SLA y Consultor</h1>
+              <% @users = Usuario.where("role_id = 4 or role_id = 5") %>        
+              <table class="table-fill">
+                <tr>
+                  <th>Nombre</th>
+                  <th>Within SLA</th>
+                  <th>Exceeding SLA</th>
+                  <th>Total</th>
+                </tr>
+                <% @users.each do |user| %>
+                <tr>
+                  <td>
+                    <%= user.nombre + " " + user.apellido %>
+                  </td>
+                  <td>
+                    <%= @caso.where("consultor_id = ? and status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 4) or
+                                                                 (complejidad = 'Urgente' and fecha_cerrado - fech_asig <= 3))",user.usuario).length %>
+                  </td>
+                  <td>
+                    <%= @caso.where("consultor_id = ? and status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig > 7) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig > 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig > 4) or
+                                                                 (complejidad = 'Urgente' and fecha_cerrado - fech_asig > 3))",user.usuario).length %>
+                  </td>
+                  <td>
+                    <%= @caso.where("consultor_id = ? and status = 'Cerrado'",user.usuario).length  %>
+                  </td>
+                </tr>
+                <% end %>
+                <tr>
+                  <td><b>Total</b></td>
+                  <td><b><%= @caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 4) or
+                                                                 (complejidad = 'Urgente' and fecha_cerrado - fech_asig <= 3))").length %>
+                                                          </b>
+                                                                 </td>
+                  <td>
+                    <b><%= @caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig > 7) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig > 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig > 4) or
+                                                                 (complejidad = 'Urgente' and fecha_cerrado - fech_asig > 3))").length %></b>
+                  </td>
+                  <td>
+                    <b><%= @caso.where("status = 'Cerrado'").length  %></b>
+                  </td>
+                </tr>
+              </table>  <br>                               
+              <% @users = Usuario.where("role_id = 4 or role_id = 5") %>
+              <% @puntual = [] %>
+              <% @inpuntual = [] %>
+              <% @users.each do |user| %>
+                 <% @puntual.push([user.nombre + " "+ user.apellido,@caso.where("consultor_id = ? and status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 4) or
+                                                                 (complejidad = 'Urgente' and fecha_cerrado - fech_asig <= 3))",user.usuario).length]) %>
+              <% @inpuntual.push([user.nombre + " "+ user.apellido,@caso.where("consultor_id = ? and status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig > 7) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig > 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig > 4) or
+                                                                 (complejidad = 'Urgente' and fecha_cerrado - fech_asig > 3))",user.usuario).length]) %>
+              <% end %>
+              <%= bar_chart [{name: "Within SLA", data: @puntual},{ name: "Exceeding SLA", data: @inpuntual}], stacked: true, legend: 'bottom', width: '100%' %>
+              
+          
+
+         
+      </td>
+      
+    </tr>
+    <tr>
+      <td>
+        <h1 style="font-size: 2em;text-align: center">Estatus período: <%= @desde %> - <%= @hasta %></h1>
+        <table class="table-fill">
+                <tr>
+                  <th>
+                    Estatus
+                  </th>
+                  <th>Cantidad</th>
+                </tr>
+                <tr>
+                  <td>Entregados</td>
+                  <td><%= @caso.where("status = 'Cerrado' and fecha_cerrado <= ?", @hasta).length %></td>
+                </tr>
+                <tr>
+                  <td>Pendientes</td>
+                  <td><%= @caso.where("(status != 'Cerrado' and status != 'Anulado') or (status = 'Cerrado' and fecha_cerrado > ?)", @hasta).length %></td>
+                </tr>
+                <tr>
+                  <td>Anulado</td>
+                  <td><%= @caso.where("status = 'Anulado'").length %></td>
+                </tr>
+                <tr>
+                  <td><b>Total</b></td>
+                  <td><b><%= @caso.length %></b></td>
+                </tr>
+              </table><br>
+              <%= pie_chart ({ "Entregados" => @caso.where("status = 'Cerrado' and fecha_cerrado <= ?", @hasta).length, "Pendientes" => @caso.where("(status != 'Cerrado' and status != 'Anulado') or (status = 'Cerrado' and fecha_cerrado > ?)", @hasta).length, "Anulados" => @caso.where("status = 'Anulado'").length}), library: {chart: { options3d: {enabled: true,alpha: 45,beta: 0}},plotOptions: {pie: {depth: 35}}, tooltip: {pointFormat: "Casos: {point.y} ({point.percentage:.1f}%)"}} ,legend: 'bottom' %>
+      </td>
+      <td>
+        <h1 style="font-size: 2em;text-align: center">Reapertura de casos por Consultor</h1>
+        <table class="table-fill">
+                <tr>
+                  <th>
+                    Consultor
+                  </th>
+                  <th>Reaperturas</th>
+                </tr>
+                <% @incidencias = 0 %>
+                <% @incidencias_cor = 0 %>
+                <% @total = 0 %>
+                <% @data = [] %>
+                <% Usuario.where("role_id in (4,5)").each do |cons| %>
+                  <tr>
+                    <td><%= cons.nombre+" "+cons.apellido %></td>
+                    <% @reap = 0 %>
+                    
+                    <% @caso.where("consultor_id = ?", cons.usuario).each do |caso| %>
+                      <% if caso.historial.where("evento LIKE 'Caso reabierto%'").length > 0 %>
+                         <% @reap += 1 %>
+                         <% if caso.status == 'Cerrado' and ((caso.complejidad == 'Alto' and caso.fecha_cerrado - caso.fech_asig <= 7) or
+                                                                 (caso.complejidad == 'Medio' and caso.fecha_cerrado - caso.fech_asig <= 4) or
+                                                                 (caso.complejidad == 'Bajo' and caso.fecha_cerrado - caso.fech_asig <= 3) or
+                                                                 (caso.complejidad == 'Urgente' and caso.fecha_cerrado - caso.fech_asig <= 3)) %>
+                            <% @incidencias_cor+=1 %>
+                         <% end %>
+                         <% @incidencias += 1 %>
+                         <% @total += 1 %>
+                      <% end %>  
+                    <% end %>
+                    <td><%= @reap %></td>
+                    <% @data.append([cons.nombre+" "+cons.apellido, @reap]) %>                                      
+                  </tr>
+                <% end %>
+                <tr>
+                  <td><b>Total</b></td>
+                  <td><b><%= @total %></b></td>
+                </tr>
+              </table><br>
+
+              <%= column_chart @data, library: {chart: { options3d: {enabled: true,alpha: 15,beta: 25}},plotOptions: {pie: {depth: 35}}, tooltip: {pointFormat: "Reaperturas: {point.y}"}}  %>
+      </td>
+    </tr>
+  </table>
+  <table style="width: 100%">
+
+    <tr>
+      <th>% Puntualidad de entrega</th>
+      <th>% Reapertura</th>
+      <th>Cantidad de incidencias</th>
+      <th>Corrección de incidencia en tiempo</th>
+    </tr>
+    <tr>
+      <td style="text-align: center;color: black;" id="puntualidad" ><%= (@caso.where("status = 'Cerrado'").length == 0 ? "No hay casos cerrados" : ((@caso.where("status = 'Cerrado' and ((complejidad = 'Alto' and fecha_cerrado - fech_asig <= 7) or
+                                                                 (complejidad = 'Medio' and fecha_cerrado - fech_asig <= 5) or
+                                                                 (complejidad = 'Bajo' and fecha_cerrado - fech_asig <= 4) or
+                                                                 (complejidad = 'Urgente' and fecha_cerrado - fech_asig <= 3))").length*100.0/(@caso.where("status = 'Cerrado'").length)).round(2).to_s + "%"))  %></td>
+      <td style="text-align: center;color: black;" id="reap" ><%= (@caso.where("status = 'Cerrado'").length == 0 ? "No hay casos cerrados" : ((@total*100.0/(@caso.where("status = 'Cerrado'").length)).round(2).to_s + "%"))  %></td>
+      <td style="text-align: center;color: black;background-color: green"><%= @total %></td>
+      <td style="text-align: center;color: black;background-color: green"><%= (@incidencias == 0 ? "No hay casos cerrados" : ((@incidencias_cor*100.0/@incidencias).round(2).to_s + "%")) %></td>
+    </tr>
+
+  </table><br><br>
+  
+  <% end %>
+  </div>
+  <button onclick="download()" >Descargar Estadisticas</button>
+
+  <% end %>
+  </div>

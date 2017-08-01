@@ -1,7 +1,7 @@
 class PublicacionesController < ApplicationController
   before_action :set_publicacion, only: [:show, :edit, :update, :destroy]
   after_action :verify_policy_scoped, :except => [:create, :new, :show]
-  skip_after_action :verify_authorized
+  skip_after_action :verify_authorized, only: [:show]
 
   # GET /publicaciones
   # GET /publicaciones.json

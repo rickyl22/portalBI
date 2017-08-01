@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   resources :publicaciones
   resources :proyectos
+  resources :estadisticas
+  resources :historials
+  resources :documentos
+  resources :casos
+  resources :comentarios
   resources :kpis
   resources :roles_privilegios
   resources :privilegios
@@ -26,5 +31,6 @@ Rails.application.routes.draw do
   get "/menus/menus/menu_cliente"
 
   root :to => "home#index" #Pagina de inicio de la App
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

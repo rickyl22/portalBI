@@ -1,11 +1,7 @@
 class PublicacionPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.present?
-        if (admin?)
-          scope.all
-        end
-      end
+      scope.all
     end
   end
 
@@ -19,7 +15,7 @@ class PublicacionPolicy < ApplicationPolicy
   end
 
   def show?
-    return true if user.present? && (rol == "admin")
+    return true# if user.present? && (rol == "admin")
   end
 
   def update?

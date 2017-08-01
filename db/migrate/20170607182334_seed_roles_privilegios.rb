@@ -3,7 +3,9 @@ class SeedRolesPrivilegios < ActiveRecord::Migration[5.1]
     #Privilegios para el usuario administrador- Se le asigna el privilegio TODOS que incluiye todos los privilegios
     execute "INSERT INTO roles_privilegios (role_id, privilegio_id, alcance, created_at, updated_at) VALUES (1,31,0, NOW(), NOW())"
     #Privilegios para el usuario administrador Mineria - Se le asigna el privilegio TODOS MINERIA que incluiye todos los privilegios donde el 'modulo' es mineria
+
     execute "INSERT INTO roles_privilegios (role_id, privilegio_id, alcance, created_at, updated_at) VALUES (2,32,0, NOW(), NOW())"
+
     #Privilegios para el usuario administrador Indicadores- Se le asigna el privilegio TODOS INDICADORES que incluiye todos los privilegios donde el 'modulo' es indicadores
     execute "INSERT INTO roles_privilegios (role_id, privilegio_id, alcance, created_at, updated_at) VALUES (3,33,0 ,NOW(), NOW())"
     #Privilegios para el usuario Consultor lider- Se le asigna los privilegios para Crear, Ver, Asignar, Cerrar, Comentar y Anular Casos de mineria

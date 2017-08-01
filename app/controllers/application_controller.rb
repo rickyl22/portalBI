@@ -29,13 +29,16 @@ class ApplicationController < ActionController::Base
   end
 
   def cli?
-    true if(current_user.role.alias == "clis")
+    true if(current_user.role.alias == "cli")
+  end
+  def cli_ind?
+    true if(current_user.role.alias == "cli_ind")
   end
 
   private
 
   def user_not_authorized
-    redirect_to login_path, alert: 'Debe iniciar sesión para acceder al sistema'
+    redirect_to login_path, notice: 'Debe iniciar sesión para acceder al sistema'
   end
 
 

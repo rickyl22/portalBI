@@ -1,0 +1,37 @@
+<%= form_with(model: estadistica, local: true) do |form| %>
+  <% if estadistica.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(estadistica.errors.count, "error") %> prohibited this estadistica from being saved:</h2>
+
+      <ul>
+      <% estadistica.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :descripcion %>
+    <%= form.text_area :descripcion, id: :estadistica_descripcion %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fecha_desde %>
+    <%= form.date_select :fecha_desde, id: :estadistica_fecha_desde %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fecha_hasta %>
+    <%= form.date_select :fecha_hasta, id: :estadistica_fecha_hasta %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cantidad %>
+    <%= form.number_field :cantidad, id: :estadistica_cantidad %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

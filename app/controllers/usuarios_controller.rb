@@ -1,14 +1,9 @@
 class UsuariosController < ApplicationController
   before_action :set_usuario,  only: [:show, :edit, :update, :destroy]
   after_action :verify_policy_scoped, :except => [:create, :new]
-  #after_action :verify_policy_scoped#, :except => [:index]
-  #skip_after_action :verify_authorized#, :only => [:create, :allowed_params]
-  #after_action :verify_authorized
-  #after_action :verify_authorized, :except => :index, unless: :devise_controller?
-  #after_action :verify_authorized, :only => :index
 
   def index
-    @usuarios = Usuario.all
+    @usuarios = Usuario.all.order("role_id")
     authorize @usuarios
     @usuarios = policy_scope(Usuario)
     #reset_session
@@ -41,6 +36,13 @@ class UsuariosController < ApplicationController
 
   def new
     @usuario = Usuario.new
+    if admin?
+      @roles = Role.all
+    elsif admin_min?
+      @roles = Role.where("id in (4,5,6)")
+    elsif admin_ind?
+      @roles = Role.where("id in (7,8)")
+    end
     authorize @usuario
   end
 
@@ -65,8 +67,6 @@ class UsuariosController < ApplicationController
        @usuario.save
        render json: @usuario }
    end
-
-
    #authorize @usuario
   end
 
@@ -81,7 +81,6 @@ class UsuariosController < ApplicationController
   end
 
   def destroy
-
     @usuario = Usuario.find(params[:id])
     @usuario.destroy
     redirect_to usuarios_path, notice: "Usuario #{@usuario.nombre} - #{@usuario.codigo_empleado} Eliminado"
