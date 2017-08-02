@@ -1,0 +1,2 @@
+class Recarga < ApplicationRecord
+end

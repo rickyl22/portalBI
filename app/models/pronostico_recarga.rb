@@ -1,0 +1,2 @@
+class PronosticoRecarga < ApplicationRecord
+end

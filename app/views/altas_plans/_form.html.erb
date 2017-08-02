@@ -1,0 +1,37 @@
+<%= form_with(model: altas_plan, local: true) do |form| %>
+  <% if altas_plan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(altas_plan.errors.count, "error") %> prohibited this altas_plan from being saved:</h2>
+
+      <ul>
+      <% altas_plan.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :fecha %>
+    <%= form.date_select :fecha, id: :altas_plan_fecha %>
+  </div>
+
+  <div class="field">
+    <%= form.label :plan %>
+    <%= form.text_field :plan, id: :altas_plan_plan %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cantidad %>
+    <%= form.number_field :cantidad, id: :altas_plan_cantidad %>
+  </div>
+
+  <div class="field">
+    <%= form.label :plataforma %>
+    <%= form.text_field :plataforma, id: :altas_plan_plataforma %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Alta</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Cantidad</th>
+      <th>Plataforma</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @alta.each do |altum| %>
+      <tr>
+        <td><%= altum.fecha %></td>
+        <td><%= altum.cantidad %></td>
+        <td><%= altum.plataforma %></td>
+        <td><%= link_to 'Show', altum %></td>
+        <td><%= link_to 'Edit', edit_altum_path(altum) %></td>
+        <td><%= link_to 'Destroy', altum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Altum', new_altum_path %>

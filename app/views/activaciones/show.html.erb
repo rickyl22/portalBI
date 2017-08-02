@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @activacione.fecha %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @activacione.cantidad %>
+</p>
+
+<p>
+  <strong>Plataforma:</strong>
+  <%= @activacione.plataforma %>
+</p>
+
+<%= link_to 'Edit', edit_activacione_path(@activacione) %> |
+<%= link_to 'Back', activaciones_path %>

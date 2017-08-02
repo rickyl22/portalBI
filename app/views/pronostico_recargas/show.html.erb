@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @pronostico_recarga.fecha %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @pronostico_recarga.cantidad %>
+</p>
+
+<%= link_to 'Edit', edit_pronostico_recarga_path(@pronostico_recarga) %> |
+<%= link_to 'Back', pronostico_recargas_path %>

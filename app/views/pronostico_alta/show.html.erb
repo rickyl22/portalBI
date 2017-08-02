@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @pronostico_altum.fecha %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @pronostico_altum.cantidad %>
+</p>
+
+<p>
+  <strong>Plataforma:</strong>
+  <%= @pronostico_altum.plataforma %>
+</p>
+
+<%= link_to 'Edit', edit_pronostico_altum_path(@pronostico_altum) %> |
+<%= link_to 'Back', pronostico_alta_path %>

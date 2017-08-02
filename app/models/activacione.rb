@@ -1,0 +1,2 @@
+class Activacione < ApplicationRecord
+end

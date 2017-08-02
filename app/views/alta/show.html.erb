@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @altum.fecha %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @altum.cantidad %>
+</p>
+
+<p>
+  <strong>Plataforma:</strong>
+  <%= @altum.plataforma %>
+</p>
+
+<%= link_to 'Edit', edit_altum_path(@altum) %> |
+<%= link_to 'Back', alta_path %>

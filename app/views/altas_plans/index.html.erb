@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Altas Plans</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Plan</th>
+      <th>Cantidad</th>
+      <th>Plataforma</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @altas_plans.each do |altas_plan| %>
+      <tr>
+        <td><%= altas_plan.fecha %></td>
+        <td><%= altas_plan.plan %></td>
+        <td><%= altas_plan.cantidad %></td>
+        <td><%= altas_plan.plataforma %></td>
+        <td><%= link_to 'Show', altas_plan %></td>
+        <td><%= link_to 'Edit', edit_altas_plan_path(altas_plan) %></td>
+        <td><%= link_to 'Destroy', altas_plan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Altas Plan', new_altas_plan_path %>
