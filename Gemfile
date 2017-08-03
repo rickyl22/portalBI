@@ -63,3 +63,4 @@ gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'bcrypt'
 gem "chartkick"
+gem 'groupdate'

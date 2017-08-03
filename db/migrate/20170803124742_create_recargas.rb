@@ -30,7 +30,7 @@ class CreateRecargas < ActiveRecord::Migration[5.1]
       t.float :TRANSFERENCIA
       t.float :TRANSFERENCIA_BSF
       t.float :TRANSFERENCIA_BSF_SINIVA12
-      t.float :TRANSFERENCIA_BSF_SINIVA10
+      t.decimal :TRANSFERENCIA_BSF_SINIVA10
 
       t.timestamps
     end

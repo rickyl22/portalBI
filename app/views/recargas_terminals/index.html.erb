@@ -1,0 +1,87 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Recargas Terminals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Terminal</th>
+      <th>Fecha</th>
+      <th>Clientes</th>
+      <th>Recargas</th>
+      <th>Bs total</th>
+      <th>Bs total iva12</th>
+      <th>Bs total iva10</th>
+      <th>Fisica</th>
+      <th>Fisica bsf</th>
+      <th>Fisica bsf siniva12</th>
+      <th>Fisica bsf siniva10</th>
+      <th>P2p</th>
+      <th>P2p bsf</th>
+      <th>P2p bsf siniva12</th>
+      <th>P2p bsf siniva10</th>
+      <th>Gre</th>
+      <th>Gre bsf</th>
+      <th>Gre bsf siniva12</th>
+      <th>Gre bsf siniva10</th>
+      <th>Bancaria</th>
+      <th>Bancaria bsf</th>
+      <th>Bancaria bsf siniva12</th>
+      <th>Bancaria bsf siniva10</th>
+      <th>Mmo</th>
+      <th>Mmo bsf</th>
+      <th>Mmo bsf siniva12</th>
+      <th>Mmo bsf siniva10</th>
+      <th>Transferencia</th>
+      <th>Transferencia bsf</th>
+      <th>Transferencia bsf siniva12</th>
+      <th>Transferencia bsf siniva10</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recargas_terminals.each do |recargas_terminal| %>
+      <tr>
+        <td><%= recargas_terminal.TERMINAL %></td>
+        <td><%= recargas_terminal.FECHA %></td>
+        <td><%= recargas_terminal.CLIENTES %></td>
+        <td><%= recargas_terminal.RECARGAS %></td>
+        <td><%= recargas_terminal.BS_TOTAL %></td>
+        <td><%= recargas_terminal.BS_TOTAL_IVA12 %></td>
+        <td><%= recargas_terminal.BS_TOTAL_IVA10 %></td>
+        <td><%= recargas_terminal.FISICA %></td>
+        <td><%= recargas_terminal.FISICA_BSF %></td>
+        <td><%= recargas_terminal.FISICA_BSF_SINIVA12 %></td>
+        <td><%= recargas_terminal.FISICA_BSF_SINIVA10 %></td>
+        <td><%= recargas_terminal.P2P %></td>
+        <td><%= recargas_terminal.P2P_BSF %></td>
+        <td><%= recargas_terminal.P2P_BSF_SINIVA12 %></td>
+        <td><%= recargas_terminal.P2P_BSF_SINIVA10 %></td>
+        <td><%= recargas_terminal.GRE %></td>
+        <td><%= recargas_terminal.GRE_BSF %></td>
+        <td><%= recargas_terminal.GRE_BSF_SINIVA12 %></td>
+        <td><%= recargas_terminal.GRE_BSF_SINIVA10 %></td>
+        <td><%= recargas_terminal.BANCARIA %></td>
+        <td><%= recargas_terminal.BANCARIA_BSF %></td>
+        <td><%= recargas_terminal.BANCARIA_BSF_SINIVA12 %></td>
+        <td><%= recargas_terminal.BANCARIA_BSF_SINIVA10 %></td>
+        <td><%= recargas_terminal.MMO %></td>
+        <td><%= recargas_terminal.MMO_BSF %></td>
+        <td><%= recargas_terminal.MMO_BSF_SINIVA12 %></td>
+        <td><%= recargas_terminal.MMO_BSF_SINIVA10 %></td>
+        <td><%= recargas_terminal.TRANSFERENCIA %></td>
+        <td><%= recargas_terminal.TRANSFERENCIA_BSF %></td>
+        <td><%= recargas_terminal.TRANSFERENCIA_BSF_SINIVA12 %></td>
+        <td><%= recargas_terminal.TRANSFERENCIA_BSF_SINIVA10 %></td>
+        <td><%= link_to 'Show', recargas_terminal %></td>
+        <td><%= link_to 'Edit', edit_recargas_terminal_path(recargas_terminal) %></td>
+        <td><%= link_to 'Destroy', recargas_terminal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recargas Terminal', new_recargas_terminal_path %>

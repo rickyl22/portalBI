@@ -1,6 +1,7 @@
 class PronosticoRecargasController < ApplicationController
   before_action :set_pronostico_recarga, only: [:show, :edit, :update, :destroy]
-
+  skip_after_action :verify_policy_scoped
+  skip_after_action :verify_authorized
   # GET /pronostico_recargas
   # GET /pronostico_recargas.json
   def index

@@ -1,6 +1,7 @@
 class AltasPlansController < ApplicationController
   before_action :set_altas_plan, only: [:show, :edit, :update, :destroy]
-
+   skip_after_action :verify_policy_scoped
+  skip_after_action :verify_authorized
   # GET /altas_plans
   # GET /altas_plans.json
   def index

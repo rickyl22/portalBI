@@ -1,10 +1,11 @@
 class AltaController < ApplicationController
   before_action :set_altum, only: [:show, :edit, :update, :destroy]
-
+  skip_after_action :verify_policy_scoped
+  skip_after_action :verify_authorized
   # GET /alta
   # GET /alta.json
   def index
-    @alta = Altum.all
+    @alta = Alta.all
   end
 
   # GET /alta/1
@@ -14,7 +15,7 @@ class AltaController < ApplicationController
 
   # GET /alta/new
   def new
-    @altum = Altum.new
+    @altum = Alta.new
   end
 
   # GET /alta/1/edit
@@ -24,17 +25,11 @@ class AltaController < ApplicationController
   # POST /alta
   # POST /alta.json
   def create
-    @altum = Altum.new(altum_params)
-
-    respond_to do |format|
-      if @altum.save
-        format.html { redirect_to @altum, notice: 'Altum was successfully created.' }
-        format.json { render :show, status: :created, location: @altum }
-      else
-        format.html { render :new }
-        format.json { render json: @altum.errors, status: :unprocessable_entity }
-      end
-    end
+    @altum = Alta.new
+    @desde = params[:desde]
+    @hasta = params[:hasta]
+    @data = "&desde="+@desde+"&hasta="+@hasta
+       redirect_to "/alta?"+@data
   end
 
   # PATCH/PUT /alta/1

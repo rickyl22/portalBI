@@ -1,6 +1,7 @@
 class ActivacionesController < ApplicationController
   before_action :set_activacione, only: [:show, :edit, :update, :destroy]
-
+  skip_after_action :verify_policy_scoped
+  skip_after_action :verify_authorized
   # GET /activaciones
   # GET /activaciones.json
   def index

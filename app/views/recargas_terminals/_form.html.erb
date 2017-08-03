@@ -1,0 +1,172 @@
+<%= form_with(model: recargas_terminal, local: true) do |form| %>
+  <% if recargas_terminal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(recargas_terminal.errors.count, "error") %> prohibited this recargas_terminal from being saved:</h2>
+
+      <ul>
+      <% recargas_terminal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :TERMINAL %>
+    <%= form.text_field :TERMINAL, id: :recargas_terminal_TERMINAL %>
+  </div>
+
+  <div class="field">
+    <%= form.label :FECHA %>
+    <%= form.date_select :FECHA, id: :recargas_terminal_FECHA %>
+  </div>
+
+  <div class="field">
+    <%= form.label :CLIENTES %>
+    <%= form.number_field :CLIENTES, id: :recargas_terminal_CLIENTES %>
+  </div>
+
+  <div class="field">
+    <%= form.label :RECARGAS %>
+    <%= form.number_field :RECARGAS, id: :recargas_terminal_RECARGAS %>
+  </div>
+
+  <div class="field">
+    <%= form.label :BS_TOTAL %>
+    <%= form.text_field :BS_TOTAL, id: :recargas_terminal_BS_TOTAL %>
+  </div>
+
+  <div class="field">
+    <%= form.label :BS_TOTAL_IVA12 %>
+    <%= form.text_field :BS_TOTAL_IVA12, id: :recargas_terminal_BS_TOTAL_IVA12 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :BS_TOTAL_IVA10 %>
+    <%= form.text_field :BS_TOTAL_IVA10, id: :recargas_terminal_BS_TOTAL_IVA10 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :FISICA %>
+    <%= form.text_field :FISICA, id: :recargas_terminal_FISICA %>
+  </div>
+
+  <div class="field">
+    <%= form.label :FISICA_BSF %>
+    <%= form.text_field :FISICA_BSF, id: :recargas_terminal_FISICA_BSF %>
+  </div>
+
+  <div class="field">
+    <%= form.label :FISICA_BSF_SINIVA12 %>
+    <%= form.text_field :FISICA_BSF_SINIVA12, id: :recargas_terminal_FISICA_BSF_SINIVA12 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :FISICA_BSF_SINIVA10 %>
+    <%= form.text_field :FISICA_BSF_SINIVA10, id: :recargas_terminal_FISICA_BSF_SINIVA10 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :P2P %>
+    <%= form.text_field :P2P, id: :recargas_terminal_P2P %>
+  </div>
+
+  <div class="field">
+    <%= form.label :P2P_BSF %>
+    <%= form.text_field :P2P_BSF, id: :recargas_terminal_P2P_BSF %>
+  </div>
+
+  <div class="field">
+    <%= form.label :P2P_BSF_SINIVA12 %>
+    <%= form.text_field :P2P_BSF_SINIVA12, id: :recargas_terminal_P2P_BSF_SINIVA12 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :P2P_BSF_SINIVA10 %>
+    <%= form.text_field :P2P_BSF_SINIVA10, id: :recargas_terminal_P2P_BSF_SINIVA10 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :GRE %>
+    <%= form.text_field :GRE, id: :recargas_terminal_GRE %>
+  </div>
+
+  <div class="field">
+    <%= form.label :GRE_BSF %>
+    <%= form.text_field :GRE_BSF, id: :recargas_terminal_GRE_BSF %>
+  </div>
+
+  <div class="field">
+    <%= form.label :GRE_BSF_SINIVA12 %>
+    <%= form.text_field :GRE_BSF_SINIVA12, id: :recargas_terminal_GRE_BSF_SINIVA12 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :GRE_BSF_SINIVA10 %>
+    <%= form.text_field :GRE_BSF_SINIVA10, id: :recargas_terminal_GRE_BSF_SINIVA10 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :BANCARIA %>
+    <%= form.text_field :BANCARIA, id: :recargas_terminal_BANCARIA %>
+  </div>
+
+  <div class="field">
+    <%= form.label :BANCARIA_BSF %>
+    <%= form.text_field :BANCARIA_BSF, id: :recargas_terminal_BANCARIA_BSF %>
+  </div>
+
+  <div class="field">
+    <%= form.label :BANCARIA_BSF_SINIVA12 %>
+    <%= form.text_field :BANCARIA_BSF_SINIVA12, id: :recargas_terminal_BANCARIA_BSF_SINIVA12 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :BANCARIA_BSF_SINIVA10 %>
+    <%= form.text_field :BANCARIA_BSF_SINIVA10, id: :recargas_terminal_BANCARIA_BSF_SINIVA10 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :MMO %>
+    <%= form.text_field :MMO, id: :recargas_terminal_MMO %>
+  </div>
+
+  <div class="field">
+    <%= form.label :MMO_BSF %>
+    <%= form.text_field :MMO_BSF, id: :recargas_terminal_MMO_BSF %>
+  </div>
+
+  <div class="field">
+    <%= form.label :MMO_BSF_SINIVA12 %>
+    <%= form.text_field :MMO_BSF_SINIVA12, id: :recargas_terminal_MMO_BSF_SINIVA12 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :MMO_BSF_SINIVA10 %>
+    <%= form.text_field :MMO_BSF_SINIVA10, id: :recargas_terminal_MMO_BSF_SINIVA10 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :TRANSFERENCIA %>
+    <%= form.text_field :TRANSFERENCIA, id: :recargas_terminal_TRANSFERENCIA %>
+  </div>
+
+  <div class="field">
+    <%= form.label :TRANSFERENCIA_BSF %>
+    <%= form.text_field :TRANSFERENCIA_BSF, id: :recargas_terminal_TRANSFERENCIA_BSF %>
+  </div>
+
+  <div class="field">
+    <%= form.label :TRANSFERENCIA_BSF_SINIVA12 %>
+    <%= form.text_field :TRANSFERENCIA_BSF_SINIVA12, id: :recargas_terminal_TRANSFERENCIA_BSF_SINIVA12 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :TRANSFERENCIA_BSF_SINIVA10 %>
+    <%= form.text_field :TRANSFERENCIA_BSF_SINIVA10, id: :recargas_terminal_TRANSFERENCIA_BSF_SINIVA10 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

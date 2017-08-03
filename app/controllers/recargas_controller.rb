@@ -1,10 +1,12 @@
 class RecargasController < ApplicationController
   before_action :set_recarga, only: [:show, :edit, :update, :destroy]
-
+  skip_after_action :verify_policy_scoped
+  after_action :verify_authorized, only: [:index]
   # GET /recargas
   # GET /recargas.json
   def index
     @recargas = Recarga.all
+    authorize @recargas
   end
 
   # GET /recargas/1
@@ -24,17 +26,14 @@ class RecargasController < ApplicationController
   # POST /recargas
   # POST /recargas.json
   def create
-    @recarga = Recarga.new(recarga_params)
-
-    respond_to do |format|
-      if @recarga.save
-        format.html { redirect_to @recarga, notice: 'Recarga was successfully created.' }
-        format.json { render :show, status: :created, location: @recarga }
-      else
-        format.html { render :new }
-        format.json { render json: @recarga.errors, status: :unprocessable_entity }
-      end
-    end
+    @recarga = Recarga.new
+    @desde = params[:desde]
+    @hasta = params[:hasta]
+    @data = "&desde="+@desde+"&hasta="+@hasta
+    if params[:terminal] and params[:terminal] != ""
+       @data += "&terminal="+params[:terminal]
+    end  
+       redirect_to "/recargas?"+@data
   end
 
   # PATCH/PUT /recargas/1

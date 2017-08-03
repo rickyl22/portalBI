@@ -1,6 +1,7 @@
 class PronosticoAltaController < ApplicationController
   before_action :set_pronostico_altum, only: [:show, :edit, :update, :destroy]
-
+  skip_after_action :verify_policy_scoped
+  skip_after_action :verify_authorized
   # GET /pronostico_alta
   # GET /pronostico_alta.json
   def index

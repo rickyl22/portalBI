@@ -1,85 +1,43 @@
-<p id="notice"><%= notice %></p>
+<script src="https://code.highcharts.com/highcharts.js" ></script>
+<script src="https://code.highcharts.com/highcharts-3d.js" ></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
+<script type="text/javascript">
 
-<h1>Recargas</h1>
+   $(document).ready(function(){
+    console.log("bueh");
+    $(".rango_desde").change(function() {
+    $(".rango_fin")[0].disabled = false;
+    $(".rango_fin")[0].value = $(".rango_desde")[0].value;
+    $(".rango_fin")[0].setAttribute("min", $(".rango_desde")[0].value);
 
-<table>
-  <thead>
-    <tr>
-      <th>Fecha</th>
-      <th>Clientes</th>
-      <th>Recargas</th>
-      <th>Bs total</th>
-      <th>Bs total iva12</th>
-      <th>Bs total iva10</th>
-      <th>Fisica</th>
-      <th>Fisica bsf</th>
-      <th>Fisica bsf siniva12</th>
-      <th>Fisica bsf siniva10</th>
-      <th>P2p</th>
-      <th>P2p bsf</th>
-      <th>P2p bsf siniva12</th>
-      <th>P2p bsf siniva10</th>
-      <th>Gre</th>
-      <th>Gre bsf</th>
-      <th>Gre bsf siniva12</th>
-      <th>Gre bsf siniva10</th>
-      <th>Bancaria</th>
-      <th>Bancaria bsf</th>
-      <th>Bancaria bsf siniva12</th>
-      <th>Bancaria bsf siniva10</th>
-      <th>Mmo</th>
-      <th>Mmo bsf</th>
-      <th>Mmo bsf siniva12</th>
-      <th>Mmo bsf siniva10</th>
-      <th>Transferencia</th>
-      <th>Transferencia bsf</th>
-      <th>Transferencia bsf siniva12</th>
-      <th>Transferencia bsf siniva10</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @recargas.each do |recarga| %>
-      <tr>
-        <td><%= recarga.FECHA %></td>
-        <td><%= recarga.CLIENTES %></td>
-        <td><%= recarga.RECARGAS %></td>
-        <td><%= recarga.BS_TOTAL %></td>
-        <td><%= recarga.BS_TOTAL_IVA12 %></td>
-        <td><%= recarga.BS_TOTAL_IVA10 %></td>
-        <td><%= recarga.FISICA %></td>
-        <td><%= recarga.FISICA_BSF %></td>
-        <td><%= recarga.FISICA_BSF_SINIVA12 %></td>
-        <td><%= recarga.FISICA_BSF_SINIVA10 %></td>
-        <td><%= recarga.P2P %></td>
-        <td><%= recarga.P2P_BSF %></td>
-        <td><%= recarga.P2P_BSF_SINIVA12 %></td>
-        <td><%= recarga.P2P_BSF_SINIVA10 %></td>
-        <td><%= recarga.GRE %></td>
-        <td><%= recarga.GRE_BSF %></td>
-        <td><%= recarga.GRE_BSF_SINIVA12 %></td>
-        <td><%= recarga.GRE_BSF_SINIVA10 %></td>
-        <td><%= recarga.BANCARIA %></td>
-        <td><%= recarga.BANCARIA_BSF %></td>
-        <td><%= recarga.BANCARIA_BSF_SINIVA12 %></td>
-        <td><%= recarga.BANCARIA_BSF_SINIVA10 %></td>
-        <td><%= recarga.MMO %></td>
-        <td><%= recarga.MMO_BSF %></td>
-        <td><%= recarga.MMO_BSF_SINIVA12 %></td>
-        <td><%= recarga.MMO_BSF_SINIVA10 %></td>
-        <td><%= recarga.TRANSFERENCIA %></td>
-        <td><%= recarga.TRANSFERENCIA_BSF %></td>
-        <td><%= recarga.TRANSFERENCIA_BSF_SINIVA12 %></td>
-        <td><%= recarga.TRANSFERENCIA_BSF_SINIVA10 %></td>
-        <td><%= link_to 'Show', recarga %></td>
-        <td><%= link_to 'Edit', edit_recarga_path(recarga) %></td>
-        <td><%= link_to 'Destroy', recarga, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Recarga', new_recarga_path %>
+  
+  });
+  });
+</script>
+<div class="content_p android-content mdl-layout__content">
+    <% if session[:notice] != nil %>
+      <div class="notice mdl-shadow--16dp"><%= session[:notice]  %></div><br>
+    <% end %>  
+    <% @hasta = params[:hasta] %>
+  <% @desde = params[:desde] %>
+  <% @recs = Recarga.where("fecha >= ? and fecha <= ?",@desde,@hasta) %>
+  <% @pron = PronosticoRecarga.where("fecha >= ? and fecha <= ?",@desde,@hasta) %>
+  <% @term = RecargasTerminal.where("fecha >= ? and fecha <= ?",@desde,@hasta) %>
+  <% if params[:terminal] %>
+     <% @term = @term.where("TERMINAL = ?",params[:terminal]) %>
+  <% end %>
+  <%= form_tag recargas_path do %>
+    Período: desde <%= date_field_tag :desde,{}, :class => "rango_desde",  :onkeydown =>"return false", :required => true, :oninvalid => "this.setCustomValidity('Por favor complete este campo')", :oninput => "setCustomValidity('')", max: Date.today %> hasta <%= date_field_tag :hasta, {},:class => "rango_fin", :disabled => true, :onkeydown =>"return false", max: Date.today %><br><br>
+      Terminal <%= select_tag :terminal, options_for_select(["Smartphone","NoSmartphone"]),:include_blank => "N/A" %>
+    <%= submit_tag 'Buscar' %>   
+  <% end %>
+  <% if params[:desde] %>
+  <div id="content">
+  <h1 style="font-size: 2em">Recargas</h1>    
+  <%= line_chart [{name: "Recargas", data: @recs.group(:fecha).average(:bs_total)},{name: "Pronostico", data: @pron.group(:fecha).average(:cantidad)}] %>
+  <h1 style="font-size: 2em">Pronostico</h1>    
+  <%= line_chart [{name: "Pronostico", data: @pron.group(:fecha).average(:cantidad)},{name: "BS_TOTAL", data: @term.group(:fecha).average(:bs_total)}] %>
+  </div>
+  <% end %>
+</div>
