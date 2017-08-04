@@ -115,7 +115,7 @@ td.text-right {
       <% end %>
 <table ><tr>
 <td style="vertical-align: text-top;">
-  <table class="table-fill" style="width: 50vw;">
+  <table class="table-fill" style="width: 50vw;table-layout: fixed;">
 <thead>
 <tr>
 <th class="text-left">Detalles del Caso</th>
@@ -127,11 +127,11 @@ td.text-right {
 </thead>
 <tbody class="table-hover">
 <tr>
-<td class="text-left" style="white-space: nowrap;word-wrap: break-word;">
+<td class="text-left" style="word-wrap: break-word;">
      Titulo: <b><%= @caso.titulo %></b><br>
-     Fecha creado:<br>&nbsp &nbsp <b><%= @caso.fecha_creado %></b><br>
-     Fecha requerido:<br> &nbsp &nbsp<b><%= @caso.fecha_req %></b><br>
-     Periodo - desde:<br> &nbsp &nbsp <b><%= @caso.periodo_desde %></b><br> hasta:<br>&nbsp &nbsp <b><%= @caso.periodo_hasta %></b><br>
+     Fecha creado:<br>&nbsp <b><%= @caso.fecha_creado %></b><br>
+     Fecha requerido:<br> &nbsp <b><%= @caso.fecha_req %></b><br>
+     Periodo - desde:<br> &nbsp <b><%= @caso.periodo_desde %></b><br> hasta:<br>&nbsp <b><%= @caso.periodo_hasta %></b><br>
      Delimitador: <br>&nbsp &nbsp<b><%= @caso.separacion %></b><br>
      Tipo de archivo: <br>&nbsp &nbsp<b><%= @caso.tipo_archivo %></b><br>
      
@@ -160,7 +160,7 @@ td.text-right {
 </tr>
 </tbody>
 </table>
-<table class="table-fill" style="width: 50vw;" >
+<table class="table-fill" style="width: 50vw;table-layout: fixed;" >
 <thead>
 <tr>
 <th class="text-left">Agrupaciones</th>
@@ -231,7 +231,7 @@ Asignado a: <b> <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("
 <% end %>
 <% end %><br>
 
-<%= link_to 'Volver', :back %>
+<!--%= #link_to 'Volver', :back %-->
 </td>
 
 
@@ -246,7 +246,7 @@ Asignado a: <b> <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("
            <b>Eliminado </b><br>
         <% else %>
         <%= link_to "Descargar", doc.attachment_url, :style => 'color:blue' %>
-          <% if cli? and doc.estatus != "Borrado" %>
+          <% if (cli? or session[:usuario_id] == @caso.usuario_id) and doc.estatus != "Borrado" %>
               <%= button_to "Borrar",  doc, method: :delete %>
           <% else %>
             <br>     
@@ -257,7 +257,7 @@ Asignado a: <b> <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("
   </tr>
   
     
-    <% if cli? and @caso.complejidad == "No Asignada" and @caso.documentos.where("estatus != 'Borrado'").length < 5 %>
+    <% if (cli? or session[:usuario_id] == @caso.usuario_id)  and @caso.complejidad == "No Asignada" and @caso.documentos.where("estatus != 'Borrado'").length < 5 %>
     <tr><td style="word-wrap: break-word;">
   <%  @documento = Documento.new %>
   <%= form_for @documento, multipart: true do |doc|  %>
@@ -273,9 +273,9 @@ Asignado a: <b> <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("
 
 
   </td></tr>
-<% elsif cli? and @caso.complejidad == "No Asignada" %>
+<% elsif (cli? or session[:usuario_id] == @caso.usuario_id) and @caso.complejidad == "No Asignada" %>
    <tr><td><span style="font-size: 2.2em">&#9888</span>  <%= "Solo se permite cargar un maximo de 5 documentos" %></td></tr>
-<% elsif cli? %>
+<% elsif (cli? or session[:usuario_id] == @caso.usuario_id) %>
    <tr><td><span style="font-size: 2.2em">&#9888</span>  <%= "No se puede cargar documentos luego de asignar el caso" %></td></tr>
 <% end %><br>
   
@@ -292,17 +292,36 @@ Asignado a: <b> <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("
 <td class="text-left" style="word-wrap: break-word;">
   <b><%= com.autor %>  -  <%= com.created_at.strftime('%d/%m/%Y %H:%M') %></b><br><br>
   <%= com.texto %>
+  <% if admin? %>
+    <% com.update(:leido_admin => 1) %>
+  <% elsif cons_lid? %>
+    <% com.update(:leido_cons_lid => 1) %>
+  <% elsif cons? %>
+    <% com.update(:leido_cons => 1) %>
+  <% end %>
 </td>
 </tr>
 <% end %>
 <tr><td style="word-wrap: break-word;">
 <% comment = Comentario.new %>
 <%= form_for comment do |form| %>
-
   <div class="field">
     <%= form.label :texto %>
     <%= form.text_area :texto, id: :comentario_texto, :style => 'width:17vw;', :rows => "3" %>
   </div>
+   <% if admin? %> 
+     <%= form.hidden_field :leido_admin, value: 1  %>
+     <%= form.hidden_field :leido_cons, value: 0  %>
+     <%= form.hidden_field :leido_cons_lid, value: 0  %>
+   <% elsif cons_lid? %>
+     <%= form.hidden_field :leido_admin, value: 0  %>
+     <%= form.hidden_field :leido_cons, value: 0  %>
+     <%= form.hidden_field :leido_cons_lid, value: 1  %>
+   <% else %>
+     <%= form.hidden_field :leido_admin, value: 0  %>
+     <%= form.hidden_field :leido_cons, value: 1  %>
+     <%= form.hidden_field :leido_cons_lid, value: 0  %>
+   <% end %>
    <%= form.hidden_field :caso_id, value: @caso.id %>
    <%= form.hidden_field :role_id, value: current_user.role_id %>
    <%= form.hidden_field :fecha, value: Time.now.in_time_zone("Caracas") %>

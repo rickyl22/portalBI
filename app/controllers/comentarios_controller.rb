@@ -3,30 +3,10 @@ class ComentariosController < ApplicationController
   skip_after_action :verify_policy_scoped
   skip_after_action :verify_authorized
 
-  # GET /comentarios
-  #def index
-    #@comentarios = Comentario.all
-  #end
 
-  # GET /comentarios/1
-  #def show
-  #end
-
-  # GET /comentarios/new
-  #def new
-    #@comentario = Comentario.new
-  #end
-
-  # GET /comentarios/1/edit
-  #def edit
-  #end
-
-  # POST /comentarios
   def create
     
     @caso = Caso.find(params[:comentario][:caso_id])
-    p "ya me ladille"
-    p comentario_params
     if @caso.comentarios.create(comentario_params)
       redirect_to @caso
     else
@@ -57,6 +37,6 @@ class ComentariosController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def comentario_params
-      params.require(:comentario).permit(:fecha, :texto, :autor, :caso_id, :role_id)
+      params.require(:comentario).permit(:fecha, :texto, :autor, :caso_id, :role_id, :leido_admin, :leido_cons, :leido_cons_lid)
     end
 end

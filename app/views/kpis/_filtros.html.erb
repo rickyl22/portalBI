@@ -1,0 +1,133 @@
+<div class="filtros_kpi mdl-shadow--4dp">
+  <div id="fk"></div>
+  <div class="mdl-grid mdl-grid--no-spacing">
+    <div class="mdl-cell mdl-cell--6-col">
+      <p class="desc_kpi">
+        <strong>Descripcion:</strong>
+        <%= @kpi.descripcion %>
+      </p>
+      <hr>
+      <h4>Seleccionar Filtro:</h4>
+      <div class="select_filtro">
+        <div class="mdl-grid mdl-grid--no-spacing">
+          <div class="mdl-cell mdl-cell--6-col">
+            Desde: <input type="date" name="desde" id="f_desde" class="select_fecha">
+            </br></br>
+            Hasta:  <input type="date" name="hasta" id="f_hasta" class="select_fecha">
+          </div>
+          <div class="mdl-cell mdl-cell--6-col">
+            <button type="button" onclick="aplicarFiltro()">Aplicar Filtro</button>
+            </br>
+            </br>
+            <button type="button" onclick="eliminarFiltro()">Eliminar todos los Filtros</button>
+          </div>
+        </div>
+      </div>
+      </br></br></br>
+      <h4>Filtros Aplicados:</h4>
+      <div class="cont_filtros" id="cont_filtros"></div>
+    </div>
+    <div class="mdl-cell mdl-cell--6-col">
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+  function fechaActual(elemento_fecha) {
+    var fecha = new Date();
+    var dd = fecha.getDate();
+    var mm = fecha.getMonth()+1; //January is 0!
+    var yyyy = fecha.getFullYear();
+
+    if(dd<10) {
+      dd = '0'+dd
+    }
+    if(mm<10) {
+      mm = '0'+mm
+    }
+
+    fecha = yyyy + '-' + mm + '-' + dd;
+
+    if (elemento_fecha == "fecha"){
+      return fecha;
+    }else if (elemento_fecha == "ano"){
+      return yyyy;
+    }else{
+      return dd;
+    }
+  }
+
+  function mostrarFiltroFecha(desde, hasta) {
+    document.getElementById("cont_filtros").innerHTML = "<a onclick='eliminarFiltro()'>Data filtrada Desde: "+desde+"  Hasta: "+hasta+" <i class='material-icons'>highlight_off</i></a>";
+  }
+
+  function filtroFecha(iframe, desde, hasta){
+
+    var fecha_filtro = "%2Ctime%3A(from%3A'"+desde+"T00%3A00%3A00.000Z'%2Cmode%3Aabsolute%2Cto%3A'"+hasta+"T23%3A59%3A59.999Z'";
+    console.log("Fecha filtro: "+fecha_filtro);
+    var i = iframe.src.search("%2Ctime%3A");
+    console.log("Var i donde comienza filtro "+i);
+
+    var f = (iframe.src.length)-2;
+    console.log("tamaño src "+f);
+
+    var quitar_filtro = iframe.src.substring(i, f);
+    console.log("lo que se quita del filtro "+quitar_filtro);
+
+    var nuevo_filtro = iframe.src.replace(quitar_filtro, fecha_filtro);
+
+    console.log("Nuevo filtro: "+nuevo_filtro);
+    iframe.src = nuevo_filtro;
+    console.log("Valor de Iframe filtro: "+iframe.src);
+
+
+    mostrarFiltroFecha(desde, hasta);
+  }
+
+  function filtroTerminal(ifram, terminal){
+
+  }
+  function filtroPago(iframe, pago){
+
+  }
+
+  function aplicarFiltro() {
+    var iframe = $('.dash_kpi').find('iframe').first()[0];
+    console.log("Valor de src del iframe encontrado: "+iframe.src);
+    document.getElementById("fk").innerHTML = "<input type='hidden' value = "+iframe.src+" id='f_original'><p>";
+    var f_desde = document.getElementById("f_desde");
+    var f_hasta = document.getElementById("f_hasta");
+    var t_terminal = document.getElementById("t_terminal");
+    var t_pago = document.getElementById("t_pago");
+
+    if (f_desde.value != ""){
+      if (f_hasta.value != ""){
+        console.log("voy a llamar filtro fecha con ambas fechas ");
+        filtroFecha(iframe, f_desde.value, f_hasta.value);
+      }else{
+        console.log("voy a llamar filtro fecha desde");
+        filtroFecha(iframe, f_desde.value, fechaActual("fecha"));
+      }
+    }else if (f_hasta.value != ""){
+      console.log("Sin fecha de inicio");
+      filtroFecha(iframe, fechaActual("ano")+"-01-01", f_hasta.value);
+    }else{
+      console.log("No se filtra por fechas");
+    }
+  }
+
+  function eliminarFiltro() {
+    var iframe = $('.dash_kpi').find('iframe').first()[0];
+    var src = document.getElementById("f_original");
+    iframe.src = src.value;
+    $("input[type=date]").val("")
+    document.getElementById("cont_filtros").innerHTML= ""
+
+
+  }
+
+</script>

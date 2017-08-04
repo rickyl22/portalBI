@@ -65,7 +65,7 @@ config.action_mailer.perform_deliveries = true
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: "ricardolira48@gmail.com",
-    password: "fcbarca55"
+    password: "fcbarca66"
 
   }
 

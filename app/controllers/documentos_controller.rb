@@ -2,29 +2,7 @@ class DocumentosController < ApplicationController
   before_action :set_documento, only: [:show, :edit, :update, :destroy]
   skip_after_action :verify_policy_scoped
   skip_after_action :verify_authorized
-  # GET /documentos
-  # GET /documentos.json
-  #def index
-    #@documentos = Documento.all
-  #end
-
-  # GET /documentos/1
-  # GET /documentos/1.json
-  #def show
-    #authorize @caso
-  #end
-
-  # GET /documentos/new
-  #def new
-    #@documento = Documento.new
-  #end
-
-  # GET /documentos/1/edit
-  #def edit
-  #end
-
-  # POST /documentos
-  # POST /documentos.json
+  
   def create
     
     params[:documento][:nombre] = params[:documento][:attachment].original_filename

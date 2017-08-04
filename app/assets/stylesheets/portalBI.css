@@ -74,7 +74,12 @@ a img{
 }
 
 .android-header .material-icons {
-    color: #767777 !important;
+    color: #01cc01!important;
+    font-size: 35px;
+}
+.android-header .material-icons:hover {
+    color: #1eb6e5!important;
+    font-size: 40px;
 }
 
 .android-header .mdl-layout__drawer-button {
@@ -381,7 +386,7 @@ a img{
 }
 
 .android-customized-section-image {
-    background: url('teamwork.jpg') center top no-repeat;
+    background: url('teamwork.png') center top no-repeat;
     height: 400px;
 }
 
@@ -1364,7 +1369,45 @@ option{
     margin-bottom: 30px;
 }
 .contenido-kpis{
-    width: 75%;
+    width: 100%;
+}
+.filtros_kpi h4{
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+.cont_filtros, .select_filtro{
+    padding: 0px 20px;
+}
+.cont_filtros a{
+    display: inline-flex;
+    cursor: pointer;
+    color: #333;
+    font-size: 16px;
+    line-height: 25px;
+    padding: 8px;
+    background-color: #002d3e;
+    color: white;
+    border-radius: 15px;
+}
+.cont_filtros a i{
+    color: #333;
+    padding-left: 5px;
+    color: white;
+}
+.cont_filtros a:hover{
+    color: white;
+}
+.cont_filtros a i:hover{
+    color: #01cc01;
+}
+#fk{
+    display: none;
+    visibility: hidden;
+}
+.select_fecha{
+    padding-left: 20px;
 }
 .mdl-card__menu-kpis{
     color: #666;
@@ -1407,19 +1450,32 @@ option{
 .kpis-show p{
     /* background-color: white;
     color: white; */
-    padding: 20px 35px;
+    padding: 35px 0px;
+    font-size: 16px;
 }
+.kpis-show hr{
+    border-top: 1.5px solid gray;
+}
+.desc_kpi{}
 
 .dash_kpi iframe{
     width: 100%;
     min-height: 1500px;
     border: 0;
 }
+
 .kpi-k{
     background-image: url("kpi_1.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+}
+/*Estilos Contenedor de filtros para el dashboard*/
+.filtros_kpi{
+   padding: 0px 0px 20px 35px!important;
+}
+.filtros_kpi .mdl-grid .mdl-cell{
+
 }
  /*  modificando iframe de kibana*/
 .gridster{
@@ -1602,7 +1658,7 @@ form.button_to{
     background-color: white;
 }
 .cont-us .mdl-grid .mdl-cell{
-    max-height: 140px;
+    max-height: 155px;
     text-align: left;
 }
 .g-1, .g-3{
@@ -1621,7 +1677,7 @@ form.button_to{
     height: 0px;
     border-right: 60px solid transparent;
    /* border-left: 60px solid transparent; */
-    border-bottom: 140px solid mediumseagreen;
+    border-bottom: 155px solid mediumseagreen;
 }
 .nosotros-icon i, .objetivo-icon i, .soluciones-icon i{
     position: inherit;!important;
@@ -1633,13 +1689,22 @@ form.button_to{
 .objetivo-icon{
     border-right: 0px;
     border-left: 60px solid transparent;
-    border-bottom: 140px solid orange;
+    border-bottom: 155px solid orange;
 }
 .nosotros-desc, .objetivo-desc, .soluciones-desc{
     padding: 8px;
 }
+.nosotros-desc p, .objetivo-desc p, .soluciones-desc p{
+    font-size: 12px;
+}
+.organigrama img{
+    width: 100%;
+}
+.cont-us{
+    padding-left: 20px;
+}
 .soluciones-icon{
-    border-bottom: 140px solid #1eb6e5;
+    border-bottom: 155px solid #1eb6e5;
 }
 .mdl-card-noticias{
     max-height: 270px;
@@ -1758,8 +1823,10 @@ form.button_to{
 .item.active{
     display: -webkit-box!important;
 }
-
-
+/* MODIFICNDO ESTILOS KIBANA*/
+.legend-value-color-picker{
+    display: none!important;
+}
 /*ESTILOS PARA LA PARTE DE GESTION DE MINERIA*/
 
 /*CASOS*/

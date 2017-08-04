@@ -58,8 +58,6 @@ gem 'pundit'
 #subida de archivos
 gem 'carrierwave'
 gem 'bootstrap-sass'
-#Busqueda sobre elasticsearch
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
 gem 'bcrypt'
 gem "chartkick"
+

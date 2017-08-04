@@ -39,6 +39,11 @@ function habilitar(e) {
 }
 
 $(document).ready(function() {
+    $('iframe').load( function() {
+        $('iframe').contents().find("head")
+            .append($("<style type='text/css'>   .legend-value-color-picker{display: none!important; }  </style>"));
+    });
+
     /*FUNCION PARA CONTRAER Y DESPLEGAR DETALLES*/
     $(".us_detalle").click(function(){
         console.log("entra aca");
