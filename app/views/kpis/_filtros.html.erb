@@ -1,4 +1,4 @@
-<div class="filtros_kpi mdl-shadow--4dp">
+<div class="filtros_kpi">
   <div id="fk"></div>
   <div class="mdl-grid mdl-grid--no-spacing">
     <div class="mdl-cell mdl-cell--6-col">
@@ -23,18 +23,18 @@
           </div>
         </div>
       </div>
-      </br></br></br>
+      </br>
       <h4>Filtros Aplicados:</h4>
       <div class="cont_filtros" id="cont_filtros"></div>
     </div>
-    <div class="mdl-cell mdl-cell--6-col">
-
+    <div class="mdl-cell mdl-cell--6-col show-kpi-comp">
+      <%= @kpi.portada.html_safe %>
     </div>
 
   </div>
 
 </div>
-
+<hr>
 <script>
 
   function fechaActual(elemento_fecha) {

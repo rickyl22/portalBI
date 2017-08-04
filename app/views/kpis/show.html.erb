@@ -1,22 +1,19 @@
-<style>
-  .legend-value-color-picker{
-    display: none!important;
-  }
-    .dashboard-panel .panel .panel-heading .panel-title{
-
-    }
-</style>
 <div class="content_p android-content mdl-layout__content kpi-k">
+  <div class="show-kpi-print">
+    <span class="mdl-chip mdl-chip--deletable">
+      <span class="mdl-chip__text">Exportar a PDF</span>
+      <a target="_blank" href ="/kpis/<%=@kpi.id%>.pdf" type="button" class="mdl-chip__action"><i class="material-icons">print</i></a>
+    </span>
+  </div>
   <div class="contenido-in contenido-kpis kpis-show mdl-shadow--16dp">
 
     <%= render 'filtros' %>
 
     <div class="dash_kpi">
-      <iframe src="http://localhost:5601/app/kibana#/dashboard/11be6930-6e2b-11e7-bd21-c75585518c42?embed=true&_g=(refreshInterval%3A(display%3AOff%2Cpause%3A!f%2Cvalue%3A0)%2Ctime%3A(from%3Anow-30d%2Cmode%3Aquick%2Cto%3Anow))"  id="d1">
-        <%= link_to 'Edit', edit_kpi_path(@kpi) %> |
+      <%= @kpi.url.html_safe %>
+    </div>
+    <%= link_to 'Edit', edit_kpi_path(@kpi) %> |
     <%= link_to 'Back', kpis_path %>
-
-
 
   </div>
 </div>
