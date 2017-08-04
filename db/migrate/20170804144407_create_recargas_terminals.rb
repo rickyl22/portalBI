@@ -3,11 +3,8 @@ class CreateRecargasTerminals < ActiveRecord::Migration[5.1]
     create_table :recargas_terminals do |t|
       t.string :TERMINAL
       t.date :FECHA
-      t.integer :CLIENTES
       t.integer :RECARGAS
-      t.float :BS_TOTAL
-      t.float :BS_TOTAL_IVA12
-      t.float :BS_TOTAL_IVA10
+      t.integer :CLIENTES
       t.float :FISICA
       t.float :FISICA_BSF
       t.float :FISICA_BSF_SINIVA12
@@ -32,6 +29,7 @@ class CreateRecargasTerminals < ActiveRecord::Migration[5.1]
       t.float :TRANSFERENCIA_BSF
       t.float :TRANSFERENCIA_BSF_SINIVA12
       t.decimal :TRANSFERENCIA_BSF_SINIVA10
+      t.float :BS_TOTAL
 
       t.timestamps
     end

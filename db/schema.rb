@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170803150728) do
+ActiveRecord::Schema.define(version: 20170804144407) do
 
   create_table "activaciones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date "fecha"
@@ -226,11 +226,8 @@ ActiveRecord::Schema.define(version: 20170803150728) do
   create_table "recargas_terminals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "TERMINAL"
     t.date "FECHA"
-    t.integer "CLIENTES"
     t.integer "RECARGAS"
-    t.float "BS_TOTAL", limit: 24
-    t.float "BS_TOTAL_IVA12", limit: 24
-    t.float "BS_TOTAL_IVA10", limit: 24
+    t.integer "CLIENTES"
     t.float "FISICA", limit: 24
     t.float "FISICA_BSF", limit: 24
     t.float "FISICA_BSF_SINIVA12", limit: 24
@@ -255,6 +252,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.float "TRANSFERENCIA_BSF", limit: 24
     t.float "TRANSFERENCIA_BSF_SINIVA12", limit: 24
     t.decimal "TRANSFERENCIA_BSF_SINIVA10", precision: 10
+    t.float "BS_TOTAL", limit: 24
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

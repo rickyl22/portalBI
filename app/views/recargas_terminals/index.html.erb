@@ -7,11 +7,8 @@
     <tr>
       <th>Terminal</th>
       <th>Fecha</th>
-      <th>Clientes</th>
       <th>Recargas</th>
-      <th>Bs total</th>
-      <th>Bs total iva12</th>
-      <th>Bs total iva10</th>
+      <th>Clientes</th>
       <th>Fisica</th>
       <th>Fisica bsf</th>
       <th>Fisica bsf siniva12</th>
@@ -36,6 +33,7 @@
       <th>Transferencia bsf</th>
       <th>Transferencia bsf siniva12</th>
       <th>Transferencia bsf siniva10</th>
+      <th>Bs total</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -45,11 +43,8 @@
       <tr>
         <td><%= recargas_terminal.TERMINAL %></td>
         <td><%= recargas_terminal.FECHA %></td>
-        <td><%= recargas_terminal.CLIENTES %></td>
         <td><%= recargas_terminal.RECARGAS %></td>
-        <td><%= recargas_terminal.BS_TOTAL %></td>
-        <td><%= recargas_terminal.BS_TOTAL_IVA12 %></td>
-        <td><%= recargas_terminal.BS_TOTAL_IVA10 %></td>
+        <td><%= recargas_terminal.CLIENTES %></td>
         <td><%= recargas_terminal.FISICA %></td>
         <td><%= recargas_terminal.FISICA_BSF %></td>
         <td><%= recargas_terminal.FISICA_BSF_SINIVA12 %></td>
@@ -74,6 +69,7 @@
         <td><%= recargas_terminal.TRANSFERENCIA_BSF %></td>
         <td><%= recargas_terminal.TRANSFERENCIA_BSF_SINIVA12 %></td>
         <td><%= recargas_terminal.TRANSFERENCIA_BSF_SINIVA10 %></td>
+        <td><%= recargas_terminal.BS_TOTAL %></td>
         <td><%= link_to 'Show', recargas_terminal %></td>
         <td><%= link_to 'Edit', edit_recargas_terminal_path(recargas_terminal) %></td>
         <td><%= link_to 'Destroy', recargas_terminal, method: :delete, data: { confirm: 'Are you sure?' } %></td>

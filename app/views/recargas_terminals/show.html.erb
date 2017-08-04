@@ -11,28 +11,13 @@
 </p>
 
 <p>
-  <strong>Clientes:</strong>
-  <%= @recargas_terminal.CLIENTES %>
-</p>
-
-<p>
   <strong>Recargas:</strong>
   <%= @recargas_terminal.RECARGAS %>
 </p>
 
 <p>
-  <strong>Bs total:</strong>
-  <%= @recargas_terminal.BS_TOTAL %>
-</p>
-
-<p>
-  <strong>Bs total iva12:</strong>
-  <%= @recargas_terminal.BS_TOTAL_IVA12 %>
-</p>
-
-<p>
-  <strong>Bs total iva10:</strong>
-  <%= @recargas_terminal.BS_TOTAL_IVA10 %>
+  <strong>Clientes:</strong>
+  <%= @recargas_terminal.CLIENTES %>
 </p>
 
 <p>
@@ -153,6 +138,11 @@
 <p>
   <strong>Transferencia bsf siniva10:</strong>
   <%= @recargas_terminal.TRANSFERENCIA_BSF_SINIVA10 %>
+</p>
+
+<p>
+  <strong>Bs total:</strong>
+  <%= @recargas_terminal.BS_TOTAL %>
 </p>
 
 <%= link_to 'Edit', edit_recargas_terminal_path(@recargas_terminal) %> |
