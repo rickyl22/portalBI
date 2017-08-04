@@ -1,0 +1,2 @@
+class RecargasTerminal < ApplicationRecord
+end

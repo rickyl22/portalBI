@@ -2,7 +2,7 @@
 <% if session[:notice] != nil %>
          <div class="notice mdl-shadow--16dp"><%= session[:notice]  %></div>
       <% end %>
-<div class="contenido-in">
+<div class="contenido-in cont-casos">
 <p id="notice"><%= notice %></p>
 
 <h1 style="font-size: 2em"><%= (admin? or (cons_lid? and @flag == 0 )) ? "Casos no asignados" : "Casos" %></h1>
@@ -173,6 +173,6 @@
 <% end %>
 <br>
 
-<%= link_to 'Caso nuevo', new_caso_path %>
+  <a href="/casos/new" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Agregar Caso</a>
 </div>
 </div>

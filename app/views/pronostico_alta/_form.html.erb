@@ -1,0 +1,32 @@
+<%= form_with(model: pronostico_altum, local: true) do |form| %>
+  <% if pronostico_altum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pronostico_altum.errors.count, "error") %> prohibited this pronostico_altum from being saved:</h2>
+
+      <ul>
+      <% pronostico_altum.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :fecha %>
+    <%= form.date_select :fecha, id: :pronostico_altum_fecha %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cantidad %>
+    <%= form.number_field :cantidad, id: :pronostico_altum_cantidad %>
+  </div>
+
+  <div class="field">
+    <%= form.label :plataforma %>
+    <%= form.text_field :plataforma, id: :pronostico_altum_plataforma %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,44 @@
+<script src="https://code.highcharts.com/highcharts.js" ></script>
+<script src="https://code.highcharts.com/highcharts-3d.js" ></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
+<script type="text/javascript">
+
+   $(document).ready(function(){
+    console.log("bueh");
+    $(".rango_desde").change(function() {
+    $(".rango_fin")[0].disabled = false;
+    $(".rango_fin")[0].value = $(".rango_desde")[0].value;
+    $(".rango_fin")[0].setAttribute("min", $(".rango_desde")[0].value);
+
+  
+  });
+  });
+</script>
+<div class="content_p android-content mdl-layout__content">
+    <% if session[:notice] != nil %>
+      <div class="notice mdl-shadow--16dp"><%= session[:notice]  %></div><br>
+    <% end %>  
+    <% @hasta = params[:hasta] %>
+  <% @desde = params[:desde] %>
+  <% @altas = Alta.where("fecha >= ? and fecha <= ?",@desde,@hasta) %>
+  <% @pron = PronosticoAlta.where("fecha >= ? and fecha <= ?",@desde,@hasta) %>
+  <% @act = Activacione.where("fecha >= ? and fecha <= ?",@desde,@hasta) %>
+  <% @plan = AltasPlan.where("fecha >= ? and fecha <= ?",@desde,@hasta) %>
+  <%= form_tag alta_path do %>
+    Período: desde <%= date_field_tag :desde,{}, :class => "rango_desde",  :onkeydown =>"return false", :required => true, :oninvalid => "this.setCustomValidity('Por favor complete este campo')", :oninput => "setCustomValidity('')", max: Date.today %> hasta <%= date_field_tag :hasta, {},:class => "rango_fin", :disabled => true, :onkeydown =>"return false", max: Date.today %><br><br>
+    <%= submit_tag 'Buscar' %>   
+  <% end %>
+  <% if params[:desde] %>
+  <div id="content">
+  <h1 style="font-size: 2em">Altas</h1>    
+  <%= line_chart [{name: "Altas", data: @altas.group(:fecha).average(:cantidad)},{name: "Pronostico", data: @pron.group(:fecha).average(:cantidad)}] %>
+  <h1 style="font-size: 2em">Altas por plan</h1>    
+  <%= line_chart [{name: "Mixto Mega Ultra", data: @plan.where("plan = 'Mixto Mega Ultra'").group(:fecha).average(:cantidad)},{name: "Mixto Mega Plus", data: @plan.where("plan = 'Mixto Mega Plus'").group(:fecha).average(:cantidad)},{name: "Full 4.3", data: @plan.where("plan = 'Full 4.3'").group(:fecha).average(:cantidad)},{name: "Full 2.3", data: @plan.where("plan = 'Full 2.3'").group(:fecha).average(:cantidad)},{name: "Full 3.3", data: @plan.where("plan = 'Full 3.3'").group(:fecha).average(:cantidad)},{name: "Full 5.3", data: @plan.where("plan = 'Full 5.3'").group(:fecha).average(:cantidad)},{name: "Full 1.3", data: @plan.where("plan = 'Full 1.3'").group(:fecha).average(:cantidad)},{name: "OTROS", data: @plan.where("plan = 'OTROS'").group(:fecha).average(:cantidad)}] %>
+  <h1 style="font-size: 2em">Activaciones</h1>    
+  <%= line_chart [{name: "Activaciones", data: @act.group(:fecha).average(:cantidad)},{name: "Altas", data: @altas.group(:fecha).average(:cantidad)}] %>
+  </div>
+  <% end %>
+</div>
+
+

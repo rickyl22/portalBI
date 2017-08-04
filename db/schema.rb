@@ -10,7 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717143637) do
+ActiveRecord::Schema.define(version: 20170803150728) do
+
+  create_table "activaciones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date "fecha"
+    t.integer "cantidad"
+    t.string "plataforma"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "alta", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date "fecha"
+    t.integer "cantidad"
+    t.string "plataforma"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "altas_plans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date "fecha"
+    t.string "plan"
+    t.integer "cantidad"
+    t.string "plataforma"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "casos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "act_tabla"
@@ -48,6 +73,9 @@ ActiveRecord::Schema.define(version: 20170717143637) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["usuario_id"], name: "index_casos_on_usuario_id"
+  end
+
+  create_table "casosno", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
   end
 
   create_table "comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -94,6 +122,14 @@ ActiveRecord::Schema.define(version: 20170717143637) do
     t.index ["caso_id"], name: "index_historials_on_caso_id"
   end
 
+  create_table "indicadores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text "nombre"
+    t.text "descripcion"
+    t.text "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "kpis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "nombre"
     t.text "descripcion"
@@ -124,6 +160,21 @@ ActiveRecord::Schema.define(version: 20170717143637) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "pronostico_alta", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date "fecha"
+    t.integer "cantidad"
+    t.string "plataforma"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pronostico_recargas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date "fecha"
+    t.integer "cantidad"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "proyectos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "imagen"
     t.text "titulo"
@@ -138,6 +189,77 @@ ActiveRecord::Schema.define(version: 20170717143637) do
     t.text "descripcion"
     t.text "imagen"
     t.text "estatus"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recargas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date "FECHA"
+    t.integer "CLIENTES"
+    t.integer "RECARGAS"
+    t.float "BS_TOTAL", limit: 24
+    t.float "BS_TOTAL_IVA12", limit: 24
+    t.float "BS_TOTAL_IVA10", limit: 24
+    t.float "FISICA", limit: 24
+    t.float "FISICA_BSF", limit: 24
+    t.float "FISICA_BSF_SINIVA12", limit: 24
+    t.float "FISICA_BSF_SINIVA10", limit: 24
+    t.float "P2P", limit: 24
+    t.float "P2P_BSF", limit: 24
+    t.float "P2P_BSF_SINIVA12", limit: 24
+    t.float "P2P_BSF_SINIVA10", limit: 24
+    t.float "GRE", limit: 24
+    t.float "GRE_BSF", limit: 24
+    t.float "GRE_BSF_SINIVA12", limit: 24
+    t.float "GRE_BSF_SINIVA10", limit: 24
+    t.float "BANCARIA", limit: 24
+    t.float "BANCARIA_BSF", limit: 24
+    t.float "BANCARIA_BSF_SINIVA12", limit: 24
+    t.float "BANCARIA_BSF_SINIVA10", limit: 24
+    t.float "MMO", limit: 24
+    t.float "MMO_BSF", limit: 24
+    t.float "MMO_BSF_SINIVA12", limit: 24
+    t.float "MMO_BSF_SINIVA10", limit: 24
+    t.float "TRANSFERENCIA", limit: 24
+    t.float "TRANSFERENCIA_BSF", limit: 24
+    t.float "TRANSFERENCIA_BSF_SINIVA12", limit: 24
+    t.decimal "TRANSFERENCIA_BSF_SINIVA10", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recargas_terminals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "TERMINAL"
+    t.date "FECHA"
+    t.integer "CLIENTES"
+    t.integer "RECARGAS"
+    t.float "BS_TOTAL", limit: 24
+    t.float "BS_TOTAL_IVA12", limit: 24
+    t.float "BS_TOTAL_IVA10", limit: 24
+    t.float "FISICA", limit: 24
+    t.float "FISICA_BSF", limit: 24
+    t.float "FISICA_BSF_SINIVA12", limit: 24
+    t.float "FISICA_BSF_SINIVA10", limit: 24
+    t.float "P2P", limit: 24
+    t.float "P2P_BSF", limit: 24
+    t.float "P2P_BSF_SINIVA12", limit: 24
+    t.float "P2P_BSF_SINIVA10", limit: 24
+    t.float "GRE", limit: 24
+    t.float "GRE_BSF", limit: 24
+    t.float "GRE_BSF_SINIVA12", limit: 24
+    t.float "GRE_BSF_SINIVA10", limit: 24
+    t.float "BANCARIA", limit: 24
+    t.float "BANCARIA_BSF", limit: 24
+    t.float "BANCARIA_BSF_SINIVA12", limit: 24
+    t.float "BANCARIA_BSF_SINIVA10", limit: 24
+    t.float "MMO", limit: 24
+    t.float "MMO_BSF", limit: 24
+    t.float "MMO_BSF_SINIVA12", limit: 24
+    t.float "MMO_BSF_SINIVA10", limit: 24
+    t.float "TRANSFERENCIA", limit: 24
+    t.float "TRANSFERENCIA_BSF", limit: 24
+    t.float "TRANSFERENCIA_BSF_SINIVA12", limit: 24
+    t.decimal "TRANSFERENCIA_BSF_SINIVA10", precision: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -179,5 +301,5 @@ ActiveRecord::Schema.define(version: 20170717143637) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "historials", "casos"
+  add_foreign_key "historials", "casosno", column: "caso_id"
 end

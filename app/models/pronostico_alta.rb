@@ -1,0 +1,2 @@
+class PronosticoAlta < ApplicationRecord
+end

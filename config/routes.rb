@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resources :recargas_terminals
+  resources :recargas
+  resources :pronostico_recargas
+  resources :pronostico_alta
+  resources :altas_plans
+  resources :alta
+  resources :activaciones
   resources :publicaciones
   resources :proyectos
   resources :estadisticas

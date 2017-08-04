@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pronostico Recargas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Cantidad</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pronostico_recargas.each do |pronostico_recarga| %>
+      <tr>
+        <td><%= pronostico_recarga.fecha %></td>
+        <td><%= pronostico_recarga.cantidad %></td>
+        <td><%= link_to 'Show', pronostico_recarga %></td>
+        <td><%= link_to 'Edit', edit_pronostico_recarga_path(pronostico_recarga) %></td>
+        <td><%= link_to 'Destroy', pronostico_recarga, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pronostico Recarga', new_pronostico_recarga_path %>

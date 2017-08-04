@@ -1,0 +1,2 @@
+class AltasPlan < ApplicationRecord
+end

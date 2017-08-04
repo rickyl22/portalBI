@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @altas_plan.fecha %>
+</p>
+
+<p>
+  <strong>Plan:</strong>
+  <%= @altas_plan.plan %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @altas_plan.cantidad %>
+</p>
+
+<p>
+  <strong>Plataforma:</strong>
+  <%= @altas_plan.plataforma %>
+</p>
+
+<%= link_to 'Edit', edit_altas_plan_path(@altas_plan) %> |
+<%= link_to 'Back', altas_plans_path %>

@@ -1,0 +1,2 @@
+module RecargasTerminalsHelper
+end

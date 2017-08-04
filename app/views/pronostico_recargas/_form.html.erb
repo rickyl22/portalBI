@@ -1,0 +1,27 @@
+<%= form_with(model: pronostico_recarga, local: true) do |form| %>
+  <% if pronostico_recarga.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pronostico_recarga.errors.count, "error") %> prohibited this pronostico_recarga from being saved:</h2>
+
+      <ul>
+      <% pronostico_recarga.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :fecha %>
+    <%= form.date_select :fecha, id: :pronostico_recarga_fecha %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cantidad %>
+    <%= form.number_field :cantidad, id: :pronostico_recarga_cantidad %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

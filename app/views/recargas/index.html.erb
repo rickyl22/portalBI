@@ -1,0 +1,55 @@
+<script src="https://code.highcharts.com/highcharts.js" ></script>
+<script src="https://code.highcharts.com/highcharts-3d.js" ></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    console.log("bueh");
+    $(".rango_desde").change(function() {
+      $(".rango_fin")[0].disabled = false;
+      $(".rango_fin")[0].value = $(".rango_desde")[0].value;
+      $(".rango_fin")[0].setAttribute("min", $(".rango_desde")[0].value);
+
+    });
+  });
+</script>
+<div class="content_p android-content mdl-layout__content">
+  <% if session[:notice] != nil %>
+      <div class="notice mdl-shadow--16dp"><%= session[:notice]  %></div><br>
+  <% end %>
+  <% @hasta = params[:hasta] %>
+  <% @desde = params[:desde] %>
+  <% @recs = Recarga.where("fecha >= ? and fecha <= ?",@desde,@hasta) %>
+  <% @pron = PronosticoRecarga.where("fecha >= ? and fecha <= ?",@desde,@hasta) %>
+  <% @term = RecargasTerminal.where("fecha >= ? and fecha <= ?",@desde,@hasta) %>
+  <% if @hasta %>
+      <% @term_last = RecargasTerminal.where("MONTH(fecha) = ?",@hasta.to_date.month-1) %>
+  <% end %>
+  <% p "holaaaa" %>
+  <% p @term_last %>
+  <% if params[:terminal] %>
+      <% if params[:terminal] == "NoSmartphone" %>
+          <% @term = @term.where("TERMINAL = 'NOSMART_SINDATOS'") %>
+      <% else %>
+          <% @term = @term.where("TERMINAL = 'NOSMART_CONDATOS' or TERMINAL = 'SMARTPHONE'") %>
+      <% end %>
+  <% end %>
+  <%= form_tag recargas_path do %>
+      Período: desde <%= date_field_tag :desde,{}, :class => "rango_desde",  :onkeydown =>"return false", :required => true, :oninvalid => "this.setCustomValidity('Por favor complete este campo')", :oninput => "setCustomValidity('')", max: Date.today %> hasta <%= date_field_tag :hasta, {},:class => "rango_fin", :disabled => true, :onkeydown =>"return false", max: Date.today %><br><br>
+      Terminal <%= select_tag :terminal, options_for_select(["Smartphone","NoSmartphone"]),:include_blank => "N/A" %>
+      <%= submit_tag 'Buscar' %>
+  <% end %>
+  <% if params[:desde] %>
+      <div id="content">
+        <h1 style="font-size: 2em">Recargas por canal</h1>
+        <%= line_chart [{name: "Total", data: @term.group(:fecha).average(:recargas)},{name: "Bancaria", data: @term.group(:fecha).average(:bancaria)},{name: "GRE", data: @term.group(:fecha).average(:GRE)},{name: "P2P", data: @term.group(:fecha).average(:p2p)},{name: "MMO", data: @term.group(:fecha).average(:mmo)},{name: "Fisica", data: @term.group(:fecha).average(:fisica)},{name: "Transferencia", data: @term.group(:fecha).average(:transferencia)}] %>
+        <h1 style="font-size: 2em">BS por canal</h1>
+        <%= line_chart [{name: "Total", data: @term.group(:fecha).average(:bs_total)},{name: "Bancaria", data: @term.group(:fecha).average(:bancaria_bsf)},{name: "GRE", data: @term.group(:fecha).average(:GRE_BSF)},{name: "P2P", data: @term.group(:fecha).average(:p2p_bsf)},{name: "MMO", data: @term.group(:fecha).average(:mmo_bsf)},{name: "Fisica", data: @term.group(:fecha).average(:fisica_bsf)},{name: "Transferencia", data: @term.group(:fecha).average(:transferencia_bsf)}] %>
+        <h1 style="font-size: 2em">Pronostico</h1>
+        <%= line_chart [{name: "Pronostico", data: @pron.group(:fecha).average(:cantidad)},{name: "BS_TOTAL", data: @term.group(:fecha).average(:bs_total)}] %>
+        <h1 style="font-size: 2em">Promedio mes anterior</h1>
+        <% series_a = {@desde => @term_last.average(:recargas), @hasta => @term_last.average(:recargas)} %>
+        <%= line_chart [{name: "Recargas mes actual", data: @term.group(:fecha).average(:recargas)},{name: "Promedio mes anterior", data: series_a}] %>
+      </div>
+  <% end %>
+</div>

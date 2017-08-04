@@ -1,0 +1,2 @@
+class Alta < ApplicationRecord
+end

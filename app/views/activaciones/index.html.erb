@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Activaciones</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Cantidad</th>
+      <th>Plataforma</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @activaciones.each do |activacione| %>
+      <tr>
+        <td><%= activacione.fecha %></td>
+        <td><%= activacione.cantidad %></td>
+        <td><%= activacione.plataforma %></td>
+        <td><%= link_to 'Show', activacione %></td>
+        <td><%= link_to 'Edit', edit_activacione_path(activacione) %></td>
+        <td><%= link_to 'Destroy', activacione, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Activacione', new_activacione_path %>

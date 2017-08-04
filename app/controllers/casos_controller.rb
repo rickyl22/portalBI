@@ -45,7 +45,7 @@ class CasosController < ApplicationController
     @string = @string[0...-3]
     authorize @caso
     if current_user.casos.create(caso_params.merge(:campos => @string))
-      current_user.casos.order("created_at").last.historial.create(:evento => "Creacion del caso", :usuario_id => current_user.id, :fecha => Time.now, :estatus => "Esperando asignacion de complejidad" )
+     # current_user.casos.order("created_at").last.historial.create(:evento => "Creacion del caso", :usuario_id => current_user.id, :fecha => Time.now, :estatus => "Esperando asignacion de complejidad" )
 
       redirect_to @caso, notice: 'Caso creado satisfactoriamente'
     else
