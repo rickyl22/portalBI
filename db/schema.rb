@@ -20,11 +20,12 @@ ActiveRecord::Schema.define(version: 20170717143637) do
     t.text "campos"
     t.string "complejidad"
     t.text "condiciones"
-    t.string "consultor"
+    t.string "consultor_id"
     t.string "especifique"
     t.date "fech_asig"
     t.date "fecha_creado"
     t.date "fecha_req"
+    t.date "fecha_cerrado"
     t.string "fijo"
     t.string "im"
     t.string "infosoft"
@@ -43,18 +44,24 @@ ActiveRecord::Schema.define(version: 20170717143637) do
     t.string "titulo"
     t.string "tlv"
     t.string "tv"
-    t.string "usuario_id"
+    t.bigint "usuario_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["usuario_id"], name: "index_casos_on_usuario_id"
   end
 
   create_table "comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "fecha"
     t.text "texto"
     t.string "autor"
-    t.integer "caso_id"
+    t.bigint "caso_id"
+    t.integer "role_id"
+    t.integer "leido_admin"
+    t.integer "leido_cons_lid"
+    t.integer "leido_cons"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["caso_id"], name: "index_comentarios_on_caso_id"
   end
 
   create_table "documentos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -85,14 +92,6 @@ ActiveRecord::Schema.define(version: 20170717143637) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["caso_id"], name: "index_historials_on_caso_id"
-  end
-
-  create_table "indicadores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text "nombre"
-    t.text "descripcion"
-    t.text "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "kpis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
