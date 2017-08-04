@@ -14,6 +14,15 @@ class KpisController < ApplicationController
   # GET /kpis/1.json
   def show
     @kpi = Kpi.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => "indicadores",
+               :layout => 'pdf_layout.html.erb',
+               :template => "kpis/indicadores.pdf.erb",
+               :javascript_delay => 5000
+      end
+    end
   end
 
   # GET /kpis/new
