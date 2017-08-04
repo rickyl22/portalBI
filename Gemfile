@@ -10,7 +10,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
 # Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.3.18', '< 0.5'
+gem 'mysql2'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -53,11 +53,12 @@ gem 'coffee-script-source', '1.8.0'
 
 gem 'pundit'
 #gem 'bcrypt'
-#gem 'bcrypt-ruby', '3.0.0'
-#gem 'bcrypt-ruby', '3.1.2'
+gem 'bcrypt-ruby', '3.0.0'
 #subida de archivos
 gem 'carrierwave'
 gem 'bootstrap-sass'
-gem 'bcrypt'
+#gem 'bcrypt'
 gem "chartkick"
-
+#Generar pdf
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
