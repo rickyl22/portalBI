@@ -2,11 +2,6 @@ class CasosController < ApplicationController
   before_action :set_caso, only: [:show, :edit, :update, :destroy]
   after_action :verify_policy_scoped, :only => [:index, :show]
   after_action :verify_authorized, :only => [:index, :create, :new, :show]
-  #def iniciar
-    #session[:usuario_id] = 1
-   # session[:usuario_tipo] = params[:user_tipo]
-
-  #end
 
   # GET /casos
   def index
@@ -41,13 +36,12 @@ class CasosController < ApplicationController
     @caso = Caso.new(caso_params)
     @campos = params[:campos]
     @string = ""
-    @campos.each { |x| if x != "" then @string << x +" - " end}
+    @campos.each { |x| if x != "" then @string << x+" - " end}
     @string = @string[0...-3]
     authorize @caso
     if current_user.casos.create(caso_params.merge(:campos => @string))
-     # current_user.casos.order("created_at").last.historial.create(:evento => "Creacion del caso", :usuario_id => current_user.id, :fecha => Time.now, :estatus => "Esperando asignacion de complejidad" )
-
-      redirect_to @caso, notice: 'Caso creado satisfactoriamente'
+      current_user.casos.order("created_at").last.historial.create(:evento => "Creacion del caso", :usuario_id => current_user.id, :fecha => Time.now, :estatus => "Esperando asignacion de complejidad" )
+      redirect_to @caso, notice: 'Caso creado satisfactoriamente.'
     else
       render :new
     end
@@ -89,7 +83,7 @@ class CasosController < ApplicationController
             AsignadoMailer.bi_afectado(Usuario.find(@caso.usuario_id).correo,@caso.titulo).deliver
           end
       end
-      redirect_to @caso, notice: 'Caso was successfully updated.'
+      redirect_to @caso, notice: 'Caso actualizado satisfactoriamente.'
     else
       render :edit
     end
@@ -98,7 +92,7 @@ class CasosController < ApplicationController
   # DELETE /casos/1
   def destroy
     @caso.destroy
-    redirect_to casos_url, notice: 'Caso was successfully destroyed.'
+    redirect_to casos_url, notice: 'Caso eliminado satisfactoriamente.'
   end
 
   private
