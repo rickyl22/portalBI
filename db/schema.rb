@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170803150728) do
 
-  create_table "activaciones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "activaciones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.date "fecha"
     t.integer "cantidad"
     t.string "plataforma"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "alta", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "alta", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.date "fecha"
     t.integer "cantidad"
     t.string "plataforma"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "altas_plans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "altas_plans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.date "fecha"
     t.string "plan"
     t.integer "cantidad"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "casos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "casos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "act_tabla"
     t.string "agrup"
     t.string "altas"
@@ -75,10 +75,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.index ["usuario_id"], name: "index_casos_on_usuario_id"
   end
 
-  create_table "casosno", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-  end
-
-  create_table "comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.datetime "fecha"
     t.text "texto"
     t.string "autor"
@@ -92,7 +89,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.index ["caso_id"], name: "index_comentarios_on_caso_id"
   end
 
-  create_table "documentos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "documentos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "nombre"
     t.string "attachment"
     t.string "estatus"
@@ -102,7 +99,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.index ["caso_id"], name: "index_documentos_on_caso_id"
   end
 
-  create_table "estadisticas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "estadisticas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.text "descripcion"
     t.date "fecha_desde"
     t.date "fecha_hasta"
@@ -111,7 +108,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "historials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "historials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "evento"
     t.datetime "fecha"
     t.integer "usuario_id"
@@ -122,15 +119,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.index ["caso_id"], name: "index_historials_on_caso_id"
   end
 
-  create_table "indicadores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text "nombre"
-    t.text "descripcion"
-    t.text "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "kpis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "kpis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.text "nombre"
     t.text "descripcion"
     t.text "portada"
@@ -140,7 +129,15 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "permisos_asignados", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "noticia", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.text "imagen"
+    t.text "titulo"
+    t.text "descripcion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "permisos_asignados", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "privilegio_id"
     t.bigint "role_id"
     t.bigint "usuario_id"
@@ -152,7 +149,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.index ["usuario_id"], name: "index_permisos_asignados_on_usuario_id"
   end
 
-  create_table "privilegios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "privilegios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "nombre"
     t.string "descripcion"
     t.string "modulo"
@@ -160,7 +157,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pronostico_alta", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "pronostico_alta", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.date "fecha"
     t.integer "cantidad"
     t.string "plataforma"
@@ -168,14 +165,14 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pronostico_recargas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "pronostico_recargas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.date "fecha"
     t.integer "cantidad"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "proyectos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "proyectos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.text "imagen"
     t.text "titulo"
     t.text "descripcion"
@@ -184,7 +181,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "publicaciones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "publicaciones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.text "titulo"
     t.text "descripcion"
     t.text "imagen"
@@ -193,7 +190,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "recargas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "recargas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.date "FECHA"
     t.integer "CLIENTES"
     t.integer "RECARGAS"
@@ -228,7 +225,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "recargas_terminals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "recargas_terminals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "TERMINAL"
     t.date "FECHA"
     t.integer "CLIENTES"
@@ -264,7 +261,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "alias"
     t.string "descripcion"
     t.string "nombre"
@@ -272,7 +269,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "roles_privilegios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "roles_privilegios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "privilegio_id"
     t.bigint "role_id"
     t.integer "alcance"
@@ -282,7 +279,7 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.index ["role_id"], name: "index_roles_privilegios_on_role_id"
   end
 
-  create_table "usuarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "usuarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "usuario"
     t.string "codigo_empleado"
     t.string "area"
@@ -294,12 +291,12 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.string "apellido"
     t.string "supervisor"
     t.string "justificacion"
-    t.string "estatus"
+    t.boolean "estatus"
     t.string "password_digest"
     t.integer "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "historials", "casosno", column: "caso_id"
+  add_foreign_key "historials", "casos"
 end
