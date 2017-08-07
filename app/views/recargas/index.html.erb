@@ -3,15 +3,12 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
 <script type="text/javascript">
-
    $(document).ready(function(){
     console.log("bueh");
     $(".rango_desde").change(function() {
     $(".rango_fin")[0].disabled = false;
     $(".rango_fin")[0].value = $(".rango_desde")[0].value;
-    $(".rango_fin")[0].setAttribute("min", $(".rango_desde")[0].value);
-
-  
+    $(".rango_fin")[0].setAttribute("min", $(".rango_desde")[0].value);  
   });
   });
 </script>

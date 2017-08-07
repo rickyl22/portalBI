@@ -59,13 +59,13 @@ config.action_mailer.perform_deliveries = true
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
     config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "gmail.com",
+    address: "10.160.17.58",
+    port: 3000,
+    #domain: "telefonica.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "ricardolira48@gmail.com",
-    password: "fcbarca55"
+    user_name: " GestionDemandaBi.Ve@telefonica.com",
+    password: "asd123++"
 
   }
 
