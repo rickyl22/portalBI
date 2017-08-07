@@ -1,6 +1,6 @@
 <div class="content_p android-content mdl-layout__content">
 <style>
-table-title h3 {
+.table-title h3 {
    color: #fafafa;
    font-size: 30px;
    font-weight: 400;
@@ -112,7 +112,146 @@ td.text-right {
   </style>
 <% if session[:notice] != nil %>
          <div class="notice mdl-shadow--16dp"><%= session[:notice]  %></div>
-      <% end %>
+<% end %>
+
+
+<div class="content_p android-content mdl-layout__content">
+  <div class="contenido-in contenido-f-caso">
+    <div class="mdl-grid">
+      <div class="mdl-cell--6-col align-left show-caso">
+        <h4>Detalles del Caso:</h4>
+        <div class="mdl-grid mdl-shadow--2dp">
+          <div class="mdl-cell--6-col">
+            <p><strong>Titulo: </strong><%= @caso.titulo %> </p>
+          </div>
+          <div class="mdl-cell--6-col">
+            <p><strong>Fecha de creación: </strong><%= @caso.fecha_creado %></p>
+          </div>
+          <div class="mdl-cell--6-col">
+            <p><strong>Fecha requerido: </strong><%= @caso.fecha_req %></p>
+          </div>
+          <div class="mdl-cell--6-col">
+            <p><strong>Delimitador: </strong><%= @caso.separacion %></p>
+          </div>
+          <div class="mdl-cell--6-col">
+            <p><strong>Fecha desde: </strong><%= @caso.periodo_desde %></p>
+          </div>
+          <div class="mdl-cell--6-col">
+            <p><strong>Fecha hasta: </strong><%= @caso.periodo_hasta %></p>
+          </div>
+          <div class="mdl-cell--12-col">
+            <p><strong>tipo de archivo: </strong><%= @caso.tipo_archivo %></p>
+          </div>
+        </div>
+
+        <h4>Indicadores:</h4>
+        <div class="mdl-grid mdl-shadow--2dp">
+          <div class="mdl-cell--4-col">
+            <p><strong>ARPU :</strong><%= @caso.arpu == '0' ? "NO" : "SI" %></p>
+          </div>
+          <div class="mdl-cell--4-col">
+            <p><strong>Altas: </strong><%= @caso.altas == '0' ? "NO" : "SI"%></p>
+          </div>
+          <div class="mdl-cell--4-col">
+            <p><strong>Parque: </strong><%= @caso.parque == '0' ? "NO" : "SI" %></p>
+          </div>
+          <div class="mdl-cell--4-col">
+            <p><strong>Recargas: </strong><%= @caso.recargas == '0' ? "NO" : "SI"%></p>
+          </div>
+          <div class="mdl-cell--4-col">
+            <p><strong>Act Tabla: </strong><%= @caso.act_tabla == '0' ? "NO" : "SI"%></p>
+          </div>
+          <div class="mdl-cell--4-col">
+            <p><strong>Televentas: </strong><%= @caso.tlv == '0' ? "NO" : "SI"%></p>
+          </div>
+        </div>
+
+        <h4>Filtros:</h4>
+        <div class="mdl-grid mdl-shadow--2dp">
+          <div class="mdl-cell--4-col">
+            <p><strong>Smartphone/No Smartphone:     </strong><%= @caso.phone == '0' ? "NO" : "SI"%></p>
+          </div>
+          <div class="mdl-cell--4-col">
+            <p><strong>Prepago/Postpago: </strong><%= @caso.pre_post == '0' ? "NO" : "SI"%></p>
+          </div>
+          <div class="mdl-cell--4-col">
+            <p><strong>Otro: </strong><%= @caso.otro == "" ? "NO" : @caso.otro %></p>
+          </div>
+        </div>
+
+        <h4>Línea de Negocio:</h4>
+        <div class="mdl-grid mdl-shadow--2dp">
+          <div class="mdl-cell--3-col">
+            <p><strong>Fijo: </strong><%= @caso.fijo == '0' ? "NO" : "SI"%></p>
+          </div>
+          <div class="mdl-cell--3-col">
+            <p><strong>IM: </strong><%= @caso.im == '0' ? "NO" : "SI"%></p>
+          </div>
+          <div class="mdl-cell--3-col">
+            <p><strong>Móvil: </strong><%= @caso.movil == '0' ? "NO" : "SI"%></p>
+          </div>
+          <div class="mdl-cell--3-col">
+            <p><strong>TV: </strong><%= @caso.tv == '0' ? "NO" : "SI"%></p>
+          </div>
+        </div>
+
+        <div class="mdl-grid mdl-shadow--2dp">
+          <div class="mdl-cell--6-col ">
+            <h4>Tipo de Caso:</h4>
+            <p><%= @caso.tipo_caso %></p>
+          </div>
+          <div class="mdl-cell--6-col ">
+            <h4>Agrupación:</h4>
+            <p><%= @caso.agrup %><%= @caso.especifique %></p>
+          </div>
+        </div>
+
+        <div class="mdl-grid mdl-shadow--2dp">
+          <div class="mdl-cell--6-col s-condiciones">
+            <h4>Condiciones:</h4>
+            <p><%= @caso.condiciones %></p>
+          </div>
+          <div class="mdl-cell--6-col s-condiciones">
+            <h4>Campos:</h4>
+            <p><%= @caso.campos %></p>
+          </div>
+        </div>
+
+
+        <div class="mdl-grid mdl-shadow--2dp">
+          <div class="mdl-cell--6-col ">
+            <h4>Complejidad:</h4>
+            <p><%= @caso.complejidad %></p>
+          </div>
+          <div class="mdl-cell--6-col ">
+            <h4>Estatus:</h4>
+            <p><%= @caso.status %></p>
+          </div>
+        </div>
+
+
+
+      </div>
+      <div class="mdl-cell--6-col">
+        nuevo
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <table ><tr>
 <td style="vertical-align: text-top;">
   <table class="table-fill" style="width: 50vw;table-layout: fixed;">
@@ -143,7 +282,7 @@ td.text-right {
     Parque: <b><%= @caso.parque == '0' ? "NO" : "SI" %></b><br>
     Recargas: <b><%= @caso.recargas == '0' ? "NO" : "SI"%></b><br>
     Act_Tabla: <b><%= @caso.act_tabla == '0' ? "NO" : "SI"%></b><br>
-    TLV: <b><%= @caso.tlv == '0' ? "NO" : "SI"%>
+    TLV: <b><%= @caso.tlv == '0' ? "NO" : "SI"%></b>
 </td>
 <td class="text-left">
     Smartphone/No Smartphone: <b><%= @caso.phone == '0' ? "NO" : "SI"%></b><br>
@@ -337,3 +476,8 @@ Asignado a: <b> <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("
 
 
 </div>
+
+<% if admin? or admin_min? %>
+    <a href="/casos/new" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Agregar Caso</a>
+<% end %>
+    <a href="/casos" id="btn-back" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons">chevron_left</i>Regresar</a>

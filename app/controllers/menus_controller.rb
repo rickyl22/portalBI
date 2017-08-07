@@ -6,7 +6,7 @@ class MenusController < ApplicationController
   def menu_principal
     @usuario = Usuario.find(current_user.id)
     @usuarios_pendientes = Usuario.where("estatus = ?", "0")
-    #@casos_recientes = Caso.all.ord.order("id DESC")
+    @casos_sn_complejidad = Caso.where("complejidad = 'No Asignada'").order("id DESC")
     @indicadores_recientes = Kpi.all.order("id DESC")
   end
 

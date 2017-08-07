@@ -1,6 +1,7 @@
 <div class="choiceForm">
-     <%= label_tag "Campo" %>
-     <br>
-     <%= text_field_tag "campos[]" %> <a href="javascript:;" onclick="remove(this);" style="text-decoration: none;" > x </a>
-     <br>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col agg-campo">
+    <%= text_field_tag "campos[]", nil, :class=>"mdl-textfield__input" %>
+    <a href="javascript:;" onclick="remove(this);" style="text-decoration: none;" > x </a>
+  </div>
+
 </div>

@@ -25,7 +25,12 @@ function busqueda_elasticsearch(query) {
 
     });
 }
-
+/* FUNCION PARA OCULTAR NOTICIAS*/
+function ocultar(e) {
+    $(".notice").css( "display","none");
+    $(".alert").css( "display","none");
+    $(".error").css( "display","none");
+}
 /*FUNCION PARA HABILITAR-DESHABILITAR USUARIOS*/
 function habilitar(e) {
     var id = $(e).attr("id");

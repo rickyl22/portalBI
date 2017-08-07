@@ -1,7 +1,7 @@
 class CasoPolicy < ApplicationPolicy
 
   def index?
-    return true if user.present? && rol != "admin_ind"
+    return true if user.present? && (rol == "admin" || rol == "admin_ind" || rol == "cli" || rol == "cons_lid" || rol == "cons" )
   end
 
   def new
@@ -19,13 +19,10 @@ class CasoPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if admin?
-        p "Scope- es admin"
         scope.all
       elsif admin_min?
-        p "Scope- es admin mineria"
         scope.all
       elsif user.role.alias == 'cli' 
-        p "Scope- es clit"
         scope.where("usuario_id = ?", user.id)
       elsif user.role.alias == 'cons_lid'
       	scope.where("infosoft = 'SI'")

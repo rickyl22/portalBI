@@ -10,11 +10,16 @@
     <%= render 'filtros' %>
 
     <div class="dash_kpi">
-      <%= @kpi.url.html_safe %>
+      <%= @kpi.dashboard.html_safe %>
     </div>
-    <%= link_to 'Edit', edit_kpi_path(@kpi) %> |
-    <%= link_to 'Back', kpis_path %>
-
   </div>
 </div>
+<% if admin? or admin_ind? %>
+    <a href="/kapis/new" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Agregar KPI</a>
+    <a href="/kpis" id="btn-back" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons">chevron_left</i>Regresar</a>
+    <%= link_to  edit_kpi_path(@kpi), class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect",id: "btn-edit" do%>
+        <i class="material-icons">edit</i>
+        Editar
+    <% end %>
+<% end %>
 

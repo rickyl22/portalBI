@@ -1,5 +1,6 @@
 class KpisController < ApplicationController
   before_action :set_kpi, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
   after_action :verify_policy_scoped, :except => [:create, :new]
 
   # GET /kpis
@@ -44,7 +45,7 @@ class KpisController < ApplicationController
 
     respond_to do |format|
       if @kpi.save
-        format.html { redirect_to @kpi, notice: ' Indicador creado satisfactoriamente' }
+        format.html { redirect_to @kpi, notice: ' Indicador creado satisfactoriamente.' }
         format.json { render :show, status: :created, location: @kpi }
       else
         format.html { render :new }
@@ -58,7 +59,7 @@ class KpisController < ApplicationController
   def update
     respond_to do |format|
       if @kpi.update(kpi_params)
-        format.html { redirect_to @kpi, notice: 'Indicador actualizado' }
+        format.html { redirect_to @kpi, notice: 'Indicador actualizado satisfactoriamente.' }
         format.json { render :show, status: :ok, location: @kpi }
       else
         format.html { render :edit }
@@ -72,14 +73,9 @@ class KpisController < ApplicationController
   def destroy
     @kpi.destroy
     respond_to do |format|
-      format.html { redirect_to kpis_url, notice: 'Indicador eliminado' }
+      format.html { redirect_to kpis_url, notice: 'Indicador eliminado satisfactoriamente.' }
       format.json { head :no_content }
     end
-  end
-
-  def estatus
-    endpoint = "localhost:9200/portal_mercadeo/recargas/_search?q=TERMINAL:SMARTPHONE"
-
   end
 
   private
@@ -92,6 +88,6 @@ class KpisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kpi_params
-      params.require(:kpi).permit(:nombre, :descripcion, :portada, :dashboard, :url)
+      params.require(:kpi).permit(:nombre, :descripcion, :portada, :dashboard)
     end
 end

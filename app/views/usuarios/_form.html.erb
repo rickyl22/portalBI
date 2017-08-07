@@ -1,4 +1,5 @@
 <div class="content_p android-content mdl-layout__content">
+  <div class="contenido-in contenido-kpis">
   <!-- Contenido -->
   <% if @usuario.new_record? %>
       <h2>Agregar Usuario</h2>
@@ -6,7 +7,7 @@
       <h2>Editar Usuario</h2>
   <% end %>
 
-  <div class="contenido-in form_us mdl-shadow--8dp">
+  <div class="form_us mdl-shadow--8dp">
     <%= form_for @usuario do |f|  %>
         <% if @usuario.errors.any? %>
             <div id="error_explanation">
@@ -124,5 +125,5 @@
     <% end %>
 
   </div>
-
+  </div>
 </div>

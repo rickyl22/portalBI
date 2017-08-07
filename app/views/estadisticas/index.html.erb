@@ -1,9 +1,4 @@
-<script src="https://code.highcharts.com/highcharts.js" ></script>
-<script src="https://code.highcharts.com/highcharts-3d.js" ></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
 <script type="text/javascript">
-
 function download(){
   var a = document.body.appendChild(
       document.createElement("a")
@@ -11,17 +6,13 @@ function download(){
   a.download = "Estadisticas.html";
   a.href = "data:text/html," + document.getElementById("content").innerHTML;
   a.click();
-
 }
-
-
    $(document).ready(function(){
 
     $(".rango_desde").change(function() {
     $(".rango_fin")[0].disabled = false;
     $(".rango_fin")[0].value = $(".rango_desde")[0].value;
     $(".rango_fin")[0].setAttribute("min", $(".rango_desde")[0].value);
-
   
   });
 

@@ -1,11 +1,12 @@
 <div class="content_p android-content mdl-layout__content">
+  <div class="contenido-in contenido-kpis">
   <!-- Contenido -->
   <% if @proyecto.new_record? %>
       <h2>Agregar Proyecto</h2>
   <% else %>
       <h2>Editar Proyecto</h2>
   <% end %>
-  <div class="contenido-in form_us mdl-shadow--8dp">
+  <div class="form_us mdl-shadow--8dp">
     <!-- Contenido -->
     <%= form_for @proyecto do |f|  %>
         <% if @proyecto.errors.any? %>
@@ -33,18 +34,15 @@
             <%= f.file_field :imagen %>
             <label class="mdl-textfield__label" for="proyecto_imagen">Portada</label>
           </div>
-
         </div>
-
         </br>
         </br>
-
         <div class="button-container">
+          <a href="/proyectos" class="mdl-button mdl-js-button btn-cancelar"><i class="material-icons">chevron_left</i>CANCELAR</a>
           <button><span>Enviar</span></button>
         </div>
-
-
     <% end %>
-
+    </div>
   </div>
 </div>
+
