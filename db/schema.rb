@@ -75,9 +75,6 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.index ["usuario_id"], name: "index_casos_on_usuario_id"
   end
 
-  create_table "casosno", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-  end
-
   create_table "comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "fecha"
     t.text "texto"
@@ -122,20 +119,20 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.index ["caso_id"], name: "index_historials_on_caso_id"
   end
 
-  create_table "indicadores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text "nombre"
-    t.text "descripcion"
-    t.text "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "kpis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "nombre"
     t.text "descripcion"
     t.text "portada"
     t.text "dashboard"
     t.text "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "noticia", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text "imagen"
+    t.text "titulo"
+    t.text "descripcion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -294,12 +291,12 @@ ActiveRecord::Schema.define(version: 20170803150728) do
     t.string "apellido"
     t.string "supervisor"
     t.string "justificacion"
-    t.string "estatus"
+    t.boolean "estatus"
     t.string "password_digest"
     t.integer "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "historials", "casosno", column: "caso_id"
+  add_foreign_key "historials", "casos"
 end
