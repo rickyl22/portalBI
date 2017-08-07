@@ -88,11 +88,28 @@ a img{
 }
 
 .android-header .mdl-navigation__link {
-    color: #757575!important;
+    color: dimgray!important;
     font-weight: 700;
     font-size: 14px;
 }
-
+.cont_bottom {
+    position: absolute;
+    z-index: 99;
+    top: 8px;
+    right: 8px;
+    display: inherit;
+}
+.boton-flash {
+    position: absolute;
+    z-index: 99;
+    top: 5px;
+    right: 5px;
+    display: inherit;
+}
+.boton-flash a{
+    color: dimgrey;
+    cursor: pointer;
+}
 .android-navigation-container {
     /* Simple hack to make the overflow happen to the left instead... */
     direction: rtl;
@@ -1125,7 +1142,13 @@ a:hover {
     background-color: transparent;
 }
 h2,h3,h4,h1{
-    /*color: dimgrey!important;*/
+   /* color: dimgrey!important;*/
+}
+h2{
+    color: dimgrey!important;
+    font-weight: 500!important;
+    padding-bottom: 15px!important;
+    font-size: 35px!important;
 }
 #view-source{
     background-color: #01cc01!important;
@@ -1134,7 +1157,10 @@ h2,h3,h4,h1{
     margin-bottom: 0px!important;
 }
 .material-icons{
-    /*color: dimgrey!important;*/
+    color: dimgrey;
+}
+.mdl-navigation .material-icons{
+    color: #002d3e;
 }
 .material-icons:hover{
     /*color: #01cc01!important;*/
@@ -1212,23 +1238,20 @@ option{
 .mdl-card__supporting-text-im{
     text-align: left;
     padding-bottom: 0px!important;
+    margin-left: 0px!important;
 }
 .mdl-card__supporting-text-im h5{
     margin-top: 5px;
+    color: dimgrey;
+    font-size: 16px;
 }
 .cont_info{
     min-height: 100px!important;
 }
-.cont_bottom {
-    position: absolute;
-    z-index: 99;
-    top: 8px;
-    right: 8px;
-    display: inherit;
-}
+
 .header-us{
     padding: 20px 10px 0px 10px;
-    background-color: #002d3e!important;
+    /*background-color: #002d3e!important;*/
 }
 .admin{
     background-color: #002d3e!important;
@@ -1252,7 +1275,7 @@ option{
     background-color: #5c6bc0!important;
 }
 .pendiente{
-    background-color: dimgray!important;
+    background-color: gray!important;
 }
 
 .us_cart_actions{
@@ -1295,6 +1318,13 @@ option{
     padding-left: 20px;
 }
 
+/*ESTILOS PARA MI CUENTA*/
+.cont-cuenta{
+    background-color: white;
+}
+.cont-cuenta h2{
+    background: #f3f3f3;
+}
 
 /* LAYOUT*/
 .notice, .alert, .error{
@@ -1303,13 +1333,13 @@ option{
     margin: 0;
     text-align: left;
     background-color: white;
-    line-height: 45px;
+    line-height: 20px;
     border-left: 8px solid #01cc01;
     font-size: 15px;
     position: absolute;
     top: 80px;
     right: 0%;
-    padding: 0px 0px 0px 10px!important;
+    padding: 10px!important;
 }
 .alert{
     border-left: 8px solid orange!important;
@@ -1317,25 +1347,22 @@ option{
 .error{
     border-left: 8px solid red!important;
 }
-
 /*edit usuario*/
-
 .edit_usuario{
-    background-color: white;
-}
+    background-color: white;}
 
 .form_us{
-    width: 65%;
+    width: 100%;
     padding: 20px 50px;
     background-color: white;
-
 }
-
 /* INDEX KPIS */
-
-.mdl-card-kpis, .mdl-card-noticia{
-    width: 70%!important;
+.mdl-card-kpis{
+    width: 100%!important;
     min-height: 330px!important;
+}
+.mdl-card__title-kpi h3 span{
+    color: white!important;
 }
 .mdl-card-noticia{
     width: 80%!important;
@@ -1381,7 +1408,12 @@ option{
     margin-bottom: 30px;
 }
 .contenido-kpis{
-    width: 100%;
+}
+.contenido-p .mdl-cell{
+    width: 80%!important;
+}
+.contenido-p .mdl-cell{
+    margin: 0 auto!important;
 }
 .filtros_kpi h4{
     color: #333;
@@ -1486,7 +1518,7 @@ option{
 }
 /*Estilos Contenedor de filtros para el dashboard*/
 .filtros_kpi{
-   padding-left: 35px!important;
+   padding-left: 50px!important;
 }
 .filtros_kpi .mdl-grid .mdl-cell{
 
@@ -1523,8 +1555,11 @@ option{
     width: 48%!important;
     margin-left: 2%!important;
 }
-.indicadores_rec .mdl-grid{
+.indicadores_rec .mdl-grid, .casos_rec .mdl-grid{
     text-align: left;
+}
+.indicadores_rec a, .casos_rec a{
+    color: dimgray;
 }
 .section-menu .mdl-grid{
     text-align: left;
@@ -1652,11 +1687,14 @@ form.button_to{
     text-overflow: ellipsis;
 }
 .descp_noticia{
-    font-size: 12px!important;
+    font-size: 15px!important;
     min-height: 100px;
     max-height: 105px;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.mdl-card__title-text span{
+    color: dimgray;
 }
 
 .ver_noticia {
@@ -1674,14 +1712,6 @@ form.button_to{
     padding: 0px 70px!important;
     padding-bottom: 30px;
     min-height: 550px;
-    /*
-    padding: 0px 70px!important;
-    background-image: url("fondo_3.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    min-height: 700px;
-    */
 }
 .espacio{
     height: 50px;
@@ -2000,3 +2030,99 @@ td.text-right {
 
 /*ESTILOS MINERIA DY*/
 .cont-casos{}
+.bajo{
+    background-color: forestgreen;
+}
+.medio{
+    background-color: orange;
+}
+.alto{
+    background-color: red;
+}
+.noasignada{
+    background-color: grey;
+}
+.form_caso{
+    width: 100%;
+    background-color: white;
+}
+.contenido-f-caso{
+    width: 90% !important;
+}
+.padding-0{
+    padding: 0!important;
+}
+.align-left{
+    text-align: left;
+}
+.align-left p{
+    margin-bottom: 0px;
+}
+.padding-x div{
+    padding: 20px;
+}
+.padding-20 h3{
+    margin: 0px;
+    text-align: center;
+    padding-bottom: 10px;
+    background-color: dimgray;
+    color: white;
+    line-height: 35px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.mod-w{
+    width: 20.4%!important;
+}
+.font-m span{
+    font-size: 14px;
+    color: #333;
+    font-weight: 600;
+}
+.padding-tl{
+    padding-top: 5px;
+    padding-left: 10px;
+}
+.paddinf-l{
+    padding-left: 25px;
+}
+.paddinf-ll{
+    padding-left: 8px;
+}
+.titulo-fecha{
+    color: dimgray;
+    font-weight: 600;
+}
+.it{
+    height: 70px;
+}
+.agg-campo{
+    display: inline-flex!important;
+}
+.cont-ag{
+    width: 28.7%!important;
+}
+
+/*SHOW CASO*/
+.show-caso, .edit-caso{
+    background-color: white;
+    padding: 15px;
+
+}
+.show-caso h4{
+    font-weight: 600;
+    color: dimgray;
+    margin-bottom: 0px;
+    margin-top: 15px;
+}
+.margin-ll h4{
+    margin-left: -12px;
+}
+.s-condiciones{
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.edit-caso{
+
+}

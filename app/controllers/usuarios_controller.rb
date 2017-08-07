@@ -1,11 +1,12 @@
 class UsuariosController < ApplicationController
   before_action :set_usuario,  only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized, :only => [:index, :show, :update, :edit]
   after_action :verify_policy_scoped, :except => [:create, :new]
 
   def index
-    @usuarios = Usuario.all.order("role_id")
+    @usuarios = Usuario.includes(:role).order("roles.nombre")
     authorize @usuarios
-    @usuarios = policy_scope(Usuario)
+    @usuarios = policy_scope(@usuarios)
     #reset_session
   end
 

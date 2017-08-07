@@ -22,16 +22,17 @@ class SessionsController < ApplicationController
       elsif admin_min?
         redirect_to '/menus/menu_min'
       elsif cons_lid?
-        redirect_to '/menus/menu_consultor_lid'
+        redirect_to '/casos'
       elsif cons?
         redirect_to '/menus/menus/menu_consultor'
       elsif cli?
         if casos.length > 0
-          redirect_to '/menus/menu_principal', alert: "Tiene casos con mas de 7 dias de creación sin complejidad asignada"
+          redirect_to '/casos', alert: "Tiene casos con mas de 7 días de creación sin complejidad asignada"
         else 
-          redirect_to '/menus/menu_principal'
+          redirect_to '/casos'
         end
       elsif cli_ind?
+        redirect_to '/kpis'
       end
       cookies[:usuario] = usuario.usuario
     else

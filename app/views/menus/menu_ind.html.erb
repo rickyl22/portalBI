@@ -1,9 +1,9 @@
 <div  class="content_p android-content mdl-layout__content">
   <!-- Contenido -->
-  <h2>Mi cuenta</h2>
   <div class="contenido-in contenido-menu  mdl-shadow--2dp">
+    <h2>Mi cuenta</h2>
     <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp section-us">
-      <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us">
+      <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us <%= @usuario.role.alias %>">
         <%= "Cod: "+@usuario.codigo_empleado %>
         </br>
         <%= @usuario.role.nombre %>
@@ -44,9 +44,12 @@
         </div>
 
         <div class="cont_bottom">
-          <%= link_to  edit_usuario_path(@usuario), class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do%>
+          <%= link_to  edit_usuario_path(@usuario),id: "mi_cuenta", class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do%>
               <i class="material-icons">edit</i>
           <% end %>
+          <div class="mdl-tooltip" data-mdl-for="mi_cuenta">
+            Editar usuario:  <strong><%=@usuario.usuario%></strong>
+          </div>
         </div>
       </div>
     </section>
@@ -94,6 +97,7 @@
           <% @indicadores_recientes.each do |indicador| %>
               <div class="mdl-cell mdl-cell--10-col">
                 <a href="/kpis/<%=indicador.id %>"><%=indicador.nombre %></a>
+                <p><%=indicador.descripcion %></p>
               </div>
               <div class="mdl-cell mdl-cell--2-col">
                 Estatus

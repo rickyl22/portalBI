@@ -1,13 +1,11 @@
 <script>
   $(document).ready(function() {
     $.get("http://localhost:9200/portal_mercadeo/recargas/_search?q=TERMINAL:SMARTPHONE", function(data) {
-      console.log("La DATA "+data);
     });
     // Habilitar - Deshabilitar usuario
     $('.mdl-switch__input').click(function() {
       var rol_id = $('#'+$(this).val()).val();
       if ($(this).parent().hasClass("is-checked")) {
-        console.log("Te esta entrando en el if "+$(this).val());
         $.get("/usuarios/"+$(this).val()+".json", function(data) {
         });
       } else {
@@ -20,10 +18,10 @@
 
 <div  class="content_p android-content mdl-layout__content">
   <!-- Contenido -->
-  <h2>Mi cuenta</h2>
-  <div class="contenido-in contenido-menu  mdl-shadow--2dp">
+  <div class="contenido-in cont-cuenta">
+    <h2>Mi cuenta</h2>
     <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp section-us">
-      <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us">
+      <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us <%= @usuario.role.alias %>">
         <%= "Cod: "+@usuario.codigo_empleado %>
         </br>
         <%= @usuario.role.nombre %>
@@ -64,9 +62,12 @@
         </div>
 
         <div class="cont_bottom">
-          <%= link_to  edit_usuario_path(@usuario), class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do%>
+          <%= link_to  edit_usuario_path(@usuario), id: "mi_cuenta", class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do%>
               <i class="material-icons">edit</i>
           <% end %>
+          <div class="mdl-tooltip" data-mdl-for="mi_cuenta">
+            Editar usuario:  <strong><%=@usuario.usuario%></strong>
+          </div>
         </div>
       </div>
     </section>
@@ -85,20 +86,20 @@
               Estatus
             </div>
           <% end %>
-
         </div>
-        </br>
         <a href="/kpis" class="mdl-button link_admin">Administrar Indicadores</a>
       </div>
       <div class="casos_rec mdl-cell mdl-cell--6-col mdl-shadow--2dp">
-        <h4  class="h4-pb">Casos Recientes</h4>
+        <h4  class="h4-pb">Casos sin Complejidad</h4>
         <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--10-col">
-            CASOS
-          </div>
-          <div class="mdl-cell mdl-cell--2-col">
-            ESTATUS
-          </div>
+          <% @casos_sn_complejidad.each do |caso| %>
+              <div class="mdl-cell mdl-cell--10-col">
+                <a href="/casos/<%=caso.id %>"><%=caso.titulo %></a>
+              </div>
+              <div class="mdl-cell mdl-cell--2-col">
+                Estatus
+              </div>
+          <% end %>
         </div>
         <a href="/casos" class="mdl-button link_admin">Administrar Casos</a>
       </div>

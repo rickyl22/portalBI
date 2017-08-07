@@ -10,8 +10,6 @@
 
       <!-- Navigation -->
       <div class="android-navigation-container">
-        <% p "AQUIII"+controller.controller_name.inspect %>
-      
         <nav class="android-navigation mdl-navigation">
           <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/">Inicio</a>
           <% if logged_in? %>
@@ -69,7 +67,7 @@
       <!-- Opciones Administrador -->
       <% if admin? %>
        <!-- Mi cuenta -->
-       <span class="mdl-navigation__link menu" href="#">
+      <span class="mdl-navigation__link menu" href="#">
           Mi Cuenta
          <i class="material-icons list">face</i>
       </span>
@@ -84,8 +82,6 @@
       <div id="mineria" class="sub-menu-container">
         <a class="mdl-navigation__link" href="/kpis">Gestión de  Indicadores</a>
         <a class="mdl-navigation__link" href="/kpis/new">Crear Indicador</a>
-        <a class="mdl-navigation__link" href="/recargas">Recargas</a>
-        <a class="mdl-navigation__link" href="/alta">Altas</a>
       </div>
       <!-- Menu para Portal de Gestion de Indicadores -->
       <span class="mdl-navigation__link menu" href="">
@@ -277,13 +273,25 @@
 
   <!-- Alertas -->
     <% if flash[:notice]  %>
-        <div class="notice mdl-shadow--16dp"><%= flash[:notice] %></div>
+        <div class="notice mdl-shadow--16dp"><%= flash[:notice] %>
+          <div class="boton-flash">
+            <a onclick="ocultar(this)"><i class="material-icons">highlight_off</i></a>
+          </div>
+        </div>
     <% end %>
     <% if flash[:alert] %>
-        <div class="alert mdl-shadow--16dp"><%= flash[:alert] %></div>
+        <div class="alert mdl-shadow--16dp"><%= flash[:alert] %>
+          <div class="boton-flash">
+            <a onclick="ocultar(this)"><i class="material-icons">highlight_off</i></a>
+          </div>
+        </div>
     <% end %>
     <% if flash[:error] %>
-        <div class="alert mdl-shadow--16dp"><%= flash[:error] %></div>
+        <div class="error mdl-shadow--16dp"><%= flash[:error] %>
+          <div class="boton-flash">
+            <a onclick="ocultar(this)"><i class="material-icons">highlight_off</i></a>
+          </div>
+        </div>
     <% end %>
 
 </div>

@@ -3,24 +3,29 @@
          <div class="notice mdl-shadow--16dp"><%= session[:notice]  %></div>
       <% end %>
   <!-- Contenido -->
+  <% complejidad = @caso.complejidad.delete(' ').downcase
+     estatus = @caso.status.delete(' ').downcase
+  %>
   <div class="contenido-in ">
     <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
-      <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us">
+      <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us <%=complejidad%>">
         <%= "Cod: #000"+@caso.id.to_s %>
         </br>
         <%= @caso.titulo %>
-        </br>
-        <%= image_tag "admin.png", class:"icon_rol"%>
       </header>
       <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
         <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
         <% @last = " " %>
-        <b>Historial:</b><br><br>
-        <% @historials.each do |hist| %>      
-            &nbsp<%= "("+hist.fecha.strftime("%d/%m/%Y %H:%M")+") "+hist.evento %>
-            <% @last = hist.estatus %>
-            </br>
-        <% end %>
+        <h4><strong>Historial:</strong></h4>
+        <br>
+        <ul class="demo-list-icon mdl-list">
+          <% @historials.each do |hist| %>
+               <p>
+              <strong>&nbsp<%= "("+hist.fecha.strftime("%d/%m/%Y %H:%M")+") " %> </strong> <%= hist.evento %>
+              <% @last = hist.estatus %>
+                </p>
+          <% end %>
+        </ul>
         &nbsp<b>......</b>
         </div>
            
@@ -30,7 +35,6 @@
 
     </section>
     </div>
-  <%= link_to 'Regresar', :back %>
-
-
 </div>
+<a href="/casos" id="btn-back" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons">chevron_left</i>Regresar</a>
+
