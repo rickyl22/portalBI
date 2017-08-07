@@ -11,7 +11,7 @@
                 <% end %>
                 <h3 class="mdl-card__title-text"><span><%= kpi.nombre%></span></h3>
               </div>
-              <div class="mdl-card__supporting-text">
+              <div class="mdl-card__supporting-text desc-kpi-i">
                 <%= kpi.descripcion%>
               </div>
               <div class="mdl-card__actions mdl-card--border">
@@ -40,52 +40,6 @@
             </div>
           </div>
       <% end %>
-
-      <div class="mdl-cell mdl-cell--12-col">
-        <div class="demo-card-wide mdl-card mdl-shadow--4dp mdl-card-kpis">
-          <div class="mdl-card__title mdl-card__title-kpi">
-            <p>PORTADA</p>
-            <h3 class="mdl-card__title-text"><span>Altas</span></h3>
-          </div>
-          <div class="mdl-card__supporting-text">
-            indicador de Altas
-          </div>
-          <div class="mdl-card__actions mdl-card--border">
-            <div class="boton_act_kpis">
-              <%= link_to "/alta", class:"mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect bnt_act" do%>
-                  <i class="material-icons">visibility</i>
-              <% end %>
-              <div class="mdl-tooltip" data-mdl-for="ver_alta">
-                Ver Indicador:  <strong>Altas</strong>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="mdl-cell mdl-cell--12-col">
-        <div class="demo-card-wide mdl-card mdl-shadow--4dp mdl-card-kpis">
-          <div class="mdl-card__title mdl-card__title-kpi">
-            <p>PORTADA</p>
-            <h3 class="mdl-card__title-text"><span>Recargas</span></h3>
-          </div>
-          <div class="mdl-card__supporting-text">
-            indicador de Recargas
-          </div>
-          <div class="mdl-card__actions mdl-card--border">
-            <div class="boton_act_kpis">
-              <%= link_to "/recargas", class:"mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect bnt_act" do%>
-                  <i class="material-icons">visibility</i>
-              <% end %>
-              <div class="mdl-tooltip" data-mdl-for="ver_alta">
-                Ver Indicador:  <strong>Recargas</strong>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
 
     </div>
   </div>

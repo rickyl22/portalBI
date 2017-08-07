@@ -2,13 +2,11 @@ class Usuario < ApplicationRecord
   has_secure_password
   belongs_to :role
   has_many :permisos_asignado
-  #has_many :role, through: :roles_privilegio
   has_many :casos, dependent: :destroy
 
 
   def rol?(id)
     rol = Role.where("id = ?",id).first
-    p "SUPUEWSTO ROL "+rol.inspect
     return rol
 
   end

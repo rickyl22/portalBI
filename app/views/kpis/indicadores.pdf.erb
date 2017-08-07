@@ -9,8 +9,9 @@
   <p><strong>Fecha de Emisión: </strong><%= Date.today%></p>
   </br></br>
   <div class="contenido-in contenido-kpis kpis-show mdl-shadow--16dp">
-    <div class="dash_kpi">
-      <%= @kpi.url.html_safe %>
+    <div class="dash_kpi_pdf">
+      <%= @kpi.portada.html_safe %>
+      <%= @kpi.dashboard.html_safe %>
     </div>
 
   </div>

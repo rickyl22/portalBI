@@ -6,7 +6,9 @@ class SessionsController < ApplicationController
 
   def create
     usuario = Usuario.where("usuario = ?",params[:usuario]).first
+    p "USUARIO "+usuario.inspect
     if usuario && (usuario.estatus) && usuario.authenticate(params[:password])
+      p "USUARIO 22222"+usuario.inspect
       log_in usuario
       session[:notice] = nil
       session[:last_check] = Time.now

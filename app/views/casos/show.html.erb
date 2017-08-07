@@ -110,13 +110,13 @@ td.text-right {
   text-align: right;
 }
   </style>
+
 <% if session[:notice] != nil %>
          <div class="notice mdl-shadow--16dp"><%= session[:notice]  %></div>
 <% end %>
 
-
 <div class="content_p android-content mdl-layout__content">
-  <div class="contenido-in contenido-f-caso">
+  <div class="contenido-f-caso">
     <div class="mdl-grid">
       <div class="mdl-cell--6-col align-left show-caso">
         <h4>Detalles del Caso:</h4>
@@ -143,7 +143,6 @@ td.text-right {
             <p><strong>tipo de archivo: </strong><%= @caso.tipo_archivo %></p>
           </div>
         </div>
-
         <h4>Indicadores:</h4>
         <div class="mdl-grid mdl-shadow--2dp">
           <div class="mdl-cell--4-col">
@@ -165,7 +164,6 @@ td.text-right {
             <p><strong>Televentas: </strong><%= @caso.tlv == '0' ? "NO" : "SI"%></p>
           </div>
         </div>
-
         <h4>Filtros:</h4>
         <div class="mdl-grid mdl-shadow--2dp">
           <div class="mdl-cell--4-col">
@@ -178,7 +176,6 @@ td.text-right {
             <p><strong>Otro: </strong><%= @caso.otro == "" ? "NO" : @caso.otro %></p>
           </div>
         </div>
-
         <h4>Línea de Negocio:</h4>
         <div class="mdl-grid mdl-shadow--2dp">
           <div class="mdl-cell--3-col">
@@ -194,7 +191,6 @@ td.text-right {
             <p><strong>TV: </strong><%= @caso.tv == '0' ? "NO" : "SI"%></p>
           </div>
         </div>
-
         <div class="mdl-grid mdl-shadow--2dp">
           <div class="mdl-cell--6-col ">
             <h4>Tipo de Caso:</h4>
@@ -205,7 +201,6 @@ td.text-right {
             <p><%= @caso.agrup %><%= @caso.especifique %></p>
           </div>
         </div>
-
         <div class="mdl-grid mdl-shadow--2dp">
           <div class="mdl-cell--6-col s-condiciones">
             <h4>Condiciones:</h4>
@@ -216,8 +211,6 @@ td.text-right {
             <p><%= @caso.campos %></p>
           </div>
         </div>
-
-
         <div class="mdl-grid mdl-shadow--2dp">
           <div class="mdl-cell--6-col ">
             <h4>Complejidad:</h4>
@@ -229,11 +222,111 @@ td.text-right {
           </div>
         </div>
 
-
-
       </div>
-      <div class="mdl-cell--6-col">
-        nuevo
+      <div class="mdl-cell--6-col align-left show-caso">
+        <% if admin?  %>
+            <h4>Caso asignado a:</h4>
+            <div class="mdl-grid mdl-shadow--2dp">
+              <div class="mdl-cell--12-col ">
+                <p><%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("usuario = ?",@caso.consultor_id).first.nombre + " " +Usuario.where("usuario = ?",@caso.consultor_id).first.apellido) %></p>
+              </div>
+            </div>
+            <% if @caso.status == "Cerrado" %>
+                <h4>Complejidad:</h4></br>
+                <div class="mdl-grid mdl-shadow--2dp">
+                <% @reapertura = (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - @caso.fecha_cerrado.mjd %>
+                <% if (@caso.complejidad == "Bajo" and @reapertura <= 1) or (@caso.complejidad == "Medio" and @reapertura <= 2) or (@caso.complejidad == "Alto" and @reapertura <= 4) or (@caso.complejidad == "Urgente" and @reapertura <= 1) %>
+                    <%= form_for @caso, :url => {:action => "update"} do |f|%>
+                        <%= f.hidden_field :status, :value => "En Proceso" %>
+                        <%= f.hidden_field :fech_asig, :value => Time.now %>
+                        <%= hidden_field_tag :estatus, "Caso reabierto por Administrador, nuevo estatus: " %>
+                          </br>
+                        <%= f.submit "Reabrir caso" %>
+                    <% end %>
+                <% end %>
+                </div>
+            <% else %>
+                <h4>Complejidad:</h4></br>
+                <div class="mdl-grid mdl-shadow--2dp">
+                <%= form_for @caso, :url => {:action => "update"} do |f|%>
+                    <%= f.select :complejidad, ['Bajo','Medio','Alto','Urgente'] %><br>
+                    <%= f.hidden_field :status, :value => "Pendiente" %>
+                    <%= f.hidden_field :infosoft, :value => "SI" %>
+
+                    <%= f.hidden_field :fech_asig, :value => Time.now %>
+                    <%= hidden_field_tag :estatus, "Asignada complejiad del caso por Aministrador a: " %>
+                      </br>
+                    <%= f.submit (@caso.infosoft == "NO" ? "Asignar Complejidad" : "Re-asignar Complejidad" ) %>
+                <% end %><br>
+                  </div>
+                <h4>Estatus:</h4></br>
+                <div class="mdl-grid mdl-shadow--2dp">
+                <%= form_for @caso, :url => {:action => "update"} do |f|%>
+                    <%= f.select :status, ['Anulado','BI-Afectado','BI-Planificado','Iniciado','En Proceso', 'Pendiente','Cerrado'] %><br>
+                    <%= hidden_field_tag :estatus, "Actualizacion de estatus a: " %>
+                      </br>
+                    <%= f.submit "Cambiar Estatus" %>
+                <% end %>
+                </div>
+            <% end %>
+        <% end %>
+
+        <% if cons_lid? %>
+            <h4>Caso asignado a:</h4>
+            <div class="mdl-grid mdl-shadow--2dp">
+              <div class="mdl-cell--12-col ">
+                <p><%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("usuario = ?",@caso.consultor_id).first.nombre + " " +Usuario.where("usuario = ?",@caso.consultor_id).first.apellido) %></p>
+              </div>
+              </br>
+              <h4>Asignar Caso a:</h4></br>
+              <div class="mdl-cell--12-col ">
+              <%= form_for @caso, :url => {:action => "update"} do |f|%>
+                  <select name="caso[consultor_id]" id="caso_consultor_id">
+                    <% Usuario.where("role_id in (5,4)").each do |u| %>
+                        <option value="<%= u.usuario %>"><%= u.nombre+" "+u.apellido %></option>
+                    <% end %>
+                  </select>
+                  <%= f.hidden_field :status, value: "En Proceso" %>
+                  <%= hidden_field_tag :estatus, "Caso asignado a Consultor" %>
+                  <%= f.submit "Asignar caso" %>
+              <% end %>
+              </div>
+            </div>
+        <% end %>
+
+        <% if cons? or (cons_lid? and @caso.consultor_id == current_user.usuario)%>
+            <h4>Estatus del caso:</h4></br>
+            <div class="mdl-cell--12-col ">
+            <%= form_for @caso, :url => {:action => "update"} do |f|%>
+                <br><%= f.select :status, ['Pendiente','En Proceso','Cerrado'] %><br>
+                <%= hidden_field_tag :estatus, "Actualizacion de estatus a: " %>
+                <%= f.submit "Cambiar Estatus" %>
+            <% end %>
+            </div>
+        <% end %><br>
+
+        <h4>Documentos:</h4></br>
+        <div class="mdl-grid mdl-shadow--2dp">
+          <% @docs = @caso.documentos %>
+          <% @docs.each do |doc| %>
+              -)<%= doc.nombre %> <br> <%= doc.created_at.strftime('%d/%m/%Y %H:%M') %> <br>
+              <% if doc.estatus == "Borrado" %>
+                  <b>Eliminado </b><br>
+              <% else %>
+                  <%= link_to "Descargar", doc.attachment_url, :style => 'color:blue' %>
+                  <% if (cli? or session[:usuario_id] == @caso.usuario_id) and doc.estatus != "Borrado" %>
+                      <%= button_to "Borrar",  doc, method: :delete %>
+                  <% else %>
+                      <br>
+                  <% end %>
+              <% end %>
+          <% end %>
+          </hr class="linea">
+          <% if (cli? or session[:usuario_id] == @caso.usuario_id)  and @caso.complejidad == "No Asignada" and @caso.documentos.where("estatus != 'Borrado'").length < 5 %>
+          </br>
+
+          </div>
+
       </div>
     </div>
   </div>

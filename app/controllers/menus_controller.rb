@@ -18,5 +18,16 @@ class MenusController < ApplicationController
   end
 
   def menu_min
+    @usuario = Usuario.find(current_user.id)
+  end
+
+  def menu_cliente
+    @usuario = Usuario.find(current_user.id)
+
+  end
+
+  def menu_cliente_kpi
+    @usuario = Usuario.find(current_user.id)
+
   end
 end

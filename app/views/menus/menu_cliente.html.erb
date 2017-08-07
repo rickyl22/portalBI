@@ -1,9 +1,58 @@
 <div  class="content_p android-content mdl-layout__content">
   <!-- Contenido -->
-  <h2>Mi cuenta CLIENTE</h2>
-  <div class="contenido-in contenido-menu  mdl-shadow--2dp">
+  <div class="contenido-in cont-cuenta">
+    <h2>Mi cuenta</h2>
+    <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp section-us">
+      <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us <%= @usuario.role.alias %>">
+        <%= "Cod: "+@usuario.codigo_empleado %>
+        </br>
+        <%= @usuario.role.nombre %>
+        </br>
+        <%= image_tag "admin.png", class:"icon_rol"%>
+      </header>
+      <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
+        <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
+          <h5>
+            <strong><%=@usuario.usuario+": "+@usuario.nombre+" "+@usuario.apellido %></strong>
+          </h5>
+          <p>
+            <%= "Cargo: "+@usuario.cargo %>
+            </br>
+            <%= "Estatus: Pendiente" if (@usuario.estatus == false) %>
+            <%= "Estatus: Aprobado" if (@usuario.estatus == true) %>
+          </p>
+        </div>
+        <div class="mdl-card__actions us_cart_actions">
+          <a href="#" class="mdl-button us_detalle">Más detalles</a>
+          <div class="desplegable">
+            <p>
+              <%= "Usuario: "+@usuario.usuario %>
+              </br>
+              <%= "Área: "+@usuario.area %>
+              </br>
+              <%= "Gerencia: "+@usuario.gerencia %>
+              </br>
+              <%= "Télefono: "+@usuario.telefono %>
+              </br>
+              <%= "Correo: "+@usuario.correo %>
+              </br>
+              <%= "Supervisor: "+@usuario.supervisor %>
+              </br>
+              <%= "Justificacioń: "+@usuario.justificacion %>
+            </p>
+          </div>
+        </div>
 
-
+        <div class="cont_bottom">
+          <%= link_to  edit_usuario_path(@usuario), id: "mi_cuenta", class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do%>
+              <i class="material-icons">edit</i>
+          <% end %>
+          <div class="mdl-tooltip" data-mdl-for="mi_cuenta">
+            Editar usuario:  <strong><%=@usuario.usuario%></strong>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
 </div>

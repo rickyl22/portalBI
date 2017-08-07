@@ -11,6 +11,7 @@ class UsuariosController < ApplicationController
   end
 
   def create
+
     @usuario = Usuario.create(usuario_params)
     authorize @usuario
     if (params[:solicitud_reg])
@@ -49,6 +50,13 @@ class UsuariosController < ApplicationController
 
   def edit
     @usuario = Usuario.find(params[:id])
+    if admin?
+      @roles = Role.all
+    elsif admin_min?
+      @roles = Role.where("id in (4,5,6)")
+    elsif admin_ind?
+      @roles = Role.where("id in (7,8)")
+    end
     #@usuario = policy_scope(Usuario).find(params[:id])
   end
 
