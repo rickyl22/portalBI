@@ -33,9 +33,10 @@ Rails.application.routes.draw do
   get "menus/menu_principal"
   get "menus/menu_ind"
   get "menus/menu_min"
-  get "/menus/menu_consultor_lid"
-  get "/menus/menus/menu_consultor"
-  get "/menus/menus/menu_cliente"
+  get "/menu/menu_consultor_lid"
+  get "menus/menu_consultor"
+  get "menus/menu_cliente"
+  get "menus/menu_cliente_kpi"
 
   root :to => "home#index" #Pagina de inicio de la App
 
