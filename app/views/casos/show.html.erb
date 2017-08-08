@@ -23,7 +23,7 @@
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   animation: float 5s infinite;
 }
- 
+
 th {
   color:#D5DDE5;;
   background:#1b1e24;
@@ -40,12 +40,12 @@ th {
 th:first-child {
   border-top-left-radius:3px;
 }
- 
+
 th:last-child {
   border-top-right-radius:3px;
   border-right:none;
 }
-  
+
 tr {
   border-top: 1px solid #C1C3D1;
   border-bottom-: 1px solid #C1C3D1;
@@ -54,7 +54,7 @@ tr {
   font-weight:normal;
   text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
 }
- 
+
 tr:first-child {
   border-top:none;
 }
@@ -62,15 +62,15 @@ tr:first-child {
 tr:last-child {
   border-bottom:none;
 }
- 
+
 tr:last-child td:first-child {
   border-bottom-left-radius:3px;
 }
- 
+
 tr:last-child td:last-child {
   border-bottom-right-radius:3px;
 }
- 
+
 td {
   background:#FFFFFF;
   padding:20px;
@@ -321,254 +321,79 @@ td.text-right {
                   <% end %>
               <% end %>
           <% end %>
-          </hr class="linea">
+          <hr class="linea">
           <% if (cli? or session[:usuario_id] == @caso.usuario_id)  and @caso.complejidad == "No Asignada" and @caso.documentos.where("estatus != 'Borrado'").length < 5 %>
-          </br>
+              <%  @documento = Documento.new %>
+              <%= form_for @documento, multipart: true do |doc|  %>
+                  Cargar documento: <br><%= doc.file_field :attachment %><br>
+                  <% if !flash[:notice].blank? %>
+                      <b style="color: red;"><%= flash[:notice] %></b>
+                  <% end %>
+                  <%= doc.hidden_field :estatus, :value => "open" %>
+                  <%= doc.hidden_field :nombre, :value => :attachment %><br>
+                  <%= doc.hidden_field :caso_id, :value => @caso.id  %><br>
+                  <%= doc.submit "Cargar" %>
+              <% end %>
 
+          <% elsif (cli? or session[:usuario_id] == @caso.usuario_id) and @caso.complejidad == "No Asignada" %>
+              <p><%= "Solo se permite cargar un maximo de 5 documentos" %></p>
+          <% elsif (cli? or session[:usuario_id] == @caso.usuario_id) %>
+              <p><span style="font-size: 2.2em">&#9888</span><%= "  No se puede cargar documentos luego de asignar el caso" %></p>
+
+          <% end %>
           </div>
+
+        <h4>Comentarios:</h4>
+        <div class="mdl-grid mdl-shadow--2dp">
+          <% if !cli? %>
+                <% @caso.comentarios.each do |com| %>
+                        <b><%= com.autor %>  -  <%= com.created_at.strftime('%d/%m/%Y %H:%M') %></b><br><br>
+                        <%= com.texto %>
+                        <% if admin? %>
+                            <% com.update(:leido_admin => 1) %>
+                        <% elsif cons_lid? %>
+                            <% com.update(:leido_cons_lid => 1) %>
+                        <% elsif cons? %>
+                            <% com.update(:leido_cons => 1) %>
+                        <% end %>
+                <% end %>
+                  <% comment = Comentario.new %>
+                  <%= form_for comment do |form| %>
+                      <div class="field">
+                        <%= form.label :texto %></br>
+                        <%= form.text_area :texto, id: :comentario_texto, :style => 'width:17vw;', :rows => "3" %>
+                      </div>
+                      <% if admin? %>
+                          <%= form.hidden_field :leido_admin, value: 1  %>
+                          <%= form.hidden_field :leido_cons, value: 0  %>
+                          <%= form.hidden_field :leido_cons_lid, value: 0  %>
+                      <% elsif cons_lid? %>
+                          <%= form.hidden_field :leido_admin, value: 0  %>
+                          <%= form.hidden_field :leido_cons, value: 0  %>
+                          <%= form.hidden_field :leido_cons_lid, value: 1  %>
+                      <% else %>
+                          <%= form.hidden_field :leido_admin, value: 0  %>
+                          <%= form.hidden_field :leido_cons, value: 1  %>
+                          <%= form.hidden_field :leido_cons_lid, value: 0  %>
+                      <% end %>
+                      <%= form.hidden_field :caso_id, value: @caso.id %>
+                      <%= form.hidden_field :role_id, value: current_user.role_id %>
+                      <%= form.hidden_field :fecha, value: Time.now.in_time_zone("Caracas") %>
+                      <%= form.hidden_field :autor, value: current_user.role.nombre %>
+                      <div class="actions">
+                        <%= form.submit "Enviar" %>
+                      </div>
+                  <% end %>
+          <% end %>
+
+        </div>
 
       </div>
     </div>
   </div>
 </div>
+<br><br><br><br><br><br><br>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table ><tr>
-<td style="vertical-align: text-top;">
-  <table class="table-fill" style="width: 50vw;table-layout: fixed;">
-<thead>
-<tr>
-<th class="text-left">Detalles del Caso</th>
-<th class="text-left">Indicadores</th>
-<th class="text-left">Filtro</th>
-<th class="text-left">Linea de Negocio</th>
-<th class="text-left">Tipo de Caso</th>
-</tr>
-</thead>
-<tbody class="table-hover">
-<tr>
-<td class="text-left" style="word-wrap: break-word;">
-     Titulo: <b><%= @caso.titulo %></b><br>
-     Fecha creado:<br>&nbsp <b><%= @caso.fecha_creado %></b><br>
-     Fecha requerido:<br> &nbsp <b><%= @caso.fecha_req %></b><br>
-     Periodo - desde:<br> &nbsp <b><%= @caso.periodo_desde %></b><br> hasta:<br>&nbsp <b><%= @caso.periodo_hasta %></b><br>
-     Delimitador: <br>&nbsp &nbsp<b><%= @caso.separacion %></b><br>
-     Tipo de archivo: <br>&nbsp &nbsp<b><%= @caso.tipo_archivo %></b><br>
-     
-
-</td>
-<td class="text-left">
-    ARPU: <b><%= @caso.arpu == '0' ? "NO" : "SI" %></b><br>
-    Altas: <b><%= @caso.altas == '0' ? "NO" : "SI"%></b><br>
-    Parque: <b><%= @caso.parque == '0' ? "NO" : "SI" %></b><br>
-    Recargas: <b><%= @caso.recargas == '0' ? "NO" : "SI"%></b><br>
-    Act_Tabla: <b><%= @caso.act_tabla == '0' ? "NO" : "SI"%></b><br>
-    TLV: <b><%= @caso.tlv == '0' ? "NO" : "SI"%></b>
-</td>
-<td class="text-left">
-    Smartphone/No Smartphone: <b><%= @caso.phone == '0' ? "NO" : "SI"%></b><br>
-    Prepago/Postpago: <b><%= @caso.pre_post == '0' ? "NO" : "SI"%></b><br>
-    Otro: <b><%= @caso.otro == "" ? "NO" : @caso.otro %></b>
-</td>
-<td class="text-left">
-    Fijo: <b><%= @caso.fijo == '0' ? "NO" : "SI"%></b><br>
-    IM: <b><%= @caso.im == '0' ? "NO" : "SI"%></b><br>
-    Movil: <b><%= @caso.movil == '0' ? "NO" : "SI"%></b><br>
-    TV: <b><%= @caso.tv == '0' ? "NO" : "SI"%></b>
-</td>
-<td class="text-left"><%= @caso.tipo_caso %></td>
-</tr>
-</tbody>
-</table>
-<table class="table-fill" style="width: 50vw;table-layout: fixed;" >
-<thead>
-<tr>
-<th class="text-left">Agrupaciones</th>
-<th class="text-left">Condiciones</th>
-<th class="text-left">Campos</th>
-<th class="text-left">Complejidad</th>
-<th class="text-left">Estatus</th>
-</tr>
-</thead>
-<tbody class="table-hover">
-<tr>
-<td class="text-left"><%= @caso.agrup %><%= @caso.especifique %></td>
-<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= @caso.condiciones %></td>
-<td class="text-left" style="max-width: 300px;word-wrap: break-word;"><%= @caso.campos %></td>
-<td class="text-left"><%= @caso.complejidad %></td>
-<td class="text-left"><%= @caso.status %></td>
-</tr>
-</tbody>
-</table>
-<br>
-<% if admin?  %>
-Asignado a: <b><%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("usuario = ?",@caso.consultor_id).first.nombre + " " +Usuario.where("usuario = ?",@caso.consultor_id).first.apellido) %></b><br><br>
-  <% if @caso.status == "Cerrado" %>
-    <% @reapertura = (Date.parse Time.now.strftime("%Y/%m/%d")).mjd - @caso.fecha_cerrado.mjd %>
-    <% if (@caso.complejidad == "Bajo" and @reapertura <= 1) or (@caso.complejidad == "Medio" and @reapertura <= 2) or (@caso.complejidad == "Alto" and @reapertura <= 4) or (@caso.complejidad == "Urgente" and @reapertura <= 1) %>
-    <%= form_for @caso, :url => {:action => "update"} do |f|%>
-    <%= f.hidden_field :status, :value => "En Proceso" %>
-    <%= f.hidden_field :fech_asig, :value => Time.now %>
-    <%= hidden_field_tag :estatus, "Caso reabierto por Administrador, nuevo estatus: " %>
-    <%= f.submit "Reabrir caso" %>
-    <% end %>
-    <% end %>
-  <% else %>  
-    <%= form_for @caso, :url => {:action => "update"} do |f|%>
-    <%= f.select :complejidad, ['Bajo','Medio','Alto','Urgente'] %><br>
-    <%= f.hidden_field :status, :value => "Pendiente" %>
-    <%= f.hidden_field :infosoft, :value => "SI" %>
-    
-    <%= f.hidden_field :fech_asig, :value => Time.now %>
-    <%= hidden_field_tag :estatus, "Asignada complejiad del caso por Aministrador a: " %>
-    <%= f.submit (@caso.infosoft == "NO" ? "Asignar Complejidad" : "Re-asignar Complejidad" ) %>
-    <% end %><br>
-    <%= form_for @caso, :url => {:action => "update"} do |f|%>
-    <%= f.select :status, ['Anulado','BI-Afectado','BI-Planificado','Iniciado','En Proceso', 'Pendiente','Cerrado'] %><br>
-    <%= hidden_field_tag :estatus, "Actualizacion de estatus a: " %>
-    <%= f.submit "Cambiar Estatus" %>
-    <% end %>
-  <% end %>
-<% end %>
-<% if cons_lid? %>
-Asignado a: <b> <%= @caso.consultor_id == nil ? "No asignado" : (Usuario.where("usuario = ?",@caso.consultor_id).first.nombre + " " +Usuario.where("usuario = ?",@caso.consultor_id).first.apellido) %></b><br><br>
-<%= form_for @caso, :url => {:action => "update"} do |f|%>
-<select name="caso[consultor_id]" id="caso_consultor_id">
-<% Usuario.where("role_id in (5,4)").each do |u| %>
-  <option value="<%= u.usuario %>"><%= u.nombre+" "+u.apellido %></option>
-<% end %>  
-</select>
-<%= f.hidden_field :status, value: "En Proceso" %>
-<%= hidden_field_tag :estatus, "Caso asignado a Consultor" %>
-<%= f.submit "Asignar caso" %>
-<% end %>
-<% end %>
-<% if cons? or (cons_lid? and @caso.consultor_id == current_user.usuario)%>
-<%= form_for @caso, :url => {:action => "update"} do |f|%>
-    <br><%= f.select :status, ['Pendiente','En Proceso','Cerrado'] %><br>
-    <%= hidden_field_tag :estatus, "Actualizacion de estatus a: " %>
-    <%= f.submit "Cambiar Estatus" %>
-<% end %>
-<% end %><br>
-
-<!--%= #link_to 'Volver', :back %-->
-</td>
-
-
-<td style="vertical-align: text-top;">
-<table class="table-fill" style="table-layout: fixed;">
-  <tr> <th>Documentos</th></tr>
-  <tr ><td style="word-wrap: break-word;width:20vw">
-    <% @docs = @caso.documentos %>
-     <% @docs.each do |doc| %>
-        -)<%= doc.nombre %> <br> <%= doc.created_at.strftime('%d/%m/%Y %H:%M') %> <br>
-        <% if doc.estatus == "Borrado" %>
-           <b>Eliminado </b><br>
-        <% else %>
-        <%= link_to "Descargar", doc.attachment_url, :style => 'color:blue' %>
-          <% if (cli? or session[:usuario_id] == @caso.usuario_id) and doc.estatus != "Borrado" %>
-              <%= button_to "Borrar",  doc, method: :delete %>
-          <% else %>
-            <br>     
-          <% end %>
-        <% end %>
-     <% end %>
-  </td>
-  </tr>
-  
-    
-    <% if (cli? or session[:usuario_id] == @caso.usuario_id)  and @caso.complejidad == "No Asignada" and @caso.documentos.where("estatus != 'Borrado'").length < 5 %>
-    <tr><td style="word-wrap: break-word;">
-  <%  @documento = Documento.new %>
-  <%= form_for @documento, multipart: true do |doc|  %>
-  Cargar documento: <br><%= doc.file_field :attachment %><br>
-  <% if !flash[:notice].blank? %>
-  <b style="color: red;"><%= flash[:notice] %></b>
-<% end %>
-  <%= doc.hidden_field :estatus, :value => "open" %>
-  <%= doc.hidden_field :nombre, :value => :attachment %><br>
-  <%= doc.hidden_field :caso_id, :value => @caso.id  %><br>
-  <%= doc.submit "Cargar" %>
-  <% end %>
-
-
-  </td></tr>
-<% elsif (cli? or session[:usuario_id] == @caso.usuario_id) and @caso.complejidad == "No Asignada" %>
-   <tr><td><span style="font-size: 2.2em">&#9888</span>  <%= "Solo se permite cargar un maximo de 5 documentos" %></td></tr>
-<% elsif (cli? or session[:usuario_id] == @caso.usuario_id) %>
-   <tr><td><span style="font-size: 2.2em">&#9888</span>  <%= "No se puede cargar documentos luego de asignar el caso" %></td></tr>
-<% end %><br>
-  
-  </table>
-
-</td><td style="vertical-align: text-top;width: 10vw">
-<% if !cli? %>
-<table class="table-fill" style="table-layout: fixed;width: 20vw" >
-<tr>
-<th class="text-left">Comentarios</th>
-</tr>
-<% @caso.comentarios.each do |com| %>
-<tr>
-<td class="text-left" style="word-wrap: break-word;">
-  <b><%= com.autor %>  -  <%= com.created_at.strftime('%d/%m/%Y %H:%M') %></b><br><br>
-  <%= com.texto %>
-  <% if admin? %>
-    <% com.update(:leido_admin => 1) %>
-  <% elsif cons_lid? %>
-    <% com.update(:leido_cons_lid => 1) %>
-  <% elsif cons? %>
-    <% com.update(:leido_cons => 1) %>
-  <% end %>
-</td>
-</tr>
-<% end %>
-<tr><td style="word-wrap: break-word;">
-<% comment = Comentario.new %>
-<%= form_for comment do |form| %>
-  <div class="field">
-    <%= form.label :texto %>
-    <%= form.text_area :texto, id: :comentario_texto, :style => 'width:17vw;', :rows => "3" %>
-  </div>
-   <% if admin? %> 
-     <%= form.hidden_field :leido_admin, value: 1  %>
-     <%= form.hidden_field :leido_cons, value: 0  %>
-     <%= form.hidden_field :leido_cons_lid, value: 0  %>
-   <% elsif cons_lid? %>
-     <%= form.hidden_field :leido_admin, value: 0  %>
-     <%= form.hidden_field :leido_cons, value: 0  %>
-     <%= form.hidden_field :leido_cons_lid, value: 1  %>
-   <% else %>
-     <%= form.hidden_field :leido_admin, value: 0  %>
-     <%= form.hidden_field :leido_cons, value: 1  %>
-     <%= form.hidden_field :leido_cons_lid, value: 0  %>
-   <% end %>
-   <%= form.hidden_field :caso_id, value: @caso.id %>
-   <%= form.hidden_field :role_id, value: current_user.role_id %>
-   <%= form.hidden_field :fecha, value: Time.now.in_time_zone("Caracas") %>
-   <%= form.hidden_field :autor, value: current_user.role.nombre %>
-  <div class="actions">
-    <%= form.submit "Enviar" %>
-  </div>
-<% end %>
-<% end %>
-
-</td></tr>
-</table></td></tr></table>
-
-
-</div>
 
 <% if admin? or admin_min? %>
     <a href="/casos/new" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Agregar Caso</a>
