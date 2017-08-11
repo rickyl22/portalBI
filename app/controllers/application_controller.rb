@@ -31,9 +31,26 @@ class ApplicationController < ActionController::Base
   def cli?
     true if(current_user.role.alias == "cli")
   end
+
   def cli_ind?
     true if(current_user.role.alias == "cli_ind")
   end
+
+  def rol_usuario()
+    return current_user.role.alias
+  end
+
+  def modulo()
+    modulo = "Todos" if (current_user.role.alias == "admin")
+    modulo = "Mineria, CRU Mineria, Usuarios de Mineria" if (current_user.role.alias == "admin_min")
+    modulo = "Indicadores, CRUD Indicadores, Usuarios de Indicadores" if (current_user.role.alias == "admin_ind")
+    modulo = "Mineria, CRU Mineria" if (current_user.role.alias == "cons_lid")
+    modulo = "Mineria, Casos Asignados" if (current_user.role.alias == "cons")
+    modulo = "Mineria, C Casos" if (current_user.role.alias == "cli")
+    modulo = "Indicadores, Ver Indicadores" if (current_user.role.alias == "cli_ind")
+    return modulo
+  end
+
 
   private
 

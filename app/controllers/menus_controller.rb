@@ -30,4 +30,14 @@ class MenusController < ApplicationController
     @usuario = Usuario.find(current_user.id)
 
   end
+
+  def menu_consultor
+    @usuario = Usuario.find(current_user.id)
+  end
+
+  def menu_consultor_lid
+    @usuario = Usuario.find(current_user.id)
+  end
+
+
 end

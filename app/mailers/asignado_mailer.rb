@@ -1,6 +1,6 @@
 class AsignadoMailer < ApplicationMailer
 
-	default from: "ricardolira48@gmail.com"
+	default from: "bi.mineria@gmail.com"
 
 
 	def asignar(comp,titulo,dias,email)

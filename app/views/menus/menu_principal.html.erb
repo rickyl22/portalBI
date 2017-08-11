@@ -79,12 +79,10 @@
         <h4 class="h4-pb">Indicadores Recientes</h4>
         <div class="mdl-grid">
           <% @indicadores_recientes.each do |indicador| %>
-            <div class="mdl-cell mdl-cell--10-col">
+            <div class="mdl-cell mdl-cell--12-col">
               <a href="/kpis/<%=indicador.id %>"><%=indicador.nombre %></a>
             </div>
-            <div class="mdl-cell mdl-cell--2-col">
-              Estatus
-            </div>
+
           <% end %>
         </div>
         <a href="/kpis" class="mdl-button link_admin">Administrar Indicadores</a>
@@ -97,7 +95,7 @@
                 <a href="/casos/<%=caso.id %>"><%=caso.titulo %></a>
               </div>
               <div class="mdl-cell mdl-cell--2-col">
-                Estatus
+                <%=caso.status %>
               </div>
           <% end %>
         </div>

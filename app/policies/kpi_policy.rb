@@ -2,11 +2,7 @@ class KpiPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.present?
-        if (admin? || admin_ind?)
           scope.all
-        elsif cli_ind?
-          scope.all
-        end
       end
     end
   end

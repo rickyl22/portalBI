@@ -33,6 +33,10 @@ class ApplicationPolicy
     true if(@user.role.alias == "cli")
   end
 
+  def cli_ind?
+    true if(current_user.role.alias == "cli_ind")
+  end
+
   def modulo
     @user.role.privilegio.modulo
   end
@@ -86,6 +90,10 @@ class ApplicationPolicy
 
     def admin_ind?
       true if(@user.role.alias == "admin_ind")
+    end
+
+    def cli_ind?
+      true if(@user.role.alias == "cli_ind")
     end
 
     def resolve

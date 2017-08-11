@@ -1,0 +1,2 @@
+class Auditoria < ApplicationRecord
+end

@@ -2,12 +2,11 @@
   <!-- Contenido -->
   <div class="contenido-in ">
     <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--8dp section-us">
-      <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us">
+      <header class="section__play-btn mdl-cell mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--4-col-phone mdl-color-text--white header-us <%=@usuario.role.alias%> ">
         <%= "Cod: "+@usuario.codigo_empleado %>
         </br>
         <%= @usuario.role.nombre %>
         </br>
-        <%= image_tag "admin.png", class:"icon_rol"%>
       </header>
       <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone cont_info">
         <div class="mdl-card__supporting-text mdl-card__supporting-text-im">
@@ -35,14 +34,15 @@
               <%= "Estatus: Aprobado" if (@usuario.estatus == true) %>
           </p>
         </div>
-
-
       </div>
-
-
     </section>
     </div>
-  <%= link_to 'Regresar', :back %>
-
-
 </div>
+<a href="/usuarios" id="btn-back" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons">chevron_left</i>Regresar</a>
+<% if admin? or admin_ind? or admin_min? %>
+    <a href="/usuarios/new" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Agregar Usuario</a>
+    <%= link_to  edit_usuario_path(@usuario), class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect",id: "btn-edit" do%>
+        <i class="material-icons">edit</i>
+        Editar
+    <% end %>
+<% end %>

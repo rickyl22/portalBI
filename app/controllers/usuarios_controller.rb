@@ -7,15 +7,12 @@ class UsuariosController < ApplicationController
     @usuarios = Usuario.includes(:role).order("roles.nombre")
     authorize @usuarios
     @usuarios = policy_scope(@usuarios)
-    #reset_session
   end
 
   def create
-
     @usuario = Usuario.create(usuario_params)
     authorize @usuario
     if (params[:solicitud_reg])
-      p "Es una solicitud de registro de usuario"
       @usuario.estatus = 0
       @usuario.role_id = 8
     end
@@ -56,8 +53,9 @@ class UsuariosController < ApplicationController
       @roles = Role.where("id in (4,5,6)")
     elsif admin_ind?
       @roles = Role.where("id in (7,8)")
+    elsif
+    @roles = Role.where("id in (7)")
     end
-    #@usuario = policy_scope(Usuario).find(params[:id])
   end
 
   def show
@@ -81,12 +79,21 @@ class UsuariosController < ApplicationController
 
   def update
     @usuario = Usuario.find(params[:id])
-    # authorize @usuario
     if @usuario.update_attributes(usuario_params)
+     cambios = @usuario.previous_changes()
       redirect_to @usuario,  notice: 'Usuario actualizado'
     else
       render 'edit', error: 'Error actualizando usuario'
     end
+    #####################################################
+    auditar = Auditoria.new
+    auditar.usuario = current_user.usuario
+    auditar.evento = "Editando usuarios, se cambiaron los siguientes campos: #{cambios}"
+    auditar.rol = rol_usuario()
+    auditar.modulo = modulo()
+    auditar.save
+    ####################################################
+
   end
 
   def destroy
@@ -99,7 +106,7 @@ class UsuariosController < ApplicationController
     def set_usuario
       @usuario = Usuario.find(params[:id])
       authorize @usuario
-      @usuario = policy_scope(Usuario).find(params[:id])
+      @usuario = policy_scope(@usuario)#.find(params[:id])
     end
 
   def usuario_params

@@ -3,7 +3,11 @@ class Usuario < ApplicationRecord
   belongs_to :role
   has_many :permisos_asignado
   has_many :casos, dependent: :destroy
-
+  #validates :correo, uniqueness: {mesaje: "Correo ya registrado en el sistema"},
+  #          presence: {mesaje:"Debe indicar un correo"},
+  #          format: { with: /\b[A-Z0-9._%a-z\-]+@telefonica\.com\z/, message: "Debe utilizar un correo con dominio @telefonica.com" }
+  #validates :usuario, uniqueness: {mesaje: "Nombre de usuario ya registrado en el sistema"}, presence: {mesaje:"Debe indicar un nombre de usuario"}, length: {  in: 4..8, mesaje:"El nombre de usuario debe poseer un mínimo de 4 caracteres y máximo de 8 " }
+  #validates :codigo_empleado, uniqueness: {mesaje: "Código de empleado de usuario ya registrado en el sistema"}, presence: {mesaje:"Debe indicar el código de empleado"}, length: { is: 6, mesaje:"El código de empleado debe tener 6 caracteres: EXXXXX" }
 
   def rol?(id)
     rol = Role.where("id = ?",id).first
@@ -40,5 +44,10 @@ class Usuario < ApplicationRecord
     
     true if(current_user.role.alias == "clis")
   end
+
+  def cli_ind?
+    true if(current_user.role.alias == "cli_ind")
+  end
+
 
 end

@@ -38,6 +38,8 @@
                       <a class="mdl-navigation__link link_res" href="/menus/menu_consultor_lid"> MI CUENTA</a>
                   <% elsif cli? %>
                       <a class="mdl-navigation__link link_res" href="/menus/menu_cliente"> MI CUENTA</a>
+                  <% elsif cli_ind? %>
+                      <a class="mdl-navigation__link link_res" href="/menus/menu_cliente_kpi"> MI CUENTA</a>
                 <% end %>
               <% end %>
               <%= button_to "Salir",logout_path,:method => "delete", :class => "mdl-navigation__link mdl-typography--text-uppercase btn-sesion link_res" %>
@@ -123,6 +125,16 @@
         <a class="mdl-navigation__link" href="/usuarios/new">Crear</a>
       </div>
 
+      <!-- Gestion de usuarios -->
+      <span class="mdl-navigation__link menu" href="">
+        Usuarios
+       <i class="material-icons list">group</i>
+      </span>
+        <div id="admin_usuarios" class="sub-menu-container">
+          <a class="mdl-navigation__link" href="/usuarios">Gestión de usuarios</a>
+          <a class="mdl-navigation__link" href="/usuarios/new">Crear</a>
+      </div>
+
       <% elsif admin_ind? %>
        <!-- Mi cuenta -->
        <span class="mdl-navigation__link menu" href="#">
@@ -190,17 +202,19 @@
           <a class="mdl-navigation__link" href="/menus/menu_consultor_lid">Gestión de  cuenta</a>
         </div>
 
-       <!-- Menu para Portal de Gestion de Mineria -->
+          <!-- Menu para Portal de Gestion de Mineria -->
        <span class="mdl-navigation__link menu" href="">
           Mineria
          <i class="material-icons list">grid_on</i>
         </span>
           <div id="mineria" class="sub-menu-container">
             <a class="mdl-navigation__link" href="/casos">Gestión de Casos</a>
-            <a class="mdl-navigation__link" href="/casos?flag=1">Mis Casos</a>
+            <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
             <a class="mdl-navigation__link" href="/estadisticas">Estadisticas</a>
             <a class="mdl-navigation__link" href="/estadisticas?hist=1">Historial</a>
           </div>
+
+
       <% elsif cons? %>
        <!-- Mi cuenta -->
        <span class="mdl-navigation__link menu" href="#">
@@ -246,14 +260,13 @@
           <div id="mineria" class="sub-menu-container">
             <a class="mdl-navigation__link" href="/menus/menu_cliente_kpi">Gestión de  cuenta</a>
           </div>
-          <!-- Menu para Portal de Gestion de Mineria -->
-       <span class="mdl-navigation__link menu" href="">
-          Mineria
-         <i class="material-icons list">grid_on</i>
-        </span>
+          <!-- Gestion de indicadores -->
+         <span class="mdl-navigation__link menu" href="">
+            Indicadores
+            <i class="material-icons list">trending_up</i>
+          </span>
           <div id="mineria" class="sub-menu-container">
-            <a class="mdl-navigation__link" href="/casos">Mis Casos</a>
-            <a class="mdl-navigation__link" href="/casos/new">Crear Caso</a>
+            <a class="mdl-navigation__link" href="/kpis">Gestión de  Indicadores</a>
           </div>
       
       <% end %>

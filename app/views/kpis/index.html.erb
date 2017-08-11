@@ -16,6 +16,8 @@
               </div>
               <div class="mdl-card__actions mdl-card--border">
                 <div class="boton_act_kpis">
+
+                  <% if admin? or admin_ind?%>
                   <%= link_to  edit_kpi_path(kpi), id:"edit_kpi_#{kpi.id}", class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect bnt_act" do%>
                       <i class="material-icons">edit</i>
                   <% end %>
@@ -31,9 +33,20 @@
                   <%= link_to kpi,id:"ver_kpi_#{kpi.id}", class:"mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect bnt_act" do%>
                       <i class="material-icons">visibility</i>
                   <% end %>
+
                   <div class="mdl-tooltip" data-mdl-for="ver_kpi_<%=kpi.id%>">
                     Ver Indicador:  <strong><%=kpi.nombre%></strong>
                   </div>
+                  <% else %>
+                    <%= link_to kpi,id:"ver_kpi_#{kpi.id}", class:"mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect bnt_act" do%>
+                        <i class="material-icons">visibility</i>
+                    <% end %>
+                    <div class="mdl-tooltip" data-mdl-for="ver_kpi_<%=kpi.id%>">
+                      Ver Indicador:  <strong><%=kpi.nombre%></strong>
+                    </div>
+
+                <% end %>
+
                 </div>
               </div>
     
@@ -46,6 +59,9 @@
 
 
 </div>
-<a href="/kpis/new" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Agregar KPI</a>
+
+<% if admin? or admin_ind?%>
+    <a href="/kpis/new" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Agregar KPI</a>
+<% end %>
 
 

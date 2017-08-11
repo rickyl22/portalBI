@@ -14,8 +14,9 @@
     </div>
   </div>
 </div>
+
+<a href="/kpis" id="btn-back" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons">chevron_left</i>Regresar</a>
 <% if admin? or admin_ind? %>
-    <a href="/kpis/new" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Agregar KPI</a>
     <a href="/kpis" id="btn-back" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons">chevron_left</i>Regresar</a>
     <%= link_to  edit_kpi_path(@kpi), class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect",id: "btn-edit" do%>
         <i class="material-icons">edit</i>

@@ -6,9 +6,8 @@ class SessionsController < ApplicationController
 
   def create
     usuario = Usuario.where("usuario = ?",params[:usuario]).first
-    p "USUARIO "+usuario.inspect
+    auditar = Auditoria.new
     if usuario && (usuario.estatus) && usuario.authenticate(params[:password])
-      p "USUARIO 22222"+usuario.inspect
       log_in usuario
       session[:notice] = nil
       session[:last_check] = Time.now
@@ -26,7 +25,7 @@ class SessionsController < ApplicationController
       elsif cons_lid?
         redirect_to '/casos'
       elsif cons?
-        redirect_to '/menus/menus/menu_consultor'
+        redirect_to '/menus/menu_consultor'
       elsif cli?
         if casos.length > 0
           redirect_to '/casos', alert: "Tiene casos con mas de 7 días de creación sin complejidad asignada"
@@ -40,7 +39,11 @@ class SessionsController < ApplicationController
     else
       redirect_to login_path, alert: "Correo o clave incorrecto"
     end
-
+    auditar.usuario = current_user.usuario
+    auditar.evento = "Inicio de sesion en el sistema"
+    auditar.rol = rol_usuario()
+    auditar.modulo = modulo()
+    auditar.save
   end
 
   def new

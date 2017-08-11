@@ -11,6 +11,15 @@ class CasosController < ApplicationController
       @flag = 1
     end
     authorize @casos
+
+    #####################################################
+    auditar = Auditoria.new
+    auditar.usuario = current_user.usuario
+    auditar.evento = "Acceso al modulo de Mineria"
+    auditar.rol = rol_usuario()
+    auditar.modulo = modulo()
+    auditar.save
+    ####################################################
   end
 
   # GET /casos/1
@@ -45,6 +54,15 @@ class CasosController < ApplicationController
     else
       render :new
     end
+
+    #####################################################
+    auditar = Auditoria.new
+    auditar.usuario = current_user.usuario
+    auditar.evento = "Acceso al modulo de Mineria, Creacion de caso #{@caso.titulo}"
+    auditar.rol = rol_usuario()
+    auditar.modulo = modulo()
+    auditar.save
+    ####################################################
   end
 
   # PATCH/PUT /casos/1
@@ -76,17 +94,27 @@ class CasosController < ApplicationController
          @dias = 3
       end
       if @asig and caso_params[:complejidad] != "No Asignada"
-          #AsignadoMailer.asignar(@caso.complejidad,@caso.titulo,@dias,Usuario.find(@caso.usuario_id).correo).deliver
+         #AsignadoMailer.asignar(@caso.complejidad,@caso.titulo,@dias,Usuario.find(@caso.usuario_id).correo).deliver
       end 
       if params[:caso][:status] != nil
           if params[:caso][:status] == "BI-Afectado"
-           # AsignadoMailer.bi_afectado(Usuario.find(@caso.usuario_id).correo,@caso.titulo).deliver
+           #AsignadoMailer.bi_afectado(Usuario.find(@caso.usuario_id).correo,@caso.titulo).deliver
           end
       end
       redirect_to @caso, notice: 'Caso actualizado satisfactoriamente.'
     else
       render :edit
     end
+
+    #####################################################
+    auditar = Auditoria.new
+    auditar.usuario = current_user.usuario
+    auditar.evento = "Acceso al modulo de Mineria, Actualización del caso #{@caso.titulo}"
+    auditar.rol = rol_usuario()
+    auditar.modulo = modulo()
+    auditar.save
+    ####################################################
+
   end
 
   # DELETE /casos/1

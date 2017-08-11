@@ -1,0 +1,72 @@
+<script>
+
+  var d = new Date();
+  var strDate = d.getFullYear()+""+(d.getMonth()+1);
+  console.log("FECHA "+strDate);
+
+  var data = {
+    "query": {
+      "query_string": {
+        "query": "(_type:recargas) AND(FECHA:20170608)",
+        "analyze_wildcard": true
+      }
+    }
+  }
+  var opt1 = busqueda_elasticsearch(data);
+  var opt2 = 0;
+</script>
+
+
+<div class="content_p cot-n android-content mdl-layout__content">
+  <div id="results"></div>
+  <h2>¿Quiénes somos?</h2>
+  <div class="contenido-in contenido-kpis grip-nostros">
+    <div class="cont-nosotros">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--6-col organigrama">
+          <img src="/assets/organigramaBI.png">
+        </div>
+        <div class="mdl-cell mdl-cell--6-col cont-us">
+          <div class="mdl-grid g-1">
+            <div class="mdl-cell mdl-cell--4-col nosotros-icon">
+              <i class="material-icons">group</i>
+            </div>
+            <div class="mdl-cell mdl-cell--8-col nosotros-desc">
+              <h4 class="h4-pb">Nuestro Equipo</h4>
+              <p>Innovación ... Proactivos ... Creativos ... Retadores</p>
+            </div>
+          </div>
+          <div class="mdl-grid g-2">
+            <div class="mdl-cell mdl-cell--8-col objetivo-desc">
+              <h4 class="h4-pb">Misión</h4>
+              <p>Transformar los datos en información, y la información en conocimiento para la toma de decisiones de negocio, mediante herramientas de data mining avanzado, modelaje estadístico, analítica avanzada, investigación de mercado, calidad del dato.</p>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col objetivo-icon">
+              <i class="material-icons">group</i>
+            </div>
+          </div>
+          <div class="mdl-grid g-3">
+            <div class="mdl-cell mdl-cell--4-col soluciones-icon">
+              <i class="material-icons">group</i>
+            </div>
+            <div class="mdl-cell mdl-cell--8-col soluciones-desc">
+              <h4 class="h4-pb">ALGO MAS</h4>
+              <p>Ser reconocidos en la empresa como el área de analítica líder, vanguardista, diferenciadora y  de mayor transversalidad.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="android-customized-section">
+    <div class="android-customized-section-text">
+      <div class="mdl-typography--font-light mdl-typography--display-1-color-contrast">ELEGIMOS TODO_</div>
+    </div>
+    <div class="android-customized-section-image"></div>
+  </div>
+</div>
+
+
+

@@ -6,24 +6,43 @@ class KpisController < ApplicationController
   # GET /kpis
   # GET /kpis.json
   def index
-    @kpis = Kpi.all
+    @kpis = Kpi.all.order("nombre DESC")
     authorize @kpis
-    @kpis = policy_scope(Kpi)
+    @kpis = policy_scope(@kpis)
+    #####################################################
+    auditar = Auditoria.new
+    auditar.usuario = current_user.usuario
+    auditar.evento = "Acceso al modulo de Indicadores"
+    auditar.rol = rol_usuario()
+    auditar.modulo = modulo()
+    auditar.save
+    ####################################################
   end
 
   # GET /kpis/1
   # GET /kpis/1.json
   def show
     @kpi = Kpi.find(params[:id])
+    ######################################################
+    auditar = Auditoria.new
+    auditar.evento = "Acceso al Indicador #{@kpi.nombre}"
+    #####################################################
     respond_to do |format|
       format.html
       format.pdf do
         render :pdf => "indicadores",
                :layout => 'pdf_layout.html.erb',
                :template => "kpis/indicadores.pdf.erb",
-               :javascript_delay => 7000
+               :javascript_delay => 9000
+        auditar.evento = auditar.evento+" , Descarga PDF del indicador "
       end
     end
+
+    ####################################################
+    auditar.usuario = current_user.usuario
+    auditar.rol = rol_usuario()
+    auditar.modulo = modulo()
+    ###################################################
   end
 
   # GET /kpis/new

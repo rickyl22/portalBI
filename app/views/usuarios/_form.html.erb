@@ -57,8 +57,7 @@
 
         <div class="mdl-grid">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-            <%= f.text_field  :area, :class => 'mdl-textfield__input', :required => "required" %>
-            <label class="mdl-textfield__label" for="area">Área</label>
+            Área  <%= f.select :area, ["Direccion de Ingreso, Consumo Fidel y Reten","Gerencia General Planificación y Administración","Gerencia General Inteligencia de Negocios","Gerencia Experiencia del Cliente","Gerencia General Movistar TV","Gerencia General Captación","Gerencia General de Publicidad y medios","Gerencia General Asuntos Regulatorios","Dirección Planificación, Estrategia y Precios","Dirección de Interconexión y Neg. Mayorista","Dirección de Transf. Canales Virt y Telef.","Gerencia General Planificación, Org. Y Compens.","Gerencia General Desarrollo, Organiz y Talento","Gerencia General Experiencia al Empleado","Gerencia de Inversión Social","Dirección de Redes","Dirección de TI","Gerencia General de Gestión y Gobernabilidad","Dirección de Planificación y Desarrollo de Red","Gerencia General Legal","Gerencia de Legal","Gerencia General de Compliance y Legal","Gerencia de Redes Sociales","Gerencia de Entorno y Planificación","Gerencia de Comunicaciones Corporativas","Gerencia de Relaciones, Sector Académico","Gerencia de Relaciones Gubernamentales","Gerencia de Entes gubernamentales","Gerencia General de Servicios","Gerencia General Seguridad Telemática","Gerencia de Prevención de Fraudes","Gerencia de Seguridad","Gerencia Análisis de Riesgo Integral","Gerencia de Flota y Administración","Gerencia de Arquitectura y Espacios","Gerencia de Seguridad","Gerencia de Sistemas de Seguridad ","Gerencia General de Auditoría","Gerencia de Auditoria","Gerencia General de Intervención","Gerencia General de Comercial","Dir. Planif. Anal. Y Merc. De Empresas","Gerencia General Ingeniería de de Empresas","Gerencia General de TST","Dir. Negocios y Contratos Masivos","Dir. De Cont. Ges. Contable y Aseg. De Ingresos","Dirección de Finanzas","Gerencia General de Impuestos","Dirección de Compras y Logística","Gerencia General Optimización y Soporte","Dirección de Canales Oeste","Dirección de Canales Este","Gerencia General Canal Telefónicos","Dirección de Planificación de Canales"],{prompt: ''}, :required => "required", :class => "mdl-textfield__input" %>
           </div>
 
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
@@ -69,8 +68,7 @@
 
         <div class="mdl-grid">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-            <%= f.text_field  :gerencia, :class => 'mdl-textfield__input', :required => "required" %>
-            <label class="mdl-textfield__label" for="gerencia">Gerencia</label>
+            Gerencia <%= f.select :gerencia, ["VP MERCADEO","VP PLANIFICACIÓN ESTRATÉGICA, REGUL Y CAL.","VP RECURSOS HUMANOS","GERENCIA GENERAL FUNDACIÓN TELEFÓNICA","VP TECNOLOGÍA","VP SECRETARÍA GENERAL","DIRECCIÓN RELACIONES INSTITUCIONALES Y GOB.","DIRECCIÓN DE SEGURIDAD Y FRAUDE","DIRECCIÓN DE AUDITORÍA","VP EMPRESAS","VP FINANAZAS Y CONTROL DE GESTIÓN","VP CANALES"],{prompt: ''}, :required => "required", :class => "mdl-textfield__input" %>
           </div>
 
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
@@ -79,20 +77,18 @@
           </div>
         </div>
 
-        <div class="mdl-grid">
-
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-            <%= f.select :estatus, { "Aprobado" => "1", "Pendiente" => "0" },{prompt: ''}, :required => "required", :class => "mdl-textfield__input" %>
-            <label class="mdl-textfield__label" for="estatus">Estatus</label>
-          </div>
-
-
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-            <% p "ROLES"+@roles.inspect %>
-            <%= f.collection_select :role_id, @roles, :id, :nombre, {:prompt => ''}, :class => 'mdl-textfield__input', :required => "required" %>
-            <label class="mdl-textfield__label" for="role_id">Rol</label>
-          </div>
-        </div>
+        <% if admin? || admin_min? || admin_ind? %>
+            <div class="mdl-grid">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                <%= f.select :estatus, { "Aprobado" => "1", "Pendiente" => "0" },{prompt: ''}, :required => "required", :class => "mdl-textfield__input" %>
+                <label class="mdl-textfield__label" for="estatus">Estatus</label>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                <%= f.collection_select :role_id, @roles, :id, :nombre, {:prompt => ''}, :class => 'mdl-textfield__input', :required => "required" %>
+                <label class="mdl-textfield__label" for="role_id">Rol</label>
+              </div>
+            </div>
+        <% end %>
 
         <div class="mdl-grid">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">

@@ -1512,7 +1512,7 @@ option{
 }
 .dash_kpi iframe{
     width: 100%;
-    min-height: 250vh;
+    min-height: 350vh;
     border: 0;
 }
 .kpi-k{
@@ -1599,7 +1599,7 @@ option{
 .cont-pdf iframe{
     padding-top: 20px;
     width: 100%!important;
-    min-height: 100%!important;
+    min-height: 350vh!important;
     border: none;
 }
 #logo-emp-pdf image{
@@ -2035,6 +2035,10 @@ td.text-right {
     text-align: right;
 }
 
+/*nosotros*/
+.cot-n{
+    width: 90% !important;
+}
 
 /*ESTILOS MINERIA DY*/
 .cont-casos{}
@@ -2133,4 +2137,12 @@ td.text-right {
 }
 .linea{
     border-top: 2px solid dimgray;
+}
+
+/********************/
+.urgente{
+    background-color: #5e5e5e;
+}
+.cont-sel-g{
+    color: white;!important;
 }
