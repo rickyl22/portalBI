@@ -8,6 +8,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.singular /^(ox)en/i, '\1'
    inflect.irregular 'publicacion', 'publicaciones'
    inflect.irregular 'proyecto', 'proyectos'
+   inflect.irregular 'auditoria', 'auditorias'
 #   inflect.uncountable %w( fish sheep )
 end
 
