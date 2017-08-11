@@ -286,7 +286,6 @@ td.text-right {
                         <option value="<%= u.usuario %>"><%= u.nombre+" "+u.apellido %></option>
                     <% end %>
                   </select>
-                  <%= f.hidden_field :status, value: "En Proceso" %>
                   <%= hidden_field_tag :estatus, "Caso asignado a Consultor" %>
                   <%= f.submit "Asignar caso" %>
               <% end %>
