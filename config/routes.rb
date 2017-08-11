@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :auditorias
+  resources :auditoria
   resources :recargas_terminals
   resources :recargas
   resources :pronostico_recargas
